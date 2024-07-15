@@ -14,7 +14,7 @@ import java.awt.*;
  */
 public class ColorsModule extends ConcurrentModule {
     //
-    Config<Color> colorConfig = new ColorConfig("Color", "The primary client color", new Color(255, 0, 0), false, false);
+    Config<Color> colorConfig = new ColorConfig("Color", "The primary client color", new Color(0, 255, 255), false, false);
     // Config<Color> color1Config = new ColorConfig("Accent-Color", "The accent client color", new Color());
     Config<Boolean> rainbowConfig = new BooleanConfig("Rainbow", "Renders rainbow colors for modules", false);
 

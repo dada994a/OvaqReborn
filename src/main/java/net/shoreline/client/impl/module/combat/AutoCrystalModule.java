@@ -218,9 +218,9 @@ public class AutoCrystalModule extends RotationModule {
         if (placeConfig.getValue()) {
             placeCrystal = calculatePlaceCrystal(blocks, entities);
         }
-        float breakDelay = 10.0f - breakSpeedConfig.getValue() * 20.0f;
+        float breakDelay = 1.0f - breakSpeedConfig.getValue() * 10.0f;
         if (breakDelayConfig.getValue()) {
-            breakDelay = Math.max(minTimeoutConfig.getValue() * 20.0f, getBreakMs() + breakTimeoutConfig.getValue() * 20.0f);
+            breakDelay = Math.max(minTimeoutConfig.getValue() * 10.0f, getBreakMs() + breakTimeoutConfig.getValue() * 10.0f);
         }
         attackRotate = attackCrystal != null && attackDelayConfig.getValue() <= 0.0 && lastAttackTimer.passed(breakDelay);
         if (attackCrystal != null) {
@@ -275,7 +275,7 @@ public class AutoCrystalModule extends RotationModule {
         }
         if (placeCrystal != null) {
             renderPos = placeCrystal.getDamageData();
-            if (lastPlaceTimer.passed(1000.0f - placeSpeedConfig.getValue() * 50.0f)) {
+            if (lastPlaceTimer.passed(1.0f - placeSpeedConfig.getValue() * 10.0f)) {
                 // ChatUtil.clientSendMessage("place range:" + Math.sqrt(mc.player.getEyePos().squaredDistanceTo(placeCrystal.getDamageData().toCenterPos())));
                 placeCrystal(placeCrystal.getDamageData(), hand);
                 setStage("PLACING");
@@ -289,7 +289,7 @@ public class AutoCrystalModule extends RotationModule {
         if (mc.player == null || attackDelayConfig.getValue() <= 0.0) {
             return;
         }
-        float attackFactor = 10.0f / Math.max(1.0f, attackFactorConfig.getValue());
+        float attackFactor = 1.0f / Math.max(1.0f, attackFactorConfig.getValue());
         if (attackCrystal != null && lastAttackTimer.passed(attackDelayConfig.getValue() * attackFactor)) {
             attackCrystal(attackCrystal.getDamageData(), getCrystalHand());
             lastAttackTimer.reset();
