@@ -135,12 +135,12 @@ public final class AutoTotemModule extends ToggleModule
                 {
                     continue;
                 }
-                if (mc.player.squaredDistanceTo(e) > 144.0)
+                if (mc.player.squaredDistanceTo(e) > 140.0)
                 {
                     continue;
                 }
                 double potential = EndCrystalUtil.getDamageTo(mc.player, crystal.getPos());
-                if (health + 0.5 > potential)
+                if (health + 1.4 > potential)
                 {
                     continue;
                 }

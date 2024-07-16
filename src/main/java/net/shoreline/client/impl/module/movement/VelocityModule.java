@@ -130,11 +130,11 @@ public class VelocityModule extends ToggleModule {
                         event.cancel();
                     } else {
                         ((AccessorExplosionS2CPacket) packet).setPlayerVelocityX(packet.getPlayerVelocityX()
-                                * (horizontalConfig.getValue() / 34.0f));
+                                * (horizontalConfig.getValue() / 100.0f));
                         ((AccessorExplosionS2CPacket) packet).setPlayerVelocityY(packet.getPlayerVelocityY()
-                                * (verticalConfig.getValue() / 67.0f));
+                                * (verticalConfig.getValue() / 100.0f));
                         ((AccessorExplosionS2CPacket) packet).setPlayerVelocityZ(packet.getPlayerVelocityZ()
-                                * (horizontalConfig.getValue() / 23.0f));
+                                * (horizontalConfig.getValue() / 100.0f));
                     }
                 }
                 case GRIM -> {
