@@ -14,7 +14,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.shoreline.client.BuildConfig;
-import net.shoreline.client.ShorelineMod;
+import net.shoreline.client.OvaqRebornMod;
 import net.shoreline.client.api.config.Config;
 import net.shoreline.client.api.config.setting.BooleanConfig;
 import net.shoreline.client.api.config.setting.EnumConfig;
@@ -128,8 +128,8 @@ public class HUDModule extends ToggleModule {
             }
             if (watermarkConfig.getValue()) {
                 RenderManager.renderText(event.getContext(), String.format("%s %s (%s%s)",
-                        ShorelineMod.MOD_NAME, ShorelineMod.MOD_VER,
-                        ShorelineMod.MOD_BUILD_NUMBER, !BuildConfig.HASH.equals("null") ? "-" + BuildConfig.HASH : ""), 2.0f, topLeft, getHudColor(rainbowOffset));
+                        OvaqRebornMod.MOD_NAME, OvaqRebornMod.MOD_VER,
+                        OvaqRebornMod.MOD_BUILD_NUMBER, !BuildConfig.HASH.equals("null") ? "-" + BuildConfig.HASH : ""), 2.0f, topLeft, getHudColor(rainbowOffset));
                 // topLeft += 9.0f;
             }
             if (arraylistConfig.getValue()) {

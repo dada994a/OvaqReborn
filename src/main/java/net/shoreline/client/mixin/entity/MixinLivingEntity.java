@@ -5,7 +5,7 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.shoreline.client.Shoreline;
+import net.shoreline.client.OvaqReborn;
 import net.shoreline.client.impl.event.entity.*;
 import net.shoreline.client.util.Globals;
 import org.spongepowered.asm.mixin.Mixin;
@@ -52,7 +52,7 @@ public abstract class MixinLivingEntity extends MixinEntity implements Globals {
             return;
         }
         final JumpRotationEvent event = new JumpRotationEvent();
-        Shoreline.EVENT_HANDLER.dispatch(event);
+        OvaqReborn.EVENT_HANDLER.dispatch(event);
         if (event.isCanceled()) {
             ci.cancel();
             Vec3d vec3d = this.getVelocity();
@@ -76,7 +76,7 @@ public abstract class MixinLivingEntity extends MixinEntity implements Globals {
     private boolean hookHasStatusEffect(LivingEntity instance, StatusEffect effect) {
         if (instance.equals(mc.player)) {
             LevitationEvent levitationEvent = new LevitationEvent();
-            Shoreline.EVENT_HANDLER.dispatch(levitationEvent);
+            OvaqReborn.EVENT_HANDLER.dispatch(levitationEvent);
             return !levitationEvent.isCanceled() && hasStatusEffect(effect);
         }
         return hasStatusEffect(effect);
@@ -94,13 +94,13 @@ public abstract class MixinLivingEntity extends MixinEntity implements Globals {
             return;
         }
         ConsumeItemEvent consumeItemEvent = new ConsumeItemEvent(activeItemStack);
-        Shoreline.EVENT_HANDLER.dispatch(consumeItemEvent);
+        OvaqReborn.EVENT_HANDLER.dispatch(consumeItemEvent);
     }
 
     @Inject(method = "tickMovement", at = @At(value = "HEAD"), cancellable = true)
     private void hookTickMovement(CallbackInfo ci) {
         JumpDelayEvent jumpDelayEvent = new JumpDelayEvent();
-        Shoreline.EVENT_HANDLER.dispatch(jumpDelayEvent);
+        OvaqReborn.EVENT_HANDLER.dispatch(jumpDelayEvent);
         if (jumpDelayEvent.isCanceled()) {
             jumpingCooldown = 0;
         }

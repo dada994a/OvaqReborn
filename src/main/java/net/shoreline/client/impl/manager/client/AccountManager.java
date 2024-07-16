@@ -1,7 +1,7 @@
 package net.shoreline.client.impl.manager.client;
 
 import net.minecraft.client.session.Session;
-import net.shoreline.client.Shoreline;
+import net.shoreline.client.OvaqReborn;
 import net.shoreline.client.api.account.config.AccountFile;
 import net.shoreline.client.api.account.config.EncryptedAccountFile;
 import net.shoreline.client.api.account.msa.MSAAuthenticator;
@@ -29,7 +29,7 @@ public final class AccountManager implements Globals
     public void postInit()
     {
         // Handle account file encryption
-        final Path runDir = Shoreline.CONFIG.getClientDirectory();
+        final Path runDir = OvaqReborn.CONFIG.getClientDirectory();
         if (runDir.resolve("accounts_enc.json").toFile().exists())
         {
             System.out.println("Encrypted account file exists");
@@ -41,7 +41,7 @@ public final class AccountManager implements Globals
             configFile = new AccountFile(runDir);
         }
 
-        Shoreline.CONFIG.addFile(configFile);
+        OvaqReborn.CONFIG.addFile(configFile);
     }
 
     /**
@@ -64,7 +64,7 @@ public final class AccountManager implements Globals
     public void setSession(final Session session)
     {
         ((AccessorMinecraftClient) mc).setSession(session);
-        Shoreline.info("Set session to {} ({})", session.getUsername(), session.getUuidOrNull());
+        OvaqReborn.info("Set session to {} ({})", session.getUsername(), session.getUuidOrNull());
     }
 
     /**

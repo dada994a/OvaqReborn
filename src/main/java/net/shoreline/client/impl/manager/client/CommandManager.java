@@ -7,7 +7,7 @@ import com.mojang.brigadier.tree.CommandNode;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import net.minecraft.client.network.ClientCommandSource;
 import net.minecraft.command.CommandSource;
-import net.shoreline.client.Shoreline;
+import net.shoreline.client.OvaqReborn;
 import net.shoreline.client.api.command.Command;
 import net.shoreline.client.api.event.listener.EventListener;
 import net.shoreline.client.api.module.Module;
@@ -39,7 +39,7 @@ public class CommandManager implements Globals {
      * Registers commands to the CommandManager
      */
     public CommandManager() {
-        Shoreline.EVENT_HANDLER.subscribe(this);
+        OvaqReborn.EVENT_HANDLER.subscribe(this);
         register(
                 new BindCommand(),
                 new ConfigCommand(),
@@ -63,7 +63,7 @@ public class CommandManager implements Globals {
         for (Module module : Managers.MODULE.getModules()) {
             register(new ModuleCommand(module));
         }
-        Shoreline.info("Registered {} commands!", commands.size());
+        OvaqReborn.info("Registered {} commands!", commands.size());
         for (Command command : commands) {
             command.buildCommand(command.getCommandBuilder());
             dispatcher.register(command.getCommandBuilder());

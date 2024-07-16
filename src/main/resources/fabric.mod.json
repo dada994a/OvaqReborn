@@ -11,10 +11,11 @@
     "homepage": "https://fabricmc.net/"
   },
   "license": "None",
+  "icon": "assets/ovaqreborn/logo.png",
   "environment": "*",
   "entrypoints": {
     "client": [
-      "net.shoreline.client.ShorelineMod"
+      "net.shoreline.client.OvaqRebornMod"
     ]
   },
   "accessWidener": "ovaqreborn.accesswidener",

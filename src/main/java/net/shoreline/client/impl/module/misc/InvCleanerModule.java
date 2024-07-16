@@ -7,7 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.SlotActionType;
-import net.shoreline.client.Shoreline;
+import net.shoreline.client.OvaqReborn;
 import net.shoreline.client.api.config.Config;
 import net.shoreline.client.api.config.setting.BooleanConfig;
 import net.shoreline.client.api.config.setting.ItemListConfig;
@@ -18,14 +18,12 @@ import net.shoreline.client.api.file.ConfigFile;
 import net.shoreline.client.api.module.ModuleCategory;
 import net.shoreline.client.api.module.ToggleModule;
 import net.shoreline.client.impl.event.TickEvent;
-import net.shoreline.client.init.Managers;
 import net.shoreline.client.util.math.timer.CacheTimer;
 import net.shoreline.client.util.math.timer.Timer;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -101,7 +99,7 @@ public class InvCleanerModule extends ToggleModule {
             }
             // error writing file
             catch (IOException e) {
-                Shoreline.error("Could not save file for inv cleaner!");
+                OvaqReborn.error("Could not save file for inv cleaner!");
                 e.printStackTrace();
             }
         }
@@ -123,7 +121,7 @@ public class InvCleanerModule extends ToggleModule {
             }
             // error writing file
             catch (IOException e) {
-                Shoreline.error("Could not read file for inv cleaner!");
+                OvaqReborn.error("Could not read file for inv cleaner!");
                 e.printStackTrace();
             }
         }

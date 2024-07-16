@@ -6,7 +6,7 @@ import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.session.Session;
 import net.minecraft.text.Text;
-import net.shoreline.client.Shoreline;
+import net.shoreline.client.OvaqReborn;
 import net.shoreline.client.api.account.msa.exception.MSAAuthException;
 import net.shoreline.client.api.account.type.MinecraftAccount;
 import net.shoreline.client.api.account.type.impl.CrackedAccount;
@@ -70,7 +70,7 @@ public final class AccountAddAccountScreen extends Screen
             try
             {
                 AccountManager.MSA_AUTHENTICATOR.loginWithBrowser((token) ->
-                        Shoreline.EXECUTOR.execute(() ->
+                        OvaqReborn.EXECUTOR.execute(() ->
                         {
                             final MicrosoftAccount account = new MicrosoftAccount(token);
                             final Session session = account.login();

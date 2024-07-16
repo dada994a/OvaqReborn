@@ -1,7 +1,7 @@
 package net.shoreline.client.init;
 
-import net.shoreline.client.Shoreline;
-import net.shoreline.client.ShorelineMod;
+import net.shoreline.client.OvaqReborn;
+import net.shoreline.client.OvaqRebornMod;
 import net.shoreline.client.api.module.ToggleModule;
 import net.shoreline.client.impl.manager.ModuleManager;
 import net.shoreline.client.api.module.Module;
@@ -191,7 +191,7 @@ public class Modules {
             HUD = (HUDModule) getRegisteredModule("hud-module");
             ROTATIONS = (RotationsModule) getRegisteredModule("rotations-module");
             SERVER = (ServerModule) getRegisteredModule("server-module");
-            if (ShorelineMod.isBaritonePresent()) {
+            if (OvaqRebornMod.isBaritonePresent()) {
                 BARITONE = (BaritoneModule) getRegisteredModule("baritone-module");
             }
             CAPES = (CapesModule) getRegisteredModule("capes-module");
@@ -324,7 +324,7 @@ public class Modules {
     /**
      * Returns <tt>true</tt> if the {@link Module} instances have been
      * initialized. This should always return <tt>true</tt> if
-     * {@link Shoreline#init()} has finished running.
+     * {@link OvaqReborn#init()} has finished running.
      *
      * @return <tt>true</tt> if the module instances have been initialized
      * @see #init()

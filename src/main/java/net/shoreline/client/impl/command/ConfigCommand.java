@@ -2,9 +2,8 @@ package net.shoreline.client.impl.command;
 
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import net.minecraft.command.CommandSource;
-import net.shoreline.client.Shoreline;
+import net.shoreline.client.OvaqReborn;
 import net.shoreline.client.api.command.Command;
 import net.shoreline.client.util.chat.ChatUtil;
 
@@ -27,10 +26,10 @@ public class ConfigCommand extends Command {
                     String action = StringArgumentType.getString(c, "save/load");
                     String name = StringArgumentType.getString(c, "config_name");
                     if (action.equalsIgnoreCase("save")) {
-                        Shoreline.CONFIG.saveModuleConfiguration(name);
+                        OvaqReborn.CONFIG.saveModuleConfiguration(name);
                         ChatUtil.clientSendMessage("Saved config: §s" + name);
                     } else if (action.equalsIgnoreCase("load")) {
-                        Shoreline.CONFIG.loadModuleConfiguration(name);
+                        OvaqReborn.CONFIG.loadModuleConfiguration(name);
                         ChatUtil.clientSendMessage("Loaded config: §s" + name);
                     }
                     return 1;

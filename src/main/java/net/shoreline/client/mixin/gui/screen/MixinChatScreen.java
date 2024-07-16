@@ -6,7 +6,7 @@ import net.minecraft.client.gui.Element;
 import net.minecraft.client.gui.Selectable;
 import net.minecraft.client.gui.screen.ChatScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.shoreline.client.Shoreline;
+import net.shoreline.client.OvaqReborn;
 import net.shoreline.client.api.render.RenderManager;
 import net.shoreline.client.impl.event.gui.chat.ChatInputEvent;
 import net.shoreline.client.impl.event.gui.chat.ChatKeyInputEvent;
@@ -38,7 +38,7 @@ public class MixinChatScreen extends MixinScreen {
     @Inject(method = "onChatFieldUpdate", at = @At(value = "TAIL"))
     private void hookOnChatFieldUpdate(String chatText, CallbackInfo ci) {
         ChatInputEvent chatInputEvent = new ChatInputEvent(chatText);
-        Shoreline.EVENT_HANDLER.dispatch(chatInputEvent);
+        OvaqReborn.EVENT_HANDLER.dispatch(chatInputEvent);
     }
 
     /**
@@ -52,7 +52,7 @@ public class MixinChatScreen extends MixinScreen {
                                 CallbackInfoReturnable<Boolean> cir) {
         ChatKeyInputEvent keyInputEvent = new ChatKeyInputEvent(keyCode,
                 chatField.getText());
-        Shoreline.EVENT_HANDLER.dispatch(keyInputEvent);
+        OvaqReborn.EVENT_HANDLER.dispatch(keyInputEvent);
         if (keyInputEvent.isCanceled()) {
             cir.cancel();
             chatField.setText(keyInputEvent.getChatText());
@@ -69,7 +69,7 @@ public class MixinChatScreen extends MixinScreen {
                                  CallbackInfoReturnable<Boolean> cir) {
         ChatMessageEvent.Client chatMessageEvent =
                 new ChatMessageEvent.Client(chatText);
-        Shoreline.EVENT_HANDLER.dispatch(chatMessageEvent);
+        OvaqReborn.EVENT_HANDLER.dispatch(chatMessageEvent);
         if (chatMessageEvent.isCanceled()) {
             cir.setReturnValue(true);
             cir.cancel();
@@ -93,7 +93,7 @@ public class MixinChatScreen extends MixinScreen {
                 chatField.getY() + (chatField.getHeight() - 8) / 2.0f :
                 chatField.getY();
         ChatRenderEvent chatTextRenderEvent = new ChatRenderEvent(context, x, y);
-        Shoreline.EVENT_HANDLER.dispatch(chatTextRenderEvent);
+        OvaqReborn.EVENT_HANDLER.dispatch(chatTextRenderEvent);
     }
 
     @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;fill(IIIII)V"))

@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
 /**
- * @author Shoreline
+ * @author OvaqReborn
  * @since 1.0
  */
 @Mixin(TextRenderer.class)

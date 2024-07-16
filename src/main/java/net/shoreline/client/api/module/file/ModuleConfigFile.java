@@ -38,7 +38,7 @@ public class ModuleConfigFile extends ConfigFile {
         }
         // error writing file
         catch (IOException e) {
-            // Shoreline.error("Could not save file for {}!", getFilepath());
+            // OvaqReborn.error("Could not save file for {}!", getFilepath());
             e.printStackTrace();
         }
     }
@@ -68,7 +68,7 @@ public class ModuleConfigFile extends ConfigFile {
         }
         // error writing file
         catch (IOException e) {
-            // Shoreline.error("Could not read file for {}!", getFilepath());
+            // OvaqReborn.error("Could not read file for {}!", getFilepath());
             e.printStackTrace();
         }
     }

@@ -34,7 +34,7 @@ public class Shader {
     private static List<String> loadShader(String name) throws IOException {
         InputStream stream = Shader.class
                 .getClassLoader()
-                .getResourceAsStream("assets/shoreline/shader/" + name);
+                .getResourceAsStream("assets/ovaqreborn/shader/" + name);
         if (stream == null) {
             throw new IOException("Shader with name " + name + " not found");
         }

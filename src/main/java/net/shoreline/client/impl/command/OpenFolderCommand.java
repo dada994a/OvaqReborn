@@ -2,7 +2,7 @@ package net.shoreline.client.impl.command;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.command.CommandSource;
-import net.shoreline.client.Shoreline;
+import net.shoreline.client.OvaqReborn;
 import net.shoreline.client.api.command.Command;
 import net.shoreline.client.util.chat.ChatUtil;
 
@@ -26,7 +26,7 @@ public class OpenFolderCommand extends Command {
     public void buildCommand(LiteralArgumentBuilder<CommandSource> builder) {
         builder.executes(c -> {
             try {
-                Desktop.getDesktop().open(Shoreline.CONFIG.getClientDirectory().toFile());
+                Desktop.getDesktop().open(OvaqReborn.CONFIG.getClientDirectory().toFile());
             } catch (IOException e) {
                 e.printStackTrace();
                 ChatUtil.error("Failed to open client folder!");

@@ -22,7 +22,7 @@ public class ShutdownHook extends Thread {
      */
     @Override
     public void run() {
-        Shoreline.info("Saving configurations and shutting down!");
-        Shoreline.CONFIG.saveClient();
+        OvaqReborn.info("Saving configurations and shutting down!");
+        OvaqReborn.CONFIG.saveClient();
     }
 }

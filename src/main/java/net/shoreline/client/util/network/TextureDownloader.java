@@ -3,7 +3,7 @@ package net.shoreline.client.util.network;
 import net.minecraft.client.texture.NativeImage;
 import net.minecraft.client.texture.NativeImageBackedTexture;
 import net.minecraft.util.Identifier;
-import net.shoreline.client.Shoreline;
+import net.shoreline.client.OvaqReborn;
 import net.shoreline.client.util.Globals;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -31,7 +31,7 @@ public final class TextureDownloader implements Globals {
     public void downloadTexture(final String id, final String url, final boolean force) {
         if (!downloading.add(id) || cache.containsKey(id)) return;
 
-        Shoreline.EXECUTOR.execute(() ->
+        OvaqReborn.EXECUTOR.execute(() ->
         {
             final HttpGet request = new HttpGet(url);
             try (CloseableHttpResponse response = client.execute(request)) {

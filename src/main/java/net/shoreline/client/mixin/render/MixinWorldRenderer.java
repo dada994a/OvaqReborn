@@ -6,7 +6,7 @@ import net.minecraft.client.render.LightmapTextureManager;
 import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.Vec3d;
-import net.shoreline.client.Shoreline;
+import net.shoreline.client.OvaqReborn;
 import net.shoreline.client.api.render.RenderBuffers;
 import net.shoreline.client.impl.event.PerspectiveEvent;
 import net.shoreline.client.impl.event.render.RenderWorldBorderEvent;
@@ -50,7 +50,7 @@ public class MixinWorldRenderer implements Globals {
 
         final RenderWorldEvent renderWorldEvent =
                 new RenderWorldEvent(matrices, tickDelta);
-        Shoreline.EVENT_HANDLER.dispatch(renderWorldEvent);
+        OvaqReborn.EVENT_HANDLER.dispatch(renderWorldEvent);
 
         RenderBuffers.postRender();
     }
@@ -63,7 +63,7 @@ public class MixinWorldRenderer implements Globals {
     private void hookRenderWorldBorder(Camera camera, CallbackInfo ci) {
         RenderWorldBorderEvent renderWorldBorderEvent =
                 new RenderWorldBorderEvent();
-        Shoreline.EVENT_HANDLER.dispatch(renderWorldBorderEvent);
+        OvaqReborn.EVENT_HANDLER.dispatch(renderWorldBorderEvent);
         if (renderWorldBorderEvent.isCanceled()) {
             ci.cancel();
         }
@@ -72,7 +72,7 @@ public class MixinWorldRenderer implements Globals {
     @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/Camera;isThirdPerson()Z"))
     public boolean hookRender(Camera instance) {
         PerspectiveEvent perspectiveEvent = new PerspectiveEvent(instance);
-        Shoreline.EVENT_HANDLER.dispatch(perspectiveEvent);
+        OvaqReborn.EVENT_HANDLER.dispatch(perspectiveEvent);
 
         if (perspectiveEvent.isCanceled()) {
             return true;

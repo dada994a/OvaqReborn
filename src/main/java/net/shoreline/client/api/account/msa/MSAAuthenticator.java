@@ -6,7 +6,7 @@ import com.mojang.util.UndashedUuid;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
 import net.minecraft.client.session.Session;
-import net.shoreline.client.Shoreline;
+import net.shoreline.client.OvaqReborn;
 import net.shoreline.client.api.account.msa.callback.BrowserLoginCallback;
 import net.shoreline.client.api.account.msa.exception.MSAAuthException;
 import net.shoreline.client.api.account.msa.model.MinecraftProfile;
@@ -407,7 +407,7 @@ public final class MSAAuthenticator
         }
         catch (IOException e)
         {
-            Shoreline.error("Failed to make POST request to {}", url);
+            OvaqReborn.error("Failed to make POST request to {}", url);
             e.printStackTrace();
         }
         return null;

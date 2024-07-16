@@ -3,7 +3,7 @@ package net.shoreline.client.impl.manager.anticheat;
 import net.minecraft.network.packet.s2c.common.CommonPingS2CPacket;
 import net.minecraft.network.packet.s2c.play.PlayerPositionLookS2CPacket;
 import net.minecraft.util.math.Vec3d;
-import net.shoreline.client.Shoreline;
+import net.shoreline.client.OvaqReborn;
 import net.shoreline.client.api.event.listener.EventListener;
 import net.shoreline.client.impl.event.network.DisconnectEvent;
 import net.shoreline.client.impl.event.network.PacketEvent;
@@ -25,7 +25,7 @@ public final class AntiCheatManager implements Globals
 
     public AntiCheatManager()
     {
-        Shoreline.EVENT_HANDLER.subscribe(this);
+        OvaqReborn.EVENT_HANDLER.subscribe(this);
         Arrays.fill(transactions, -1);
     }
 
@@ -71,7 +71,7 @@ public final class AntiCheatManager implements Globals
             }
         }
         isGrim = true;
-        Shoreline.LOGGER.info("Server is running GrimAC.");
+        OvaqReborn.LOGGER.info("Server is running GrimAC.");
     }
 
     public boolean isGrim()

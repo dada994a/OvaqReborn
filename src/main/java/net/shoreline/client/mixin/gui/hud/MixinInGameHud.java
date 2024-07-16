@@ -6,7 +6,7 @@ import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.shoreline.client.Shoreline;
+import net.shoreline.client.OvaqReborn;
 import net.shoreline.client.impl.event.gui.hud.RenderOverlayEvent;
 import net.shoreline.client.init.Managers;
 import net.shoreline.client.util.Globals;
@@ -42,7 +42,7 @@ public class MixinInGameHud implements Globals {
     private void hookRender(DrawContext context, float tickDelta, CallbackInfo ci) {
         RenderOverlayEvent.Post renderOverlayEvent =
                 new RenderOverlayEvent.Post(context, tickDelta);
-        Shoreline.EVENT_HANDLER.dispatch(renderOverlayEvent);
+        OvaqReborn.EVENT_HANDLER.dispatch(renderOverlayEvent);
     }
 
     @Redirect(method = "renderHotbar", at = @At(value = "FIELD", target = "Lnet/minecraft/entity/player/PlayerInventory;selectedSlot:I"))
@@ -60,7 +60,7 @@ public class MixinInGameHud implements Globals {
                                                CallbackInfo ci) {
         RenderOverlayEvent.StatusEffect renderOverlayEvent =
                 new RenderOverlayEvent.StatusEffect(context);
-        Shoreline.EVENT_HANDLER.dispatch(renderOverlayEvent);
+        OvaqReborn.EVENT_HANDLER.dispatch(renderOverlayEvent);
         if (renderOverlayEvent.isCanceled()) {
             ci.cancel();
         }
@@ -77,7 +77,7 @@ public class MixinInGameHud implements Globals {
                                            CallbackInfo ci) {
         RenderOverlayEvent.Spyglass renderOverlayEvent =
                 new RenderOverlayEvent.Spyglass(context);
-        Shoreline.EVENT_HANDLER.dispatch(renderOverlayEvent);
+        OvaqReborn.EVENT_HANDLER.dispatch(renderOverlayEvent);
         if (renderOverlayEvent.isCanceled()) {
             ci.cancel();
         }
@@ -95,14 +95,14 @@ public class MixinInGameHud implements Globals {
         if (texture.getPath().equals(PUMPKIN_BLUR.getPath())) {
             RenderOverlayEvent.Pumpkin renderOverlayEvent =
                     new RenderOverlayEvent.Pumpkin(context);
-            Shoreline.EVENT_HANDLER.dispatch(renderOverlayEvent);
+            OvaqReborn.EVENT_HANDLER.dispatch(renderOverlayEvent);
             if (renderOverlayEvent.isCanceled()) {
                 ci.cancel();
             }
         } else if (texture.getPath().equals(POWDER_SNOW_OUTLINE.getPath())) {
             RenderOverlayEvent.Frostbite renderOverlayEvent =
                     new RenderOverlayEvent.Frostbite(context);
-            Shoreline.EVENT_HANDLER.dispatch(renderOverlayEvent);
+            OvaqReborn.EVENT_HANDLER.dispatch(renderOverlayEvent);
             if (renderOverlayEvent.isCanceled()) {
                 ci.cancel();
             }
@@ -124,7 +124,7 @@ public class MixinInGameHud implements Globals {
                                           Text text, int x, int y, int color) {
         RenderOverlayEvent.ItemName renderOverlayEvent =
                 new RenderOverlayEvent.ItemName(instance);
-        Shoreline.EVENT_HANDLER.dispatch(renderOverlayEvent);
+        OvaqReborn.EVENT_HANDLER.dispatch(renderOverlayEvent);
         if (renderOverlayEvent.isCanceled()) {
             if (renderOverlayEvent.isUpdateXY()) {
                 return instance.drawText(mc.textRenderer, text,

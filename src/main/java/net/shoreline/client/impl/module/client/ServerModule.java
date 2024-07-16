@@ -1,7 +1,7 @@
 package net.shoreline.client.impl.module.client;
 
 import net.minecraft.network.packet.s2c.play.GameStateChangeS2CPacket;
-import net.shoreline.client.Shoreline;
+import net.shoreline.client.OvaqReborn;
 import net.shoreline.client.api.config.Config;
 import net.shoreline.client.api.config.setting.BooleanConfig;
 import net.shoreline.client.api.event.listener.EventListener;
@@ -32,7 +32,7 @@ public final class ServerModule extends ConcurrentModule
         {
             if (packet.getReason() == DEMO_MESSAGE_SHOWN && !mc.isDemo() && demoConfig.getValue())
             {
-                Shoreline.info("Server attempted to use Demo mode features on you!");
+                OvaqReborn.info("Server attempted to use Demo mode features on you!");
                 event.cancel();
             }
         }

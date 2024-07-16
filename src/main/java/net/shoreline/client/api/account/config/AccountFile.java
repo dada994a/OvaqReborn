@@ -3,7 +3,7 @@ package net.shoreline.client.api.account.config;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import net.shoreline.client.Shoreline;
+import net.shoreline.client.OvaqReborn;
 import net.shoreline.client.api.account.type.MinecraftAccount;
 import net.shoreline.client.api.account.type.impl.CrackedAccount;
 import net.shoreline.client.api.account.type.impl.MicrosoftAccount;
@@ -56,7 +56,7 @@ public class AccountFile extends ConfigFile
         // error writing file
         catch (IOException e)
         {
-            Shoreline.error("Could not save file for accounts.json!");
+            OvaqReborn.error("Could not save file for accounts.json!");
             e.printStackTrace();
         }
     }
@@ -78,7 +78,7 @@ public class AccountFile extends ConfigFile
         // error reading file
         catch (IOException e)
         {
-            Shoreline.error("Could not read file for accounts.json!");
+            OvaqReborn.error("Could not read file for accounts.json!");
             e.printStackTrace();
         }
     }
@@ -93,7 +93,7 @@ public class AccountFile extends ConfigFile
             }
             catch (RuntimeException e)
             {
-                Shoreline.error(e.getMessage());
+                OvaqReborn.error(e.getMessage());
             }
         }
         return serialize(array);
@@ -126,7 +126,7 @@ public class AccountFile extends ConfigFile
             {
                 if (!object.has("username"))
                 {
-                    Shoreline.error("Browser account does not have a username set?");
+                    OvaqReborn.error("Browser account does not have a username set?");
                     continue;
                 }
                 account = new MicrosoftAccount(object.get("token").getAsString());
@@ -146,7 +146,7 @@ public class AccountFile extends ConfigFile
             }
             else
             {
-                Shoreline.error("Could not parse account JSON.\nRaw: {}", object.toString());
+                OvaqReborn.error("Could not parse account JSON.\nRaw: {}", object.toString());
             }
         }
     }

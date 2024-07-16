@@ -11,7 +11,7 @@ import net.shoreline.client.api.module.ModuleCategory;
 import net.shoreline.client.impl.event.TickEvent;
 
 /**
- * @author Shoreline
+ * @author OvaqReborn
  * @since 1.0
  */
 public class BaritoneModule extends ConcurrentModule {

@@ -10,7 +10,7 @@ import net.fabricmc.loader.api.FabricLoader;
  * @author linus
  * @since 1.0
  */
-public class ShorelineMod implements ClientModInitializer {
+public class OvaqRebornMod implements ClientModInitializer {
     public static final String MOD_NAME = "OvaqReborn";
     public static final String MOD_VER = BuildConfig.VERSION;
     public static final String MOD_BUILD_NUMBER = BuildConfig.BUILD_IDENTIFIER + "-" +  BuildConfig.BUILD_NUMBER;
@@ -23,7 +23,7 @@ public class ShorelineMod implements ClientModInitializer {
      */
     @Override
     public void onInitializeClient() {
-        Shoreline.init();
+        OvaqReborn.init();
     }
 
     public static boolean isBaritonePresent() {

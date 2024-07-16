@@ -17,10 +17,10 @@ import java.util.concurrent.Executors;
  * instances and client managers.
  *
  * @author linus
- * @see ShorelineMod
+ * @see OvaqRebornMod
  * @since 1.0
  */
-public class Shoreline {
+public class OvaqReborn {
     // Client logger.
     public static Logger LOGGER;
     // Client Event handler (aka Event bus) which handles event dispatching
@@ -36,7 +36,7 @@ public class Shoreline {
     public static Executor EXECUTOR;
 
     /**
-     * Called during {@link ShorelineMod#onInitializeClient()}
+     * Called during {@link OvaqRebornMod#onInitializeClient()}
      */
     public static void init() {
         LOGGER = LogManager.getLogger("OvaqReborn");

@@ -1,6 +1,6 @@
 package net.shoreline.client.init;
 
-import net.shoreline.client.Shoreline;
+import net.shoreline.client.OvaqReborn;
 import net.shoreline.client.impl.manager.ModuleManager;
 import net.shoreline.client.impl.manager.anticheat.AntiCheatManager;
 import net.shoreline.client.impl.manager.client.*;
@@ -94,11 +94,11 @@ public class Managers {
 
     /**
      * Returns <tt>true</tt> if the Manager instances have been initialized.
-     * This should always return <tt>true</tt> if {@link Shoreline#preInit()} has
+     * This should always return <tt>true</tt> if {@link OvaqReborn#preInit()} has
      * finished running.
      *
      * @return <tt>true</tt> if the Manager instances have been initialized
-     * @see Shoreline#preInit()
+     * @see OvaqReborn#preInit()
      * @see #init()
      * @see #initialized
      */

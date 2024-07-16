@@ -21,7 +21,7 @@ public class AntiAFKModule extends ToggleModule {
     Config<Boolean> tabCompleteConfig = new BooleanConfig("TabComplete", "Uses tab complete in chat to prevent AFK kick", true);
     Config<Boolean> rotateConfig = new BooleanConfig("Rotate", "Rotates the player to prevent AFK kick", true);
     Config<Boolean> autoReplyConfig = new BooleanConfig("AutoReply", "Replies to players messaging you in chat", true);
-    Config<String> replyConfig = new StringConfig("Reply", "The reply message for AutoReply", "[Shoreline] I am currently AFK.");
+    Config<String> replyConfig = new StringConfig("Reply", "The reply message for AutoReply", "[OvaqReborn] I am currently AFK.");
     Config<Float> delayConfig = new NumberConfig<>("Delay", "The delay between actions", 5.0f, 60.0f, 270.0f);
 
     /**

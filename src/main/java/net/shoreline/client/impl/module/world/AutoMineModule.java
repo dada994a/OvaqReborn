@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.TreeMap;
 
 /**
- * @author Shoreline
+ * @author OvaqReborn
  * @since 1.0
  */
 public class AutoMineModule extends RotationModule {

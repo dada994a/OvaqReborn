@@ -12,7 +12,7 @@ import net.shoreline.client.api.module.ToggleModule;
 import net.shoreline.client.init.Managers;
 
 /**
- * @author Shoreline
+ * @author OvaqReborn
  * @since 1.0
  */
 public class ChestSwapModule extends ToggleModule {

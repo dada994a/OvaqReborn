@@ -9,7 +9,7 @@ import net.minecraft.client.gui.hud.MessageIndicator;
 import net.minecraft.network.message.MessageSignatureData;
 import net.minecraft.text.OrderedText;
 import net.minecraft.text.Text;
-import net.shoreline.client.Shoreline;
+import net.shoreline.client.OvaqReborn;
 import net.shoreline.client.impl.event.gui.hud.ChatMessageEvent;
 import net.shoreline.client.init.Modules;
 import net.shoreline.client.util.render.animation.TimeAnimation;
@@ -98,6 +98,6 @@ public class MixinChatHud
                                 int ticks, MessageIndicator indicator,
                                 boolean refresh, CallbackInfo ci) {
         ChatMessageEvent chatMessageEvent = new ChatMessageEvent(message);
-        Shoreline.EVENT_HANDLER.dispatch(chatMessageEvent);
+        OvaqReborn.EVENT_HANDLER.dispatch(chatMessageEvent);
     }
 }

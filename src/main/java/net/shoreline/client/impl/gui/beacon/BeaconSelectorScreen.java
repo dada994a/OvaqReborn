@@ -6,7 +6,7 @@ import net.minecraft.screen.BeaconScreenHandler;
 import net.minecraft.text.Text;
 
 /**
- * @author Shoreline
+ * @author OvaqReborn
  * @since 1.0
  */
 public class BeaconSelectorScreen extends BeaconScreen {

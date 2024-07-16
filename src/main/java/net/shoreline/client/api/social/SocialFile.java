@@ -3,14 +3,13 @@ package net.shoreline.client.api.social;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonPrimitive;
-import net.shoreline.client.Shoreline;
+import net.shoreline.client.OvaqReborn;
 import net.shoreline.client.api.file.ConfigFile;
 import net.shoreline.client.init.Managers;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.UUID;
 
 /**
  * @author linus
@@ -47,7 +46,7 @@ public class SocialFile extends ConfigFile {
         }
         // error writing file
         catch (IOException e) {
-            Shoreline.error("Could not save file for {}.json!",
+            OvaqReborn.error("Could not save file for {}.json!",
                     relation.name().toLowerCase());
             e.printStackTrace();
         }
@@ -73,7 +72,7 @@ public class SocialFile extends ConfigFile {
         }
         // error reading file
         catch (IOException e) {
-            Shoreline.error("Could not read file for {}.json!",
+            OvaqReborn.error("Could not read file for {}.json!",
                     relation.name().toLowerCase());
             e.printStackTrace();
         }

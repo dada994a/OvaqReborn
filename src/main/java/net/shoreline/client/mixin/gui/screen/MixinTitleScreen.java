@@ -18,7 +18,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.MathHelper;
 import net.shoreline.client.BuildConfig;
-import net.shoreline.client.ShorelineMod;
+import net.shoreline.client.OvaqRebornMod;
 import net.shoreline.client.impl.gui.account.AccountSelectorScreen;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
@@ -76,8 +76,8 @@ public abstract class MixinTitleScreen extends Screen {
             return;
         }
         context.drawTextWithShadow(client.textRenderer,
-                "OvaqReborn " + ShorelineMod.MOD_VER
-                        + " (" + ShorelineMod.MOD_BUILD_NUMBER
+                "OvaqReborn " + OvaqRebornMod.MOD_VER
+                        + " (" + OvaqRebornMod.MOD_BUILD_NUMBER
                         + "-" + BuildConfig.HASH + ")",
                 2, height - (client.textRenderer.fontHeight * 2) - 2, 0xffffff | i);
     }

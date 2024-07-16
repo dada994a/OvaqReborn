@@ -1,7 +1,7 @@
 package net.shoreline.client.impl.manager;
 
-import net.shoreline.client.Shoreline;
-import net.shoreline.client.ShorelineMod;
+import net.shoreline.client.OvaqReborn;
+import net.shoreline.client.OvaqRebornMod;
 import net.shoreline.client.api.module.Module;
 import net.shoreline.client.impl.module.client.*;
 import net.shoreline.client.impl.module.combat.*;
@@ -155,10 +155,10 @@ public class ModuleManager {
                 new SpeedmineModule()
                 // new WallhackModule()
         );
-        if (ShorelineMod.isBaritonePresent()) {
+        if (OvaqRebornMod.isBaritonePresent()) {
             register(new BaritoneModule());
         }
-        Shoreline.info("Registered {} modules!", modules.size());
+        OvaqReborn.info("Registered {} modules!", modules.size());
     }
 
     /**

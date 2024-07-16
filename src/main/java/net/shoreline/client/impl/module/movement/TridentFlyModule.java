@@ -17,7 +17,7 @@ import net.shoreline.client.impl.event.item.TridentWaterEvent;
 import net.shoreline.client.init.Managers;
 
 /**
- * @author Shoreline
+ * @author OvaqReborn
  * @since 1.0
  */
 public class TridentFlyModule extends ToggleModule {
