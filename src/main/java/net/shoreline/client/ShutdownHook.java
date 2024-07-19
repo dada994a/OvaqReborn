@@ -22,7 +22,7 @@ public class ShutdownHook extends Thread {
      */
     @Override
     public void run() {
-        OvaqReborn.info("Saving configurations and shutting down!");
+        OvaqReborn.info("コンフィグをセーブ中…");
         OvaqReborn.CONFIG.saveClient();
     }
 }

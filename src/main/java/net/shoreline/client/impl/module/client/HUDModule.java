@@ -129,7 +129,7 @@ public class HUDModule extends ToggleModule {
             if (watermarkConfig.getValue()) {
                 RenderManager.renderText(event.getContext(), String.format("%s %s (%s%s)",
                         OvaqRebornMod.MOD_NAME, OvaqRebornMod.MOD_VER,
-                        OvaqRebornMod.MOD_BUILD_NUMBER, !BuildConfig.HASH.equals("null") ? "-" + BuildConfig.HASH : ""), 2.0f, topLeft, getHudColor(rainbowOffset));
+                        OvaqRebornMod.MOD_BUILD_NUMBER, !BuildConfig.HASH.equals("エラー") ? "-" + BuildConfig.HASH : ""), 2.0f, topLeft, getHudColor(rainbowOffset));
                 // topLeft += 9.0f;
             }
             if (arraylistConfig.getValue()) {

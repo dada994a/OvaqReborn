@@ -82,7 +82,7 @@ public class AutoCrystalModule extends RotationModule {
     Config<Boolean> neutralsConfig = new BooleanConfig("Neutrals", "Target neutrals", false);
     Config<Boolean> animalsConfig = new BooleanConfig("Animals", "Target animals", false);
     // BREAK SETTINGS
-    Config<Float> breakSpeedConfig = new NumberConfig<>("BreakSpeed", "Speed to break crystals", 0.1f, 18.0f, 20.0f);
+    Config<Float> breakSpeedConfig = new NumberConfig<>("BreakSpeed", "Speed to break crystals", 0.1f, 18.0f, 50.0f);
     Config<Float> attackDelayConfig = new NumberConfig<>("AttackDelay", "Added delays", 0.0f, 0.0f, 5.0f);
     Config<Integer> attackFactorConfig = new NumberConfig<>("AttackFactor", "Factor of attack delay", 0, 0, 3, () -> attackDelayConfig.getValue() > 0.0);
     Config<Float> randomSpeedConfig = new NumberConfig<>("RandomSpeed", "Randomized delay for breaking crystals", 0.0f, 0.0f, 10.0f);
@@ -110,7 +110,7 @@ public class AutoCrystalModule extends RotationModule {
     //        eight: 100
     Config<Boolean> manualConfig = new BooleanConfig("ManualCrystal", "Always breaks manually placed crystals", false);
     Config<Boolean> placeConfig = new BooleanConfig("Place", "Places crystals to damage enemies. Place settings will only function if this setting is enabled.", true);
-    Config<Float> placeSpeedConfig = new NumberConfig<>("PlaceSpeed", "Speed to place crystals", 0.1f, 18.0f, 20.0f, () -> placeConfig.getValue());
+    Config<Float> placeSpeedConfig = new NumberConfig<>("PlaceSpeed", "Speed to place crystals", 0.1f, 18.0f, 50.0f, () -> placeConfig.getValue());
     Config<Float> placeRangeConfig = new NumberConfig<>("PlaceRange", "Range to place crystals", 0.1f, 4.0f, 5.0f, () -> placeConfig.getValue());
     Config<Float> strictPlaceRangeConfig = new NumberConfig<>("StrictPlaceRange", "NCP range to place crystals", 0.1f, 4.0f, 5.0f, () -> placeConfig.getValue());
     Config<Float> placeWallRangeConfig = new NumberConfig<>("PlaceWallRange", "Range to place crystals through walls", 0.1f, 4.0f, 5.0f, () -> placeConfig.getValue());
@@ -218,9 +218,9 @@ public class AutoCrystalModule extends RotationModule {
         if (placeConfig.getValue()) {
             placeCrystal = calculatePlaceCrystal(blocks, entities);
         }
-        float breakDelay = 1.0f - breakSpeedConfig.getValue() * 10.0f;
+        float breakDelay = 0.0f - breakSpeedConfig.getValue() * 0.0f;
         if (breakDelayConfig.getValue()) {
-            breakDelay = Math.max(minTimeoutConfig.getValue() * 10.0f, getBreakMs() + breakTimeoutConfig.getValue() * 10.0f);
+            breakDelay = Math.max(minTimeoutConfig.getValue() * 0.0f, getBreakMs() + breakTimeoutConfig.getValue() * 0.0f);
         }
         attackRotate = attackCrystal != null && attackDelayConfig.getValue() <= 0.0 && lastAttackTimer.passed(breakDelay);
         if (attackCrystal != null) {
@@ -275,7 +275,7 @@ public class AutoCrystalModule extends RotationModule {
         }
         if (placeCrystal != null) {
             renderPos = placeCrystal.getDamageData();
-            if (lastPlaceTimer.passed(1.0f - placeSpeedConfig.getValue() * 10.0f)) {
+            if (lastPlaceTimer.passed(0.0f - placeSpeedConfig.getValue() * 0.0f)) {
                 // ChatUtil.clientSendMessage("place range:" + Math.sqrt(mc.player.getEyePos().squaredDistanceTo(placeCrystal.getDamageData().toCenterPos())));
                 placeCrystal(placeCrystal.getDamageData(), hand);
                 setStage("PLACING");
@@ -289,7 +289,7 @@ public class AutoCrystalModule extends RotationModule {
         if (mc.player == null || attackDelayConfig.getValue() <= 0.0) {
             return;
         }
-        float attackFactor = 1.0f / Math.max(1.0f, attackFactorConfig.getValue());
+        float attackFactor = 0.0f / Math.max(0.0f, attackFactorConfig.getValue());
         if (attackCrystal != null && lastAttackTimer.passed(attackDelayConfig.getValue() * attackFactor)) {
             attackCrystal(attackCrystal.getDamageData(), getCrystalHand());
             lastAttackTimer.reset();

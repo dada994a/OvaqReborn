@@ -43,16 +43,16 @@ public class OvaqReborn {
 
         // Debug information - required when submitting a crash / bug report
         info("This build of OvaqReborn is on Git hash {} and was compiled on {}", BuildConfig.HASH, BuildConfig.BUILD_TIME);
-        info("Starting preInit ...");
+        info("preInitを開始中 ...");
 
         EXECUTOR = Executors.newFixedThreadPool(1);
         // Create event handler instance
         EVENT_HANDLER = new EventBus();
-        info("Starting init ...");
+        info("initを開始中 ...");
         Managers.init();
         Modules.init();
         // Commands.init();
-        info("Starting postInit ...");
+        info("postInitを開始中 ...");
         CONFIG = new ClientConfiguration();
         Managers.postInit();
         SHUTDOWN = new ShutdownHook();
