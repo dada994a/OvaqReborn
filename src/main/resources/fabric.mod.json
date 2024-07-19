@@ -11,7 +11,7 @@
     "homepage": "https://fabricmc.net/"
   },
   "license": "None",
-  "icon": "assets/ovaqreborn/logo.png",
+  "icon": "logo.png",
   "environment": "*",
   "entrypoints": {
     "client": [

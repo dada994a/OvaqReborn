@@ -41,6 +41,7 @@ public class ModuleManager {
                 new AutoArmorModule(),
                 new AutoBowReleaseModule(),
                 new AutoCrystalModule(),
+                new PistonAuraModule(),
                 new AutoLogModule(),
                 new AutoTotemModule(),
                 new AutoTrapModule(),
