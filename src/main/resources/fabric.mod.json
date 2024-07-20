@@ -3,14 +3,14 @@
   "id": "ovaqreborn",
   "version": "${version}",
   "name": "OvaqReborn",
-  "description": "for Minescon :3",
+  "description": "TEAM hypscon ",
   "authors": [
-    "hypinohaizin"
+    "ハイピ",
+    "ovaq_1008(名前の元・旧アイコン作成）"
   ],
-  "contact": {
+  "Discord": {
     "homepage": "https://fabricmc.net/"
   },
-  "license": "None",
   "icon": "logo.png",
   "environment": "*",
   "entrypoints": {
