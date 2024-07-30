@@ -14,7 +14,6 @@ buildConfig {
     buildConfigField(String, "HASH", "${execute("git rev-parse --short HEAD")}")
     buildConfigField(String, "VERSION", project.mod_version)
     buildConfigField(String, "BUILD_NUMBER", project.build_number)
-    buildConfigField(String, "BUILD_IDENTIFIER", project.build_identifier)
     buildConfigField(String, "BUILD_TIME", "${new Date(System.currentTimeMillis()).format("MM/dd/yyyy HH:mm")}")
 
     packageName "net.shoreline.client"

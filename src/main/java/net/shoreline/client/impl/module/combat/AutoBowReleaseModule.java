@@ -18,10 +18,7 @@ import net.shoreline.client.impl.event.TickEvent;
 import net.shoreline.client.init.Managers;
 import net.shoreline.client.init.Modules;
 
-/**
- * @author linus
- * @since 1.0
- */
+
 public class AutoBowReleaseModule extends ToggleModule {
     //
     Config<Boolean> crossbowConfig = new BooleanConfig("Crossbow", "Automatically releases crossbow when fully charged", false);

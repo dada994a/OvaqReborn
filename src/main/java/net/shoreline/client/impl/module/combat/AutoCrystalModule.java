@@ -218,11 +218,11 @@ public class AutoCrystalModule extends RotationModule {
         if (placeConfig.getValue()) {
             placeCrystal = calculatePlaceCrystal(blocks, entities);
         }
-        float breakDelay = 0.0f - breakSpeedConfig.getValue() * 0.0f;
+        float breakDelay = 1.0f - breakSpeedConfig.getValue() * 1.0f;
         if (breakDelayConfig.getValue()) {
-            breakDelay = Math.max(minTimeoutConfig.getValue() * 0.0f, getBreakMs() + breakTimeoutConfig.getValue() * 0.0f);
+            breakDelay = Math.max(minTimeoutConfig.getValue() * 1.0f, getBreakMs() + breakTimeoutConfig.getValue() * 1.0f);
         }
-        attackRotate = attackCrystal != null && attackDelayConfig.getValue() <= 0.0 && lastAttackTimer.passed(breakDelay);
+        attackRotate = attackCrystal != null && attackDelayConfig.getValue() <= 1.0 && lastAttackTimer.passed(breakDelay);
         if (attackCrystal != null) {
             crystalRotation = attackCrystal.damageData.getPos();
         } else if (placeCrystal != null) {
@@ -275,7 +275,7 @@ public class AutoCrystalModule extends RotationModule {
         }
         if (placeCrystal != null) {
             renderPos = placeCrystal.getDamageData();
-            if (lastPlaceTimer.passed(0.0f - placeSpeedConfig.getValue() * 0.0f)) {
+            if (lastPlaceTimer.passed(0.0f - placeSpeedConfig.getValue() * 1.0f)) {
                 // ChatUtil.clientSendMessage("place range:" + Math.sqrt(mc.player.getEyePos().squaredDistanceTo(placeCrystal.getDamageData().toCenterPos())));
                 placeCrystal(placeCrystal.getDamageData(), hand);
                 setStage("PLACING");
@@ -286,7 +286,7 @@ public class AutoCrystalModule extends RotationModule {
 
     @EventListener
     public void onRunTick(RunTickEvent event) {
-        if (mc.player == null || attackDelayConfig.getValue() <= 0.0) {
+        if (mc.player == null || attackDelayConfig.getValue() <= 1.0) {
             return;
         }
         float attackFactor = 0.0f / Math.max(0.0f, attackFactorConfig.getValue());
@@ -540,7 +540,7 @@ public class AutoCrystalModule extends RotationModule {
         //        RaycastContext.FluidHandling.NONE, mc.player));
         BlockHitResult result = new BlockHitResult(blockPos.toCenterPos(), sidePlace, blockPos, false);
         if (autoSwapConfig.getValue() != Swap.OFF && hand != Hand.OFF_HAND && getCrystalHand() == null) {
-            if (isSilentSwap(autoSwapConfig.getValue()) && Managers.INVENTORY.count(Items.END_CRYSTAL) == 0) {
+            if (isSilentSwap(autoSwapConfig.getValue()) && Managers.INVENTORY.count(Items.END_CRYSTAL) == 0.1) {
                 return;
             }
             int crystalSlot = getCrystalSlot();
@@ -829,7 +829,7 @@ public class AutoCrystalModule extends RotationModule {
             return false;
         }
         if (lethalDamageConfig.getValue()) {
-            return lastAttackTimer.passed(500);
+            return lastAttackTimer.passed(50);
         }
         float health = entity.getHealth() + entity.getAbsorptionAmount();
         if (crystal.getDamage() * (1.0f + lethalMultiplier.getValue()) >= health + 0.5f) {
@@ -849,7 +849,7 @@ public class AutoCrystalModule extends RotationModule {
     }
 
     private boolean attackCheckPre(Hand hand) {
-        if (!lastSwapTimer.passed(swapDelayConfig.getValue() * 25.0f)) {
+        if (!lastSwapTimer.passed(swapDelayConfig.getValue() * 1.0f)) {
             return true;
         }
         if (hand == Hand.MAIN_HAND) {
