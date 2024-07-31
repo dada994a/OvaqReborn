@@ -60,6 +60,7 @@ public class Modules {
     public static ClientSpoofModule CLIENT_SPOOFER;
     public static CrasherModule CRASHER;
     public static DisablerModule DISABLER;
+    public static FastEatModule  FastEat;
     public static ExtendedFireworkModule EXTENDED_FIREWORK;
     public static FakeLatencyModule FAKE_LATENCY;
     public static FastProjectileModule FAST_PROJECTILE;
@@ -74,6 +75,8 @@ public class Modules {
     public static AntiSpamModule ANTI_SPAM;
     public static AutoAcceptModule AUTO_ACCEPT;
     public static AutoEatModule AUTO_EAT;
+
+
     public static AutoFishModule AUTO_FISH;
     public static AutoReconnectModule AUTO_RECONNECT;
     public static AutoRespawnModule AUTO_RESPAWN;
@@ -248,6 +251,7 @@ public class Modules {
             MIDDLE_CLICK = (MiddleClickModule) getRegisteredModule("middleclick-module");
             NO_PACKET_KICK = (NoPacketKickModule) getRegisteredModule("nopacketkick-module");
             NO_SOUND_LAG = (NoSoundLagModule) getRegisteredModule("nosoundlag-module");
+            FastEat = (FastEatModule) getRegisteredModule("fast_eat-module");
             TIMER = (TimerModule) getRegisteredModule("timer-module");
             TRUE_DURABILITY = (TrueDurabilityModule) getRegisteredModule("truedurability-module");
             UNFOCUSED_FPS = (UnfocusedFPSModule) getRegisteredModule("unfocusedfps-module");

@@ -47,8 +47,8 @@ public final class FastEatModule extends ToggleModule
             }
         } else {
             packets++;
-            if (packets > 100) {
-                packets = 100;
+            if (packets > 10) {
+                packets = 10;
             }
         }
 

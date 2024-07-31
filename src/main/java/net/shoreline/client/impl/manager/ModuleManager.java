@@ -63,6 +63,7 @@ public class ModuleManager {
                 new ClientSpoofModule(),
                 new CrasherModule(),
                 new DisablerModule(),
+                new FastEatModule(),
                 new ExtendedFireworkModule(),
                 new FakeLatencyModule(),
                 new FastProjectileModule(),
