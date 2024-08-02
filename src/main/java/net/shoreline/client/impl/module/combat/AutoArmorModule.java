@@ -125,7 +125,7 @@ public class AutoArmorModule extends ToggleModule {
     public void swapArmor(int armorSlot, int slot) {
         ItemStack stack = mc.player.getInventory().getArmorStack(armorSlot);
         //
-        armorSlot = 8 - armorSlot;
+        armorSlot = 9 - armorSlot;
         Managers.INVENTORY.pickupSlot(slot);
         boolean rt = !stack.isEmpty();
         Managers.INVENTORY.pickupSlot(armorSlot);
