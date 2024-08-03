@@ -37,7 +37,6 @@ public class Modules {
     public static AutoBowReleaseModule AUTO_BOW_RELEASE;
     public static AutoCrystalModule AUTO_CRYSTAL;
 
-    public  static PistonAuraModule PistonAura;
 
     public static AutoLogModule AUTO_LOG;
     public static AutoTotemModule AUTO_TOTEM;
@@ -202,7 +201,6 @@ public class Modules {
             }
             CAPES = (CapesModule) getRegisteredModule("capes-module");
             AURA = (AuraModule) getRegisteredModule("aura-module");
-            PistonAura = (PistonAuraModule) getRegisteredModule("pistonaura-module");
             AUTO_ARMOR = (AutoArmorModule) getRegisteredModule("autoarmor-module");
             AUTO_BOW_RELEASE = (AutoBowReleaseModule) getRegisteredModule("autobowrelease-module");
             AUTO_CRYSTAL = (AutoCrystalModule) getRegisteredModule("autocrystal-module");
