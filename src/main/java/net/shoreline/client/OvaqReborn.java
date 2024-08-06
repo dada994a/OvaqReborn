@@ -42,7 +42,7 @@ public class OvaqReborn {
         LOGGER = LogManager.getLogger("OvaqReborn");
 
         // Debug information - required when submitting a crash / bug report
-        info("This build of OvaqReborn is on Git hash {} and was compiled on {}", BuildConfig.HASH, BuildConfig.BUILD_TIME);
+        info("This build of OvaqReborn is on Git hash {} and was compiled on {}", BuildConfig.HASH);
         info("preInitを開始中 ...");
 
         EXECUTOR = Executors.newFixedThreadPool(1);

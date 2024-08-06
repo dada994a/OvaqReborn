@@ -14,7 +14,6 @@ buildConfig {
     buildConfigField(String, "HASH", "${execute("git rev-parse --short HEAD")}")
     buildConfigField(String, "VERSION", project.mod_version)
     buildConfigField(String, "BUILD_NUMBER", project.build_number)
-    buildConfigField(String, "BUILD_TIME", "${new Date(System.currentTimeMillis()).format("MM/dd/yyyy HH:mm")}")
 
     packageName "net.shoreline.client"
     useJavaOutput()
@@ -40,7 +39,7 @@ dependencies {
     mappings "net.fabricmc:yarn:${project.yarn_version}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-
+    modImplementation "cabaletta:baritone-api:${baritone_api_version}"
 }
 
 processResources {
@@ -56,14 +55,6 @@ tasks.withType(JavaCompile).configureEach {
 
     // Make this run before the compileJava task
     dependsOn generateBuildConfig
-}
-
-jar {
-    from("LICENSE") {
-        rename { "${it}-${project.archives_base_name}" }
-    }
-
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
 
 def execute(String cmd) {
