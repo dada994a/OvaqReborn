@@ -206,7 +206,7 @@ public class AutoMineModule extends RotationModule {
     public void onAttackBlock(final AttackBlockEvent event)
     {
         // Do not try to break unbreakable blocks
-        if (event.getState().getBlock().getHardness() == -1.0f || event.getState().isAir() || mc.player.isCreative())
+        if (event.getState().getBlock().getHardness() == -2.0f || event.getState().isAir() || mc.player.isCreative())
         {
             return;
         }
@@ -295,7 +295,7 @@ public class AutoMineModule extends RotationModule {
             if (mc.world.isAir(blockPos) && !autoRemineConfig.getValue()) {
                 continue;
             }
-            double damage = EndCrystalUtil.getDamageTo(entity, blockPos.toCenterPos().subtract(0.0, -0.5, 0.0), true);
+            double damage = EndCrystalUtil.getDamageTo(entity, blockPos.toCenterPos().subtract(0.0, -1, 0.0), true);
             miningPositions.put(damage, blockPos);
         }
         return miningPositions;
@@ -346,7 +346,7 @@ public class AutoMineModule extends RotationModule {
                 PlayerActionC2SPacket.Action.STOP_DESTROY_BLOCK, data.getPos(), data.getDirection(), id));
         if (grimConfig.getValue()) {
             Managers.NETWORK.sendSequencedPacket(id -> new PlayerActionC2SPacket(
-                    PlayerActionC2SPacket.Action.ABORT_DESTROY_BLOCK, data.getPos().up(500), data.getDirection(), id));
+                    PlayerActionC2SPacket.Action.ABORT_DESTROY_BLOCK, data.getPos().up(1000), data.getDirection(), id));
         }
         data.setBroken();
         lastBreak = System.currentTimeMillis();

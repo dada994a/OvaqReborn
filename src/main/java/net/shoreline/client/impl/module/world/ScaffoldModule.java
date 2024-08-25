@@ -258,7 +258,7 @@ public final class ScaffoldModule extends RotationModule
             for (float pitch = 75; pitch <= 90; pitch += 0.5f)
             {
                 final float[] angles = { yaw, pitch };
-                final HitResult result = RayCastUtil.rayCast(4.0, angles);
+                final HitResult result = RayCastUtil.rayCast(3.0, angles);
                 if (result instanceof BlockHitResult hitResult
                         && hitResult.getBlockPos().equals(data.getPos())
                         && hitResult.getSide() == direction)

@@ -119,9 +119,9 @@ public abstract class MixinTitleScreen extends Screen {
     public void hookInit(int y, int spacingY, CallbackInfo ci) {
         // parameters from when the method initWidgetsNormal is called
         final ButtonWidget widget = ButtonWidget.builder(Text.of("Account Manager"), (action) -> client.setScreen(new AccountSelectorScreen((Screen) (Object) this)))
-            .dimensions(this.width / 2 - 100, y + spacingY * 3, 200, 20)
-            .tooltip(Tooltip.of(Text.of("Allows you to switch your in-game account")))
-            .build();
+                .dimensions(this.width / 2 - 100, y + spacingY * 3, 200, 20)
+                .tooltip(Tooltip.of(Text.of("Allows you to switch your in-game account")))
+                .build();
         widget.active = true;
         addDrawableChild(widget);
     }
