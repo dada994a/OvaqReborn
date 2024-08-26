@@ -122,7 +122,7 @@ public final class AutoTotemModule extends ToggleModule
             return Items.TOTEM_OF_UNDYING;
         }
         // Check fall damage
-        if (PlayerUtil.computeFallDamage(mc.player.fallDistance, 0.5f) + 0.5f > mc.player.getHealth())
+        if (PlayerUtil.computeFallDamage(mc.player.fallDistance, 1.0f) + 1.0f > mc.player.getHealth())
         {
             return Items.TOTEM_OF_UNDYING;
         }
@@ -140,7 +140,7 @@ public final class AutoTotemModule extends ToggleModule
                     continue;
                 }
                 double potential = EndCrystalUtil.getDamageTo(mc.player, crystal.getPos());
-                if (health + 1.4 > potential)
+                if (health + 1.0 > potential)
                 {
                     continue;
                 }
