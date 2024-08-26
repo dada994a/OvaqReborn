@@ -42,7 +42,6 @@ public class Modules {
     public static AutoTotemModule AUTO_TOTEM;
     public static AutoTrapModule AUTO_TRAP;
     public static AutoXPModule AUTO_XP;
-    public static BacktrackModule BACK_TRACK;
     public static BlockLagModule BLOCK_LAG;
     public static BowAimModule BOW_AIM;
     public static CriticalsModule CRITICALS;
@@ -59,18 +58,17 @@ public class Modules {
     public static ClientSpoofModule CLIENT_SPOOFER;
     public static CrasherModule CRASHER;
     public static DisablerModule DISABLER;
-    public static FastEatModule  FastEat;
     public static ExtendedFireworkModule EXTENDED_FIREWORK;
     public static FakeLatencyModule FAKE_LATENCY;
     public static FastProjectileModule FAST_PROJECTILE;
     public static PacketCancelerModule PACKET_CANCELER;
     public static PacketFlyModule PACKET_FLY;
     public static PhaseModule PHASE;
+    public static PearlPhaseModule PEARL_PHASE;
     public static PortalGodModeModule PORTAL_GOD_MODE;
     public static ReachModule REACH;
     // Misc
     public static AntiAimModule ANTI_AIM;
-    public static NoPacketKickModule ANTI_BOOK_BAN;
     public static AntiSpamModule ANTI_SPAM;
     public static AutoAcceptModule AUTO_ACCEPT;
     public static AutoEatModule AUTO_EAT;
@@ -208,7 +206,7 @@ public class Modules {
             AUTO_TOTEM = (AutoTotemModule) getRegisteredModule("autototem-module");
             AUTO_TRAP = (AutoTrapModule) getRegisteredModule("autotrap-module");
             AUTO_XP = (AutoXPModule) getRegisteredModule("autoxp-module");
-            // BACK_TRACK = (BackTrackModule) getRegisteredModule("backtrack-module");
+            //BACK_TRACK = (BackTrackModule) getRegisteredModule("backtrack-module");
             BLOCK_LAG = (BlockLagModule) getRegisteredModule("blocklag-module");
             BOW_AIM = (BowAimModule) getRegisteredModule("bowaim-module");
             CRITICALS = (CriticalsModule) getRegisteredModule("criticals-module");
@@ -230,6 +228,7 @@ public class Modules {
             PACKET_CANCELER = (PacketCancelerModule) getRegisteredModule("packetcanceler-module");
             PACKET_FLY = (PacketFlyModule) getRegisteredModule("packetfly-module");
             PHASE = (PhaseModule) getRegisteredModule("phase-module");
+            PEARL_PHASE = (PearlPhaseModule)  getRegisteredModule("pearl-phase-module");
             PORTAL_GOD_MODE = (PortalGodModeModule) getRegisteredModule("portalgodmode-module");
             REACH = (ReachModule) getRegisteredModule("reach-module");
             ANTI_AIM = (AntiAimModule) getRegisteredModule("antiaim-module");
@@ -249,7 +248,6 @@ public class Modules {
             MIDDLE_CLICK = (MiddleClickModule) getRegisteredModule("middleclick-module");
             NO_PACKET_KICK = (NoPacketKickModule) getRegisteredModule("nopacketkick-module");
             NO_SOUND_LAG = (NoSoundLagModule) getRegisteredModule("nosoundlag-module");
-            FastEat = (FastEatModule) getRegisteredModule("fast_eat-module");
             TIMER = (TimerModule) getRegisteredModule("timer-module");
             TRUE_DURABILITY = (TrueDurabilityModule) getRegisteredModule("truedurability-module");
             UNFOCUSED_FPS = (UnfocusedFPSModule) getRegisteredModule("unfocusedfps-module");

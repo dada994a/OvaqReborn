@@ -94,11 +94,11 @@ public class Managers {
 
     /**
      * Returns <tt>true</tt> if the Manager instances have been initialized.
-     * This should always return <tt>true</tt> if {@link OvaqReborn#preInit()} has
+     * This should always return <tt>true</tt> if {@link OvaqReborn#init()} has
      * finished running.
      *
      * @return <tt>true</tt> if the Manager instances have been initialized
-     * @see OvaqReborn#preInit()
+     * @see OvaqReborn#init()
      * @see #init()
      * @see #initialized
      */
