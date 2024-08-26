@@ -64,7 +64,7 @@ public class Modules {
     public static PacketCancelerModule PACKET_CANCELER;
     public static PacketFlyModule PACKET_FLY;
     public static PhaseModule PHASE;
-    public static PearlPhaseModule PEARL_PHASE;
+    public static PearlPhaseModule PEARLPHASE;
     public static PortalGodModeModule PORTAL_GOD_MODE;
     public static ReachModule REACH;
     // Misc
@@ -228,7 +228,7 @@ public class Modules {
             PACKET_CANCELER = (PacketCancelerModule) getRegisteredModule("packetcanceler-module");
             PACKET_FLY = (PacketFlyModule) getRegisteredModule("packetfly-module");
             PHASE = (PhaseModule) getRegisteredModule("phase-module");
-            PEARL_PHASE = (PearlPhaseModule)  getRegisteredModule("pearl-phase-module");
+            PEARLPHASE = (PearlPhaseModule)  getRegisteredModule("pearlphase-module");
             PORTAL_GOD_MODE = (PortalGodModeModule) getRegisteredModule("portalgodmode-module");
             REACH = (ReachModule) getRegisteredModule("reach-module");
             ANTI_AIM = (AntiAimModule) getRegisteredModule("antiaim-module");
