@@ -42,7 +42,7 @@ public final class AutoTotemModule extends ToggleModule
 
     public AutoTotemModule()
     {
-        super("AutoTotem", "Automatically replenishes the totem in your offhand", ModuleCategory.COMBAT);
+        super("AutoTotem", "Automatically replenishes the totem in your offhand(BUGGD)", ModuleCategory.COMBAT);
     }
 
     @Override
@@ -140,7 +140,7 @@ public final class AutoTotemModule extends ToggleModule
                     continue;
                 }
                 double potential = EndCrystalUtil.getDamageTo(mc.player, crystal.getPos());
-                if (health + 1.0 > potential)
+                if (health + 1.5 > potential)
                 {
                     continue;
                 }

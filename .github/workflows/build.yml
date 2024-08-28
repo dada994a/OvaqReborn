@@ -29,5 +29,5 @@ jobs:
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: shoreline
+          name: OvaqReborn
           path: ./build/libs/*.jar
