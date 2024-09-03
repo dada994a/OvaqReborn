@@ -5,6 +5,8 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.shoreline.client.util.Globals;
 
+import java.util.concurrent.ScheduledFuture;
+
 /**
  * @author linus
  * @since 1.0
@@ -12,16 +14,15 @@ import net.shoreline.client.util.Globals;
 public class ChatUtil implements Globals {
     //
     private static final String PREFIX = "§s[OvaqReborn] §f";
+    private static final String SUFFIX = "OvaqRebornDev";
 
-    /**
-     * Sends a message in the {@link net.minecraft.client.gui.hud.ChatHud}
-     * which is not visible to others
-     *
-     * @param message The message
-     */
+
     public static void clientSendMessage(String message) {
         mc.inGameHud.getChatHud().addMessage(Text.of(PREFIX + message), null, null);
     }
+
+
+
 
     /**
      * @param message
