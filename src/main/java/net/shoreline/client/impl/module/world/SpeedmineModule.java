@@ -80,7 +80,7 @@ public class SpeedmineModule extends RotationModule {
         AccessorClientPlayerInteractionManager interactionManager =
                 (AccessorClientPlayerInteractionManager) mc.interactionManager;
         if (interactionManager.hookGetCurrentBreakingProgress() >= mineSpeedConfig.getValue()) {
-            interactionManager.hookSetCurrentBreakingProgress(1.0f);
+            interactionManager.hookSetCurrentBreakingProgress(2.0f);
         }
     }
 

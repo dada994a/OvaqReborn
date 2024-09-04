@@ -29,5 +29,5 @@ jobs:
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: OvaqReborn
+          name: OvaqReborn.jar
           path: ./build/libs/*.jar

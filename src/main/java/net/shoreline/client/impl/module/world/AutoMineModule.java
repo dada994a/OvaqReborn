@@ -132,7 +132,7 @@ public class AutoMineModule extends RotationModule {
                         if (!mc.world.isAir(cityBlockPos2) && !isBlockDelayGrim())
                         {
                             miningData2 = new AutoMiningData(cityBlockPos2,
-                                    strictDirectionConfig.getValue() ? Managers.INTERACT.getPlaceDirectionGrim(cityBlockPos2) : Direction.UP, 1.0f);
+                                    strictDirectionConfig.getValue() ? Managers.INTERACT.getPlaceDirectionGrim(cityBlockPos2) : Direction.UP, 1.3f);
                             startMining(miningData2);
                         }
                     }
@@ -262,7 +262,7 @@ public class AutoMineModule extends RotationModule {
                     mining.getZ() + render1.minZ, mining.getX() + render1.maxX,
                     mining.getY() + render1.maxY, mining.getZ() + render1.maxZ);
             Vec3d center = render.getCenter();
-            float scale = MathHelper.clamp(data.getBlockDamage() / data.getSpeed(), 0, 1.0f);
+            float scale = MathHelper.clamp(data.getBlockDamage() / data.getSpeed(), 0, 1.3f);
             double dx = (render1.maxX - render1.minX) / 2.0;
             double dy = (render1.maxY - render1.minY) / 2.0;
             double dz = (render1.maxZ - render1.minZ) / 2.0;
@@ -320,7 +320,7 @@ public class AutoMineModule extends RotationModule {
     }
 
     private void abortMining(MiningData data) {
-        if (!data.isStarted() || data.getState().isAir() || data.isInstantRemine() || data.getBlockDamage() >= 1.0f) {
+        if (!data.isStarted() || data.getState().isAir() || data.isInstantRemine() || data.getBlockDamage() >= 1.2f) {
             return;
         }
         Managers.NETWORK.sendSequencedPacket(id -> new PlayerActionC2SPacket(
