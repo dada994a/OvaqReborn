@@ -218,11 +218,11 @@ public class AutoCrystalModule extends RotationModule {
         if (placeConfig.getValue()) {
             placeCrystal = calculatePlaceCrystal(blocks, entities);
         }
-        float breakDelay = 0f - breakSpeedConfig.getValue() * 0f;
+        float breakDelay = 0.1f - breakSpeedConfig.getValue() * 0.1f;
         if (breakDelayConfig.getValue()) {
-            breakDelay = Math.max(minTimeoutConfig.getValue() * 0f, getBreakMs() + breakTimeoutConfig.getValue() * 0f);
+            breakDelay = Math.max(minTimeoutConfig.getValue() * 0.1f, getBreakMs() + breakTimeoutConfig.getValue() * 0.1f);
         }
-        attackRotate = attackCrystal != null && attackDelayConfig.getValue() <= 0 && lastAttackTimer.passed(breakDelay);
+        attackRotate = attackCrystal != null && attackDelayConfig.getValue() <= 0.1 && lastAttackTimer.passed(breakDelay);
         if (attackCrystal != null) {
             crystalRotation = attackCrystal.damageData.getPos();
         } else if (placeCrystal != null) {
@@ -275,7 +275,7 @@ public class AutoCrystalModule extends RotationModule {
         }
         if (placeCrystal != null) {
             renderPos = placeCrystal.getDamageData();
-            if (lastPlaceTimer.passed(0f - placeSpeedConfig.getValue() * 0f)) {
+            if (lastPlaceTimer.passed(0.1f - placeSpeedConfig.getValue() * 0.1f)) {
                 // ChatUtil.clientSendMessage("place range:" + Math.sqrt(mc.player.getEyePos().squaredDistanceTo(placeCrystal.getDamageData().toCenterPos())));
                 placeCrystal(placeCrystal.getDamageData(), hand);
                 setStage("PLACING");
@@ -286,10 +286,10 @@ public class AutoCrystalModule extends RotationModule {
 
     @EventListener
     public void onRunTick(RunTickEvent event) {
-        if (mc.player == null || attackDelayConfig.getValue() <= 0) {
+        if (mc.player == null || attackDelayConfig.getValue() <=0.1) {
             return;
         }
-        float attackFactor = 0.0f / Math.max(0.0f, attackFactorConfig.getValue());
+        float attackFactor = 0.1f / Math.max(0.1f, attackFactorConfig.getValue());
         if (attackCrystal != null && lastAttackTimer.passed(attackDelayConfig.getValue() * attackFactor)) {
             attackCrystal(attackCrystal.getDamageData(), getCrystalHand());
             lastAttackTimer.reset();
@@ -849,7 +849,7 @@ public class AutoCrystalModule extends RotationModule {
     }
 
     private boolean attackCheckPre(Hand hand) {
-        if (!lastSwapTimer.passed(swapDelayConfig.getValue() * 1.0f)) {
+        if (!lastSwapTimer.passed(swapDelayConfig.getValue() * 0.1f)) {
             return true;
         }
         if (hand == Hand.MAIN_HAND) {

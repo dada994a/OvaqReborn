@@ -106,7 +106,7 @@ public class SpeedmineModule extends RotationModule {
             state = null;
             direction = null;
             damage = 0.0f;
-        } else if (damage > 1.3f && !Modules.AUTO_CRYSTAL.isAttacking()
+        } else if (damage > 1.0f && !Modules.AUTO_CRYSTAL.isAttacking()
             && !Modules.AUTO_CRYSTAL.isPlacing() && !mc.player.isUsingItem()) {
             if (isRotationBlocked()) {
                 return;

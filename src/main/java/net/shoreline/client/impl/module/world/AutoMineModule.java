@@ -320,7 +320,7 @@ public class AutoMineModule extends RotationModule {
     }
 
     private void abortMining(MiningData data) {
-        if (!data.isStarted() || data.getState().isAir() || data.isInstantRemine() || data.getBlockDamage() >= 2.0f) {
+        if (!data.isStarted() || data.getState().isAir() || data.isInstantRemine() || data.getBlockDamage() >= 1.3f) {
             return;
         }
         Managers.NETWORK.sendSequencedPacket(id -> new PlayerActionC2SPacket(
