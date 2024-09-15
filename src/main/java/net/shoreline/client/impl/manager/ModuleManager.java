@@ -35,6 +35,7 @@ public class ModuleManager {
                 new ClickGuiModule(),
                 new ColorsModule(),
                 new HUDModule(),
+                //new FontModule(),
                 new RotationsModule(),
                 // Combat
                 new AuraModule(),
@@ -45,7 +46,7 @@ public class ModuleManager {
                 new AutoTotemModule(),
                 new AutoTrapModule(),
                 new AutoXPModule(),
-                // new BackTrackModule(),
+                new BacktrackModule(),
                 new BlockLagModule(),
                 new BowAimModule(),
                 new CriticalsModule(),

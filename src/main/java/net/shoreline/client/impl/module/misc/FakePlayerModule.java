@@ -7,18 +7,16 @@ import net.shoreline.client.impl.event.entity.player.PushEntityEvent;
 import net.shoreline.client.impl.event.network.DisconnectEvent;
 import net.shoreline.client.util.world.FakePlayerEntity;
 
+import java.util.UUID;
+
 /**
  * @author linus
  * @see FakePlayerEntity
  * @since 1.0
  */
 public class FakePlayerModule extends ToggleModule {
-    //
     private FakePlayerEntity fakePlayer;
 
-    /**
-     *
-     */
     public FakePlayerModule() {
         super("FakePlayer", "Spawns an indestructible client-side player",
                 ModuleCategory.MISCELLANEOUS);
@@ -27,7 +25,11 @@ public class FakePlayerModule extends ToggleModule {
     @Override
     public void onEnable() {
         if (mc.player != null && mc.world != null) {
-            fakePlayer = new FakePlayerEntity(mc.player, "NoraDragonJP");
+            fakePlayer = new FakePlayerEntity(mc.player, "FakePlayer");
+            try {
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             fakePlayer.spawnPlayer();
         }
     }
@@ -47,12 +49,8 @@ public class FakePlayerModule extends ToggleModule {
     }
 
     @EventListener
-    public void onPushEntity(PushEntityEvent event)
-    {
-        // Prevents Simulation flags (as the FakePlayer is client only, so Grim rightfully
-        // flags us for that push motion that shouldn't happen
-        if (event.getPushed().equals(mc.player) && event.getPusher().equals(fakePlayer))
-        {
+    public void onPushEntity(PushEntityEvent event) {
+        if (event.getPushed().equals(mc.player) && event.getPusher().equals(fakePlayer)) {
             event.setCanceled(true);
         }
     }
