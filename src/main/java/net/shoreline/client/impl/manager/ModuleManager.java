@@ -149,6 +149,7 @@ public class ModuleManager {
                 new AvoidModule(),
                 new BlockInteractModule(),
                 new FastDropModule(),
+                new FastEatModule(),
                 new FastPlaceModule(),
                 new MultitaskModule(),
                 new NoGlitchBlocksModule(),

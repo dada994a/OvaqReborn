@@ -77,8 +77,7 @@ public abstract class MixinTitleScreen extends Screen {
         }
         context.drawTextWithShadow(client.textRenderer,
                 "OvaqReborn " + OvaqRebornMod.MOD_VER
-                        + " (" + OvaqRebornMod.MOD_BUILD_NUMBER
-                        + "-" + BuildConfig.HASH + ")",
+                        + "-" + BuildConfig.MODLAST,
                 2, height - (client.textRenderer.fontHeight * 2) - 2, 0xffffff | i);
     }
 

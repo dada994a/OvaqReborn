@@ -144,6 +144,7 @@ public class Modules {
     public static AvoidModule AVOID;
     public static BlockInteractModule BLOCK_INTERACT;
     public static FastDropModule FAST_DROP;
+    public static FastEatModule FAST_EAT;
     public static FastPlaceModule FAST_PLACE;
     public static MultitaskModule MULTITASK;
     public static NoGlitchBlocksModule NO_GLITCH_BLOCKS;
@@ -302,6 +303,7 @@ public class Modules {
             AVOID = (AvoidModule) getRegisteredModule("avoid-module");
             BLOCK_INTERACT = (BlockInteractModule) getRegisteredModule("blockinteract-module");
             FAST_DROP = (FastDropModule) getRegisteredModule("fastdrop-module");
+            FAST_EAT = (FastEatModule) getRegisteredModule("fasteat-module");
             FAST_PLACE = (FastPlaceModule) getRegisteredModule("fastplace-module");
             MULTITASK = (MultitaskModule) getRegisteredModule("multitask-module");
             NO_GLITCH_BLOCKS = (NoGlitchBlocksModule) getRegisteredModule("noglitchblocks-module");

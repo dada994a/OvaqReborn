@@ -12,8 +12,8 @@ group = project.maven_group
 
 buildConfig {
     buildConfigField(String, "HASH", "${execute("git rev-parse --short HEAD")}")
+    buildConfigField(String, "MODLAST", project.modlast)
     buildConfigField(String, "VERSION", project.mod_version)
-    buildConfigField(String, "BUILD_NUMBER", project.build_number)
 
     packageName "net.shoreline.client"
     useJavaOutput()

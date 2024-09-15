@@ -13,7 +13,7 @@ import net.fabricmc.loader.api.FabricLoader;
 public class OvaqRebornMod implements ClientModInitializer {
     public static final String MOD_NAME = "OvaqReborn";
     public static final String MOD_VER = BuildConfig.VERSION;
-    public static final String MOD_BUILD_NUMBER = BuildConfig.BUILD_NUMBER;
+    public static final String MODLAST = BuildConfig.MODLAST;
     public static final String MOD_MC_VER = "1.20.4";
 
     /**
