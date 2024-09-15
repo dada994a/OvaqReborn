@@ -13,6 +13,7 @@ import net.shoreline.client.impl.module.movement.*;
 import net.shoreline.client.impl.module.render.*;
 import net.shoreline.client.impl.module.world.*;
 
+import java.awt.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,6 +29,7 @@ public class Modules {
     public static ClickGuiModule CLICK_GUI;
     public static ColorsModule COLORS;
     public static HUDModule HUD;
+    //public static FontModule FONT;
     public static RotationsModule ROTATIONS;
     public static BaritoneModule BARITONE;
     public static CapesModule CAPES;
@@ -36,7 +38,7 @@ public class Modules {
     public static AutoArmorModule AUTO_ARMOR;
     public static AutoBowReleaseModule AUTO_BOW_RELEASE;
     public static AutoCrystalModule AUTO_CRYSTAL;
-
+    public static BacktrackModule BACK_TRACK;
 
     public static AutoLogModule AUTO_LOG;
     public static AutoTotemModule AUTO_TOTEM;
@@ -193,6 +195,7 @@ public class Modules {
             CLICK_GUI = (ClickGuiModule) getRegisteredModule("clickgui-module");
             COLORS = (ColorsModule) getRegisteredModule("colors-module");
             HUD = (HUDModule) getRegisteredModule("hud-module");
+            //FONT =(FontModule) getRegisteredModule("font-module");
             ROTATIONS = (RotationsModule) getRegisteredModule("rotations-module");
             SERVER = (ServerModule) getRegisteredModule("server-module");
             if (OvaqRebornMod.isBaritonePresent()) {
@@ -207,7 +210,7 @@ public class Modules {
             AUTO_TOTEM = (AutoTotemModule) getRegisteredModule("autototem-module");
             AUTO_TRAP = (AutoTrapModule) getRegisteredModule("autotrap-module");
             AUTO_XP = (AutoXPModule) getRegisteredModule("autoxp-module");
-            //BACK_TRACK = (BackTrackModule) getRegisteredModule("backtrack-module");
+            BACK_TRACK = (BacktrackModule) getRegisteredModule("backtrack-module");
             BLOCK_LAG = (BlockLagModule) getRegisteredModule("blocklag-module");
             BOW_AIM = (BowAimModule) getRegisteredModule("bowaim-module");
             CRITICALS = (CriticalsModule) getRegisteredModule("criticals-module");
