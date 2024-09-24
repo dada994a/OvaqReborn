@@ -86,7 +86,7 @@ public abstract class MixinMinecraftClient implements IMinecraftClient {
     @Inject(method = "run", at = @At(value = "INVOKE", target = "Lnet" +
             "/minecraft/client/MinecraftClient;render(Z)V", shift = At.Shift.BEFORE))
     private void hookRun(CallbackInfo ci) {
-        ((MinecraftClient)(Object)this).getWindow().setTitle("OvaqReborn " + OvaqRebornMod.MOD_VER);  // タイトルを変更
+        ((MinecraftClient)(Object)this).getWindow().setTitle("Project " +"OvaqReborn " + OvaqRebornMod.MOD_VER);  // タイトルを変更
         final RunTickEvent runTickEvent = new RunTickEvent();
         OvaqReborn.EVENT_HANDLER.dispatch(runTickEvent);
     }
