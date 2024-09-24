@@ -28,15 +28,13 @@ public class RPCModule extends ToggleModule {
 
     private void startDiscordRPC() {
         if (RPC != null) {
-            RPC.startRPC();  // Discord RPCを有効化
-            System.out.println("Discord RPC started.");
+            RPC.startRPC();
         }
     }
 
     private void stopDiscordRPC() {
         if (RPC != null) {
-            RPC.stopRPC();  // Discord RPCを無効化
-            System.out.println("Discord RPC stopped.");
+            RPC.stopRPC();
         }
     }
 }
