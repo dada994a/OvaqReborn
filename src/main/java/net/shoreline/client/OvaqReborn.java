@@ -4,6 +4,7 @@ import net.shoreline.client.api.Identifiable;
 import net.shoreline.client.api.event.handler.EventBus;
 import net.shoreline.client.api.event.handler.EventHandler;
 import net.shoreline.client.api.file.ClientConfiguration;
+import net.shoreline.client.impl.manager.client.DiscordManager;
 import net.shoreline.client.init.Managers;
 import net.shoreline.client.init.Modules;
 import org.apache.logging.log4j.LogManager;
@@ -32,27 +33,43 @@ public class OvaqReborn {
     // Client shutdown hooks which will run once when the MinecraftClient
     // game instance is shutdown.
     public static ShutdownHook SHUTDOWN;
+
+    public static DiscordManager RPC;
     //
     public static Executor EXECUTOR;
+
+    public static void logAsciiArt() {
+        String asciiArt =
+                "  ___                   ____      _                      \n" +
+                        " / _ \\__   ____ _  __ _|  _ \\ ___| |__   ___  _ __ _ __  \n" +
+                        "| | | \\ \\ / / _` |/ _` | |_) / _ \\ '_ \\ / _ \\| '__| '_ \\ \n" +
+                        "| |_| |\\ V / (_| | (_| |  _ <  __/ |_) | (_) | |  | | | |\n" +
+                        " \\___/  \\_/ \\__,_|\\__, |_| \\_\\___|_.__/ \\___/|_|  |_| |_|\n" +
+                        "                   |___/                                \n";
+
+        LOGGER.info(asciiArt);
+    }
 
     /**
      * Called during {@link OvaqRebornMod#onInitializeClient()}
      */
     public static void init() {
         LOGGER = LogManager.getLogger("OvaqReborn");
-
+        logAsciiArt();
         // Debug information - required when submitting a crash / bug report
-        info("This build of OvaqReborn is on Git hash {} and was compiled on {}", BuildConfig.HASH);
-        info("preInitを開始中 ...");
+        info("preInit starting ...");
 
         EXECUTOR = Executors.newFixedThreadPool(1);
         // Create event handler instance
         EVENT_HANDLER = new EventBus();
-        info("initを開始中 ...");
+        info("init starting ...");
         Managers.init();
         Modules.init();
+
+        RPC = new DiscordManager();
+        DiscordManager.startRPC(); // RPCを開始
         // Commands.init();
-        info("postInitを開始中 ...");
+        info("postInit starting ...");
         CONFIG = new ClientConfiguration();
         Managers.postInit();
         SHUTDOWN = new ShutdownHook();

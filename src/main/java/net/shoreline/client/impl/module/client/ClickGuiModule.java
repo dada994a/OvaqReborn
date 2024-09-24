@@ -24,7 +24,7 @@ public class ClickGuiModule extends ToggleModule {
 //    Config<Integer> alphaConfig = new NumberConfig<>("Alpha", "The alpha of colors", 0, 100, 100);
     //
     public static ClickGuiScreen CLICK_GUI_SCREEN;
-    private final Animation openCloseAnimation = new Animation(false, 300, Easing.CUBIC_IN_OUT);
+    private final Animation openCloseAnimation = new Animation(false, 400, Easing.CUBIC_IN_OUT);
 
     // TODO: Fix Gui scaling
     public float scaleConfig = 1.0f;
@@ -33,8 +33,8 @@ public class ClickGuiModule extends ToggleModule {
      *
      */
     public ClickGuiModule() {
-        super("ClickGui", "Opens the clickgui screen", ModuleCategory.CLIENT,
-                GLFW.GLFW_KEY_RIGHT_SHIFT);
+        super("ClickGui", "Opens the clickgui screen", ModuleCategory.CLIENT, GLFW.GLFW_KEY_RIGHT_SHIFT);
+
     }
 
     @Override

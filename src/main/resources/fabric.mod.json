@@ -3,14 +3,11 @@
   "id": "ovaqreborn",
   "version": "${version}",
   "name": "OvaqReborn",
-  "description": "RIP OvaqReborn Created by TEAM hypscon ",
+  "description": "Made By Hypinohaizin ",
+
   "authors": [
-    "ハイピ",
-    "ダチょ"
+    "ハイピ"
   ],
-  "Discord": {
-    "Intave": "https://discord.gg/TgN7yK3B9s"
-  },
   "icon": "logo.png",
   "environment": "*",
   "entrypoints": {

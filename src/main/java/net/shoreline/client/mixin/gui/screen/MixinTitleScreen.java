@@ -19,7 +19,6 @@ import net.minecraft.util.Util;
 import net.minecraft.util.math.MathHelper;
 import net.shoreline.client.BuildConfig;
 import net.shoreline.client.OvaqRebornMod;
-import net.shoreline.client.impl.gui.account.AccountSelectorScreen;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -69,15 +68,14 @@ public abstract class MixinTitleScreen extends Screen {
 
     @Inject(method = "render", at = @At("TAIL"))
     public void hookRender(final DrawContext context, final int mouseX, final int mouseY, final float delta, final CallbackInfo info) {
-        float f = this.doBackgroundFade ? (float)(Util.getMeasuringTimeMs() - this.backgroundFadeStart) / 1000.0f : 1.0f;
+        float f = this.doBackgroundFade ? (float) (Util.getMeasuringTimeMs() - this.backgroundFadeStart) / 1000.0f : 1.0f;
         float g = this.doBackgroundFade ? MathHelper.clamp(f - 1.0f, 0.0f, 1.0f) : 1.0f;
         int i = MathHelper.ceil(g * 255.0f) << 24;
         if ((i & 0xFC000000) == 0) {
             return;
         }
         context.drawTextWithShadow(client.textRenderer,
-                "OvaqReborn " + OvaqRebornMod.MOD_VER
-                        + "-" + BuildConfig.MODLAST,
+                "OvaqReborn " + OvaqRebornMod.MOD_VER,
                 2, height - (client.textRenderer.fontHeight * 2) - 2, 0xffffff | i);
     }
 
@@ -97,7 +95,7 @@ public abstract class MixinTitleScreen extends Screen {
         } else {
             this.initWidgetsNormal(l, 24);
         }
-        TextIconButtonWidget textIconButtonWidget = this.addDrawableChild(AccessibilityOnboardingButtons.createLanguageButton(20, button -> this.client.setScreen(new LanguageOptionsScreen((Screen)this, this.client.options, this.client.getLanguageManager())), true));
+        TextIconButtonWidget textIconButtonWidget = this.addDrawableChild(AccessibilityOnboardingButtons.createLanguageButton(20, button -> this.client.setScreen(new LanguageOptionsScreen((Screen) this, this.client.options, this.client.getLanguageManager())), true));
         textIconButtonWidget.setPosition(this.width / 2 - 124, l + 72 + 24);
         this.addDrawableChild(ButtonWidget.builder(Text.translatable("menu.options"), button -> this.client.setScreen(new OptionsScreen(this, this.client.options))).dimensions(this.width / 2 - 100, l + 72 + 24, 98, 20).build());
         this.addDrawableChild(ButtonWidget.builder(Text.translatable("menu.quit"), button -> this.client.scheduleStop()).dimensions(this.width / 2 + 2, l + 72 + 24, 98, 20).build());
@@ -110,18 +108,5 @@ public abstract class MixinTitleScreen extends Screen {
         if (this.isRealmsNotificationsGuiDisplayed()) {
             this.realmsNotificationGui.init(this.client, this.width, this.height);
         }
-    }
-
-    @Inject(method = "initWidgetsNormal", at = @At(
-            target = "Lnet/minecraft/client/gui/screen/TitleScreen;addDrawableChild(Lnet/minecraft/client/gui/Element;)Lnet/minecraft/client/gui/Element;",
-            value = "INVOKE", shift = At.Shift.AFTER, ordinal = 2))
-    public void hookInit(int y, int spacingY, CallbackInfo ci) {
-        // parameters from when the method initWidgetsNormal is called
-        final ButtonWidget widget = ButtonWidget.builder(Text.of("Account Manager"), (action) -> client.setScreen(new AccountSelectorScreen((Screen) (Object) this)))
-                .dimensions(this.width / 2 - 100, y + spacingY * 3, 200, 20)
-                .tooltip(Tooltip.of(Text.of("Allows you to switch your in-game account")))
-                .build();
-        widget.active = true;
-        addDrawableChild(widget);
     }
 }

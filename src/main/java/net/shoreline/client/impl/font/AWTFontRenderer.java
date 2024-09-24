@@ -13,7 +13,7 @@ import java.awt.*;
  * @author xgraza
  * @since 1.0
  */
-public final class AWTFontRenderer implements FontRenderer
+public class AWTFontRenderer implements FontRenderer
 {
     private final Font font;
 

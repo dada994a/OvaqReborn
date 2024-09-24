@@ -11,8 +11,6 @@ version = project.mod_version
 group = project.maven_group
 
 buildConfig {
-    buildConfigField(String, "HASH", "${execute("git rev-parse --short HEAD")}")
-    buildConfigField(String, "MODLAST", project.modlast)
     buildConfigField(String, "VERSION", project.mod_version)
 
     packageName "net.shoreline.client"
@@ -27,7 +25,26 @@ loom {
     accessWidenerPath = file("src/main/resources/ovaqreborn.accesswidener")
 }
 
+configurations {
+    libImpl
+}
 repositories {
+    maven {
+        name = "jitpack.io"
+        url = "https://jitpack.io"
+    }
+    maven {
+        name = 'swt-repo'
+        url = "https://maven-eclipse.github.io/maven"
+    }
+    maven {
+        name = "meteor-maven"
+        url = "https://maven.meteordev.org/releases"
+    }
+    maven {
+        name = "meteor-maven-snapshots"
+        url = "https://maven.meteordev.org/snapshots"
+    }
     mavenCentral() {
         url "https://jitpack.io/"
         url "https://impactdevelopment.github.io/maven/"
@@ -40,6 +57,10 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modImplementation "cabaletta:baritone-api:${baritone_api_version}"
+
+    libImpl ("meteordevelopment:orbit:${project.orbit_version}")
+    libImpl("io.netty:netty-handler-proxy:${project.netty_version}") { transitive = false }
+    libImpl("io.netty:netty-codec-socks:${project.netty_version}") { transitive = false }
 
 }
 

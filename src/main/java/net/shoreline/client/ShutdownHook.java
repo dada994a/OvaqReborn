@@ -22,7 +22,9 @@ public class ShutdownHook extends Thread {
      */
     @Override
     public void run() {
-        OvaqReborn.info("コンフィグをセーブ中…");
+        OvaqReborn.info("Config Saveing…");
         OvaqReborn.CONFIG.saveClient();
+        OvaqReborn.info("PRC stoping…");
+        OvaqReborn.RPC.stopRPC();
     }
 }

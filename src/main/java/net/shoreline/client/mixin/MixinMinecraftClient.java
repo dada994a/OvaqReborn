@@ -8,6 +8,7 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.shoreline.client.OvaqReborn;
+import net.shoreline.client.OvaqRebornMod;
 import net.shoreline.client.api.event.EventStage;
 import net.shoreline.client.impl.event.*;
 import net.shoreline.client.impl.event.entity.EntityDeathEvent;
@@ -85,9 +86,13 @@ public abstract class MixinMinecraftClient implements IMinecraftClient {
     @Inject(method = "run", at = @At(value = "INVOKE", target = "Lnet" +
             "/minecraft/client/MinecraftClient;render(Z)V", shift = At.Shift.BEFORE))
     private void hookRun(CallbackInfo ci) {
+        ((MinecraftClient)(Object)this).getWindow().setTitle("OvaqReborn " + OvaqRebornMod.MOD_VER);  // タイトルを変更
         final RunTickEvent runTickEvent = new RunTickEvent();
         OvaqReborn.EVENT_HANDLER.dispatch(runTickEvent);
     }
+
+
+
 
     /**
      * @param loadingContext

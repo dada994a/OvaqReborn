@@ -44,6 +44,7 @@ public class Modules {
     public static AutoTotemModule AUTO_TOTEM;
     public static AutoTrapModule AUTO_TRAP;
     public static AutoXPModule AUTO_XP;
+    public static BlockerModule BLOCKER;
     public static BlockLagModule BLOCK_LAG;
     public static BowAimModule BOW_AIM;
     public static CriticalsModule CRITICALS;
@@ -72,6 +73,9 @@ public class Modules {
     // Misc
     public static AntiAimModule ANTI_AIM;
     public static AntiSpamModule ANTI_SPAM;
+    public static AutoEzModule AUTO_EZ;
+    public static AntiAFKModule ANTI_AFK;
+    public static ChatSuffixModule CHATSUFFIX;
     public static AutoAcceptModule AUTO_ACCEPT;
     public static AutoEatModule AUTO_EAT;
 
@@ -210,6 +214,7 @@ public class Modules {
             AUTO_TOTEM = (AutoTotemModule) getRegisteredModule("autototem-module");
             AUTO_TRAP = (AutoTrapModule) getRegisteredModule("autotrap-module");
             AUTO_XP = (AutoXPModule) getRegisteredModule("autoxp-module");
+            BLOCKER = (BlockerModule) getRegisteredModule("blocker-module");
             BACK_TRACK = (BacktrackModule) getRegisteredModule("backtrack-module");
             BLOCK_LAG = (BlockLagModule) getRegisteredModule("blocklag-module");
             BOW_AIM = (BowAimModule) getRegisteredModule("bowaim-module");
@@ -302,6 +307,9 @@ public class Modules {
             // WAYPOINTS = (WaypointsModule) getRegisteredModule("waypoints-module");
             ANTI_INTERACT = (AntiInteractModule) getRegisteredModule("antiinteract-module");
             AUTO_MINE = (AutoMineModule) getRegisteredModule("automine-module");
+            AUTO_EZ = (AutoEzModule) getRegisteredModule("autoez-module");
+            CHATSUFFIX = (ChatSuffixModule) getRegisteredModule("chatsuffix-module");
+            ANTI_AFK = (AntiAFKModule) getRegisteredModule("antiafk-module");
             AUTO_TOOL = (AutoToolModule) getRegisteredModule("autotool-module");
             AVOID = (AvoidModule) getRegisteredModule("avoid-module");
             BLOCK_INTERACT = (BlockInteractModule) getRegisteredModule("blockinteract-module");
