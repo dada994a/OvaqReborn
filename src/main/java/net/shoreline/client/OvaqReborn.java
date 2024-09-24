@@ -33,9 +33,6 @@ public class OvaqReborn {
     // Client shutdown hooks which will run once when the MinecraftClient
     // game instance is shutdown.
     public static ShutdownHook SHUTDOWN;
-
-    public static DiscordManager RPC;
-    //
     public static Executor EXECUTOR;
 
     public static void logAsciiArt() {
@@ -65,9 +62,6 @@ public class OvaqReborn {
         info("init starting ...");
         Managers.init();
         Modules.init();
-
-        RPC = new DiscordManager();
-        DiscordManager.startRPC();
         // Commands.init();
         info("postInit starting ...");
         CONFIG = new ClientConfiguration();

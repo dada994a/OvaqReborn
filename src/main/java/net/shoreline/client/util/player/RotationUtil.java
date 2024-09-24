@@ -40,4 +40,5 @@ public class RotationUtil implements Globals {
         float k = MathHelper.sin(f);
         return new Vec3d(i * j, -k, h * j);
     }
+
 }

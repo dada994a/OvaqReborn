@@ -24,7 +24,5 @@ public class ShutdownHook extends Thread {
     public void run() {
         OvaqReborn.info("Config Saveing…");
         OvaqReborn.CONFIG.saveClient();
-        OvaqReborn.info("PRC stoping…");
-        OvaqReborn.RPC.stopRPC();
     }
 }
