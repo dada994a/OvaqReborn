@@ -15,21 +15,17 @@ public class ChatSuffixModule extends ToggleModule {
 
     @EventListener
     public void onChatMessage(ChatMessageEvent.Client event) {
-        // オリジナルのメッセージを取得
+
         String originalMessage = event.getMessage();
 
-        // メッセージに / または . が含まれているかチェック
         if (originalMessage.contains("/") || originalMessage.contains(".")) {
-            return; // サフィックスを追加せず、メッセージをそのまま送信
+            return;
         }
 
-        // サフィックスを追加
         String newMessage = originalMessage + SUFFIX;
 
-        // 新しいメッセージをサーバーに送信
         ChatUtil.serverSendMessage(newMessage);
 
-        // オリジナルのメッセージ送信をキャンセル
         event.cancel();
     }
 }

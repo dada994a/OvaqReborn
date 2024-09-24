@@ -24,7 +24,7 @@ public class AutoEzModule extends ToggleModule {
     private final Config<String> dieMessages = new StringConfig("Kill Messages", "Message to send when killing an enemy", "Killd By <NAME>");
 
     private final Random random = new Random();
-    private final Map<UUID, Long> attackHistory = new HashMap<>(); // 攻撃履歴
+    private final Map<UUID, Long> attackHistory = new HashMap<>();
 
     public AutoEzModule() {
         super("AutoEz", "Sends messages after an enemy dies or pops a totem.", ModuleCategory.MISCELLANEOUS);
@@ -36,15 +36,12 @@ public class AutoEzModule extends ToggleModule {
             PlayerEntity player = (PlayerEntity) packet.getEntity(mc.world);
             if (player == null) return;
 
-            // 自分が攻撃した相手かを確認
             if (!isRecentlyAttackedByMe(player.getUuid())) return;
 
-            // トーテムポップ (ステータス 35)
             if (packet.getStatus() == 35 && totemPopMessagesEnabled.getValue()) {
                 sendMessage(totemPopMessages.getValue(), player.getName().getString());
             }
 
-            // DIE (ステータス 3)
             if (packet.getStatus() == 3 && dieMessagesEnabled.getValue()) {
                 sendMessage(dieMessages.getValue(), player.getName().getString());
             }
@@ -53,7 +50,7 @@ public class AutoEzModule extends ToggleModule {
 
     private boolean isRecentlyAttackedByMe(UUID playerUUID) {
         long currentTime = System.currentTimeMillis();
-        return attackHistory.containsKey(playerUUID) && (currentTime - attackHistory.get(playerUUID)) <= 10000; // 10秒間
+        return attackHistory.containsKey(playerUUID) && (currentTime - attackHistory.get(playerUUID)) <= 10000;
     }
 
     public void recordAttack(PlayerEntity player) {

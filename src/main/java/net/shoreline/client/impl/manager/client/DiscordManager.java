@@ -34,14 +34,10 @@ public class DiscordManager {
 
     private static void updatePresence() {
         presence.details = getDetails();
-        // カスタムステートやモードの設定をここに追加
-        presence.state = "Best Cpvp Client?";
-
         rpc.Discord_UpdatePresence(presence);
     }
 
     private static String getDetails() {
-        // 状況に応じた詳細を返すロジックを追加
         return "OvaqReborn is PrivateClient :)"; // 例
     }
 
