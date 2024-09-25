@@ -25,7 +25,7 @@ public class FakePlayerEntity extends OtherClientPlayerEntity implements Globals
      */
     public FakePlayerEntity(PlayerEntity player, String name) {
         super(MinecraftClient.getInstance().world,
-                new GameProfile(UUID.fromString("8667ba71-b85a-4004-af54-457a9734eed7"), name));
+                new GameProfile(UUID.fromString("2cff2b21-21f2-40cd-b92a-e115ec6f48bb"), name));
         this.player = player;
         copyPositionAndRotation(player);
         prevYaw = getYaw();

@@ -85,5 +85,9 @@ public class ChatNotifierModule extends ToggleModule {
             return;
         }
         ChatUtil.clientSendMessage((isFriend ? "§b" : "§s") + playerName + "§f died after popping §s" + totems + "§f totems");
+
+
+
+        }
     }
-}
+
