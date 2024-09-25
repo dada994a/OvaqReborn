@@ -54,7 +54,7 @@ public class ChatNotifierModule extends ToggleModule {
         if (isFriend && !friendsConfig.getValue() || event.getEntity() == mc.player) {
             return;
         }
-        ChatUtil.clientSendMessageRaw("§s[VisualRange] " + (isFriend ? "§b" + playerName : playerName) + "§f entered your visual range");
+        ChatUtil.clientSendMessageRaw("§s[VisualRange] " + (isFriend ? "§b" + playerName : playerName) + "§f joind your visual range");
     }
 
     @EventListener
