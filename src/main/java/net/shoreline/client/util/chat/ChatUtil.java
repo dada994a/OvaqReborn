@@ -14,7 +14,6 @@ import java.util.concurrent.ScheduledFuture;
 public class ChatUtil implements Globals {
     //
     private static final String PREFIX = "§s[OvaqReborn] §f";
-    private static final String SUFFIX = "OvaqRebornDev";
 
 
     public static void clientSendMessage(String message) {
