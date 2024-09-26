@@ -239,12 +239,6 @@ public final class ScaffoldModule extends RotationModule
             return;
         }
 
-        // I could just make dynamic rotations and call it a day
-        // but what's the fun in a simple approach?
-        // This is aids.
-        // youre a retard gavin - linus
-        // kill yourself linus - gavin
-
         float yawOffset = 180;
         if (direction.equals(mc.player.getHorizontalFacing().getOpposite()))
         {
