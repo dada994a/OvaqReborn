@@ -144,6 +144,7 @@ public class Modules {
     public static ViewClipModule VIEW_CLIP;
     public static ViewModelModule VIEW_MODEL;
     public static WaypointsModule WAYPOINTS;
+    public static ZoomModule ZOOM;
     // World
     public static AntiInteractModule ANTI_INTERACT;
     public static AutoMineModule AUTO_MINE;
@@ -308,6 +309,7 @@ public class Modules {
             VIEW_CLIP = (ViewClipModule) getRegisteredModule("viewclip-module");
             VIEW_MODEL = (ViewModelModule) getRegisteredModule("viewmodel-module");
             WAYPOINTS = (WaypointsModule) getRegisteredModule("waypoints-module");
+            ZOOM = (ZoomModule) getRegisteredModule("zoom-module");
             ANTI_INTERACT = (AntiInteractModule) getRegisteredModule("antiinteract-module");
             AUTO_MINE = (AutoMineModule) getRegisteredModule("automine-module");
             CHATSUFFIX = (ChatSuffixModule) getRegisteredModule("chatsuffix-module");
