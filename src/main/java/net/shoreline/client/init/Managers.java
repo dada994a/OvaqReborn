@@ -29,7 +29,6 @@ public class Managers {
     public static CommandManager COMMAND;
     public static SocialManager SOCIAL;
     public static WaypointManager WAYPOINT;
-    public static AccountManager ACCOUNT;
     public static TickManager TICK;
     public static InventoryManager INVENTORY;
     public static PositionManager POSITION;
@@ -60,7 +59,6 @@ public class Managers {
             MACRO = new MacroManager();
             SOCIAL = new SocialManager();
             WAYPOINT = new WaypointManager();
-            ACCOUNT = new AccountManager();
             TICK = new TickManager();
             INVENTORY = new InventoryManager();
             POSITION = new PositionManager();
@@ -87,7 +85,6 @@ public class Managers {
         if (isInitialized()) {
             MODULE.postInit();
             MACRO.postInit();
-            ACCOUNT.postInit();
             CAPES = new CapeManager();
         }
     }
