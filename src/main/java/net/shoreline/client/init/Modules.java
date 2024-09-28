@@ -63,6 +63,7 @@ public class Modules {
     public static CrasherModule CRASHER;
     public static DisablerModule DISABLER;
     public static ExtendedFireworkModule EXTENDED_FIREWORK;
+    public static FakeLatencyModule FAKE_LATENCY;
     public static FastLatencyModule FAST_LATENCY;
     public static FastProjectileModule FAST_PROJECTILE;
     public static PacketCancelerModule PACKET_CANCELER;
@@ -233,6 +234,7 @@ public class Modules {
             CRASHER = (CrasherModule) getRegisteredModule("crasher-module");
             DISABLER = (DisablerModule) getRegisteredModule("disabler-module");
             EXTENDED_FIREWORK = (ExtendedFireworkModule) getRegisteredModule("extendedfirework-module");
+            FAKE_LATENCY = (FakeLatencyModule) getRegisteredModule("fakelatency-module");
             FAST_LATENCY = (FastLatencyModule) getRegisteredModule("fastlatency-module");
             FAST_PROJECTILE = (FastProjectileModule) getRegisteredModule("fastprojectile-module");
             PACKET_CANCELER = (PacketCancelerModule) getRegisteredModule("packetcanceler-module");
