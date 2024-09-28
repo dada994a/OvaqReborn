@@ -29,13 +29,16 @@ import net.shoreline.client.util.chat.ChatUtil;
  */
 public class ToggleModule extends Module implements Hideable {
     private final Animation animation = new Animation(false, 300, Easing.CUBIC_IN_OUT);
+
+
     Config<Boolean> enabledConfig = new ToggleConfig("Enabled", "The module enabled state. This state is true when the module is running.", false);
     Config<Macro> keybindingConfig = new MacroConfig("Keybind", "The module keybinding. Pressing this key will toggle the module enabled state. Press [BACKSPACE] to delete the keybind.", new Macro(getId(), GLFW.GLFW_KEY_UNKNOWN, () -> toggle()));
     Config<Boolean> hiddenConfig = new BooleanConfig("Hidden", "The hidden state of the module in the Arraylist", false);
+    Config<Boolean> messageConfig = new BooleanConfig("Message", "Send messages when the module is toggled", true);
 
     public ToggleModule(String name, String desc, ModuleCategory category) {
         super(name, desc, category);
-        register(keybindingConfig, enabledConfig, hiddenConfig);
+        register( keybindingConfig, enabledConfig, hiddenConfig, messageConfig);
     }
 
     public ToggleModule(String name, String desc, ModuleCategory category, Integer keycode) {
@@ -64,13 +67,17 @@ public class ToggleModule extends Module implements Hideable {
     public void enable() {
         enabledConfig.setValue(true);
         onEnable();
-        ChatUtil.clientSendMessage("§s[+]§f %s", getName());
+        if (messageConfig.getValue()) {
+            ChatUtil.clientSendMessage("§s[+]§f %s", getName());
+        }
     }
 
     public void disable() {
         enabledConfig.setValue(false);
         onDisable();
-        ChatUtil.clientSendMessage("§c[-]§f %s", getName());
+        if (messageConfig.getValue()) {
+            ChatUtil.clientSendMessage("§c[-]§f %s", getName());
+        }
     }
 
     protected void onEnable() {
