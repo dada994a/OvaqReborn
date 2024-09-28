@@ -77,7 +77,6 @@ public class ModuleManager {
                 // Misc
                 new AntiAFKModule(),
                 new AntiAimModule(),
-                new AutoEzModule(),
                 new ChatSuffixModule(),
                 // new AntiBookBanModule(),
                 new AntiSpamModule(),

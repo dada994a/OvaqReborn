@@ -74,7 +74,6 @@ public class Modules {
     // Misc
     public static AntiAimModule ANTI_AIM;
     public static AntiSpamModule ANTI_SPAM;
-    public static AutoEzModule AUTO_EZ;
     public static AntiAFKModule ANTI_AFK;
     public static ChatSuffixModule CHATSUFFIX;
     public static AutoAcceptModule AUTO_ACCEPT;
@@ -309,7 +308,6 @@ public class Modules {
             // WAYPOINTS = (WaypointsModule) getRegisteredModule("waypoints-module");
             ANTI_INTERACT = (AntiInteractModule) getRegisteredModule("antiinteract-module");
             AUTO_MINE = (AutoMineModule) getRegisteredModule("automine-module");
-            AUTO_EZ = (AutoEzModule) getRegisteredModule("autoez-module");
             CHATSUFFIX = (ChatSuffixModule) getRegisteredModule("chatsuffix-module");
             ANTI_AFK = (AntiAFKModule) getRegisteredModule("antiafk-module");
             AUTO_TOOL = (AutoToolModule) getRegisteredModule("autotool-module");
