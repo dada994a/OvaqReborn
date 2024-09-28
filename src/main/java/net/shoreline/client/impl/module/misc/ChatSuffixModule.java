@@ -1,5 +1,7 @@
 package net.shoreline.client.impl.module.misc;
 
+import net.shoreline.client.api.config.Config;
+import net.shoreline.client.api.config.setting.StringConfig;
 import net.shoreline.client.api.event.listener.EventListener;
 import net.shoreline.client.api.module.ModuleCategory;
 import net.shoreline.client.api.module.ToggleModule;
@@ -7,10 +9,11 @@ import net.shoreline.client.impl.event.gui.chat.ChatMessageEvent;
 import net.shoreline.client.util.chat.ChatUtil;
 
 public class ChatSuffixModule extends ToggleModule {
-    private static final String SUFFIX = " ｜ OvaqReborn";
+
+    private final Config<String> suffixConfig = new StringConfig("Suffix", "Set custom chat suffix", "｜OvaqReborn");
 
     public ChatSuffixModule() {
-        super("ChatSuffix", "Appends Suffix to all sent messages", ModuleCategory.MISCELLANEOUS);
+        super("ChatSuffix", "Appends a custom suffix to all sent messages", ModuleCategory.MISCELLANEOUS);
     }
 
     @EventListener
@@ -18,11 +21,11 @@ public class ChatSuffixModule extends ToggleModule {
 
         String originalMessage = event.getMessage();
 
-        if (originalMessage.contains("/") || originalMessage.contains(".")) {
+        if (originalMessage.startsWith("/") || originalMessage.startsWith(".") || originalMessage.startsWith("#")) {
             return;
         }
 
-        String newMessage = originalMessage + SUFFIX;
+        String newMessage = originalMessage + suffixConfig.getValue();
 
         ChatUtil.serverSendMessage(newMessage);
 
