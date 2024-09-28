@@ -75,7 +75,7 @@ public class ModuleManager {
                 new PortalGodModeModule(),
                 new ReachModule(),
                 // Misc
-                //new AntiAFKModule(),
+                new AntiAFKModule(),
                 new AntiAimModule(),
                 new ChatSuffixModule(),
                 // new AntiBookBanModule(),
@@ -144,7 +144,7 @@ public class ModuleManager {
                 new TrueSightModule(),
                 new ViewClipModule(),
                 new ViewModelModule(),
-                // new WaypointsModule(),
+                new WaypointsModule(),
                 // World
                 new AntiInteractModule(),
                 new AutoMineModule(),

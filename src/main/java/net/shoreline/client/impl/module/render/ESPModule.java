@@ -121,7 +121,7 @@ public class ESPModule extends ToggleModule {
     }
 
     public enum ESPMode {
-        // OUTLINE,
+        //OUTLINE,
         GLOW
     }
 }

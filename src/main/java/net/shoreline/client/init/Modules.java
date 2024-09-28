@@ -74,7 +74,7 @@ public class Modules {
     // Misc
     public static AntiAimModule ANTI_AIM;
     public static AntiSpamModule ANTI_SPAM;
-    //public static AntiAFKModule ANTI_AFK;
+    public static AntiAFKModule ANTI_AFK;
     public static ChatSuffixModule CHATSUFFIX;
     public static AutoAcceptModule AUTO_ACCEPT;
     public static AutoEatModule AUTO_EAT;
@@ -142,7 +142,7 @@ public class Modules {
     public static TrueSightModule TRUE_SIGHT;
     public static ViewClipModule VIEW_CLIP;
     public static ViewModelModule VIEW_MODEL;
-    // public static WaypointsModule WAYPOINTS;
+    public static WaypointsModule WAYPOINTS;
     // World
     public static AntiInteractModule ANTI_INTERACT;
     public static AutoMineModule AUTO_MINE;
@@ -305,11 +305,11 @@ public class Modules {
             TRUE_SIGHT = (TrueSightModule) getRegisteredModule("truesight-module");
             VIEW_CLIP = (ViewClipModule) getRegisteredModule("viewclip-module");
             VIEW_MODEL = (ViewModelModule) getRegisteredModule("viewmodel-module");
-            // WAYPOINTS = (WaypointsModule) getRegisteredModule("waypoints-module");
+            WAYPOINTS = (WaypointsModule) getRegisteredModule("waypoints-module");
             ANTI_INTERACT = (AntiInteractModule) getRegisteredModule("antiinteract-module");
             AUTO_MINE = (AutoMineModule) getRegisteredModule("automine-module");
             CHATSUFFIX = (ChatSuffixModule) getRegisteredModule("chatsuffix-module");
-            //ANTI_AFK = (AntiAFKModule) getRegisteredModule("antiafk-module");
+            ANTI_AFK = (AntiAFKModule) getRegisteredModule("antiafk-module");
             AUTO_TOOL = (AutoToolModule) getRegisteredModule("autotool-module");
             AVOID = (AvoidModule) getRegisteredModule("avoid-module");
             BLOCK_INTERACT = (BlockInteractModule) getRegisteredModule("blockinteract-module");
