@@ -75,7 +75,7 @@ public class ModuleManager {
                 new PortalGodModeModule(),
                 new ReachModule(),
                 // Misc
-                new AntiAFKModule(),
+                //new AntiAFKModule(),
                 new AntiAimModule(),
                 new ChatSuffixModule(),
                 // new AntiBookBanModule(),
@@ -119,7 +119,6 @@ public class ModuleManager {
                 new SprintModule(),
                 new StepModule(),
                 new TickShiftModule(),
-                new TridentFlyModule(),
                 new VelocityModule(),
                 new YawModule(),
                 // Render

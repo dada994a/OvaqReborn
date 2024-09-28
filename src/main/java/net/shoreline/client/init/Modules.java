@@ -74,7 +74,7 @@ public class Modules {
     // Misc
     public static AntiAimModule ANTI_AIM;
     public static AntiSpamModule ANTI_SPAM;
-    public static AntiAFKModule ANTI_AFK;
+    //public static AntiAFKModule ANTI_AFK;
     public static ChatSuffixModule CHATSUFFIX;
     public static AutoAcceptModule AUTO_ACCEPT;
     public static AutoEatModule AUTO_EAT;
@@ -117,7 +117,6 @@ public class Modules {
     public static SprintModule SPRINT;
     public static StepModule STEP;
     public static TickShiftModule TICK_SHIFT;
-    public static TridentFlyModule TRIDENT_FLY;
     public static VelocityModule VELOCITY;
     public static YawModule YAW;
     // Render
@@ -282,7 +281,6 @@ public class Modules {
             SPRINT = (SprintModule) getRegisteredModule("sprint-module");
             STEP = (StepModule) getRegisteredModule("step-module");
             TICK_SHIFT = (TickShiftModule) getRegisteredModule("tickshift-module");
-            TRIDENT_FLY = (TridentFlyModule) getRegisteredModule("tridentfly-module");
             VELOCITY = (VelocityModule) getRegisteredModule("velocity-module");
             YAW = (YawModule) getRegisteredModule("yaw-module");
             BLOCK_HIGHLIGHT = (BlockHighlightModule) getRegisteredModule("blockhighlight-module");
@@ -311,7 +309,7 @@ public class Modules {
             ANTI_INTERACT = (AntiInteractModule) getRegisteredModule("antiinteract-module");
             AUTO_MINE = (AutoMineModule) getRegisteredModule("automine-module");
             CHATSUFFIX = (ChatSuffixModule) getRegisteredModule("chatsuffix-module");
-            ANTI_AFK = (AntiAFKModule) getRegisteredModule("antiafk-module");
+            //ANTI_AFK = (AntiAFKModule) getRegisteredModule("antiafk-module");
             AUTO_TOOL = (AutoToolModule) getRegisteredModule("autotool-module");
             AVOID = (AvoidModule) getRegisteredModule("avoid-module");
             BLOCK_INTERACT = (BlockInteractModule) getRegisteredModule("blockinteract-module");
