@@ -1,6 +1,7 @@
 package net.shoreline.client.impl.module.movement;
 
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vec2f;
 import net.shoreline.client.api.module.ModuleCategory;
 import net.shoreline.client.api.module.ToggleModule;
 import net.shoreline.client.impl.event.RunTickEvent;
@@ -16,32 +17,39 @@ public class BlockMoveModule extends ToggleModule {
     public void onTick(RunTickEvent event) {
         if (mc.player == null) return;
 
+        // プレイヤーがブロックに埋まっている場合
         if (!mc.player.noClip && mc.player.isInsideWall()) {
             Vec3d playerPos = mc.player.getPos();
+            float yaw = mc.player.getYaw(); // プレイヤーの視点のYaw（方位）
 
-            if (mc.options.leftKey.isPressed()) {
-                mc.player.setPos(playerPos.x - 0.1, playerPos.y, playerPos.z);
-            }
+            // プレイヤーの進行方向ベクトルを計算
+            Vec3d forward = new Vec3d(-Math.sin(Math.toRadians(yaw)), 0, Math.cos(Math.toRadians(yaw)));
 
-            if (mc.options.rightKey.isPressed()) {
-                mc.player.setPos(playerPos.x + 0.1, playerPos.y, playerPos.z);
-            }
+            // 移動量を設定
+            double moveSpeed = 0.1;
 
+            // 前方向の移動
             if (mc.options.forwardKey.isPressed()) {
-                mc.player.setPos(playerPos.x, playerPos.y, playerPos.z + 0.1);
+                mc.player.setPos(playerPos.x + forward.x * moveSpeed, playerPos.y, playerPos.z + forward.z * moveSpeed);
             }
 
+            // 後方向の移動
             if (mc.options.backKey.isPressed()) {
-                mc.player.setPos(playerPos.x, playerPos.y, playerPos.z - 0.1);
+                mc.player.setPos(playerPos.x - forward.x * moveSpeed, playerPos.y, playerPos.z - forward.z * moveSpeed);
             }
 
-            if (mc.options.jumpKey.isPressed()) {
-                mc.player.setPos(playerPos.x, playerPos.y + 0.1, playerPos.z);
+            // 左方向の移動
+            if (mc.options.leftKey.isPressed()) {
+                Vec3d left = forward.crossProduct(new Vec3d(0, 1, 0)).normalize();
+                mc.player.setPos(playerPos.x + left.x * moveSpeed, playerPos.y, playerPos.z + left.z * moveSpeed);
             }
 
-            if (mc.options.sneakKey.isPressed()) {
-                mc.player.setPos(playerPos.x, playerPos.y - 0.1, playerPos.z);
+            // 右方向の移動
+            if (mc.options.rightKey.isPressed()) {
+                Vec3d right = forward.crossProduct(new Vec3d(0, 1, 0)).normalize().negate();
+                mc.player.setPos(playerPos.x + right.x * moveSpeed, playerPos.y, playerPos.z + right.z * moveSpeed);
             }
+
         }
     }
 }
