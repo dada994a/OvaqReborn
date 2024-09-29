@@ -2,9 +2,9 @@ package net.shoreline.client.impl.module.movement;
 
 import net.minecraft.util.math.Vec3d;
 import net.shoreline.client.api.module.ToggleModule;
+import net.shoreline.client.api.module.ModuleCategory;
 import net.shoreline.client.api.event.listener.EventListener;
 import net.shoreline.client.impl.event.RunTickEvent;
-import net.shoreline.client.api.module.ModuleCategory;
 
 public class BlockMoveModule extends ToggleModule {
 
@@ -32,15 +32,15 @@ public class BlockMoveModule extends ToggleModule {
             mc.player.setPos(playerPos.x - forward.x * moveSpeed, playerPos.y, playerPos.z - forward.z * moveSpeed);
         }
 
-        // Left and right movement
+        // Left and right movement (左右逆転修正)
         Vec3d left = forward.crossProduct(new Vec3d(0, 1, 0)).normalize();
         Vec3d right = left.multiply(-1);
 
         if (mc.options.leftKey.isPressed()) {
-            mc.player.setPos(playerPos.x + left.x * moveSpeed, playerPos.y, playerPos.z + left.z * moveSpeed);
+            mc.player.setPos(playerPos.x - left.x * moveSpeed, playerPos.y, playerPos.z - left.z * moveSpeed); // 左の動き
         }
         if (mc.options.rightKey.isPressed()) {
-            mc.player.setPos(playerPos.x + right.x * moveSpeed, playerPos.y, playerPos.z + right.z * moveSpeed);
+            mc.player.setPos(playerPos.x + right.x * moveSpeed, playerPos.y, playerPos.z + right.z * moveSpeed); // 右の動き
         }
 
         // Vertical movement
