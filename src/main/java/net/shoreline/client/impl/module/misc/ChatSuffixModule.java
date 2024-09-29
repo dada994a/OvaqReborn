@@ -1,5 +1,6 @@
 package net.shoreline.client.impl.module.misc;
 
+import net.shoreline.client.BuildConfig;
 import net.shoreline.client.api.event.listener.EventListener;
 import net.shoreline.client.api.module.ModuleCategory;
 import net.shoreline.client.api.module.ToggleModule;
@@ -7,7 +8,7 @@ import net.shoreline.client.impl.event.gui.chat.ChatMessageEvent;
 import net.shoreline.client.util.chat.ChatUtil;
 
 public class ChatSuffixModule extends ToggleModule {
-    private static final String SUFFIX = " ｜ OvaqReborn";
+    private static final String SUFFIX = " ｜ OvaqReborn " + BuildConfig.VERSION ;
 
     public ChatSuffixModule() {
         super("ChatSuffix", "Appends Suffix to all sent messages", ModuleCategory.MISC);
