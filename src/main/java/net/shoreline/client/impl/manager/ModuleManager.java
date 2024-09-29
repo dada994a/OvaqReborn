@@ -103,6 +103,7 @@ public class ModuleManager {
                 // Movement
                 new AntiLevitationModule(),
                 new AutoWalkModule(),
+                new BlockMoveModule(),
                 new ElytraFlyModule(),
                 new EntityControlModule(),
                 new EntitySpeedModule(),

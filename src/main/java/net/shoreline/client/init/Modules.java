@@ -101,6 +101,7 @@ public class Modules {
     // Movement
     public static AntiLevitationModule ANTI_LEVITATION;
     public static AutoWalkModule AUTO_WALK;
+    public static BlockMoveModule BLOCKMOVE;
     public static ElytraFlyModule ELYTRA_FLY;
     public static EntityControlModule ENTITY_CONTROL;
     public static EntitySpeedModule ENTITY_SPEED;
@@ -267,6 +268,7 @@ public class Modules {
             XCARRY = (XCarryModule) getRegisteredModule("xcarry-module");
             ANTI_LEVITATION = (AntiLevitationModule) getRegisteredModule("antilevitation-module");
             AUTO_WALK = (AutoWalkModule) getRegisteredModule("autowalk-module");
+            BLOCKMOVE = (BlockMoveModule) getRegisteredModule("blockmove-module");
             ELYTRA_FLY = (ElytraFlyModule) getRegisteredModule("elytrafly-module");
             ENTITY_CONTROL = (EntityControlModule) getRegisteredModule("entitycontrol-module");
             ENTITY_SPEED = (EntitySpeedModule) getRegisteredModule("entityspeed-module");
