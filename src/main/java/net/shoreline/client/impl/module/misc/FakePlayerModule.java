@@ -19,7 +19,7 @@ public class FakePlayerModule extends ToggleModule {
 
     public FakePlayerModule() {
         super("FakePlayer", "Spawns an indestructible client-side player",
-                ModuleCategory.MISCELLANEOUS);
+                ModuleCategory.MISC);
     }
 
     @Override

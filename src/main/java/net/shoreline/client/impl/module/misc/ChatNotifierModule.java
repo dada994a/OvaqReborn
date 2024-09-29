@@ -24,7 +24,7 @@ public class ChatNotifierModule extends ToggleModule {
     Config<Boolean> friendsConfig = new BooleanConfig("Friends", "Notifies for friends", false);
 
     public ChatNotifierModule() {
-        super("ChatNotifier", "Notifies in chat", ModuleCategory.MISCELLANEOUS);
+        super("ChatNotifier", "Notifies in chat", ModuleCategory.MISC);
     }
 
     @EventListener

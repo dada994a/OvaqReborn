@@ -2,6 +2,7 @@ package net.shoreline.client.impl.module.render;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.GameOptions;
+import net.minecraft.client.option.SimpleOption;
 import net.shoreline.client.api.config.Config;
 import net.shoreline.client.api.config.setting.NumberConfig;
 import net.shoreline.client.api.event.listener.EventListener;
@@ -9,12 +10,10 @@ import net.shoreline.client.api.module.ModuleCategory;
 import net.shoreline.client.api.module.ToggleModule;
 import net.shoreline.client.impl.event.RunTickEvent;
 
-import java.lang.reflect.Field;
-
 public class ZoomModule extends ToggleModule {
-    private final Config<Float> zoomLevelConfig = new NumberConfig<>("ZoomLevel", "Level of zoom", 2.0f, 1.0f, 5.0f); // 1x - 5x
+    private final Config<Float> zoomLevelConfig = new NumberConfig<>("ZoomLevel", "Level of zoom", 2.0f, 1.0f, 5.0f);
     private boolean isZoomed = false;
-    private float originalFov;
+    private int originalFov;
 
     public ZoomModule() {
         super("Zoom", "Allows you to zoom in", ModuleCategory.RENDER);
@@ -23,43 +22,37 @@ public class ZoomModule extends ToggleModule {
     @Override
     public void onEnable() {
         isZoomed = true;
-        adjustFOV();
+        saveAndAdjustFOV();
     }
 
     @Override
     public void onDisable() {
         isZoomed = false;
-        adjustFOV();
+        restoreOriginalFOV();
     }
 
-    private void adjustFOV() {
+    private void saveAndAdjustFOV() {
         MinecraftClient mc = MinecraftClient.getInstance();
         GameOptions options = mc.options;
 
         if (options != null) {
-            try {
-                // FOV フィールドをリフレクションを使って取得
-                Field fovField = GameOptions.class.getDeclaredField("fov");
-                fovField.setAccessible(true); // アクセス可能に設定
-
-                if (isZoomed) {
-                    originalFov = (float) fovField.get(options); // 現在のFOVを保存
-                    fovField.set(options, calculateZoomedFOV()); // ズームしたFOVを設定
-                } else {
-                    fovField.set(options, originalFov); // 元のFOVに戻す
-                }
-            } catch (NoSuchFieldException | IllegalAccessException e) {
-                e.printStackTrace(); // エラーを表示
-            }
+            SimpleOption<Integer> fovOption = options.getFov();
+            originalFov = fovOption.getValue();
+            fovOption.setValue((int) (originalFov / zoomLevelConfig.getValue()));
         }
     }
 
-    private float calculateZoomedFOV() {
-        return 70.0f / zoomLevelConfig.getValue(); // ズームレベルに基づいてズームする
+    private void restoreOriginalFOV() {
+        MinecraftClient mc = MinecraftClient.getInstance();
+        GameOptions options = mc.options;
+
+        if (options != null) {
+            SimpleOption<Integer> fovOption = options.getFov();
+            fovOption.setValue(originalFov);
+        }
     }
 
     @EventListener
     public void onTick(RunTickEvent event) {
-        adjustFOV();
     }
 }

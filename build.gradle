@@ -6,6 +6,7 @@ plugins {
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
 
+
 archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
@@ -64,6 +65,9 @@ dependencies {
 
 }
 
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+javadoc.options.encoding = 'UTF-8'
 
 processResources {
     inputs.property "version", project.version

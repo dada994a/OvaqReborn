@@ -36,7 +36,7 @@ public class ModuleManager {
                 new ColorsModule(),
                 new HUDModule(),
                 new RPCModule(),
-                new FontModule(),
+                //new FontModule(),
                 new RotationsModule(),
                 // Combat
                 new AuraModule(),
@@ -139,7 +139,7 @@ public class ModuleManager {
                 new ParticlesModule(),
                 new SkeletonModule(),
                 new SkyboxModule(),
-                new ShadersModule(),
+                //new ShadersModule(),
                 new TooltipsModule(),
                 new TracersModule(),
                 new TrueSightModule(),

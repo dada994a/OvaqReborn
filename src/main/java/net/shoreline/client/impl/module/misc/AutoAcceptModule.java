@@ -29,7 +29,7 @@ public class AutoAcceptModule extends ToggleModule {
      */
     public AutoAcceptModule() {
         super("AutoAccept", "Automatically accepts teleport requests",
-                ModuleCategory.MISCELLANEOUS);
+                ModuleCategory.MISC);
     }
 
     @EventListener

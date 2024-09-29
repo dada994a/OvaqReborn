@@ -30,7 +30,7 @@ public class AntiSpamModule extends ToggleModule {
      */
     public AntiSpamModule() {
         super("AntiSpam", "Prevents players from spamming the game chat",
-                ModuleCategory.MISCELLANEOUS);
+                ModuleCategory.MISC);
     }
 
     @EventListener

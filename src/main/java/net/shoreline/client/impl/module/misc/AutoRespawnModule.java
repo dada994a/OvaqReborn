@@ -21,7 +21,7 @@ public class AutoRespawnModule extends ToggleModule {
      */
     public AutoRespawnModule() {
         super("AutoRespawn", "Respawns automatically after a death",
-                ModuleCategory.MISCELLANEOUS);
+                ModuleCategory.MISC);
     }
 
     @EventListener

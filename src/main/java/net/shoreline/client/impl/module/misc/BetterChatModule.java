@@ -23,7 +23,7 @@ public class BetterChatModule extends ToggleModule
 
     public BetterChatModule()
     {
-        super("BetterChat", "Modifications for the chat", ModuleCategory.MISCELLANEOUS);
+        super("BetterChat", "Modifications for the chat", ModuleCategory.MISC);
     }
 
     public Config<Boolean> getAnimationConfig()

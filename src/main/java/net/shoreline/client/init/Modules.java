@@ -29,7 +29,7 @@ public class Modules {
     public static ClickGuiModule CLICK_GUI;
     public static ColorsModule COLORS;
     public static HUDModule HUD;
-    public static FontModule FONT;
+    //public static FontModule FONT;
     public static RotationsModule ROTATIONS;
     public static BaritoneModule BARITONE;
     public static RPCModule RPC;
@@ -202,7 +202,7 @@ public class Modules {
             COLORS = (ColorsModule) getRegisteredModule("colors-module");
             HUD = (HUDModule) getRegisteredModule("hud-module");
             RPC = (RPCModule) getRegisteredModule("rpc-module");
-            FONT =(FontModule) getRegisteredModule("font-module");
+            //FONT =(FontModule) getRegisteredModule("font-module");
             ROTATIONS = (RotationsModule) getRegisteredModule("rotations-module");
             SERVER = (ServerModule) getRegisteredModule("server-module");
             if (OvaqRebornMod.isBaritonePresent()) {
@@ -302,7 +302,7 @@ public class Modules {
             PARTICLES = (ParticlesModule) getRegisteredModule("particles-module");
             SKELETON = (SkeletonModule) getRegisteredModule("skeleton-module");
             SKYBOX = (SkyboxModule) getRegisteredModule("skybox-module");
-            SHADERS = (ShadersModule) getRegisteredModule("shaders-module");
+            //SHADERS = (ShadersModule) getRegisteredModule("shaders-module");
             TOOLTIPS = (TooltipsModule) getRegisteredModule("tooltips-module");
             TRACERS = (TracersModule) getRegisteredModule("tracers-module");
             TRUE_SIGHT = (TrueSightModule) getRegisteredModule("truesight-module");

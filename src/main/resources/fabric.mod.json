@@ -3,10 +3,10 @@
   "id": "ovaqreborn",
   "version": "${version}",
   "name": "OvaqReborn",
-  "description": "人見知りが作った人見知りの為のクライアント ",
+  "description": "JAVAの勉強でshorelineをベースにJP用に改造",
 
   "authors": [
-    "ハイピ"
+    "ハイピの廃人"
   ],
   "icon": "logo.png",
   "environment": "*",

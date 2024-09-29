@@ -20,7 +20,7 @@ public class UnfocusedFPSModule extends ToggleModule {
      */
     public UnfocusedFPSModule() {
         super("UnfocusedFPS", "Reduces FPS when game is in the background",
-                ModuleCategory.MISCELLANEOUS);
+                ModuleCategory.MISC);
     }
 
     @EventListener

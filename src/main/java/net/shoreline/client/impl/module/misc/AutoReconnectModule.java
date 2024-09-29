@@ -20,7 +20,7 @@ public class AutoReconnectModule extends ToggleModule {
      */
     public AutoReconnectModule() {
         super("AutoReconnect", "Automatically reconnects to a server " +
-                "immediately after disconnecting", ModuleCategory.MISCELLANEOUS);
+                "immediately after disconnecting", ModuleCategory.MISC);
     }
 
     /**

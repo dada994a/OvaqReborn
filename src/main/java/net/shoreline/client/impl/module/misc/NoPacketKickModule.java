@@ -15,7 +15,7 @@ public class NoPacketKickModule extends ToggleModule {
      *
      */
     public NoPacketKickModule() {
-        super("NoPacketKick", "Prevents getting kicked by packets", ModuleCategory.MISCELLANEOUS);
+        super("NoPacketKick", "Prevents getting kicked by packets", ModuleCategory.MISC);
     }
 
     // TODO: Add more packet kick checks
