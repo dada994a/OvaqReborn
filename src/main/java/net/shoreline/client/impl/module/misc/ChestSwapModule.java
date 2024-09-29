@@ -20,7 +20,7 @@ public class ChestSwapModule extends ToggleModule {
     Config<Priority> priorityConfig = new EnumConfig<>("Priority", "The chestplate material to prioritize", Priority.NETHERITE, Priority.values());
 
     public ChestSwapModule() {
-        super("ChestSwap", "Automatically swaps chestplate", ModuleCategory.MISCELLANEOUS);
+        super("ChestSwap", "Automatically swaps chestplate", ModuleCategory.MISC);
     }
 
     @Override

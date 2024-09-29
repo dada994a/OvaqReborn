@@ -2,6 +2,7 @@ package net.shoreline.client.impl.module.render;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.GameOptions;
+import net.minecraft.client.option.SimpleOption;
 import net.shoreline.client.api.config.Config;
 import net.shoreline.client.api.config.setting.NumberConfig;
 import net.shoreline.client.api.event.listener.EventListener;
@@ -9,10 +10,8 @@ import net.shoreline.client.api.module.ModuleCategory;
 import net.shoreline.client.api.module.ToggleModule;
 import net.shoreline.client.impl.event.RunTickEvent;
 
-import java.lang.reflect.Field;
-
 public class ZoomModule extends ToggleModule {
-    private final Config<Float> zoomLevelConfig = new NumberConfig<>("ZoomLevel", "Level of zoom", 2.0f, 1.0f, 5.0f); // 1x - 5x
+    private final Config<Float> zoomLevelConfig = new NumberConfig<>("ZoomLevel", "Level of zoom", 2.0f, 1.0f, 5.0f);
     private boolean isZoomed = false;
     private float originalFov;
 
@@ -37,19 +36,13 @@ public class ZoomModule extends ToggleModule {
         GameOptions options = mc.options;
 
         if (options != null) {
-            try {
-                // FOV フィールドをリフレクションを使って取得
-                Field fovField = GameOptions.class.getDeclaredField("fov");
-                fovField.setAccessible(true); // アクセス可能に設定
+            SimpleOption<Float> fovOption = (SimpleOption<Float>) options.fov; // FOVオプションを取得
 
-                if (isZoomed) {
-                    originalFov = (float) fovField.get(options); // 現在のFOVを保存
-                    fovField.set(options, calculateZoomedFOV()); // ズームしたFOVを設定
-                } else {
-                    fovField.set(options, originalFov); // 元のFOVに戻す
-                }
-            } catch (NoSuchFieldException | IllegalAccessException e) {
-                e.printStackTrace(); // エラーを表示
+            if (isZoomed) {
+                originalFov = fovOption.getValue(); // 現在のFOVを保存
+                fovOption.setValue(calculateZoomedFOV()); // ズームしたFOVを設定
+            } else {
+                fovOption.setValue(originalFov); // 元のFOVに戻す
             }
         }
     }
@@ -60,6 +53,8 @@ public class ZoomModule extends ToggleModule {
 
     @EventListener
     public void onTick(RunTickEvent event) {
-        adjustFOV();
+        if (isZoomed) {
+            adjustFOV(); // ズーム中のみFOVを調整
+        }
     }
 }

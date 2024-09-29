@@ -25,7 +25,7 @@ public class AntiAFKModule extends ToggleModule {
      */
     public AntiAFKModule() {
         super("AntiAFK", "Prevents the player from being kicked for AFK",
-                ModuleCategory.MISCELLANEOUS);
+                ModuleCategory.MISC);
     }
 
     @EventListener

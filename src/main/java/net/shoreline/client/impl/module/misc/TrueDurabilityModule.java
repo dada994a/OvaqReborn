@@ -16,7 +16,7 @@ public class TrueDurabilityModule extends ToggleModule {
      */
     public TrueDurabilityModule() {
         super("TrueDurability", "Displays the true durability of unbreakable items",
-                ModuleCategory.MISCELLANEOUS);
+                ModuleCategory.MISC);
     }
 
     @EventListener

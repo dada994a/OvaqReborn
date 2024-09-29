@@ -30,7 +30,7 @@ public class TimerModule extends ToggleModule {
      *
      */
     public TimerModule() {
-        super("Timer", "Changes the client tick speed", ModuleCategory.MISCELLANEOUS);
+        super("Timer", "Changes the client tick speed", ModuleCategory.MISC);
     }
 
     @Override

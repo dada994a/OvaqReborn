@@ -23,7 +23,7 @@ public class AutoMapartModule extends ToggleModule {
      */
     public AutoMapartModule() {
         super("AutoMapart", "Automatically places maparts on walls",
-                ModuleCategory.MISCELLANEOUS);
+                ModuleCategory.MISC);
     }
 
     @EventListener

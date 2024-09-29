@@ -15,12 +15,12 @@ public enum ModuleCategory {
      * Modules that exploit certain anticheats to allow for "non-vanilla"
      * behavior (Ex: AntiHunger, PacketFlight, Reach, etc.)
      */
-    EXPLOITS,
+    EXPLOIT,
 
     /**
      * Modules that don't fit into the other categories
      */
-    MISCELLANEOUS,
+    MISC,
 
     /**
      * Modules that allow the player to move in unnatural ways (Ex: Flight,

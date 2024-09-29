@@ -13,6 +13,6 @@ public class SpammerModule extends ToggleModule {
      *
      */
     public SpammerModule() {
-        super("Spammer", "Spams messages in the chat", ModuleCategory.MISCELLANEOUS);
+        super("Spammer", "Spams messages in the chat", ModuleCategory.MISC);
     }
 }

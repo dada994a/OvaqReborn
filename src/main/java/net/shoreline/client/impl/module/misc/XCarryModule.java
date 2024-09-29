@@ -23,7 +23,7 @@ public class XCarryModule extends ToggleModule {
      */
     public XCarryModule() {
         super("XCarry", "Allow player to carry items in the crafting slots",
-                ModuleCategory.MISCELLANEOUS);
+                ModuleCategory.MISC);
     }
 
     @EventListener

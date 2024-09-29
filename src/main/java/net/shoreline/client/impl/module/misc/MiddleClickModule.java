@@ -30,7 +30,7 @@ public class MiddleClickModule extends ToggleModule {
      */
     public MiddleClickModule() {
         super("MiddleClick", "Adds an additional bind on the mouse middle button",
-                ModuleCategory.MISCELLANEOUS);
+                ModuleCategory.MISC);
     }
 
     @EventListener

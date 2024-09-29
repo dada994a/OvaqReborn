@@ -44,7 +44,7 @@ public class InvCleanerModule extends ToggleModule {
      */
     public InvCleanerModule() {
         super("InvCleaner", "Automatically cleans the player inventory",
-                ModuleCategory.MISCELLANEOUS);
+                ModuleCategory.MISC);
     }
 
     @EventListener

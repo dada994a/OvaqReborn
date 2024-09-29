@@ -29,7 +29,7 @@ public class AutoEatModule extends ToggleModule {
      */
     public AutoEatModule() {
         super("AutoEat", "Automatically eats when losing hunger",
-                ModuleCategory.MISCELLANEOUS);
+                ModuleCategory.MISC);
     }
 
     @Override

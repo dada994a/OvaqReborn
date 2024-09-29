@@ -36,7 +36,7 @@ public class AutoFishModule extends ToggleModule {
      */
     public AutoFishModule() {
         super("AutoFish", "Automatically casts and reels fishing rods",
-                ModuleCategory.MISCELLANEOUS);
+                ModuleCategory.MISC);
     }
 
     @EventListener

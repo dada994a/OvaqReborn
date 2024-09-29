@@ -33,7 +33,7 @@ public class NoSoundLagModule extends ToggleModule {
      */
     public NoSoundLagModule() {
         super("NoSoundLag", "Prevents sound effects from lagging the game",
-                ModuleCategory.MISCELLANEOUS);
+                ModuleCategory.MISC);
     }
 
     @EventListener

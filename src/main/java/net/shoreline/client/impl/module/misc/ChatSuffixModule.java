@@ -10,7 +10,7 @@ public class ChatSuffixModule extends ToggleModule {
     private static final String SUFFIX = " ｜ OvaqReborn";
 
     public ChatSuffixModule() {
-        super("ChatSuffix", "Appends Suffix to all sent messages", ModuleCategory.MISCELLANEOUS);
+        super("ChatSuffix", "Appends Suffix to all sent messages", ModuleCategory.MISC);
     }
 
     @EventListener

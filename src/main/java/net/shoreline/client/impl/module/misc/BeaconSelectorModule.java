@@ -29,7 +29,7 @@ public class BeaconSelectorModule extends ToggleModule {
      */
     public BeaconSelectorModule() {
         super("BeaconSelector", "Allows you to change beacon effects",
-                ModuleCategory.MISCELLANEOUS);
+                ModuleCategory.MISC);
     }
 
     @EventListener

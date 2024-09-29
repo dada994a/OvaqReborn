@@ -31,7 +31,7 @@ public class AntiAimModule extends RotationModule {
      */
     public AntiAimModule() {
         super("AntiAim", "Makes it harder to accurately aim at the player",
-                ModuleCategory.MISCELLANEOUS, 50);
+                ModuleCategory.MISC, 50);
     }
 
     /**
