@@ -67,7 +67,7 @@ public class ModuleManager {
                 new DisablerModule(),
                 new ExtendedFireworkModule(),
                 new FakeLatencyModule(),
-                new FastLatencyModule(),
+                //new FastLatencyModule(),
                 new FastProjectileModule(),
                 new PacketCancelerModule(),
                 new PacketFlyModule(),
