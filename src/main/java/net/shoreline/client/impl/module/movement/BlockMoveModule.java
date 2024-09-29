@@ -37,10 +37,10 @@ public class BlockMoveModule extends ToggleModule {
         Vec3d right = left.multiply(-1); // 右方向は左の逆
 
         if (mc.options.leftKey.isPressed()) {
-            mc.player.setPos(playerPos.x - left.x * moveSpeed, playerPos.y, playerPos.z - left.z * moveSpeed); // 左に移動
+            mc.player.setPos(playerPos.x + right.x * moveSpeed, playerPos.y, playerPos.z - right.z * moveSpeed); // 右に移動
         }
         if (mc.options.rightKey.isPressed()) {
-            mc.player.setPos(playerPos.x + left.x * moveSpeed, playerPos.y, playerPos.z + left.z * moveSpeed); // 右に移動
+            mc.player.setPos(playerPos.x - right.x * moveSpeed, playerPos.y, playerPos.z - right.z * moveSpeed); // 左に移動
         }
 
         // 縦の移動
