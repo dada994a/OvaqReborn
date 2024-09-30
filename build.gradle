@@ -13,7 +13,6 @@ group = project.maven_group
 
 buildConfig {
     buildConfigField(String, "VERSION", project.mod_version)
-    buildConfigField(String, "MDVER", project.md_ver)
 
     packageName "net.shoreline.client"
     useJavaOutput()

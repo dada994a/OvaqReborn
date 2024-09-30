@@ -11,6 +11,7 @@ import net.shoreline.client.mixin.accessor.AccessorClientWorld;
 import net.shoreline.client.util.Globals;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -90,8 +91,7 @@ public class NetworkManager implements Globals {
      */
     public int getClientLatency() {
         if (mc.getNetworkHandler() != null) {
-            final PlayerListEntry playerEntry =
-                    mc.getNetworkHandler().getPlayerListEntry(mc.player.getGameProfile().getId());
+            final PlayerListEntry playerEntry = mc.getNetworkHandler().getPlayerListEntry(mc.player.getGameProfile().getId());
             if (playerEntry != null) {
                 return playerEntry.getLatency();
             }
@@ -114,6 +114,18 @@ public class NetworkManager implements Globals {
     public void setInfo(ServerInfo info) {
         this.info = info;
     }
+
+    public boolean isCrystalPvpCC() {
+        if (info != null) {
+            return info.address.equalsIgnoreCase("us.crystalpvp.cc") || info.address.equalsIgnoreCase("crystalpvp.cc");
+        }
+        return false;
+    }
+
+    public boolean isGrimCC() {
+        return info != null && info.address.equalsIgnoreCase("grim.crystalpvp.cc");
+    }
+
     /**
      * @param p
      * @return
