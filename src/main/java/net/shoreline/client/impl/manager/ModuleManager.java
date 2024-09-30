@@ -67,7 +67,7 @@ public class ModuleManager {
                 new DisablerModule(),
                 new ExtendedFireworkModule(),
                 new FakeLatencyModule(),
-                //new FastLatencyModule(),
+                new FastLatencyModule(),
                 new FastProjectileModule(),
                 new PacketCancelerModule(),
                 new PacketFlyModule(),
@@ -103,7 +103,7 @@ public class ModuleManager {
                 // Movement
                 new AntiLevitationModule(),
                 new AutoWalkModule(),
-                new BlockMoveModule(),
+                //new BlockMoveModule(),
                 new ElytraFlyModule(),
                 new EntityControlModule(),
                 new EntitySpeedModule(),

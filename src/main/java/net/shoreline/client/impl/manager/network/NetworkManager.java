@@ -114,18 +114,6 @@ public class NetworkManager implements Globals {
     public void setInfo(ServerInfo info) {
         this.info = info;
     }
-
-    public boolean isCrystalPvpCC() {
-        if (info != null) {
-            return info.address.equalsIgnoreCase("us.crystalpvp.cc") || info.address.equalsIgnoreCase("crystalpvp.cc");
-        }
-        return false;
-    }
-
-    public boolean isGrimCC() {
-        return info != null && info.address.equalsIgnoreCase("grim.crystalpvp.cc");
-    }
-
     /**
      * @param p
      * @return

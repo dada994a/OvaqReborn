@@ -13,7 +13,6 @@ import net.shoreline.client.impl.module.movement.*;
 import net.shoreline.client.impl.module.render.*;
 import net.shoreline.client.impl.module.world.*;
 
-import java.awt.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -64,7 +63,7 @@ public class Modules {
     public static DisablerModule DISABLER;
     public static ExtendedFireworkModule EXTENDED_FIREWORK;
     public static FakeLatencyModule FAKE_LATENCY;
-    //public static FastLatencyModule FAST_LATENCY;
+    public static FastLatencyModule FAST_LATENCY;
     public static FastProjectileModule FAST_PROJECTILE;
     public static PacketCancelerModule PACKET_CANCELER;
     public static PacketFlyModule PACKET_FLY;
@@ -101,7 +100,7 @@ public class Modules {
     // Movement
     public static AntiLevitationModule ANTI_LEVITATION;
     public static AutoWalkModule AUTO_WALK;
-    public static BlockMoveModule BLOCKMOVE;
+    //public static BlockMoveModule BLOCKMOVE;
     public static ElytraFlyModule ELYTRA_FLY;
     public static EntityControlModule ENTITY_CONTROL;
     public static EntitySpeedModule ENTITY_SPEED;
@@ -237,7 +236,7 @@ public class Modules {
             DISABLER = (DisablerModule) getRegisteredModule("disabler-module");
             EXTENDED_FIREWORK = (ExtendedFireworkModule) getRegisteredModule("extendedfirework-module");
             FAKE_LATENCY = (FakeLatencyModule) getRegisteredModule("fakelatency-module");
-            //FAST_LATENCY = (FastLatencyModule) getRegisteredModule("fastlatency-module");
+            FAST_LATENCY = (FastLatencyModule) getRegisteredModule("fastlatency-module");
             FAST_PROJECTILE = (FastProjectileModule) getRegisteredModule("fastprojectile-module");
             PACKET_CANCELER = (PacketCancelerModule) getRegisteredModule("packetcanceler-module");
             PACKET_FLY = (PacketFlyModule) getRegisteredModule("packetfly-module");
@@ -268,7 +267,7 @@ public class Modules {
             XCARRY = (XCarryModule) getRegisteredModule("xcarry-module");
             ANTI_LEVITATION = (AntiLevitationModule) getRegisteredModule("antilevitation-module");
             AUTO_WALK = (AutoWalkModule) getRegisteredModule("autowalk-module");
-            BLOCKMOVE = (BlockMoveModule) getRegisteredModule("blockmove-module");
+            //BLOCKMOVE = (BlockMoveModule) getRegisteredModule("blockmove-module");
             ELYTRA_FLY = (ElytraFlyModule) getRegisteredModule("elytrafly-module");
             ENTITY_CONTROL = (EntityControlModule) getRegisteredModule("entitycontrol-module");
             ENTITY_SPEED = (EntitySpeedModule) getRegisteredModule("entityspeed-module");

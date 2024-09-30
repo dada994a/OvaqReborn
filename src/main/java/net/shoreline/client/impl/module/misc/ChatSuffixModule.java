@@ -8,7 +8,7 @@ import net.shoreline.client.impl.event.gui.chat.ChatMessageEvent;
 import net.shoreline.client.util.chat.ChatUtil;
 
 public class ChatSuffixModule extends ToggleModule {
-    private static final String SUFFIX = " ｜ OvaqReborn " + BuildConfig.VERSION ;
+    private static final String SUFFIX = " ｜ ᴏᴠᴀǫʀᴇʙᴏʀɴ " + BuildConfig.MDVER ;
 
     public ChatSuffixModule() {
         super("ChatSuffix", "Appends Suffix to all sent messages", ModuleCategory.MISC);
