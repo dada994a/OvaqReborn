@@ -44,14 +44,12 @@ public class WaypointsModule extends ToggleModule {
                 && logoutsConfig.getValue()) {
             for (PlayerListS2CPacket.Entry entry : packet.getEntries()) {
                 GameProfile profile = entry.profile();
-                if (profile.getName() == null || profile.getName().isEmpty()
-                        || profile.getId() == null) {
-                    continue;
-                }
-                PlayerEntity player = mc.world.getPlayerByUuid(profile.getId());
-                if (player != null) {
-                    if (packet.getActions().contains(PlayerListS2CPacket.Action.ADD_PLAYER)) {
-                        Managers.WAYPOINT.remove(String.format("%s's Logout", player.getName().getString()));
+                if (profile != null && profile.getId() != null) {
+                    PlayerEntity player = mc.world.getPlayerByUuid(profile.getId());
+                    if (player != null) {
+                        if (packet.getActions().contains(PlayerListS2CPacket.Action.ADD_PLAYER)) {
+                            Managers.WAYPOINT.remove(String.format("%s's Logout", player.getName().getString()));
+                        }
                     }
                 }
             }
