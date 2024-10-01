@@ -13,6 +13,7 @@ group = project.maven_group
 
 buildConfig {
     buildConfigField(String, "VERSION", project.mod_version)
+    buildConfigField(String, "BUILD_IDENTIFIER", project.build_identifier)
 
     packageName "net.shoreline.client"
     useJavaOutput()
@@ -63,9 +64,6 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modImplementation "cabaletta:baritone-api:${baritone_api_version}"
 
-    libImpl ("meteordevelopment:orbit:${project.orbit_version}")
-    libImpl("io.netty:netty-handler-proxy:${project.netty_version}") { transitive = false }
-    libImpl("io.netty:netty-codec-socks:${project.netty_version}") { transitive = false }
 
 }
 
