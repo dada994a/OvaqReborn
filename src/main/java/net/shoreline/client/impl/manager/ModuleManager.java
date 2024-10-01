@@ -48,7 +48,6 @@ public class ModuleManager {
                 new AutoTrapModule(),
                 new AutoXPModule(),
                 new BacktrackModule(),
-                new BlockerModule(),
                 new BlockLagModule(),
                 new BowAimModule(),
                 new CriticalsModule(),
@@ -75,7 +74,7 @@ public class ModuleManager {
                 new PortalGodModeModule(),
                 new ReachModule(),
                 // Misc
-                new AntiAFKModule(),
+                //new AntiAFKModule(),
                 new AntiAimModule(),
                 new ChatSuffixModule(),
                 // new AntiBookBanModule(),
