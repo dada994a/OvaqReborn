@@ -4,49 +4,58 @@ import io.netty.util.internal.ConcurrentSet;
 import net.shoreline.client.api.waypoint.Waypoint;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
+ * Manages waypoints for the client.
+ *
  * @author linus
- * @see Waypoint
  * @since 1.0
  */
 public class WaypointManager {
-    //
-    private final Set<Waypoint> waypoints = new ConcurrentSet<>();
+    // Using ConcurrentHashMap's newKeySet for thread-safe set operations
+    private final Set<Waypoint> waypoints = ConcurrentHashMap.newKeySet();
 
     /**
-     * @param waypoint
+     * Registers a single waypoint.
+     *
+     * @param waypoint the waypoint to register
      */
     public void register(Waypoint waypoint) {
         waypoints.add(waypoint);
     }
 
     /**
-     * @param waypoints
+     * Registers multiple waypoints.
+     *
+     * @param waypoints the waypoints to register
      */
     public void register(Waypoint... waypoints) {
-        for (Waypoint waypoint : waypoints) {
-            register(waypoint);
-        }
+        Collections.addAll(this.waypoints, waypoints);
     }
 
     /**
-     * @param waypoint
-     * @return
+     * Removes a specific waypoint.
+     *
+     * @param waypoint the waypoint to remove
+     * @return true if the waypoint was successfully removed, false otherwise
      */
     public boolean remove(Waypoint waypoint) {
         return waypoints.remove(waypoint);
     }
 
     /**
-     * @param waypoint
-     * @return
+     * Removes a waypoint by its name.
+     *
+     * @param waypointName the name of the waypoint to remove
+     * @return true if the waypoint was found and removed, false otherwise
      */
-    public boolean remove(String waypoint) {
-        for (Waypoint w : getWaypoints()) {
-            if (w.getName().equalsIgnoreCase(waypoint)) {
+    public boolean remove(String waypointName) {
+        for (Waypoint w : waypoints) {
+            if (w.getName().equalsIgnoreCase(waypointName)) {
                 return waypoints.remove(w);
             }
         }
@@ -54,18 +63,22 @@ public class WaypointManager {
     }
 
     /**
-     * @return
+     * Gets all registered waypoints.
+     *
+     * @return an unmodifiable collection of waypoints
      */
     public Collection<Waypoint> getWaypoints() {
-        return waypoints;
+        return Collections.unmodifiableSet(waypoints);
     }
 
     /**
-     * @return
+     * Gets all server IPs associated with the waypoints.
+     *
+     * @return a collection of server IPs
      */
     public Collection<String> getIps() {
         final Set<String> ips = new HashSet<>();
-        for (Waypoint waypoint : getWaypoints()) {
+        for (Waypoint waypoint : waypoints) {
             ips.add(waypoint.getIp());
         }
         return ips;
