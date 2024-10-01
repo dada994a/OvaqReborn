@@ -47,6 +47,7 @@ public class Modules {
     public static BowAimModule BOW_AIM;
     public static CriticalsModule CRITICALS;
     public static HoleFillModule HOLE_FILL;
+    public static HoleSnapModule HOLESAMP;
     public static NoHitDelayModule NO_HIT_DELAY;
     public static ReplenishModule REPLENISH;
     public static SelfBowModule SELF_BOW;
@@ -97,7 +98,8 @@ public class Modules {
     // Movement
     public static AntiLevitationModule ANTI_LEVITATION;
     public static AutoWalkModule AUTO_WALK;
-    //public static BlockMoveModule BLOCKMOVE;
+    //public static BlockHoleMoveModule BLOCKHOLEMOVE;
+    public static BlockMoveModule BLOCKMOVE;
     public static ElytraFlyModule ELYTRA_FLY;
     public static EntityControlModule ENTITY_CONTROL;
     public static EntitySpeedModule ENTITY_SPEED;
@@ -219,6 +221,7 @@ public class Modules {
             BOW_AIM = (BowAimModule) getRegisteredModule("bowaim-module");
             CRITICALS = (CriticalsModule) getRegisteredModule("criticals-module");
             HOLE_FILL = (HoleFillModule) getRegisteredModule("holefill-module");
+            HOLESAMP = (HoleSnapModule) getRegisteredModule("holesnap-module");
             NO_HIT_DELAY = (NoHitDelayModule) getRegisteredModule("nohitdelay-module");
             REPLENISH = (ReplenishModule) getRegisteredModule("replenish-module");
             SELF_BOW = (SelfBowModule) getRegisteredModule("selfbow-module");
@@ -262,7 +265,8 @@ public class Modules {
             XCARRY = (XCarryModule) getRegisteredModule("xcarry-module");
             ANTI_LEVITATION = (AntiLevitationModule) getRegisteredModule("antilevitation-module");
             AUTO_WALK = (AutoWalkModule) getRegisteredModule("autowalk-module");
-            //BLOCKMOVE = (BlockMoveModule) getRegisteredModule("blockmove-module");
+            //BLOCKHOLEMOVE = (BlockHoleMoveModule) getRegisteredModule("blockholemove-module");
+            BLOCKMOVE = (BlockMoveModule) getRegisteredModule("blockmove-module");
             ELYTRA_FLY = (ElytraFlyModule) getRegisteredModule("elytrafly-module");
             ENTITY_CONTROL = (EntityControlModule) getRegisteredModule("entitycontrol-module");
             ENTITY_SPEED = (EntitySpeedModule) getRegisteredModule("entityspeed-module");

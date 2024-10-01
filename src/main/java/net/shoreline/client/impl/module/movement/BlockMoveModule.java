@@ -1,49 +1,44 @@
 package net.shoreline.client.impl.module.movement;
 
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.shoreline.client.api.module.ToggleModule;
-import net.shoreline.client.api.module.ModuleCategory;
+import net.shoreline.client.api.module.ModuleCategory; // 追加
 import net.shoreline.client.api.event.listener.EventListener;
-import net.shoreline.client.impl.event.entity.player.PlayerMoveEvent; // こちらを修正
-import net.shoreline.client.util.player.MovementUtil;
-import net.shoreline.client.util.player.PlayerUtil;
+import net.shoreline.client.impl.event.RunTickEvent;
 
 public class BlockMoveModule extends ToggleModule {
+
     public BlockMoveModule() {
-        super("BlockMove", "Allows phase-like movement along block edges", ModuleCategory.MOVEMENT);
+        super("BlockMove", "Allows movement through blocks while submerged", ModuleCategory.MOVEMENT);
     }
 
     @EventListener
-    public void onMove(final PlayerMoveEvent event) {
-        if (MovementUtil.isInputtingMovement() && isPlayerOnEdge()) {
-            double moveSpeed = 0.1; // Movement speed
-            Vec3d playerPos = mc.player.getPos();
-
-            // Calculate the new position based on input and movement speed
-            Vec3d forward = mc.player.getRotationVector();
-            double newX = playerPos.x + forward.x * moveSpeed;
-            double newZ = playerPos.z + forward.z * moveSpeed;
-
-            // Set the new position, allowing phase-like movement
-            mc.player.setPos(newX, playerPos.y, newZ);
-            event.cancel();
+    public void onTick(RunTickEvent event) {
+        if (!isEnabled() || mc.player == null || mc.world == null) {
+            return;
         }
-    }
 
-    private boolean isPlayerOnEdge() {
-        BlockPos pos = PlayerUtil.getRoundedBlockPos(mc.player.getX(), mc.player.getY(), mc.player.getZ()).down();
-        for (Direction direction : Direction.values()) {
-            BlockPos neighbor = pos.offset(direction);
-            if (!mc.world.getBlockState(neighbor).isReplaceable()) {
-                return false; // エッジにいる場合
-            }
+        Vec3d playerPos = mc.player.getPos();
+        double moveSpeed = 0.1;
 
+        Vec3d forward = mc.player.getRotationVector();
+
+
+        if (mc.options.forwardKey.isPressed()) {
+            mc.player.setPos(playerPos.x + forward.x * moveSpeed, playerPos.y, playerPos.z + forward.z * moveSpeed);
         }
-        return true;
+        if (mc.options.backKey.isPressed()) {
+            mc.player.setPos(playerPos.x - forward.x * moveSpeed, playerPos.y, playerPos.z - forward.z * moveSpeed);
+        }
+
+        Vec3d left = forward.crossProduct(new Vec3d(0, 1, 0)).normalize(); // 左方向
+        Vec3d right = left.multiply(-1);
+
+        if (mc.options.leftKey.isPressed()) {
+            mc.player.setPos(playerPos.x + right.x * moveSpeed, playerPos.y, playerPos.z + right.z * moveSpeed); // 右に移動
+        }
+        if (mc.options.rightKey.isPressed()) {
+            mc.player.setPos(playerPos.x - right.x * moveSpeed, playerPos.y, playerPos.z - right.z * moveSpeed); // 左に移動
+        }
     }
 }
-
-
-

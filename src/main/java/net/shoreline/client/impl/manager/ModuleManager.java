@@ -52,6 +52,7 @@ public class ModuleManager {
                 new BowAimModule(),
                 new CriticalsModule(),
                 new HoleFillModule(),
+                new HoleSnapModule(),
                 new NoHitDelayModule(),
                 new ReplenishModule(),
                 new SelfBowModule(),
@@ -101,7 +102,8 @@ public class ModuleManager {
                 // Movement
                 new AntiLevitationModule(),
                 new AutoWalkModule(),
-                //new BlockMoveModule(),
+                //new BlockHoleMoveModule(),
+                new BlockMoveModule(),
                 new ElytraFlyModule(),
                 new EntityControlModule(),
                 new EntitySpeedModule(),
