@@ -30,6 +30,7 @@ public class OvaqReborn {
     // Client configuration handler. This master saves/loads the client
     // configuration files which have been saved locally.
     public static ClientConfiguration CONFIG;
+    public static DiscordManager RPC;
     // Client shutdown hooks which will run once when the MinecraftClient
     // game instance is shutdown.
     public static ShutdownHook SHUTDOWN;
@@ -62,6 +63,10 @@ public class OvaqReborn {
         info("init starting ...");
         Managers.init();
         Modules.init();
+
+        RPC = new DiscordManager();
+        DiscordManager.startRPC();
+        info("DiscordRPC starting ...");
         // Commands.init();
         info("postInit starting ...");
         CONFIG = new ClientConfiguration();

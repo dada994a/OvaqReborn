@@ -31,7 +31,7 @@ public class Modules {
     //public static FontModule FONT;
     public static RotationsModule ROTATIONS;
     public static BaritoneModule BARITONE;
-    public static RPCModule RPC;
+    //public static RPCModule RPC;
     public static CapesModule CAPES;
     // Combat
     public static AuraModule AURA;
@@ -47,7 +47,7 @@ public class Modules {
     public static BowAimModule BOW_AIM;
     public static CriticalsModule CRITICALS;
     public static HoleFillModule HOLE_FILL;
-    public static HoleSnapModule HOLESAMP;
+    public static HoleSnapModule HOLESNAP;
     public static NoHitDelayModule NO_HIT_DELAY;
     public static ReplenishModule REPLENISH;
     public static SelfBowModule SELF_BOW;
@@ -200,7 +200,7 @@ public class Modules {
             CLICK_GUI = (ClickGuiModule) getRegisteredModule("clickgui-module");
             COLORS = (ColorsModule) getRegisteredModule("colors-module");
             HUD = (HUDModule) getRegisteredModule("hud-module");
-            RPC = (RPCModule) getRegisteredModule("rpc-module");
+            //RPC = (RPCModule) getRegisteredModule("rpc-module");
             //FONT =(FontModule) getRegisteredModule("font-module");
             ROTATIONS = (RotationsModule) getRegisteredModule("rotations-module");
             SERVER = (ServerModule) getRegisteredModule("server-module");
@@ -221,7 +221,7 @@ public class Modules {
             BOW_AIM = (BowAimModule) getRegisteredModule("bowaim-module");
             CRITICALS = (CriticalsModule) getRegisteredModule("criticals-module");
             HOLE_FILL = (HoleFillModule) getRegisteredModule("holefill-module");
-            HOLESAMP = (HoleSnapModule) getRegisteredModule("holesnap-module");
+            HOLESNAP = (HoleSnapModule) getRegisteredModule("holesnap-module");
             NO_HIT_DELAY = (NoHitDelayModule) getRegisteredModule("nohitdelay-module");
             REPLENISH = (ReplenishModule) getRegisteredModule("replenish-module");
             SELF_BOW = (SelfBowModule) getRegisteredModule("selfbow-module");

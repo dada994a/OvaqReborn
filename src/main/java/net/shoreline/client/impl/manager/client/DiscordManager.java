@@ -38,7 +38,7 @@ public class DiscordManager {
     }
 
     private static String getDetails() {
-        return "OvaqReborn is PrivateClient :)"; // 例
+        return "OvaqReborn is PrivateClient :)";
     }
 
     public void stopRPC() {

@@ -35,7 +35,7 @@ public class ModuleManager {
                 new ClickGuiModule(),
                 new ColorsModule(),
                 new HUDModule(),
-                new RPCModule(),
+                //new RPCModule(),
                 //new FontModule(),
                 new RotationsModule(),
                 // Combat
