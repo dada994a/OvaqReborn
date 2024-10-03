@@ -98,7 +98,7 @@ public class Modules {
     // Movement
     public static AntiLevitationModule ANTI_LEVITATION;
     public static AutoWalkModule AUTO_WALK;
-    //public static BlockHoleMoveModule BLOCKHOLEMOVE;
+   // public static BlockHoleMoveModule BLOCKHOLEMOVE;
     public static BlockMoveModule BLOCKMOVE;
     public static ElytraFlyModule ELYTRA_FLY;
     public static EntityControlModule ENTITY_CONTROL;

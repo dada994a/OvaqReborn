@@ -66,7 +66,7 @@ public class OvaqReborn {
 
         RPC = new DiscordManager();
         DiscordManager.startRPC();
-        info("DiscordRPC starting ...");
+        info("discordrpc starting ...");
         // Commands.init();
         info("postInit starting ...");
         CONFIG = new ClientConfiguration();
