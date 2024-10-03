@@ -54,6 +54,8 @@ public class DiscordManager {
         }
     }
 
+
+
     public void stopRPC() {
         started = false;
         if (rpcThread != null && !rpcThread.isInterrupted()) {

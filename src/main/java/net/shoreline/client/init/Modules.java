@@ -59,9 +59,10 @@ public class Modules {
     public static ChorusControlModule CHORUS_CONTROL;
     public static ClientSpoofModule CLIENT_SPOOFER;
     public static CrasherModule CRASHER;
-    public static DisablerModule DISABLER;
+    //public static DisablerModule DISABLER;
     public static ExtendedFireworkModule EXTENDED_FIREWORK;
     public static FakeLatencyModule FAKE_LATENCY;
+    public static FastLatencyModule FAST_LATENCY;
     public static FastProjectileModule FAST_PROJECTILE;
     public static PacketCancelerModule PACKET_CANCELER;
     public static PacketFlyModule PACKET_FLY;
@@ -98,7 +99,7 @@ public class Modules {
     // Movement
     public static AntiLevitationModule ANTI_LEVITATION;
     public static AutoWalkModule AUTO_WALK;
-    //public static BlockHoleMoveModule BLOCKHOLEMOVE;
+   // public static BlockHoleMoveModule BLOCKHOLEMOVE;
     public static BlockMoveModule BLOCKMOVE;
     public static ElytraFlyModule ELYTRA_FLY;
     public static EntityControlModule ENTITY_CONTROL;
@@ -136,7 +137,7 @@ public class Modules {
     public static ParticlesModule PARTICLES;
     public static SkeletonModule SKELETON;
     public static SkyboxModule SKYBOX;
-    //public static ShadersModule SHADERS;
+   // public static ShadersModule SHADERS;
     public static TooltipsModule TOOLTIPS;
     public static TracersModule TRACERS;
     public static TrueSightModule TRUE_SIGHT;
@@ -232,9 +233,10 @@ public class Modules {
             CHORUS_CONTROL = (ChorusControlModule) getRegisteredModule("choruscontrol-module");
             CLIENT_SPOOFER = (ClientSpoofModule) getRegisteredModule("clientspoof-module");
             CRASHER = (CrasherModule) getRegisteredModule("crasher-module");
-            DISABLER = (DisablerModule) getRegisteredModule("disabler-module");
+            //DISABLER = (DisablerModule) getRegisteredModule("disabler-module");
             EXTENDED_FIREWORK = (ExtendedFireworkModule) getRegisteredModule("extendedfirework-module");
             FAKE_LATENCY = (FakeLatencyModule) getRegisteredModule("fakelatency-module");
+            FAST_LATENCY = (FastLatencyModule) getRegisteredModule("fastlatency-module");
             FAST_PROJECTILE = (FastProjectileModule) getRegisteredModule("fastprojectile-module");
             PACKET_CANCELER = (PacketCancelerModule) getRegisteredModule("packetcanceler-module");
             PACKET_FLY = (PacketFlyModule) getRegisteredModule("packetfly-module");
