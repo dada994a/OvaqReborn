@@ -31,7 +31,7 @@ public class Modules {
     //public static FontModule FONT;
     public static RotationsModule ROTATIONS;
     public static BaritoneModule BARITONE;
-    //public static RPCModule RPC;
+    public static RPCModule RPC;
     public static CapesModule CAPES;
     // Combat
     public static AuraModule AURA;
@@ -201,7 +201,7 @@ public class Modules {
             CLICK_GUI = (ClickGuiModule) getRegisteredModule("clickgui-module");
             COLORS = (ColorsModule) getRegisteredModule("colors-module");
             HUD = (HUDModule) getRegisteredModule("hud-module");
-            //RPC = (RPCModule) getRegisteredModule("rpc-module");
+            RPC = (RPCModule) getRegisteredModule("rpc-module");
             //FONT =(FontModule) getRegisteredModule("font-module");
             ROTATIONS = (RotationsModule) getRegisteredModule("rotations-module");
             SERVER = (ServerModule) getRegisteredModule("server-module");
