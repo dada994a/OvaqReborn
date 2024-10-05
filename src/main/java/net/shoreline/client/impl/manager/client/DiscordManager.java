@@ -34,14 +34,11 @@ public class DiscordManager {
     }
 
     private static void updatePresence() {
-        presence.details = getDetails();
         presence.state = getServerInfo();
         rpc.Discord_UpdatePresence(presence);
     }
 
-    private static String getDetails() {
-        return "OvaqReborn is PrivateClient :)";
-    }
+
 
     private static String getServerInfo() {
         MinecraftClient mc = MinecraftClient.getInstance();

@@ -48,6 +48,7 @@ public class CommandManager implements Globals {
                 new FriendCommand(),
                 new HClipCommand(),
                 new HelpCommand(),
+                new TpCommand(),
                 new HideAllCommand(),
                 new ModulesCommand(),
                 new NbtCommand(),
