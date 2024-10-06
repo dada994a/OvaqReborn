@@ -31,7 +31,7 @@ public class BlockMoveModule extends ToggleModule {
             mc.player.setPos(playerPos.x - forward.x * moveSpeed, playerPos.y, playerPos.z - forward.z * moveSpeed);
         }
 
-        Vec3d left = forward.crossProduct(new Vec3d(0, 1, 0)).normalize(); // 左方向
+        Vec3d left = forward.crossProduct(new Vec3d(0, 1, 0)).normalize();
         Vec3d right = left.multiply(-1);
 
         if (mc.options.leftKey.isPressed()) {

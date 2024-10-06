@@ -92,6 +92,7 @@ public class Modules {
     public static MiddleClickModule MIDDLE_CLICK;
     public static NoPacketKickModule NO_PACKET_KICK;
     public static NoSoundLagModule NO_SOUND_LAG;
+    public static SpammerModule SPAMMER;
     public static TimerModule TIMER;
     public static TrueDurabilityModule TRUE_DURABILITY;
     public static UnfocusedFPSModule UNFOCUSED_FPS;
@@ -261,6 +262,7 @@ public class Modules {
             MIDDLE_CLICK = (MiddleClickModule) getRegisteredModule("middleclick-module");
             NO_PACKET_KICK = (NoPacketKickModule) getRegisteredModule("nopacketkick-module");
             NO_SOUND_LAG = (NoSoundLagModule) getRegisteredModule("nosoundlag-module");
+            SPAMMER = (SpammerModule) getRegisteredModule("spammer-module");
             TIMER = (TimerModule) getRegisteredModule("timer-module");
             TRUE_DURABILITY = (TrueDurabilityModule) getRegisteredModule("truedurability-module");
             UNFOCUSED_FPS = (UnfocusedFPSModule) getRegisteredModule("unfocusedfps-module");
