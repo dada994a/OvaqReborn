@@ -102,6 +102,7 @@ public class Modules {
     public static AutoWalkModule AUTO_WALK;
    // public static BlockHoleMoveModule BLOCKHOLEMOVE;
     public static BlockMoveModule BLOCKMOVE;
+    public static BoatFlyModule BOATFLY;
     public static ElytraFlyModule ELYTRA_FLY;
     public static EntityControlModule ENTITY_CONTROL;
     public static EntitySpeedModule ENTITY_SPEED;
@@ -145,7 +146,6 @@ public class Modules {
     public static ViewClipModule VIEW_CLIP;
     public static ViewModelModule VIEW_MODEL;
     //public static WaypointsModule WAYPOINTS;
-    public static ZoomModule ZOOM;
     // World
     public static AntiInteractModule ANTI_INTERACT;
     public static AutoMineModule AUTO_MINE;
@@ -271,6 +271,7 @@ public class Modules {
             AUTO_WALK = (AutoWalkModule) getRegisteredModule("autowalk-module");
             //BLOCKHOLEMOVE = (BlockHoleMoveModule) getRegisteredModule("blockholemove-module");
             BLOCKMOVE = (BlockMoveModule) getRegisteredModule("blockmove-module");
+            BOATFLY = (BoatFlyModule) getRegisteredModule("boatfly-module");
             ELYTRA_FLY = (ElytraFlyModule) getRegisteredModule("elytrafly-module");
             ENTITY_CONTROL = (EntityControlModule) getRegisteredModule("entitycontrol-module");
             ENTITY_SPEED = (EntitySpeedModule) getRegisteredModule("entityspeed-module");
@@ -313,7 +314,6 @@ public class Modules {
             VIEW_CLIP = (ViewClipModule) getRegisteredModule("viewclip-module");
             VIEW_MODEL = (ViewModelModule) getRegisteredModule("viewmodel-module");
             //WAYPOINTS = (WaypointsModule) getRegisteredModule("waypoints-module");
-            ZOOM = (ZoomModule) getRegisteredModule("zoom-module");
             ANTI_INTERACT = (AntiInteractModule) getRegisteredModule("antiinteract-module");
             AUTO_MINE = (AutoMineModule) getRegisteredModule("automine-module");
             CHATSUFFIX = (ChatSuffixModule) getRegisteredModule("chatsuffix-module");

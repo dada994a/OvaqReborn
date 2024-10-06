@@ -106,6 +106,7 @@ public class ModuleManager {
                 new AutoWalkModule(),
                 //new BlockHoleMoveModule(),
                 new BlockMoveModule(),
+                new BoatFlyModule(),
                 new ElytraFlyModule(),
                 new EntityControlModule(),
                 new EntitySpeedModule(),
@@ -149,7 +150,6 @@ public class ModuleManager {
                 new ViewClipModule(),
                 new ViewModelModule(),
                 //new WaypointsModule(),
-                new ZoomModule(),
                 // World
                 new AntiInteractModule(),
                 new AutoMineModule(),
