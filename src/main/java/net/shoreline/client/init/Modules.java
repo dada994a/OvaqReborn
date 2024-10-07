@@ -39,6 +39,7 @@ public class Modules {
     public static AutoBowReleaseModule AUTO_BOW_RELEASE;
     public static AutoCrystalModule AUTO_CRYSTAL;
     public static BacktrackModule BACK_TRACK;
+   // public static BedAuraModule BEDAURA;
     public static AutoLogModule AUTO_LOG;
     public static AutoTotemModule AUTO_TOTEM;
     public static AutoTrapModule AUTO_TRAP;
@@ -116,6 +117,7 @@ public class Modules {
     public static NoJumpDelayModule NO_JUMP_DELAY;
     public static NoSlowModule NO_SLOW;
     public static ParkourModule PARKOUR;
+    public static ReverseStepModule REVERSESTEP;
     public static SpeedModule SPEED;
     public static SprintModule SPRINT;
     public static StepModule STEP;
@@ -219,6 +221,7 @@ public class Modules {
             AUTO_TRAP = (AutoTrapModule) getRegisteredModule("autotrap-module");
             AUTO_XP = (AutoXPModule) getRegisteredModule("autoxp-module");
             BACK_TRACK = (BacktrackModule) getRegisteredModule("backtrack-module");
+            //BEDAURA = (BedAuraModule) getRegisteredModule("bedaura-module");
             BLOCK_LAG = (BlockLagModule) getRegisteredModule("blocklag-module");
             BOW_AIM = (BowAimModule) getRegisteredModule("bowaim-module");
             CRITICALS = (CriticalsModule) getRegisteredModule("criticals-module");
@@ -285,6 +288,7 @@ public class Modules {
             NO_JUMP_DELAY = (NoJumpDelayModule) getRegisteredModule("nojumpdelay-module");
             NO_SLOW = (NoSlowModule) getRegisteredModule("noslow-module");
             PARKOUR = (ParkourModule) getRegisteredModule("parkour-module");
+            REVERSESTEP = (ReverseStepModule) getRegisteredModule("reversestep-module");
             SPEED = (SpeedModule) getRegisteredModule("speed-module");
             SPRINT = (SprintModule) getRegisteredModule("sprint-module");
             STEP = (StepModule) getRegisteredModule("step-module");
