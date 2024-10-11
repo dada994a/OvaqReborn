@@ -24,7 +24,7 @@ public class ReverseStepModule extends ToggleModule {
     Config<Float> heightConfig = new NumberConfig<>("Height", "The maximum fall height", 1.0f, 3.0f, 10.0f);
 
     private boolean prevOnGround;
-    private final Timer groundTimer = new CacheTimer();
+    private final Timer fallTimer = new CacheTimer();
 
     public ReverseStepModule() {
         super("ReverseStep", "Falls down blocks faster", ModuleCategory.MOVEMENT);
@@ -38,10 +38,12 @@ public class ReverseStepModule extends ToggleModule {
     @EventListener
     public void onTick(TickEvent event) {
         if (event.getStage() == EventStage.PRE) {
+            prevOnGround = mc.player.isOnGround();
             if (mc.player.isRiding()
                     || mc.player.isHoldingOntoLadder()
                     || mc.player.isInLava()
                     || mc.player.isTouchingWater()
+                    || mc.player.isFallFlying()
                     || mc.player.input.jumping
                     || mc.player.input.sneaking) {
                 return;
@@ -50,13 +52,7 @@ public class ReverseStepModule extends ToggleModule {
                     || Modules.FLIGHT.isEnabled() || Modules.PACKET_FLY.isEnabled()) {
                 return;
             }
-
-            if (mc.player.isOnGround()) {
-                prevOnGround = true;
-                groundTimer.reset();
-            }
-
-            if (prevOnGround && groundTimer.passed(100) && isNearestBlockWithinHeight(heightConfig.getValue())) {
+            if (mc.player.isOnGround() && isNearestBlockWithinHeight(heightConfig.getValue())) {
                 Managers.MOVEMENT.setMotionY(-3.0);
             }
         }

@@ -132,7 +132,7 @@ public class AutoMineModule extends RotationModule {
                         if (!mc.world.isAir(cityBlockPos2) && !isBlockDelayGrim())
                         {
                             miningData2 = new AutoMiningData(cityBlockPos2,
-                                    strictDirectionConfig.getValue() ? Managers.INTERACT.getPlaceDirectionGrim(cityBlockPos2) : Direction.UP, 1.0f);
+                                    strictDirectionConfig.getValue() ? Managers.INTERACT.getPlaceDirectionGrim(cityBlockPos2) : Direction.UP, 0.8f);
                             startMining(miningData2);
                         }
                     }

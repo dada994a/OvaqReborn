@@ -68,7 +68,7 @@ public class ToggleModule extends Module implements Hideable {
         enabledConfig.setValue(true);
         onEnable();
         if (messageConfig.getValue()) {
-            ChatUtil.clientSendMessage("§s[+]§f %s", getName());
+            ChatUtil.clientSendMessage("§2[+]§f %s", getName());
         }
     }
 
