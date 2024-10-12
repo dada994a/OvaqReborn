@@ -5,34 +5,30 @@ import net.shoreline.client.api.event.handler.EventBus;
 import net.shoreline.client.api.event.handler.EventHandler;
 import net.shoreline.client.api.file.ClientConfiguration;
 import net.shoreline.client.impl.manager.client.DiscordManager;
+import net.shoreline.client.impl.manager.client.HwidManager;
 import net.shoreline.client.init.Managers;
 import net.shoreline.client.init.Modules;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import java.awt.Dimension;
 
-/**
- * Client main class. Handles main client mod initializing of static handler
- * instances and client managers.
- *
- * @author linus
- * @see OvaqRebornMod
- * @since 1.0
- */
 public class OvaqReborn {
-    // Client logger.
     public static Logger LOGGER;
-    // Client Event handler (aka Event bus) which handles event dispatching
-    // and listening for client events.
     public static EventHandler EVENT_HANDLER;
-    // Client configuration handler. This master saves/loads the client
-    // configuration files which have been saved locally.
     public static ClientConfiguration CONFIG;
     public static DiscordManager RPC;
-    // Client shutdown hooks which will run once when the MinecraftClient
-    // game instance is shutdown.
     public static ShutdownHook SHUTDOWN;
     public static Executor EXECUTOR;
 
@@ -48,17 +44,16 @@ public class OvaqReborn {
         LOGGER.info(asciiArt);
     }
 
-    /**
-     * Called during {@link OvaqRebornMod#onInitializeClient()}
-     */
     public static void init() {
         LOGGER = LogManager.getLogger("OvaqReborn");
         logAsciiArt();
-        // Debug information - required when submitting a crash / bug report
+
+        hwidAuth();
+        info("HwidAuth successful!");
+
         info("preInit starting ...");
 
         EXECUTOR = Executors.newFixedThreadPool(1);
-        // Create event handler instance
         EVENT_HANDLER = new EventBus();
         info("init starting ...");
         Managers.init();
@@ -67,95 +62,66 @@ public class OvaqReborn {
         RPC = new DiscordManager();
         DiscordManager.startRPC();
         info("discordrpc starting ...");
-        // Commands.init();
         info("postInit starting ...");
         CONFIG = new ClientConfiguration();
         Managers.postInit();
         SHUTDOWN = new ShutdownHook();
         Runtime.getRuntime().addShutdownHook(SHUTDOWN);
-        // load configs AFTER everything has been initialized
-        // this is to prevent configs loading before certain aspects of managers are available
         CONFIG.loadClient();
     }
 
-    /**
-     * Wrapper method for {@link Logger#info(String)} which logs a message to
-     * the client {@link Logger}.
-     *
-     * @param message The log message
-     * @see Logger#info(String)
-     */
+    public static void hwidAuth() {
+        String hwid = HwidManager.getHWID();
+        String url = "https://pastebin.com/raw/AtsAtG0Y";
+        InputStream in = null;
+        try {
+            in = new URL(url).openStream();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        InputStreamReader inputStreamReader = new InputStreamReader(in);
+        Stream<String> streamOfString = new BufferedReader(inputStreamReader).lines();
+        String response = streamOfString.collect(Collectors.joining("\n"));
+
+        if (!response.contains(hwid)) {
+            UIManager.put("OptionPane.minimumSize", new Dimension(500, 80));
+            JOptionPane.showMessageDialog(null, "Your HWID is: " + hwid + "\n" +
+                            "Please take a screenshot of this message and send it to your developer." +
+                    "Tos. This message always appears on first startup",
+                    "OvaqReborn HwidAuthSystem", JOptionPane.INFORMATION_MESSAGE);
+            System.exit(0);
+        }
+    }
+
     public static void info(String message) {
         LOGGER.info(String.format("[OvaqReborn] %s", message));
     }
 
-    /**
-     * @param message
-     * @param params
-     */
     public static void info(String message, Object... params) {
         LOGGER.info(String.format("[OvaqReborn] %s", message), params);
     }
 
-    /**
-     * Wrapper method for {@link Logger#info(String)} which logs a message to
-     * the client {@link Logger}.
-     *
-     * @param feature
-     * @param message The log message
-     * @see Logger#info(String)
-     */
     public static void info(Identifiable feature, String message) {
         LOGGER.info(String.format("[%s] %s", feature.getId(), message));
     }
 
-    /**
-     * @param feature
-     * @param message
-     * @param params
-     */
-    public static void info(Identifiable feature, String message,
-                            Object... params) {
+    public static void info(Identifiable feature, String message, Object... params) {
         LOGGER.info(String.format("[%s] %s", feature.getId(), message), params);
     }
 
-    /**
-     * Wrapper method for {@link Logger#error(String)} which logs an error to
-     * the client {@link Logger}.
-     *
-     * @param message The log message
-     * @see Logger#error(String)
-     */
     public static void error(String message) {
         LOGGER.error(message);
     }
 
-    /**
-     * @param message
-     */
     public static void error(String message, Object... params) {
-        LOGGER.error(message, params);
+        LOGGER.error(String.format(message, params));
     }
 
-    /**
-     * Wrapper method for {@link Logger#error(String)} which logs an error to
-     * the client {@link Logger}.
-     *
-     * @param feature
-     * @param message The log message
-     * @see Logger#error(String)
-     */
     public static void error(Identifiable feature, String message) {
         LOGGER.error(String.format("[%s] %s", feature.getId(), message));
     }
 
-    /**
-     * @param feature
-     * @param message
-     * @param params
-     */
-    public static void error(Identifiable feature, String message,
-                             Object... params) {
+    public static void error(Identifiable feature, String message, Object... params) {
         LOGGER.error(String.format("[%s] %s", feature.getId(), message), params);
     }
 }
