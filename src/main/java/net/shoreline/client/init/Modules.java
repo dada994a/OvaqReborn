@@ -78,8 +78,7 @@ public class Modules {
     //public static AntiAFKModule ANTI_AFK;
     public static ChatSuffixModule CHATSUFFIX;
     public static AutoAcceptModule AUTO_ACCEPT;
-    public static AutoEatModule AUTO_EAT;
-
+    public static AutoEzModule AUTO_EZ;
     public static AutoFishModule AUTO_FISH;
     public static AutoReconnectModule AUTO_RECONNECT;
     public static AutoRespawnModule AUTO_RESPAWN;
@@ -156,7 +155,7 @@ public class Modules {
     public static AvoidModule AVOID;
     public static BlockInteractModule BLOCK_INTERACT;
     public static FastDropModule FAST_DROP;
-    public static FastEatModule FAST_EAT;
+    //public static FastEatModule FAST_EAT;
     public static FastPlaceModule FAST_PLACE;
     public static MultitaskModule MULTITASK;
     public static NoGlitchBlocksModule NO_GLITCH_BLOCKS;
@@ -254,7 +253,7 @@ public class Modules {
             // ANTI_BOOK_BAN = (AntiBookBanModule) getRegisteredModule("antibookban-module");
             ANTI_SPAM = (AntiSpamModule) getRegisteredModule("antispam-module");
             AUTO_ACCEPT = (AutoAcceptModule) getRegisteredModule("autoaccept-module");
-            AUTO_EAT = (AutoEatModule) getRegisteredModule("autoeat-module");
+            AUTO_EZ = (AutoEzModule) getRegisteredModule("autoez-moudle");
             AUTO_FISH = (AutoFishModule) getRegisteredModule("autofish-module");
             AUTO_RECONNECT = (AutoReconnectModule) getRegisteredModule("autoreconnect-module");
             AUTO_RESPAWN = (AutoRespawnModule) getRegisteredModule("autorespawn-module");
@@ -329,7 +328,7 @@ public class Modules {
             AVOID = (AvoidModule) getRegisteredModule("avoid-module");
             BLOCK_INTERACT = (BlockInteractModule) getRegisteredModule("blockinteract-module");
             FAST_DROP = (FastDropModule) getRegisteredModule("fastdrop-module");
-            FAST_EAT = (FastEatModule) getRegisteredModule("fasteat-module");
+            //FAST_EAT = (FastEatModule) getRegisteredModule("fasteat-module");
             FAST_PLACE = (FastPlaceModule) getRegisteredModule("fastplace-module");
             MULTITASK = (MultitaskModule) getRegisteredModule("multitask-module");
             NO_GLITCH_BLOCKS = (NoGlitchBlocksModule) getRegisteredModule("noglitchblocks-module");

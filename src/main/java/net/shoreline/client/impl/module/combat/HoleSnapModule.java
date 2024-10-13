@@ -3,6 +3,7 @@ package net.shoreline.client.impl.module.combat;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.shoreline.client.api.config.Config;
 import net.shoreline.client.api.config.setting.BooleanConfig;
 import net.shoreline.client.api.config.setting.NumberConfig;
@@ -18,11 +19,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HoleSnapModule extends ToggleModule {
-    Config<Float> rangeConfig = new NumberConfig<>("SnapRange", "The range to snap to nearby holes", 1.0f, 4.0f, 5.0f);
-    Config<Boolean> proximityConfig = new BooleanConfig("ProximityCheck", "Snaps to holes when enemies are within a certain range", false);
-    Config<Float> proximityRangeConfig = new NumberConfig<>("ProximityRange", "The range from the target to the hole", 0.5f, 1.0f, 4.0f, () -> proximityConfig.getValue());
-    Config<Float> enemyRangeConfig = new NumberConfig<>("EnemyRange", "The maximum range of targets", 1.0f, 10.0f, 15.0f);
+    Config<Float> rangeConfig = new NumberConfig<>("SnapRange", "The range to snap to nearby holes", 1.0f, 1.0f, 5.0f);
+
     private int snapDelay;
+    private long lastSnapTime;
 
     public HoleSnapModule() {
         super("HoleSnap", "Snaps player to nearby holes", ModuleCategory.COMBAT);
@@ -46,24 +46,7 @@ public class HoleSnapModule extends ToggleModule {
                 continue;
             }
 
-            if (proximityConfig.getValue()) {
-                for (Entity entity : mc.world.getEntities()) {
-                    if (!(entity instanceof PlayerEntity player) || player == mc.player) {
-                        continue;
-                    }
-                    double dist = mc.player.distanceTo(player);
-                    if (dist > enemyRangeConfig.getValue()) {
-                        continue;
-                    }
-                    if (player.getY() > hole.getY() && hole.squaredDistanceTo(player) > proximityRangeConfig.getValue()) {
-                        continue;
-                    }
-                    holesToSnap.add(hole.getPos());
-                    break;
-                }
-            } else {
-                holesToSnap.add(hole.getPos());
-            }
+            holesToSnap.add(hole.getPos());
         }
 
         if (holesToSnap.isEmpty()) {
@@ -73,7 +56,9 @@ public class HoleSnapModule extends ToggleModule {
         BlockPos targetPos = holesToSnap.get(0);
         mc.player.setPos(targetPos.getX() + 0.5, targetPos.getY() + 0.1, targetPos.getZ() + 0.5);
         snapDelay = 1;
+        lastSnapTime = System.currentTimeMillis();
 
-        disable();
+            disable();
+        }
     }
-}
+

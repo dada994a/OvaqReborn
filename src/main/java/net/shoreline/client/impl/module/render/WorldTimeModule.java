@@ -20,7 +20,7 @@ public class WorldTimeModule extends ToggleModule {
     private long prevTime;
 
     public WorldTimeModule() {
-        super("WorldTime", "Changes the world time", ModuleCategory.WORLD);
+        super("WorldTime", "Changes the world time", ModuleCategory.RENDER);
     }
 
     @Override
