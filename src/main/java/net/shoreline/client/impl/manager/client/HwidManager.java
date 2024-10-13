@@ -10,17 +10,14 @@ public class HwidManager {
      */
     public static String getHWID() {
         try {
-            // Generate hardware ID based on system information
             String toEncrypt = System.getenv("COMPUTERNAME") +
                     System.getProperty("user.name") +
                     System.getenv("PROCESSOR_IDENTIFIER") +
                     System.getenv("PROCESSOR_LEVEL");
 
-            // Create HWID using MD5 algorithm
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(toEncrypt.getBytes());
 
-            // Convert byte array to hexadecimal format and return it
             StringBuilder hexString = new StringBuilder();
             byte[] byteData = md.digest();
             for (byte aByteData : byteData) {

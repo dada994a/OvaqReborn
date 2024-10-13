@@ -19,16 +19,14 @@ import net.shoreline.client.mixin.accessor.AccessorKeyBinding;
  * @since 1.0
  */
 public class AutoEatModule extends ToggleModule {
-    //
-    Config<Float> hungerConfig = new NumberConfig<>("Hunger", "The minimum hunger level before eating", 1.0f, 19.0f, 20.0f);
-    //
+    Config<Float> healthConfig = new NumberConfig<>("Health", "The minimum health level before eating", 1.0f, 19.0f, 20.0f);
     private int prevSlot;
 
     /**
      *
      */
     public AutoEatModule() {
-        super("AutoEat", "Automatically eats when losing hunger",
+        super("AutoEat", "Automatically eats when losing health",
                 ModuleCategory.MISC);
     }
 
@@ -52,9 +50,8 @@ public class AutoEatModule extends ToggleModule {
             KeyBinding.setKeyPressed(((AccessorKeyBinding) mc.options.useKey).getBoundKey(), false);
             return;
         }
-        //
-        HungerManager hungerManager = mc.player.getHungerManager();
-        if (hungerManager.getFoodLevel() <= hungerConfig.getValue()) {
+
+        if (mc.player.getHealth() <= healthConfig.getValue()) {
             int slot = getFoodSlot();
             if (slot == -1) {
                 return;

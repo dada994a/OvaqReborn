@@ -20,8 +20,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import javax.swing.JOptionPane;
-import javax.swing.UIManager;
+import javax.swing.*;
 import java.awt.Dimension;
 
 public class OvaqReborn {
@@ -58,7 +57,6 @@ public class OvaqReborn {
         info("init starting ...");
         Managers.init();
         Modules.init();
-
         RPC = new DiscordManager();
         DiscordManager.startRPC();
         info("discordrpc starting ...");
@@ -69,7 +67,7 @@ public class OvaqReborn {
         Runtime.getRuntime().addShutdownHook(SHUTDOWN);
         CONFIG.loadClient();
     }
-
+    // TODO: OvaqHwidAuthSystem
     public static void hwidAuth() {
         String hwid = HwidManager.getHWID();
         String url = "https://pastebin.com/raw/AtsAtG0Y";
@@ -85,13 +83,20 @@ public class OvaqReborn {
 
         if (!response.contains(hwid)) {
             UIManager.put("OptionPane.minimumSize", new Dimension(500, 80));
-            JOptionPane.showMessageDialog(null, "Your HWID is: " + hwid + "\n" +
-                            "Please take a screenshot of this message and send it to your developer." +
-                    "Tos. This message always appears on first startup",
+
+            JFrame frame = new JFrame();
+            frame.setAlwaysOnTop(true);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+            JOptionPane.showMessageDialog(frame, "Your HWID is: " + hwid + "\n" +
+                            "Please take a screenshot of this message and send it to your developer." + "\n" +
+                            "Tos. This message always appears on first startup",
                     "OvaqReborn HwidAuthSystem", JOptionPane.INFORMATION_MESSAGE);
+
             System.exit(0);
         }
     }
+
 
     public static void info(String message) {
         LOGGER.info(String.format("[OvaqReborn] %s", message));

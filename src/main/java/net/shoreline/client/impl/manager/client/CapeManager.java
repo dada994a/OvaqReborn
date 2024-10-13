@@ -76,6 +76,14 @@ public class CapeManager implements Globals {
         return img;
     }
 
+    //public Identifier getCapeTexture() {
+    //   return currentCapeTexture;
+    //}
+
+    //public void setCurrentCapeTexture(Identifier texture) {
+    //    this.currentCapeTexture = texture;
+    //}
+
     public interface CapeTexture {
         void callback(Identifier id);
     }

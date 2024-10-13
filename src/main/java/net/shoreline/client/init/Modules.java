@@ -65,6 +65,7 @@ public class Modules {
     public static FakeLatencyModule FAKE_LATENCY;
     public static FastLatencyModule FAST_LATENCY;
     public static FastProjectileModule FAST_PROJECTILE;
+    public static HitboxDesyncModule HITBOXDESYNC;
     public static PacketCancelerModule PACKET_CANCELER;
     public static PacketFlyModule PACKET_FLY;
     public static PhaseModule PHASE;
@@ -78,7 +79,6 @@ public class Modules {
     public static ChatSuffixModule CHATSUFFIX;
     public static AutoAcceptModule AUTO_ACCEPT;
     public static AutoEatModule AUTO_EAT;
-
 
     public static AutoFishModule AUTO_FISH;
     public static AutoReconnectModule AUTO_RECONNECT;
@@ -148,6 +148,7 @@ public class Modules {
     public static ViewClipModule VIEW_CLIP;
     public static ViewModelModule VIEW_MODEL;
     //public static WaypointsModule WAYPOINTS;
+    public static WorldTimeModule WORLDTIME;
     // World
     public static AntiInteractModule ANTI_INTERACT;
     public static AutoMineModule AUTO_MINE;
@@ -242,6 +243,7 @@ public class Modules {
             FAKE_LATENCY = (FakeLatencyModule) getRegisteredModule("fakelatency-module");
             FAST_LATENCY = (FastLatencyModule) getRegisteredModule("fastlatency-module");
             FAST_PROJECTILE = (FastProjectileModule) getRegisteredModule("fastprojectile-module");
+            HITBOXDESYNC = (HitboxDesyncModule) getRegisteredModule("hitboxdesync-module");
             PACKET_CANCELER = (PacketCancelerModule) getRegisteredModule("packetcanceler-module");
             PACKET_FLY = (PacketFlyModule) getRegisteredModule("packetfly-module");
             PHASE = (PhaseModule) getRegisteredModule("phase-module");
@@ -318,6 +320,7 @@ public class Modules {
             VIEW_CLIP = (ViewClipModule) getRegisteredModule("viewclip-module");
             VIEW_MODEL = (ViewModelModule) getRegisteredModule("viewmodel-module");
             //WAYPOINTS = (WaypointsModule) getRegisteredModule("waypoints-module");
+            WORLDTIME = (WorldTimeModule) getRegisteredModule("worldtime-module");
             ANTI_INTERACT = (AntiInteractModule) getRegisteredModule("antiinteract-module");
             AUTO_MINE = (AutoMineModule) getRegisteredModule("automine-module");
             CHATSUFFIX = (ChatSuffixModule) getRegisteredModule("chatsuffix-module");

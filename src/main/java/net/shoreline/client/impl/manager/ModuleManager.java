@@ -70,6 +70,7 @@ public class ModuleManager {
                 new FakeLatencyModule(),
                 new FastLatencyModule(),
                 new FastProjectileModule(),
+                new HitboxDesyncModule(),
                 new PacketCancelerModule(),
                 new PacketFlyModule(),
                 new PhaseModule(),
@@ -152,6 +153,7 @@ public class ModuleManager {
                 new ViewClipModule(),
                 new ViewModelModule(),
                 //new WaypointsModule(),
+                new WorldTimeModule(),
                 // World
                 new AntiInteractModule(),
                 new AutoMineModule(),

@@ -54,7 +54,7 @@ public class CategoryFrame extends Frame {
                          float width, float height) {
         super(x, y, width, height);
         this.category = category;
-        // this.categoryIcon = new Identifier("shoreline", "icon/" + category.name().toLowerCase() + ".png");
+         //this.categoryIcon = new Identifier("shoreline", "icon/" + category.name().toLowerCase() + ".png");
         this.name = EnumFormatter.formatEnum(category);
         for (Module module : Managers.MODULE.getModules()) {
             if (module.getCategory() == category) {

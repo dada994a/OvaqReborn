@@ -23,7 +23,6 @@ public class ChatSuffixModule extends ToggleModule {
         if (originalMessage.contains("/") || originalMessage.contains(".") || originalMessage.contains("#")) {
             return;
         }
-// こんな感じ
         String newMessage = originalMessage + SUFFIX;
 
         ChatUtil.serverSendMessage(newMessage);
