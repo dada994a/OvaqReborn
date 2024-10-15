@@ -51,6 +51,7 @@ public class Modules {
     public static HoleSnapModule HOLESNAP;
     public static NoHitDelayModule NO_HIT_DELAY;
     public static ReplenishModule REPLENISH;
+    public static PistonPushModule PISTONPUSH;
     public static SelfBowModule SELF_BOW;
     public static SelfTrapModule SELF_TRAP;
     public static SurroundModule SURROUND;
@@ -231,6 +232,7 @@ public class Modules {
             HOLESNAP = (HoleSnapModule) getRegisteredModule("holesnap-module");
             NO_HIT_DELAY = (NoHitDelayModule) getRegisteredModule("nohitdelay-module");
             REPLENISH = (ReplenishModule) getRegisteredModule("replenish-module");
+            PISTONPUSH = (PistonPushModule) getRegisteredModule("pistonpush-module");
             SELF_BOW = (SelfBowModule) getRegisteredModule("selfbow-module");
             SELF_TRAP = (SelfTrapModule) getRegisteredModule("selftrap-module");
             SURROUND = (SurroundModule) getRegisteredModule("surround-module");
@@ -245,6 +247,7 @@ public class Modules {
             FAST_LATENCY = (FastLatencyModule) getRegisteredModule("fastlatency-module");
             FAST_PROJECTILE = (FastProjectileModule) getRegisteredModule("fastprojectile-module");
             HITBOXDESYNC = (HitboxDesyncModule) getRegisteredModule("hitboxdesync-module");
+            //HEARTFULEXPLOIT = (HeartfulExploitModule) getRegisteredModule("heartfulexploit-module");
             PACKET_CANCELER = (PacketCancelerModule) getRegisteredModule("packetcanceler-module");
             PACKET_FLY = (PacketFlyModule) getRegisteredModule("packetfly-module");
             PHASE = (PhaseModule) getRegisteredModule("phase-module");
