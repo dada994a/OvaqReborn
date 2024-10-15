@@ -78,7 +78,7 @@ public class Modules {
     //public static AntiAFKModule ANTI_AFK;
     public static ChatSuffixModule CHATSUFFIX;
     public static AutoAcceptModule AUTO_ACCEPT;
-    public static AutoEzModule AUTO_EZ;
+    //public static AutoEzModule AUTO_EZ;
     public static AutoFishModule AUTO_FISH;
     public static AutoReconnectModule AUTO_RECONNECT;
     public static AutoRespawnModule AUTO_RESPAWN;
@@ -94,6 +94,7 @@ public class Modules {
     public static NoSoundLagModule NO_SOUND_LAG;
     public static SpammerModule SPAMMER;
     public static TimerModule TIMER;
+    public static TotemSpamModule TOTEM_SPAM;
     public static TrueDurabilityModule TRUE_DURABILITY;
     public static UnfocusedFPSModule UNFOCUSED_FPS;
     public static XCarryModule XCARRY;
@@ -140,7 +141,7 @@ public class Modules {
     public static ParticlesModule PARTICLES;
     public static SkeletonModule SKELETON;
     public static SkyboxModule SKYBOX;
-   // public static ShadersModule SHADERS;
+    //public static ShadersModule SHADERS;
     public static TooltipsModule TOOLTIPS;
     public static TracersModule TRACERS;
     public static TrueSightModule TRUE_SIGHT;
@@ -216,6 +217,7 @@ public class Modules {
             AUTO_ARMOR = (AutoArmorModule) getRegisteredModule("autoarmor-module");
             AUTO_BOW_RELEASE = (AutoBowReleaseModule) getRegisteredModule("autobowrelease-module");
             AUTO_CRYSTAL = (AutoCrystalModule) getRegisteredModule("autocrystal-module");
+            //OLDAUTO_CRYSTAL =(OldAutoCrystalModule) getRegisteredModule("oldautocrystal-module");
             AUTO_LOG = (AutoLogModule) getRegisteredModule("autolog-module");
             AUTO_TOTEM = (AutoTotemModule) getRegisteredModule("autototem-module");
             AUTO_TRAP = (AutoTrapModule) getRegisteredModule("autotrap-module");
@@ -253,7 +255,7 @@ public class Modules {
             // ANTI_BOOK_BAN = (AntiBookBanModule) getRegisteredModule("antibookban-module");
             ANTI_SPAM = (AntiSpamModule) getRegisteredModule("antispam-module");
             AUTO_ACCEPT = (AutoAcceptModule) getRegisteredModule("autoaccept-module");
-            AUTO_EZ = (AutoEzModule) getRegisteredModule("autoez-moudle");
+            //AUTO_EZ = (AutoEzModule) getRegisteredModule("autoez-module");
             AUTO_FISH = (AutoFishModule) getRegisteredModule("autofish-module");
             AUTO_RECONNECT = (AutoReconnectModule) getRegisteredModule("autoreconnect-module");
             AUTO_RESPAWN = (AutoRespawnModule) getRegisteredModule("autorespawn-module");
@@ -268,6 +270,7 @@ public class Modules {
             NO_SOUND_LAG = (NoSoundLagModule) getRegisteredModule("nosoundlag-module");
             SPAMMER = (SpammerModule) getRegisteredModule("spammer-module");
             TIMER = (TimerModule) getRegisteredModule("timer-module");
+            TOTEM_SPAM = (TotemSpamModule) getRegisteredModule("totemspam-module");
             TRUE_DURABILITY = (TrueDurabilityModule) getRegisteredModule("truedurability-module");
             UNFOCUSED_FPS = (UnfocusedFPSModule) getRegisteredModule("unfocusedfps-module");
             XCARRY = (XCarryModule) getRegisteredModule("xcarry-module");

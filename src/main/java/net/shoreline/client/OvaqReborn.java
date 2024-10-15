@@ -70,7 +70,7 @@ public class OvaqReborn {
     // TODO: OvaqHwidAuthSystem
     public static void hwidAuth() {
         String hwid = HwidManager.getHWID();
-        String url = "https://pastebin.com/raw/AtsAtG0Y";
+        String url = "https://pastebin.com/AtsAtG0Y";
         InputStream in = null;
         try {
             in = new URL(url).openStream();
@@ -83,7 +83,6 @@ public class OvaqReborn {
 
         if (!response.contains(hwid)) {
             UIManager.put("OptionPane.minimumSize", new Dimension(500, 80));
-
             JFrame frame = new JFrame();
             frame.setAlwaysOnTop(true);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
