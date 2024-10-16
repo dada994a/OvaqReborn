@@ -63,6 +63,7 @@ public class ModuleManager {
                 new TriggerModule(),
                 // Exploit
                 new AntiHungerModule(),
+                new AntiResourcePackModule(),
                 new ChorusControlModule(),
                 new ClientSpoofModule(),
                 new CrasherModule(),

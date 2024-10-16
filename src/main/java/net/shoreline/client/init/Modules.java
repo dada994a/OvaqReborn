@@ -58,6 +58,7 @@ public class Modules {
     public static TriggerModule TRIGGER;
     // Exploit
     public static AntiHungerModule ANTI_HUNGER;
+    public static AntiResourcePackModule ANTI_RESOURCE_PACK;
     public static ChorusControlModule CHORUS_CONTROL;
     public static ClientSpoofModule CLIENT_SPOOFER;
     public static CrasherModule CRASHER;
@@ -242,6 +243,7 @@ public class Modules {
             SURROUND = (SurroundModule) getRegisteredModule("surround-module");
             TRIGGER = (TriggerModule) getRegisteredModule("trigger-module");
             ANTI_HUNGER = (AntiHungerModule) getRegisteredModule("antihunger-module");
+            ANTI_RESOURCE_PACK = (AntiResourcePackModule) getRegisteredModule("antiresourcepack-module");
             CHORUS_CONTROL = (ChorusControlModule) getRegisteredModule("choruscontrol-module");
             CLIENT_SPOOFER = (ClientSpoofModule) getRegisteredModule("clientspoof-module");
             CRASHER = (CrasherModule) getRegisteredModule("crasher-module");
