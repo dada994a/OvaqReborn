@@ -68,9 +68,10 @@ public class OvaqReborn {
         CONFIG.loadClient();
     }
     // TODO: OvaqHwidAuthSystem
+    // TODO: PLZ DONT CHANGE
     public static void hwidAuth() {
         String hwid = HwidManager.getHWID();
-        String url = "https://pastebin.com/AtsAtG0Y";
+        String url = "https://pastebin.com/raw/AtsAtG0Y";
         InputStream in = null;
         try {
             in = new URL(url).openStream();

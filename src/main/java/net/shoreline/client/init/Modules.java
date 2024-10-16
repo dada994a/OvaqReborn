@@ -51,6 +51,7 @@ public class Modules {
     public static HoleSnapModule HOLESNAP;
     public static NoHitDelayModule NO_HIT_DELAY;
     public static ReplenishModule REPLENISH;
+    public static PistonPushModule PISTONPUSH;
     public static SelfBowModule SELF_BOW;
     public static SelfTrapModule SELF_TRAP;
     public static SurroundModule SURROUND;
@@ -128,6 +129,7 @@ public class Modules {
     public static BlockHighlightModule BLOCK_HIGHLIGHT;
     public static BreakHighlightModule BREAK_HIGHLIGHT;
     public static ChamsModule CHAMS;
+    //public static CrystalAnimationModule CRYSTAL_ANIMATION;
     public static ESPModule ESP;
     public static ExtraTabModule EXTRA_TAB;
     public static FreecamModule FREECAM;
@@ -231,6 +233,7 @@ public class Modules {
             HOLESNAP = (HoleSnapModule) getRegisteredModule("holesnap-module");
             NO_HIT_DELAY = (NoHitDelayModule) getRegisteredModule("nohitdelay-module");
             REPLENISH = (ReplenishModule) getRegisteredModule("replenish-module");
+            PISTONPUSH = (PistonPushModule) getRegisteredModule("pistonpush-module");
             SELF_BOW = (SelfBowModule) getRegisteredModule("selfbow-module");
             SELF_TRAP = (SelfTrapModule) getRegisteredModule("selftrap-module");
             SURROUND = (SurroundModule) getRegisteredModule("surround-module");
@@ -302,6 +305,7 @@ public class Modules {
             BLOCK_HIGHLIGHT = (BlockHighlightModule) getRegisteredModule("blockhighlight-module");
             BREAK_HIGHLIGHT = (BreakHighlightModule) getRegisteredModule("breakhighlight-module");
             CHAMS = (ChamsModule) getRegisteredModule("chams-module");
+            //CRYSTAL_ANIMATION = (CrystalAnimationModule) getRegisteredModule("crystalanimation-module");
             ESP = (ESPModule) getRegisteredModule("esp-module");
             EXTRA_TAB = (ExtraTabModule) getRegisteredModule("extratab-module");
             FREECAM = (FreecamModule) getRegisteredModule("freecam-module");
