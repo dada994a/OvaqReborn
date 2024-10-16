@@ -16,9 +16,7 @@ import net.shoreline.client.api.module.ModuleCategory;
 import net.shoreline.client.api.module.ToggleModule;
 import net.shoreline.client.impl.event.TickEvent;
 
-/**
- * AirPlaceModule allows players to place blocks where their crosshair is pointing, using a fixed range.
- */
+
 public class AirPlaceModule extends ToggleModule {
 
     private final Config<Double> rangeConfig = new NumberConfig<>("Range", "Custom range.", 1.0, 1.0, 6.0);
