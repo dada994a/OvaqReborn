@@ -71,6 +71,7 @@ public class Modules {
     public static PacketFlyModule PACKET_FLY;
     public static PhaseModule PHASE;
     public static PearlPhaseModule PEARLPHASE;
+    //public static TrapPhaseModule TRAPPHASE;
     public static PortalGodModeModule PORTAL_GOD_MODE;
     public static ReachModule REACH;
     // Misc
@@ -153,6 +154,7 @@ public class Modules {
     //public static WaypointsModule WAYPOINTS;
     public static WorldTimeModule WORLDTIME;
     // World
+    //public static AirPlaceModule AIR_PLACE;
     public static AntiInteractModule ANTI_INTERACT;
     public static AutoMineModule AUTO_MINE;
     public static AutoToolModule AUTO_TOOL;
@@ -254,6 +256,7 @@ public class Modules {
             PACKET_FLY = (PacketFlyModule) getRegisteredModule("packetfly-module");
             PHASE = (PhaseModule) getRegisteredModule("phase-module");
             PEARLPHASE = (PearlPhaseModule)  getRegisteredModule("pearlphase-module");
+            //TRAPPHASE = (TrapPhaseModule) getRegisteredModule("trapphase-module");
             PORTAL_GOD_MODE = (PortalGodModeModule) getRegisteredModule("portalgodmode-module");
             REACH = (ReachModule) getRegisteredModule("reach-module");
             ANTI_AIM = (AntiAimModule) getRegisteredModule("antiaim-module");
@@ -330,6 +333,7 @@ public class Modules {
             VIEW_MODEL = (ViewModelModule) getRegisteredModule("viewmodel-module");
             //WAYPOINTS = (WaypointsModule) getRegisteredModule("waypoints-module");
             WORLDTIME = (WorldTimeModule) getRegisteredModule("worldtime-module");
+            //AIR_PLACE = (AirPlaceModule) getRegisteredModule("airplace-module");
             ANTI_INTERACT = (AntiInteractModule) getRegisteredModule("antiinteract-module");
             AUTO_MINE = (AutoMineModule) getRegisteredModule("automine-module");
             CHATSUFFIX = (ChatSuffixModule) getRegisteredModule("chatsuffix-module");

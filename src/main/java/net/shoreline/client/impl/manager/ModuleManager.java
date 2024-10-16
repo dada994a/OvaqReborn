@@ -77,6 +77,7 @@ public class ModuleManager {
                 new PacketFlyModule(),
                 new PhaseModule(),
                 new PearlPhaseModule(),
+                //new TrapPhaseModule(),
                 new PortalGodModeModule(),
                 new ReachModule(),
                 // Misc
@@ -160,6 +161,7 @@ public class ModuleManager {
                 //new WaypointsModule(),
                 new WorldTimeModule(),
                 // World
+               // new AirPlaceModule(),
                 new AntiInteractModule(),
                 new AutoMineModule(),
                 new AutoToolModule(),
