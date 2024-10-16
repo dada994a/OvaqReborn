@@ -68,7 +68,6 @@ public class OvaqReborn {
         CONFIG.loadClient();
     }
     // TODO: OvaqHwidAuthSystem
-    // TODO: PLZ DONT CHANGE
     public static void hwidAuth() {
         boolean isRom = false;
         String hwid = HwidManager.getHWID();

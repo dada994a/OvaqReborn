@@ -142,6 +142,7 @@ public class ModuleManager {
                 new FreecamModule(),
                 new FullbrightModule(),
                 new HoleESPModule(),
+                new KillEffectModule(),
                 new NameProtectModule(),
                 new NametagsModule(),
                 new NoRenderModule(),

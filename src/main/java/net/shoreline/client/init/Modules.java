@@ -136,6 +136,7 @@ public class Modules {
     public static FullbrightModule FULLBRIGHT;
     public static NameProtectModule NAME_PROTECT;
     public static HoleESPModule HOLE_ESP;
+    public static KillEffectModule KILL_EFFECT;
     public static NametagsModule NAMETAGS;
     public static NoRenderModule NO_RENDER;
     public static NoRotateModule NO_ROTATE;
@@ -312,6 +313,7 @@ public class Modules {
             FREECAM = (FreecamModule) getRegisteredModule("freecam-module");
             FULLBRIGHT = (FullbrightModule) getRegisteredModule("fullbright-module");
             HOLE_ESP = (HoleESPModule) getRegisteredModule("holeesp-module");
+            KILL_EFFECT = (KillEffectModule) getRegisteredModule("killeffect-module");
             NAME_PROTECT = (NameProtectModule) getRegisteredModule("nameprotect-module");
             NAMETAGS = (NametagsModule) getRegisteredModule("nametags-module");
             NO_RENDER = (NoRenderModule) getRegisteredModule("norender-module");
