@@ -72,6 +72,7 @@ public class ModuleManager {
                 new FastLatencyModule(),
                 new FastProjectileModule(),
                 new HitboxDesyncModule(),
+                //new HeartfulExploitModule(),
                 new PacketCancelerModule(),
                 new PacketFlyModule(),
                 new PhaseModule(),

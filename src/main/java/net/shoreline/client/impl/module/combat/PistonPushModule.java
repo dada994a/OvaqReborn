@@ -2,7 +2,7 @@ package net.shoreline.client.impl.module.combat;
 
 import com.google.common.collect.Lists;
 import net.minecraft.block.*;
-        import net.minecraft.entity.Entity;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;

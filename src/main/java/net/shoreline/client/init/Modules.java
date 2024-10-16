@@ -248,6 +248,7 @@ public class Modules {
             FAST_LATENCY = (FastLatencyModule) getRegisteredModule("fastlatency-module");
             FAST_PROJECTILE = (FastProjectileModule) getRegisteredModule("fastprojectile-module");
             HITBOXDESYNC = (HitboxDesyncModule) getRegisteredModule("hitboxdesync-module");
+            //HEARTFULEXPLOIT = (HeartfulExploitModule) getRegisteredModule("heartfulexploit-module");
             PACKET_CANCELER = (PacketCancelerModule) getRegisteredModule("packetcanceler-module");
             PACKET_FLY = (PacketFlyModule) getRegisteredModule("packetfly-module");
             PHASE = (PhaseModule) getRegisteredModule("phase-module");
