@@ -17,8 +17,8 @@ import net.shoreline.client.util.chat.ChatUtil;
  */
 public class IRCModule extends ToggleModule {
     SocketChat chat = new SocketChat("wss://hack.chat/chat-ws", "OvaqRebornChat", mc.getSession().getUsername(), "");
-
-    Config<Boolean> discordConfig = new BooleanConfig("Discord", "make u lag when u send message. we will fix this later", false); //laggy maybe
+//TODO:非同期処理にして修正 by hypinohoaizin
+    Config<Boolean> discordConfig = new BooleanConfig("Discord", "make u lag when u send message. we will fix this later", false); // laggy maybe
 
     public IRCModule() {
         super("IRC", "global chat. prefix: @", ModuleCategory.CLIENT);
@@ -27,8 +27,12 @@ public class IRCModule extends ToggleModule {
     @Override
     public void onEnable() {
         ChatUtil.clientSendMessage("Connecting To IRC Server...");
-        chat.connect();
-        ChatUtil.clientSendMessage("Connected!");
+
+        new Thread(() -> {
+            chat.connect();
+            ChatUtil.clientSendMessage("Connected!");
+        }).start();
+
         super.onEnable();
     }
 
@@ -36,7 +40,10 @@ public class IRCModule extends ToggleModule {
     public void onDisable() {
         super.onDisable();
         ChatUtil.clientSendMessage("Disconnected!");
-        chat.disconnect();
+
+        new Thread(() -> {
+            chat.disconnect();
+        }).start();
     }
 
     @EventListener
@@ -47,9 +54,12 @@ public class IRCModule extends ToggleModule {
         if (message.startsWith(prefix)) {
             String trimmedMessage = message.substring(prefix.length());
             if (trimmedMessage.length() < 150) {
-                if (discordConfig.getValue())
-                    SocketWebhookManager.send(mc.getSession().getUsername(), trimmedMessage);
-                chat.send(trimmedMessage);
+                new Thread(() -> {
+                    if (discordConfig.getValue()) {
+                        SocketWebhookManager.send(mc.getSession().getUsername(), trimmedMessage);
+                    }
+                    chat.send(trimmedMessage);
+                }).start();
             } else {
                 ChatUtil.error("You cannot send more than 150 characters.");
             }
@@ -59,9 +69,11 @@ public class IRCModule extends ToggleModule {
 
     @EventListener
     public void onSocketReceiveMessage(SocketReceivedPacketEvent event) {
-        String text = event.getText().length() < 150 ? event.getText() : Formatting.DARK_RED + "(long message)";
-        String nick = event.getNick();
+        new Thread(() -> {
+            String text = event.getText().length() < 150 ? event.getText() : Formatting.DARK_RED + "(long message)";
+            String nick = event.getNick();
 
-        ChatUtil.clientSendMessageRaw(Formatting.GRAY + "[" + Formatting.AQUA + "OvaqReborn" + Formatting.GRAY + "] " + Formatting.WHITE + Formatting.BOLD + nick + ": " + text + Formatting.RESET);
+            ChatUtil.clientSendMessageRaw(Formatting.GRAY + "[" + Formatting.AQUA + "OvaqReborn" + Formatting.GRAY + "] " + Formatting.WHITE + Formatting.BOLD + nick + ": " + text + Formatting.RESET);
+        }).start();
     }
 }
