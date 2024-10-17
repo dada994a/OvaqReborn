@@ -39,6 +39,8 @@ public class Modules {
     public static AutoArmorModule AUTO_ARMOR;
     public static AutoBowReleaseModule AUTO_BOW_RELEASE;
     public static AutoCrystalModule AUTO_CRYSTAL;
+    public static AutoAnvilModule AUTO_ANVIL;
+    public static AntiAnvilModule ANTI_ANVIL;
     public static BacktrackModule BACK_TRACK;
    // public static BedAuraModule BEDAURA;
     public static AutoLogModule AUTO_LOG;
@@ -225,6 +227,8 @@ public class Modules {
             AUTO_ARMOR = (AutoArmorModule) getRegisteredModule("autoarmor-module");
             AUTO_BOW_RELEASE = (AutoBowReleaseModule) getRegisteredModule("autobowrelease-module");
             AUTO_CRYSTAL = (AutoCrystalModule) getRegisteredModule("autocrystal-module");
+            AUTO_ANVIL = (AutoAnvilModule) getRegisteredModule("autoanvil-module");
+            ANTI_ANVIL = (AntiAnvilModule) getRegisteredModule("antianvil-module");
             //OLDAUTO_CRYSTAL =(OldAutoCrystalModule) getRegisteredModule("oldautocrystal-module");
             AUTO_LOG = (AutoLogModule) getRegisteredModule("autolog-module");
             AUTO_TOTEM = (AutoTotemModule) getRegisteredModule("autototem-module");
