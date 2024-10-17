@@ -39,6 +39,8 @@ public class Modules {
     public static AutoArmorModule AUTO_ARMOR;
     public static AutoBowReleaseModule AUTO_BOW_RELEASE;
     public static AutoCrystalModule AUTO_CRYSTAL;
+    public static AutoAnvilModule AUTO_ANVIL;
+    public static AntiAnvilModule ANTI_ANVIL;
     public static BacktrackModule BACK_TRACK;
    // public static BedAuraModule BEDAURA;
     public static AutoLogModule AUTO_LOG;
@@ -98,7 +100,6 @@ public class Modules {
     public static NoSoundLagModule NO_SOUND_LAG;
     public static SpammerModule SPAMMER;
     public static TimerModule TIMER;
-    public static TotemSpamModule TOTEM_SPAM;
     public static TrueDurabilityModule TRUE_DURABILITY;
     public static UnfocusedFPSModule UNFOCUSED_FPS;
     public static XCarryModule XCARRY;
@@ -225,6 +226,8 @@ public class Modules {
             AUTO_ARMOR = (AutoArmorModule) getRegisteredModule("autoarmor-module");
             AUTO_BOW_RELEASE = (AutoBowReleaseModule) getRegisteredModule("autobowrelease-module");
             AUTO_CRYSTAL = (AutoCrystalModule) getRegisteredModule("autocrystal-module");
+            AUTO_ANVIL = (AutoAnvilModule) getRegisteredModule("autoanvil-module");
+            ANTI_ANVIL = (AntiAnvilModule) getRegisteredModule("antianvil-module");
             //OLDAUTO_CRYSTAL =(OldAutoCrystalModule) getRegisteredModule("oldautocrystal-module");
             AUTO_LOG = (AutoLogModule) getRegisteredModule("autolog-module");
             AUTO_TOTEM = (AutoTotemModule) getRegisteredModule("autototem-module");
@@ -282,7 +285,6 @@ public class Modules {
             NO_SOUND_LAG = (NoSoundLagModule) getRegisteredModule("nosoundlag-module");
             SPAMMER = (SpammerModule) getRegisteredModule("spammer-module");
             TIMER = (TimerModule) getRegisteredModule("timer-module");
-            TOTEM_SPAM = (TotemSpamModule) getRegisteredModule("totemspam-module");
             TRUE_DURABILITY = (TrueDurabilityModule) getRegisteredModule("truedurability-module");
             UNFOCUSED_FPS = (UnfocusedFPSModule) getRegisteredModule("unfocusedfps-module");
             XCARRY = (XCarryModule) getRegisteredModule("xcarry-module");
