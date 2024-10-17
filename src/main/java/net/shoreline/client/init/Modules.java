@@ -32,6 +32,7 @@ public class Modules {
     public static RotationsModule ROTATIONS;
     public static BaritoneModule BARITONE;
     public static RPCModule RPC;
+    public static IRCModule IRC;
     public static CapesModule CAPES;
     // Combat
     public static AuraModule AURA;
@@ -212,6 +213,7 @@ public class Modules {
             COLORS = (ColorsModule) getRegisteredModule("colors-module");
             HUD = (HUDModule) getRegisteredModule("hud-module");
             RPC = (RPCModule) getRegisteredModule("rpc-module");
+            IRC = (IRCModule) getRegisteredModule("irc-module");
             //FONT =(FontModule) getRegisteredModule("font-module");
             ROTATIONS = (RotationsModule) getRegisteredModule("rotations-module");
             SERVER = (ServerModule) getRegisteredModule("server-module");

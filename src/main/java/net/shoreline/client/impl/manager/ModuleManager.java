@@ -36,6 +36,7 @@ public class ModuleManager {
                 new ColorsModule(),
                 new HUDModule(),
                 new RPCModule(),
+                new IRCModule(),
                 //new FontModule(),
                 new RotationsModule(),
                 // Combat

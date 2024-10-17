@@ -65,7 +65,8 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modImplementation "cabaletta:baritone-api:${baritone_api_version}"
 
-
+    implementation 'com.eclipsesource.minimal-json:minimal-json:0.9.5'
+    implementation 'com.neovisionaries:nv-websocket-client:2.3'
 }
 
 
