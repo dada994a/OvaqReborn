@@ -20,7 +20,7 @@ public class ChatSuffixModule extends ToggleModule {
 
         String originalMessage = event.getMessage();
 
-        if (originalMessage.contains("/") || originalMessage.contains(".") || originalMessage.contains("#")) {
+        if (originalMessage.contains("/") || originalMessage.contains(".") || originalMessage.contains("#") || originalMessage.contains("@")) {
             return;
         }
         String newMessage = originalMessage + SUFFIX;
