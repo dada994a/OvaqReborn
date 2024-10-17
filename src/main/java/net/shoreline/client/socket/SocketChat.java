@@ -1,10 +1,11 @@
 package net.shoreline.client.socket;
 
-import com.eclipsesource.json.Json;
-import com.neovisionaries.ws.client.*;
+import net.shoreline.client.socket.json.Json;
 import net.shoreline.client.OvaqReborn;
 import net.shoreline.client.socket.exception.SocketNickErrorException;
 import net.shoreline.client.impl.event.network.SocketReceivedPacketEvent;
+import net.shoreline.client.socket.json.JsonObject;
+import net.shoreline.client.socket.websocket.*;
 
 import java.io.IOException;
 import java.util.Timer;
@@ -141,7 +142,7 @@ public class SocketChat extends WebSocketAdapter {
 
     private class Parser {
         protected void parse(String msg, ParseListener listener) {
-            com.eclipsesource.json.JsonObject json = Json.parse(msg).asObject();
+            JsonObject json = Json.parse(msg).asObject();
             SocketPackets ev = null;
             long time = System.currentTimeMillis();
 
