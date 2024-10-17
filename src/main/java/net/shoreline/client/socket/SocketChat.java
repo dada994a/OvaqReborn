@@ -128,6 +128,11 @@ public class SocketChat extends WebSocketAdapter {
         ws.sendText(str);
     }
 
+    public boolean isConnected() {
+        if(ws == null) return false;
+        return ws.isOpen();
+    }
+
     @Override
     public void onTextMessage(WebSocket websocket, String text) throws Exception {
         super.onTextMessage(websocket, text);

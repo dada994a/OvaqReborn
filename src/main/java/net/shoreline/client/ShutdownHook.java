@@ -1,6 +1,8 @@
 package net.shoreline.client;
 
 import net.shoreline.client.api.file.ClientConfiguration;
+import net.shoreline.client.impl.module.client.IRCModule;
+import net.shoreline.client.init.Modules;
 
 /**
  * @author linus
@@ -26,5 +28,9 @@ public class ShutdownHook extends Thread {
         OvaqReborn.CONFIG.saveClient();
         OvaqReborn.info("PRC stoping…");
         OvaqReborn.RPC.stopRPC();
+
+        if (Modules.IRC.isEnabled() && IRCModule.chat.isConnected()) {
+            IRCModule.chat.disconnect();
+        }
     }
 }

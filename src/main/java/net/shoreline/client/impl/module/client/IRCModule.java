@@ -13,12 +13,18 @@ import net.shoreline.client.socket.SocketWebhookManager;
 import net.shoreline.client.util.chat.ChatUtil;
 
 /**
- * @author OvaqReborn
+ * @author Rom & Hypinohaizin
  */
 public class IRCModule extends ToggleModule {
-    SocketChat chat = new SocketChat("wss://hack.chat/chat-ws", "OvaqRebornChat", mc.getSession().getUsername(), "");
-//TODO:非同期処理にして修正 by hypinohoaizin
+    public static SocketChat chat = new SocketChat("wss://hack.chat/chat-ws", "OvaqRebornChat", mc.getSession().getUsername(), "");
+    //TODO:非同期処理にして修正 by hypinohoaizin
     Config<Boolean> discordConfig = new BooleanConfig("Discord", "make u lag when u send message. we will fix this later", false); // laggy maybe
+
+    String[] devs = {
+            "kisqra",
+            "7wp5",
+            "Naa_Naa"
+    };
 
     public IRCModule() {
         super("IRC", "global chat. prefix: @", ModuleCategory.CLIENT);
@@ -73,7 +79,15 @@ public class IRCModule extends ToggleModule {
             String text = event.getText().length() < 150 ? event.getText() : Formatting.DARK_RED + "(long message)";
             String nick = event.getNick();
 
-            ChatUtil.clientSendMessageRaw(Formatting.GRAY + "[" + Formatting.AQUA + "OvaqReborn" + Formatting.GRAY + "] " + Formatting.WHITE + Formatting.BOLD + nick + ": " + text + Formatting.RESET);
+            boolean isDev = false;
+            for (String dev : devs) {
+                if (dev.equalsIgnoreCase(nick)) {
+                    isDev = true;
+                    break;
+                }
+            }
+            Formatting nickColor = isDev ? Formatting.LIGHT_PURPLE : Formatting.WHITE;
+            ChatUtil.clientSendMessageRaw(Formatting.GRAY + "[" + Formatting.AQUA + "OvaqReborn" + Formatting.GRAY + "] " + nickColor + Formatting.BOLD + nick + ": " + text + Formatting.RESET);
         }).start();
     }
 }

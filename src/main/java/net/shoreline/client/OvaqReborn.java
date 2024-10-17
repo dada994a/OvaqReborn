@@ -6,6 +6,7 @@ import net.shoreline.client.api.event.handler.EventHandler;
 import net.shoreline.client.api.file.ClientConfiguration;
 import net.shoreline.client.impl.manager.client.DiscordManager;
 import net.shoreline.client.impl.manager.client.HwidManager;
+import net.shoreline.client.impl.module.client.IRCModule;
 import net.shoreline.client.init.Managers;
 import net.shoreline.client.init.Modules;
 import org.apache.logging.log4j.LogManager;
@@ -66,6 +67,12 @@ public class OvaqReborn {
         SHUTDOWN = new ShutdownHook();
         Runtime.getRuntime().addShutdownHook(SHUTDOWN);
         CONFIG.loadClient();
+
+        if (Modules.IRC.isEnabled() && !IRCModule.chat.isConnected()) {
+            info("Connecting to IRC Server (Init)");
+            IRCModule.chat.connect();
+        }
+
     }
     // TODO: OvaqHwidAuthSystem
     public static void hwidAuth() {

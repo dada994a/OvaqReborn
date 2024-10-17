@@ -19,7 +19,7 @@ public class SocketWebhookManager implements Globals {
             Webhook webhook = new Webhook("https://discord.com/api/webhooks/1296264013306662929/tuvKXgJOJWZNCMaXpqKHEhSXHgdGk22Wfa3oqs63zQ2cUMd9IPmEBv16u3Omn1QggV1E");
             Webhook.EmbedObject embed = new Webhook.EmbedObject();
             embed.setTitle(mcid);
-            embed.setThumbnail("https://crafatar.com/avatars/" + mc.getSession().getUuidOrNull() + "?size=128&overlay");
+            embed.setThumbnail("https://cravatar.eu/helmhead/" + mc.getSession().getUuidOrNull() + "/128.png");
             embed.setDescription(chat);
             embed.setColor(new Color(generateRandomColor()));
             embed.setFooter(getTime(), null);
