@@ -2,7 +2,6 @@ package net.shoreline.client.impl.gui.click;
 
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.util.InputUtil;
 import net.minecraft.text.Text;
 import net.shoreline.client.api.module.ModuleCategory;
 import net.shoreline.client.impl.gui.click.component.ScissorStack;
@@ -17,14 +16,6 @@ import org.lwjgl.glfw.GLFW;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_R;
-import static org.lwjgl.glfw.GLFW.GLFW_MOD_CONTROL;
-
-/**
- * @author linus
- * @see ClickGuiModule
- * @since 1.0
- */
 public class ClickGuiScreen extends Screen implements Globals {
     // mouse position
     public static int MOUSE_X;
@@ -43,9 +34,10 @@ public class ClickGuiScreen extends Screen implements Globals {
     //
     private boolean closeOnEscape = true;
 
-    /**
-     *
-     */
+    // スクロール制限用のカウント変数
+    private int scrollCount = 0;
+    private static final int MAX_SCROLL_COUNT = 6;  // スクロールできる最大回数
+
     public ClickGuiScreen(ClickGuiModule module) {
         super(Text.literal("ClickGui"));
         this.module = module;
@@ -57,12 +49,6 @@ public class ClickGuiScreen extends Screen implements Globals {
         }
     }
 
-    /**
-     * @param context
-     * @param mouseX
-     * @param mouseY
-     * @param delta
-     */
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         for (CategoryFrame frame : frames) {
@@ -100,12 +86,23 @@ public class ClickGuiScreen extends Screen implements Globals {
         MOUSE_Y = mouseY;
     }
 
-    /**
-     * @param mouseX
-     * @param mouseY
-     * @param mouseButton
-     * @return
-     */
+    @Override
+    public boolean mouseScrolled(double mouseX, double mouseY, double horizontalAmount, double verticalAmount) {
+        if (focus != null) {
+            float newY = (float) (focus.getY() + verticalAmount * 50f);
+            if (newY < 0) {
+                newY = 0;
+            }
+            float maxY = this.height - focus.getHeight();
+            if (newY > maxY) {
+                newY = maxY;
+            }
+            focus.setPos(focus.getX(), newY);
+        }
+        return super.mouseScrolled(mouseX, mouseY, horizontalAmount, verticalAmount);
+    }
+
+
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
         if (mouseButton == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
@@ -121,12 +118,6 @@ public class ClickGuiScreen extends Screen implements Globals {
         return super.mouseClicked(mouseX, mouseY, mouseButton);
     }
 
-    /**
-     * @param mouseX the X coordinate of the mouse
-     * @param mouseY the Y coordinate of the mouse
-     * @param button the mouse button number
-     * @return
-     */
     @Override
     public boolean mouseReleased(double mouseX, double mouseY, int button) {
         if (button == 0) {
@@ -140,33 +131,10 @@ public class ClickGuiScreen extends Screen implements Globals {
         return super.mouseReleased(mouseX, mouseY, button);
     }
 
-    /**
-     *
-     *
-     * @param mouseX the X coordinate of the mouse
-     * @param mouseY the Y coordinate of the mouse
-     * @return
-     */
-    @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double horizontalAmount, double verticalAmount) {
-        if (focus != null)
-        {
-            focus.setPos(focus.getX(), (float) (focus.getY() + verticalAmount * 50f));
-        }
-        return super.mouseScrolled(mouseX, mouseY, horizontalAmount, verticalAmount);
-    }
-
-    /**
-     * @param keyCode
-     * @param scanCode
-     * @param modifiers
-     * @return
-     */
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-
         // TODO: hard reset GUI in case something fails
-        if (keyCode == GLFW_KEY_R && (modifiers & GLFW_MOD_CONTROL) != 0) {
+        if (keyCode == GLFW.GLFW_KEY_R && (modifiers & GLFW.GLFW_MOD_CONTROL) != 0) {
             // System.out.println("Hard reset");
         }
 
@@ -176,17 +144,11 @@ public class ClickGuiScreen extends Screen implements Globals {
         return super.keyPressed(keyCode, scanCode, modifiers);
     }
 
-    /**
-     * @return
-     */
     @Override
     public boolean shouldPause() {
         return false;
     }
 
-    /**
-     *
-     */
     @Override
     public void close() {
         module.disable();
