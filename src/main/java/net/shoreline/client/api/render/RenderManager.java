@@ -9,6 +9,7 @@ import net.shoreline.client.init.Fonts;
 import net.shoreline.client.init.Modules;
 import net.shoreline.client.mixin.accessor.AccessorWorldRenderer;
 import net.shoreline.client.util.Globals;
+import net.shoreline.client.impl.font.TTFFontRenderer;
 import org.joml.Matrix4f;
 import org.lwjgl.opengl.GL11;
 
@@ -20,6 +21,7 @@ import static net.shoreline.client.api.render.RenderBuffers.*;
  */
 public class RenderManager implements Globals {
     //
+    public static TTFFontRenderer tf = TTFFontRenderer.of("Roboto-Regular", 8);
     public static final Tessellator TESSELLATOR = RenderSystem.renderThreadTesselator();
     public static final BufferBuilder BUFFER = TESSELLATOR.getBuffer();
 
@@ -330,7 +332,7 @@ public class RenderManager implements Globals {
      * @param color
      */
     public static void renderText(DrawContext context, String text, float x, float y, int color) {
-        context.drawText(mc.textRenderer, text, (int) x, (int) y, color, true);
+        tf.drawString(context.getMatrices(), text, (int) x, (int) y, color);
     }
 
     /**

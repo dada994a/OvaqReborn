@@ -92,7 +92,7 @@ public class HUDModule extends ToggleModule {
             return;
         }
         String text = getFormattedModule(toggleModule);
-        int width = RenderManager.textWidth(text);
+        float width = RenderManager.tf.getStringWidth(text);
         RenderManager.renderText(event.getContext(), text,
                 mc.getWindow().getScaledWidth() - width * factor - 1.0f,
                 renderingUp ? topRight : bottomRight, getHudColor(rainbowOffset));
@@ -130,6 +130,7 @@ public class HUDModule extends ToggleModule {
                 RenderManager.renderText(event.getContext(), String.format("%s §f%s (%s%s)",
                         OvaqRebornMod.MOD_NAME,  OvaqRebornMod.MOD_VER,
                         OvaqRebornMod.MOD_BUILD_NUMBER, !BuildConfig.HASH.equals("null") ? "-" + BuildConfig.HASH : ""), 2.0f, topLeft, getHudColor(rainbowOffset));
+
                 // topLeft += 9.0f;
             }
             if (arraylistConfig.getValue()) {
@@ -157,7 +158,7 @@ public class HUDModule extends ToggleModule {
                             effect.getName().getString(),
                             amplifier ? e.getAmplifier() + " " : "",
                             e.isInfinite() ? "" : duration.getString());
-                    int width = RenderManager.textWidth(text);
+                    float width = RenderManager.tf.getStringWidth(text);
                     RenderManager.renderText(event.getContext(), text,
                             res.getScaledWidth() - width - 1.0f, renderingUp ? bottomRight : topRight,
                             potionColorsConfig.getValue() ? effect.getColor() : getHudColor(rainbowOffset));
@@ -171,7 +172,7 @@ public class HUDModule extends ToggleModule {
             }
             if (serverBrandConfig.getValue() && mc.getServer() != null) {
                 String brand = mc.getServer().getVersion();
-                int width = RenderManager.textWidth(brand);
+                float width = RenderManager.tf.getStringWidth(brand);
                 RenderManager.renderText(event.getContext(), brand,
                         res.getScaledWidth() - width - 1.0f, renderingUp ? bottomRight : topRight,
                         getHudColor(rainbowOffset));
@@ -192,7 +193,7 @@ public class HUDModule extends ToggleModule {
                 final double speed = dist / div * timer;
                 String text = String.format("Speed §f%skm/h",
                         decimal.format(speed));
-                int width = RenderManager.textWidth(text);
+                float width = RenderManager.tf.getStringWidth(text);
                 RenderManager.renderText(event.getContext(), text,
                         res.getScaledWidth() - width - 1.0f, renderingUp ? bottomRight : topRight,
                         getHudColor(rainbowOffset));
@@ -208,8 +209,8 @@ public class HUDModule extends ToggleModule {
                 int n2 = mc.player.getMainHandStack().getDamage();
                 String text1 = "Durability ";
                 String text2 = String.valueOf(n - n2);
-                int width = RenderManager.textWidth(text1);
-                int width2 = RenderManager.textWidth(text2);
+                float width = RenderManager.tf.getStringWidth(text1);
+                float width2 = RenderManager.tf.getStringWidth(text2);
                 Color color = ColorUtil.hslToColor((float) (n - n2) / (float) n * 120.0f, 100.0f, 50.0f, 1.0f);
                 RenderManager.renderText(event.getContext(), text1,
                         res.getScaledWidth() - width - width2 - 1.0f, renderingUp ? bottomRight : topRight,
@@ -227,7 +228,7 @@ public class HUDModule extends ToggleModule {
             if (pingConfig.getValue() && !mc.isInSingleplayer()) {
                 int latency = Managers.NETWORK.getClientLatency();
                 String text = String.format("Ping §f%dms", latency);
-                int width = RenderManager.textWidth(text);
+                float width = RenderManager.tf.getStringWidth(text);
                 RenderManager.renderText(event.getContext(), text,
                         res.getScaledWidth() - width - 1.0f, renderingUp ? bottomRight : topRight,
                         getHudColor(rainbowOffset));
@@ -244,7 +245,7 @@ public class HUDModule extends ToggleModule {
                 String text = String.format("TPS §f%s §7[§f%s§7]",
                         decimal.format(avg),
                         decimal.format(curr));
-                int width = RenderManager.textWidth(text);
+                float width = RenderManager.tf.getStringWidth(text);
                 RenderManager.renderText(event.getContext(), text,
                         res.getScaledWidth() - width - 1.0f, renderingUp ? bottomRight : topRight,
                         getHudColor(rainbowOffset));
@@ -257,7 +258,7 @@ public class HUDModule extends ToggleModule {
             }
             if (fpsConfig.getValue()) {
                 String text = String.format("FPS §f%d", mc.getCurrentFps());
-                int width = RenderManager.textWidth(text);
+                float width = RenderManager.tf.getStringWidth(text);
                 RenderManager.renderText(event.getContext(), text,
                         res.getScaledWidth() - width - 1.0f, renderingUp ? bottomRight : topRight,
                         getHudColor(rainbowOffset));
