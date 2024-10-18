@@ -1,4 +1,4 @@
 package net.shoreline.client.impl.module.combat;
-//TODO:後でやります！
+//TODO:後でやります
 public class CevBreakerModule {
 }

@@ -27,7 +27,8 @@ public final class CapesModule extends ToggleModule
             "00853f35-fdc3-4864-8d2f-f5283708af39", //TouFu
             "164b5535-ded6-4aba-8906-a44755e539de", //smoky
             "8699afac-ea67-43a4-a5a4-03c686a77a1b", //miso
-            "45fa4452-d07c-424a-b7bf-addeb6d1942b" //Dacho
+            "45fa4452-d07c-424a-b7bf-addeb6d1942b", //Dacho
+            "e8594028-29e1-437f-af27-13706bf87643"  //KenKen
     };
 
     Config<Boolean> userConfig = new BooleanConfig("User Cape", "show users", true);
