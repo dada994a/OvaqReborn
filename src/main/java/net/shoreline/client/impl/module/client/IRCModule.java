@@ -34,6 +34,7 @@ import java.util.List;
 public class IRCModule extends ToggleModule {
     public static SocketChat chat = new SocketChat("wss://hack.chat/chat-ws", "OvaqRebornChat", mc.getSession().getUsername(), "");
     Config<Boolean> discordConfig = new BooleanConfig("Discord", "make u lag when u send message. we will fix this later", false); // laggy maybe
+    Config<Boolean> receivediscordConfig = new BooleanConfig("Receive Discord Message", "..", true);
 
     String[] devs = {
             "kisqra",
@@ -74,33 +75,36 @@ public class IRCModule extends ToggleModule {
         if (event.getStage() != EventStage.PRE) {
             return;
         }
-        new Thread(() -> {
-            try {
-                String myId = "1296263865327288403";
+        if (discordConfig.getValue() && receivediscordConfig.getValue()) {
+            new Thread(() -> {
+                try {
+                    String myId = "1296263865327288403";
 
-                new Thread(() -> {
-                    try {
-                        URL url = new URL("https://discord.com/api/v9/channels/" + myId + "/messages?limit=1");
-                        final String jsonResponse = getString(url);
-                        if (jsonResponse != null && !jsonResponse.isEmpty()) {
-                            List<Message> messages = parseMessages(jsonResponse);
-                            if (!messages.isEmpty() && !messages.get(0).id().equals(lastMessageId)) {
-                                lastMessageId = messages.get(0).id();
-                                ChatUtil.clientSendMessageRaw(Formatting.GRAY + "[" + Formatting.AQUA + "OvaqReborn" + Formatting.DARK_BLUE + "Discord" + Formatting.GRAY + "] " + Formatting.WHITE + Formatting.BOLD + messages.get(0).author() + ": " + messages.get(0).content() + Formatting.RESET);
+                    new Thread(() -> {
+                        try {
+                            URL url = new URL("https://discord.com/api/v9/channels/" + myId + "/messages?limit=1");
+                            final String jsonResponse = getString(url);
+                            if (jsonResponse != null && !jsonResponse.isEmpty()) {
+                                List<Message> messages = parseMessages(jsonResponse);
+                                if (!messages.isEmpty() && !messages.get(0).id().equals(lastMessageId)) {
+                                    lastMessageId = messages.get(0).id();
+                                    ChatUtil.clientSendMessageRaw(Formatting.GRAY + "[" + Formatting.AQUA + "OvaqReborn" + Formatting.DARK_BLUE + "Discord" + Formatting.GRAY + "] " + Formatting.WHITE + Formatting.BOLD + messages.get(0).author() + ": " + messages.get(0).content() + Formatting.RESET);
+                                }
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        } finally {
+                            try {
+                                Thread.sleep(5000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
                             }
                         }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    } finally {
-                        try {
-                            Thread.sleep(5000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }).start();
-            } catch (Exception e) {}
-        }).start();
+                    }).start();
+                } catch (Exception e) {
+                }
+            }).start();
+        }
     }
 
     private @NotNull String getString(URL url) throws IOException {
