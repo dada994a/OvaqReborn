@@ -88,7 +88,9 @@ public class IRCModule extends ToggleModule {
                                 List<Message> messages = parseMessages(jsonResponse);
                                 if (!messages.isEmpty() && !messages.get(0).id().equals(lastMessageId)) {
                                     lastMessageId = messages.get(0).id();
-                                    ChatUtil.clientSendMessageRaw(Formatting.GRAY + "[" + Formatting.AQUA + "OvaqReborn" + Formatting.DARK_BLUE + "Discord" + Formatting.GRAY + "] " + Formatting.WHITE + Formatting.BOLD + messages.get(0).author() + ": " + messages.get(0).content() + Formatting.RESET);
+                                    if (!isBotOrWebhook(messages.get(0))) {
+                                        ChatUtil.clientSendMessageRaw(Formatting.GRAY + "[" + Formatting.AQUA + "OvaqReborn" + Formatting.DARK_BLUE + "Discord" + Formatting.GRAY + "] " + Formatting.WHITE + Formatting.BOLD + messages.get(0).author() + ": " + messages.get(0).content() + Formatting.RESET);
+                                    }
                                 }
                             }
                         } catch (Exception e) {
@@ -144,9 +146,15 @@ public class IRCModule extends ToggleModule {
             String id = jsonObject.get("id").getAsString();
             String content = jsonObject.get("content").getAsString();
             String author = jsonObject.get("author").getAsJsonObject().get("username").getAsString();
-            messages.add(new Message(id, content, author));
+            boolean isBot = jsonObject.get("author").getAsJsonObject().get("bot") != null;
+            boolean isWebhook = jsonObject.get("webhook_id") != null;
+            messages.add(new Message(id, content, author, isBot, isWebhook));
         }
         return messages;
+    }
+
+    private boolean isBotOrWebhook(Message message) {
+        return message.isBot() || message.isWebhook();
     }
 
     @EventListener
@@ -188,5 +196,5 @@ public class IRCModule extends ToggleModule {
         }).start();
     }
 
-    private record Message(String id, String content, String author) {}
+    private record Message(String id, String content, String author, boolean isBot, boolean isWebhook) {}
 }
