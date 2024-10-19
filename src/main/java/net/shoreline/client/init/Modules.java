@@ -39,7 +39,7 @@ public class Modules {
     public static AuraModule AURA;
     public static AutoArmorModule AUTO_ARMOR;
     public static AutoBowReleaseModule AUTO_BOW_RELEASE;
-    //public static AutoCrystalBaseModule AUTO_CRYSTAL_BASE;
+    public static AutoCrystalBaseModule AUTO_CRYSTAL_BASE;
     public static AutoCrystalModule AUTO_CRYSTAL;
    // public static AutoCrystalMinusModule AUTO_CRYSTAL_MINUS;
     public static AutoAnvilModule AUTO_ANVIL;
@@ -229,7 +229,7 @@ public class Modules {
             AURA = (AuraModule) getRegisteredModule("aura-module");
             AUTO_ARMOR = (AutoArmorModule) getRegisteredModule("autoarmor-module");
             AUTO_BOW_RELEASE = (AutoBowReleaseModule) getRegisteredModule("autobowrelease-module");
-            //AUTO_CRYSTAL_BASE = (AutoCrystalBaseModule) getRegisteredModule("autocrystalbase-module");
+            AUTO_CRYSTAL_BASE = (AutoCrystalBaseModule) getRegisteredModule("autocrystalbase-module");
             AUTO_CRYSTAL = (AutoCrystalModule) getRegisteredModule("autocrystal-module");
             //AUTO_CRYSTAL_MINUS = (AutoCrystalMinusModule) getRegisteredModule("autocrystalminus-module");
             AUTO_ANVIL = (AutoAnvilModule) getRegisteredModule("autoanvil-module");

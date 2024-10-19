@@ -44,7 +44,7 @@ public class ModuleManager {
                 new AuraModule(),
                 new AutoArmorModule(),
                 new AutoBowReleaseModule(),
-                //new AutoCrystalBaseModule(),
+                new AutoCrystalBaseModule(),
                 new AutoCrystalModule(),
                 //new AutoCrystalMinusModule(),
                 new AutoAnvilModule(),
