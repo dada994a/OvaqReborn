@@ -7,6 +7,7 @@ import net.minecraft.client.network.ClientPlayerInteractionManager;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.shoreline.client.BuildConfig;
 import net.shoreline.client.OvaqReborn;
 import net.shoreline.client.OvaqRebornMod;
 import net.shoreline.client.api.event.EventStage;
@@ -91,6 +92,16 @@ public abstract class MixinMinecraftClient implements IMinecraftClient {
         OvaqReborn.EVENT_HANDLER.dispatch(runTickEvent);
     }
 
+
+    /**
+     * @param ci
+     */
+    @Inject(method = "updateWindowTitle", at = @At("HEAD"), cancellable = true)
+    private void hookUpdateWindowTitle(CallbackInfo ci) {
+        String customTitle = "OvaqReborn " + BuildConfig.VERSION;
+        MinecraftClient.getInstance().getWindow().setTitle(customTitle);
+        ci.cancel();
+    }
 
 
 
