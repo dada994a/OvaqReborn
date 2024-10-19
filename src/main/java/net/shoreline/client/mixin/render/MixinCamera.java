@@ -2,16 +2,19 @@ package net.shoreline.client.mixin.render;
 
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.CameraSubmersionType;
+import net.minecraft.entity.Entity;
 import net.shoreline.client.OvaqReborn;
 import net.shoreline.client.impl.event.camera.CameraPositionEvent;
 import net.shoreline.client.impl.event.camera.CameraRotationEvent;
 import net.shoreline.client.impl.event.gui.hud.RenderOverlayEvent;
 import net.shoreline.client.impl.event.render.CameraClipEvent;
+import net.shoreline.client.init.Modules;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
@@ -25,6 +28,15 @@ public abstract class MixinCamera {
     @Shadow protected abstract void setPos(double x, double y, double z);
 
     @Shadow protected abstract void setRotation(float yaw, float pitch);
+
+    @Shadow
+    private Entity focusedEntity;
+
+    @Shadow
+    private float lastCameraY;
+
+    @Shadow
+    private float cameraY;
 
     /**
      * @param cir
@@ -70,5 +82,16 @@ public abstract class MixinCamera {
         CameraRotationEvent cameraRotationEvent = new CameraRotationEvent(yaw, pitch, lastTickDelta);
         OvaqReborn.EVENT_HANDLER.dispatch(cameraRotationEvent);
         setRotation(cameraRotationEvent.getYaw(), cameraRotationEvent.getPitch());
+    }
+
+    @Inject(at = @At("HEAD"), method = "updateEyeHeight()V", cancellable = true)
+    public void updateEyeHeight(CallbackInfo info) {
+        if (Modules.PROTOCOL.isEnabled() && Modules.PROTOCOL.getSneakFix()) {
+            if (this.focusedEntity != null) {
+                lastCameraY = cameraY;
+                cameraY = focusedEntity.getStandingEyeHeight();
+            }
+            info.cancel();
+        }
     }
 }

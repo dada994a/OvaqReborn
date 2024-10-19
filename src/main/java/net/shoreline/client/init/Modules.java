@@ -33,18 +33,21 @@ public class Modules {
     public static BaritoneModule BARITONE;
     public static RPCModule RPC;
     public static IRCModule IRC;
+    public static ProtocolModule PROTOCOL;
     public static CapesModule CAPES;
     // Combat
     public static AuraModule AURA;
     public static AutoArmorModule AUTO_ARMOR;
     public static AutoBowReleaseModule AUTO_BOW_RELEASE;
+    //public static AutoCrystalBaseModule AUTO_CRYSTAL_BASE;
     public static AutoCrystalModule AUTO_CRYSTAL;
+   // public static AutoCrystalMinusModule AUTO_CRYSTAL_MINUS;
     public static AutoAnvilModule AUTO_ANVIL;
     public static AntiAnvilModule ANTI_ANVIL;
     public static BacktrackModule BACK_TRACK;
-   // public static BedAuraModule BEDAURA;
+    // public static BedAuraModule BEDAURA;
     public static AutoLogModule AUTO_LOG;
-    public static AutoTotemModule AUTO_TOTEM;
+    public static OffHandModule OFFHAND;
     public static AutoTrapModule AUTO_TRAP;
     public static AutoXPModule AUTO_XP;
     public static BlockLagModule BLOCK_LAG;
@@ -106,7 +109,7 @@ public class Modules {
     // Movement
     public static AntiLevitationModule ANTI_LEVITATION;
     public static AutoWalkModule AUTO_WALK;
-   // public static BlockHoleMoveModule BLOCKHOLEMOVE;
+    // public static BlockHoleMoveModule BLOCKHOLEMOVE;
     public static BlockMoveModule BLOCKMOVE;
     public static BoatFlyModule BOATFLY;
     public static ElytraFlyModule ELYTRA_FLY;
@@ -215,6 +218,7 @@ public class Modules {
             HUD = (HUDModule) getRegisteredModule("hud-module");
             RPC = (RPCModule) getRegisteredModule("rpc-module");
             IRC = (IRCModule) getRegisteredModule("irc-module");
+            PROTOCOL = (ProtocolModule) getRegisteredModule("protocol-module");
             //FONT =(FontModule) getRegisteredModule("font-module");
             ROTATIONS = (RotationsModule) getRegisteredModule("rotations-module");
             SERVER = (ServerModule) getRegisteredModule("server-module");
@@ -225,12 +229,14 @@ public class Modules {
             AURA = (AuraModule) getRegisteredModule("aura-module");
             AUTO_ARMOR = (AutoArmorModule) getRegisteredModule("autoarmor-module");
             AUTO_BOW_RELEASE = (AutoBowReleaseModule) getRegisteredModule("autobowrelease-module");
+            //AUTO_CRYSTAL_BASE = (AutoCrystalBaseModule) getRegisteredModule("autocrystalbase-module");
             AUTO_CRYSTAL = (AutoCrystalModule) getRegisteredModule("autocrystal-module");
+            //AUTO_CRYSTAL_MINUS = (AutoCrystalMinusModule) getRegisteredModule("autocrystalminus-module");
             AUTO_ANVIL = (AutoAnvilModule) getRegisteredModule("autoanvil-module");
             ANTI_ANVIL = (AntiAnvilModule) getRegisteredModule("antianvil-module");
             //OLDAUTO_CRYSTAL =(OldAutoCrystalModule) getRegisteredModule("oldautocrystal-module");
             AUTO_LOG = (AutoLogModule) getRegisteredModule("autolog-module");
-            AUTO_TOTEM = (AutoTotemModule) getRegisteredModule("autototem-module");
+            OFFHAND = (OffHandModule) getRegisteredModule("offhand-module");
             AUTO_TRAP = (AutoTrapModule) getRegisteredModule("autotrap-module");
             AUTO_XP = (AutoXPModule) getRegisteredModule("autoxp-module");
             BACK_TRACK = (BacktrackModule) getRegisteredModule("backtrack-module");
