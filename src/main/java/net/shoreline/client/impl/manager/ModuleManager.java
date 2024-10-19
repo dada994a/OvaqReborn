@@ -39,10 +39,12 @@ public class ModuleManager {
                 new IRCModule(),
                 //new FontModule(),
                 new RotationsModule(),
+                new ProtocolModule(),
                 // Combat
                 new AuraModule(),
                 new AutoArmorModule(),
                 new AutoBowReleaseModule(),
+                //new AutoCrystalBaseModule(),
                 new AutoCrystalModule(),
                 new AutoAnvilModule(),
                 new AntiAnvilModule(),

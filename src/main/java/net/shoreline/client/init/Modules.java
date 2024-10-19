@@ -33,11 +33,13 @@ public class Modules {
     public static BaritoneModule BARITONE;
     public static RPCModule RPC;
     public static IRCModule IRC;
+    public static ProtocolModule PROTOCOL;
     public static CapesModule CAPES;
     // Combat
     public static AuraModule AURA;
     public static AutoArmorModule AUTO_ARMOR;
     public static AutoBowReleaseModule AUTO_BOW_RELEASE;
+    //public static AutoCrystalBaseModule AUTO_CRYSTAL_BASE;
     public static AutoCrystalModule AUTO_CRYSTAL;
     public static AutoAnvilModule AUTO_ANVIL;
     public static AntiAnvilModule ANTI_ANVIL;
@@ -215,6 +217,7 @@ public class Modules {
             HUD = (HUDModule) getRegisteredModule("hud-module");
             RPC = (RPCModule) getRegisteredModule("rpc-module");
             IRC = (IRCModule) getRegisteredModule("irc-module");
+            PROTOCOL = (ProtocolModule) getRegisteredModule("protocol-module");
             //FONT =(FontModule) getRegisteredModule("font-module");
             ROTATIONS = (RotationsModule) getRegisteredModule("rotations-module");
             SERVER = (ServerModule) getRegisteredModule("server-module");
@@ -225,6 +228,7 @@ public class Modules {
             AURA = (AuraModule) getRegisteredModule("aura-module");
             AUTO_ARMOR = (AutoArmorModule) getRegisteredModule("autoarmor-module");
             AUTO_BOW_RELEASE = (AutoBowReleaseModule) getRegisteredModule("autobowrelease-module");
+            //AUTO_CRYSTAL_BASE = (AutoCrystalBaseModule) getRegisteredModule("autocrystalbase-module");
             AUTO_CRYSTAL = (AutoCrystalModule) getRegisteredModule("autocrystal-module");
             AUTO_ANVIL = (AutoAnvilModule) getRegisteredModule("autoanvil-module");
             ANTI_ANVIL = (AntiAnvilModule) getRegisteredModule("antianvil-module");

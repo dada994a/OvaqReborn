@@ -4,6 +4,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityPose;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.event.GameEvent;
@@ -12,7 +17,9 @@ import net.shoreline.client.impl.event.camera.EntityCameraPositionEvent;
 import net.shoreline.client.impl.event.entity.*;
 import net.shoreline.client.impl.event.entity.decoration.TeamColorEvent;
 import net.shoreline.client.impl.event.entity.player.PushEntityEvent;
+import net.shoreline.client.init.Modules;
 import net.shoreline.client.util.Globals;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -54,6 +61,18 @@ public abstract class MixinEntity implements Globals {
 
     @Shadow
     public boolean velocityDirty;
+
+    @Final
+    @Shadow
+    private EntityType<?> type;
+
+    @Final
+    @Shadow
+    protected DataTracker dataTracker;
+
+    @Final
+    @Shadow
+    protected static TrackedData<EntityPose> POSE;
 
     /**
      *
@@ -193,5 +212,18 @@ public abstract class MixinEntity implements Globals {
         EntityCameraPositionEvent cameraPositionEvent = new EntityCameraPositionEvent(cir.getReturnValue(), (Entity) (Object) this, tickDelta);
         OvaqReborn.EVENT_HANDLER.dispatch(cameraPositionEvent);
         cir.setReturnValue(cameraPositionEvent.getPosition());
+    }
+
+    @Inject(at = @At("HEAD"), method = "getPose()Lnet/minecraft/entity/EntityPose;", cancellable = true)
+    public void getPose(CallbackInfoReturnable<EntityPose> info) {
+        if (!((Object) this instanceof PlayerEntity)) return;
+        if (equals(mc.player)) return;
+        if (Modules.PROTOCOL.isEnabled() && Modules.PROTOCOL.getCrouchFix() && type == EntityType.PLAYER) {
+            EntityPose pose = dataTracker.get(POSE);
+            if (pose == EntityPose.SWIMMING)
+                pose = EntityPose.STANDING;
+            info.setReturnValue(pose);
+            info.cancel();
+        }
     }
 }
