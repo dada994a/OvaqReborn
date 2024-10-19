@@ -93,8 +93,8 @@ public class ClickGuiScreen extends Screen implements Globals {
     public boolean mouseScrolled(double mouseX, double mouseY, double horizontalAmount, double verticalAmount) {
         if (focus != null) {
             float newY = (float) (focus.getY() + verticalAmount * 50f);
-            if (newY < 0) {
-                newY = 0;
+            if (newY < -500) {
+                newY = -500;
             }
             float maxY = this.height - focus.getHeight();
             if (newY > maxY) {
@@ -104,6 +104,7 @@ public class ClickGuiScreen extends Screen implements Globals {
         }
         return super.mouseScrolled(mouseX, mouseY, horizontalAmount, verticalAmount);
     }
+
 
 
     @Override

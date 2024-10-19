@@ -21,7 +21,7 @@ import static net.shoreline.client.api.render.RenderBuffers.*;
  */
 public class RenderManager implements Globals {
     //
-    public static TTFFontRenderer tf = TTFFontRenderer.of("Roboto-Regular", 8);
+    public static TTFFontRenderer tf = TTFFontRenderer.of("sushi", 8);
     public static final Tessellator TESSELLATOR = RenderSystem.renderThreadTesselator();
     public static final BufferBuilder BUFFER = TESSELLATOR.getBuffer();
 
