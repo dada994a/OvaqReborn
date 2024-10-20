@@ -2,7 +2,6 @@ package net.shoreline.client.impl.module.combat;
 
 import com.google.common.collect.Lists;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import net.minecraft.block.Block;
@@ -29,10 +28,7 @@ import net.shoreline.client.util.math.timer.Timer;
 /**
  * @author OvaqReborn
  */
-public class AutoCrystalBaseModule extends ObsidianPlacerModule {
-    private List<Block> airBlocks =
-            Arrays.asList(Blocks.AIR, Blocks.FIRE, Blocks.LAVA, Blocks.WATER);
-
+public class AutoObsidianModule extends ObsidianPlacerModule {
     PlayerEntity target = null;
 
     Timer timer = new CacheTimer();
@@ -43,8 +39,8 @@ public class AutoCrystalBaseModule extends ObsidianPlacerModule {
     Config<Integer> delayConfig = new NumberConfig<>("Delay", "delay", 1, 1, 5);
     Config<Boolean> rotateConfig = new BooleanConfig("Rotate", "yaw", false);
 
-    public AutoCrystalBaseModule() {
-        super("AutoCrystalBase", "Place Pos Base", ModuleCategory.COMBAT);
+    public AutoObsidianModule() {
+        super("AutoObsidian", "Place Pos Base", ModuleCategory.COMBAT);
     }
 
     @Override

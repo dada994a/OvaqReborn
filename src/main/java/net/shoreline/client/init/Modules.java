@@ -39,7 +39,7 @@ public class Modules {
     public static AuraModule AURA;
     public static AutoArmorModule AUTO_ARMOR;
     public static AutoBowReleaseModule AUTO_BOW_RELEASE;
-    public static AutoCrystalBaseModule AUTO_CRYSTAL_BASE;
+    public static AutoObsidianModule AUTOOBSIDIAN;
     public static AutoCrystalModule AUTO_CRYSTAL;
    // public static AutoCrystalMinusModule AUTO_CRYSTAL_MINUS;
    // public static AutoAnvilModule AUTO_ANVIL;
@@ -59,6 +59,7 @@ public class Modules {
     public static HoleSnapModule HOLESNAP;
     public static NoHitDelayModule NO_HIT_DELAY;
     public static ReplenishModule REPLENISH;
+    public static PistonAuraModule PISTONAURA;
     public static PistonPushModule PISTONPUSH;
     public static SelfBowModule SELF_BOW;
     public static SelfTrapModule SELF_TRAP;
@@ -92,6 +93,7 @@ public class Modules {
     public static AutoAcceptModule AUTO_ACCEPT;
     public static AutoEzModule AUTO_EZ;
     public static AutoFishModule AUTO_FISH;
+    public static AutoGappleModule AUTO_GAPPLE;
     public static AutoReconnectModule AUTO_RECONNECT;
     public static AutoRespawnModule AUTO_RESPAWN;
     public static BeaconSelectorModule BEACON_SELECTOR;
@@ -232,7 +234,7 @@ public class Modules {
             AURA = (AuraModule) getRegisteredModule("aura-module");
             AUTO_ARMOR = (AutoArmorModule) getRegisteredModule("autoarmor-module");
             AUTO_BOW_RELEASE = (AutoBowReleaseModule) getRegisteredModule("autobowrelease-module");
-            AUTO_CRYSTAL_BASE = (AutoCrystalBaseModule) getRegisteredModule("autocrystalbase-module");
+            AUTOOBSIDIAN = (AutoObsidianModule) getRegisteredModule("autoobsidian-module");
             AUTO_CRYSTAL = (AutoCrystalModule) getRegisteredModule("autocrystal-module");
             //AUTO_CRYSTAL_MINUS = (AutoCrystalMinusModule) getRegisteredModule("autocrystalminus-module");
             //AUTO_ANVIL = (AutoAnvilModule) getRegisteredModule("autoanvil-module");
@@ -253,6 +255,7 @@ public class Modules {
             HOLESNAP = (HoleSnapModule) getRegisteredModule("holesnap-module");
             NO_HIT_DELAY = (NoHitDelayModule) getRegisteredModule("nohitdelay-module");
             REPLENISH = (ReplenishModule) getRegisteredModule("replenish-module");
+            PISTONAURA = (PistonAuraModule) getRegisteredModule("pistonaura-module");
             PISTONPUSH = (PistonPushModule) getRegisteredModule("pistonpush-module");
             SELF_BOW = (SelfBowModule) getRegisteredModule("selfbow-module");
             SELF_TRAP = (SelfTrapModule) getRegisteredModule("selftrap-module");
@@ -284,6 +287,7 @@ public class Modules {
             AUTO_ACCEPT = (AutoAcceptModule) getRegisteredModule("autoaccept-module");
             AUTO_EZ = (AutoEzModule) getRegisteredModule("autoez-module");
             AUTO_FISH = (AutoFishModule) getRegisteredModule("autofish-module");
+            AUTO_GAPPLE = (AutoGappleModule) getRegisteredModule("autogapple-module");
             AUTO_RECONNECT = (AutoReconnectModule) getRegisteredModule("autoreconnect-module");
             AUTO_RESPAWN = (AutoRespawnModule) getRegisteredModule("autorespawn-module");
             BEACON_SELECTOR = (BeaconSelectorModule) getRegisteredModule("beaconselector-module");

@@ -17,13 +17,15 @@ import net.shoreline.client.api.module.RotationModule;
 import net.shoreline.client.impl.event.network.PlayerTickEvent;
 import net.shoreline.client.init.Managers;
 import net.shoreline.client.util.chat.ChatUtil;
-import net.shoreline.client.util.player.InventoryUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * @author OvaqReborn
+ */
 public class PistonPushModule extends RotationModule {
     private List<Block> airBlocks = Arrays.asList(
             Blocks.AIR,
@@ -66,11 +68,15 @@ public class PistonPushModule extends RotationModule {
                 ChatUtil.error("No targets.");
                 disable();
             } else {
+                if (Managers.SOCIAL.isFriend(target.getName().getString())) {
+                    target = null;
+                    return;
+                }
                 if (!Managers.HOLE.checkHole(target.getBlockPos()).isStandard()
-                || !Managers.HOLE.checkHole(target.getBlockPos()).isDouble()
-                || !Managers.HOLE.checkHole(target.getBlockPos()).isQuad()
-                || !Managers.HOLE.checkHole(target.getBlockPos()).isDoubleX()
-                || !Managers.HOLE.checkHole(target.getBlockPos()).isDoubleZ()) {
+                        && !Managers.HOLE.checkHole(target.getBlockPos()).isDouble()
+                        && !Managers.HOLE.checkHole(target.getBlockPos()).isQuad()
+                        && !Managers.HOLE.checkHole(target.getBlockPos()).isDoubleX()
+                        && !Managers.HOLE.checkHole(target.getBlockPos()).isDoubleZ()) {
                     disable();
                     return;
                 }
@@ -101,7 +107,7 @@ public class PistonPushModule extends RotationModule {
     }
 
     private void placeRedstone(BlockPos activatorPos) {
-        Place(activatorPos, Items.REDSTONE_BLOCK, 3);
+        Place(activatorPos, getItemHotbar(Items.REDSTONE_BLOCK), 3);
     }
 
     private boolean placePiston(int pistons, Piston a) {
@@ -116,11 +122,11 @@ public class PistonPushModule extends RotationModule {
             return true;
         }
         this.timer = 0;
-        Place(a.piston, Item.byRawId(pistons), 2);
+        Place(a.piston, pistons, 2);
         return true;
     }
 
-    private void Place(BlockPos pos, Item e, int retrys) {
+    private void Place(BlockPos pos, int e, int retrys) {
         if (retrys < 1) {
             return;
         }
@@ -138,12 +144,8 @@ public class PistonPushModule extends RotationModule {
         return distanceFromEye(pres.pos) * 1;
     }
 
-    private void silentPlace(BlockPos placepos, Item block) {
-        boolean NO = InventoryUtil.hasItemInInventory(block, true);
-        if (!NO) {
-            return;
-        }
-        Managers.INTERACT.placeBlock(placepos, getItemHotbar(block), false, false, null);
+    private void silentPlace(BlockPos placepos, int block) {
+        Managers.INTERACT.placeBlock(placepos, block, false, false, null);
     }
 
     private int getItemHotbar(Item item) {
