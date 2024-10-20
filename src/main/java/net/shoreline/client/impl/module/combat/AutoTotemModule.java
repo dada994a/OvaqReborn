@@ -60,24 +60,20 @@ public final class AutoTotemModule extends ToggleModule
     @EventListener
     public void onPlayerTick(final PlayerTickEvent event)
     {
-        if (mc.currentScreen != null)
-        {
+        if (mc.currentScreen != null) {
             return;
         }
-        // Get the item to wield in our offhand, and make sure we are already not holding the item
+
         final Item itemToWield = getItemToWield();
-        if (PlayerUtil.isHolding(itemToWield))
-        {
+        if (PlayerUtil.isHolding(itemToWield)) {
             return;
         }
-        // Find the item in our inventory
         final int itemSlot = getSlotFor(itemToWield);
-        if (itemSlot != -1)
-        {
+        if (itemSlot != -1) {
             if (itemSlot < 9) {
                 lastSlot = itemSlot;
             }
-            // Do another quick swap (equivalent to hovering over an item & pressing F)
+
             if (fastConfig.getValue()) {
                 mc.interactionManager.clickSlot(INVENTORY_SYNC_ID,
                         itemSlot < 9 ? itemSlot + 36 : itemSlot, 40, SlotActionType.SWAP, mc.player);
@@ -99,9 +95,7 @@ public final class AutoTotemModule extends ToggleModule
             lastSlot = -1;
             return slot;
         }
-        // Only take totems from the hotbar
         final int startSlot = HOTBAR_ITEMS.contains(item) ? 0 : 9;
-        // Search through our inventory
         for (int slot = 35; slot >= startSlot; slot--)
         {
             final ItemStack itemStack = mc.player.getInventory().getStack(slot);
@@ -115,13 +109,11 @@ public final class AutoTotemModule extends ToggleModule
 
     private Item getItemToWield()
     {
-        // If the player's health (+absorption) falls below the "safe" amount, equip a totem
         final float health = PlayerUtil.getLocalPlayerHealth();
         if (health <= healthConfig.getValue())
         {
             return Items.TOTEM_OF_UNDYING;
         }
-        // Check fall damage
         if (PlayerUtil.computeFallDamage(mc.player.fallDistance, 1.0f) + 1.0f > mc.player.getHealth())
         {
             return Items.TOTEM_OF_UNDYING;
@@ -147,7 +139,6 @@ public final class AutoTotemModule extends ToggleModule
                 return Items.TOTEM_OF_UNDYING;
             }
         }
-        // If offhand gap is enabled & the use key is pressed down, equip a golden apple.
         if (gappleConfig.getValue() && mc.options.useKey.isPressed() && (mc.player.getMainHandStack().getItem() instanceof SwordItem
                 || mc.player.getMainHandStack().getItem() instanceof TridentItem || mc.player.getMainHandStack().getItem() instanceof AxeItem))
         {
