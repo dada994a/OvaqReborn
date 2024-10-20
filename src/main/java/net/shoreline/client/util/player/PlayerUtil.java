@@ -6,12 +6,13 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.EntityTypeTags;
+import net.minecraft.util.Hand; // Hand をインポート
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.shoreline.client.util.Globals;
 
 /**
- * @author linus & xgraza
+ * @author OvaqReborn
  * @since 1.0
  */
 public final class PlayerUtil implements Globals
@@ -52,6 +53,11 @@ public final class PlayerUtil implements Globals
             return true;
         }
         itemStack = mc.player.getOffHandStack();
+        return !itemStack.isEmpty() && itemStack.getItem() == item;
+    }
+    public static boolean isHolding(final Item item, Hand hand)
+    {
+        ItemStack itemStack = mc.player.getStackInHand(hand);
         return !itemStack.isEmpty() && itemStack.getItem() == item;
     }
 
