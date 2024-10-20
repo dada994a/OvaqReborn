@@ -122,6 +122,7 @@ public class ModuleManager {
                 new AntiLevitationModule(),
                 new AutoWalkModule(),
                 //new BlockHoleMoveModule(),
+                new BetaBlockMoveModule(),
                 new BlockMoveModule(),
                 new BoatFlyModule(),
                 new ElytraFlyModule(),

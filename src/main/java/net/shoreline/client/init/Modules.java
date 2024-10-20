@@ -114,6 +114,7 @@ public class Modules {
     // Movement
     public static AntiLevitationModule ANTI_LEVITATION;
     public static AutoWalkModule AUTO_WALK;
+    public static BetaBlockMoveModule BETA_BLOCKHOLEMOVE;
     // public static BlockHoleMoveModule BLOCKHOLEMOVE;
     public static BlockMoveModule BLOCKMOVE;
     public static BoatFlyModule BOATFLY;
@@ -307,6 +308,7 @@ public class Modules {
             XCARRY = (XCarryModule) getRegisteredModule("xcarry-module");
             ANTI_LEVITATION = (AntiLevitationModule) getRegisteredModule("antilevitation-module");
             AUTO_WALK = (AutoWalkModule) getRegisteredModule("autowalk-module");
+            BETA_BLOCKHOLEMOVE = (BetaBlockMoveModule) getRegisteredModule("betablockholemove-module");
             //BLOCKHOLEMOVE = (BlockHoleMoveModule) getRegisteredModule("blockholemove-module");
             BLOCKMOVE = (BlockMoveModule) getRegisteredModule("blockmove-module");
             BOATFLY = (BoatFlyModule) getRegisteredModule("boatfly-module");
