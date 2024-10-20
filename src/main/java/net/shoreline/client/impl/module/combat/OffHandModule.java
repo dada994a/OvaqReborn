@@ -64,24 +64,20 @@ public final class OffHandModule extends ToggleModule
     @EventListener
     public void onPlayerTick(final PlayerTickEvent event)
     {
-        if (mc.currentScreen != null)
-        {
+        if (mc.currentScreen != null) {
             return;
         }
-        // Get the item to wield in our offhand, and make sure we are already not holding the item
+
         final Item itemToWield = getItemToWield();
-        if (PlayerUtil.isHolding(itemToWield))
-        {
+        if (PlayerUtil.isHolding(itemToWield)) {
             return;
         }
-        // Find the item in our inventory
         final int itemSlot = getSlotFor(itemToWield);
-        if (itemSlot != -1)
-        {
+        if (itemSlot != -1) {
             if (itemSlot < 9) {
                 lastSlot = itemSlot;
             }
-            // Do another quick swap (equivalent to hovering over an item & pressing F)
+
             if (fastConfig.getValue()) {
                 mc.interactionManager.clickSlot(INVENTORY_SYNC_ID,
                         itemSlot < 9 ? itemSlot + 36 : itemSlot, 40, SlotActionType.SWAP, mc.player);
