@@ -53,6 +53,7 @@ public class Modules {
     public static AutoXPModule AUTO_XP;
     public static BlockLagModule BLOCK_LAG;
     public static BowAimModule BOW_AIM;
+    //public static CevBreakerModule CEVBREAKER;
     public static CriticalsModule CRITICALS;
     public static HoleFillModule HOLE_FILL;
     public static HoleSnapModule HOLESNAP;
@@ -245,6 +246,7 @@ public class Modules {
             //BEDAURA = (BedAuraModule) getRegisteredModule("bedaura-module");
             BLOCK_LAG = (BlockLagModule) getRegisteredModule("blocklag-module");
             BOW_AIM = (BowAimModule) getRegisteredModule("bowaim-module");
+//            CEVBREAKER = (CevBreakerModule) getRegisteredModule("cevbreaker-module");
             CRITICALS = (CriticalsModule) getRegisteredModule("criticals-module");
             HOLE_FILL = (HoleFillModule) getRegisteredModule("holefill-module");
             HOLESNAP = (HoleSnapModule) getRegisteredModule("holesnap-module");

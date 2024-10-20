@@ -58,6 +58,7 @@ public class ModuleManager {
                 // new BedAuraModule(),
                 new BlockLagModule(),
                 new BowAimModule(),
+                //new CevBreakerModule(),
                 new CriticalsModule(),
                 new HoleFillModule(),
                 new HoleSnapModule(),
