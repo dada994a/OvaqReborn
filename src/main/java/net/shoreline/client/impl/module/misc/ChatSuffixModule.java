@@ -9,7 +9,8 @@ import net.shoreline.client.util.chat.ChatUtil;
 
 public class ChatSuffixModule extends ToggleModule {
     private static final String SUFFIX = " ｜ ᴏᴠᴀǫʀᴇʙᴏʀɴ ᴅᴇᴠ" ;
-    //    private static final String SUFFIX = " ｜ ᴏᴠᴀǫʀᴇʙᴏʀɴ" ;
+    //private static final String SUFFIX = " ｜ ᴏᴠᴀǫʀᴇʙᴏʀɴ ᴇᴀʀʟʏᴀᴄᴄᴇꜱꜱ" ;
+    //private static final String SUFFIX = " ｜ ᴏᴠᴀǫʀᴇʙᴏʀɴ" ;
 
     public ChatSuffixModule() {
         super("ChatSuffix", "Appends Suffix to all sent messages", ModuleCategory.MISC);

@@ -11,6 +11,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.shoreline.client.api.config.Config;
 import net.shoreline.client.api.config.setting.BooleanConfig;
+import net.shoreline.client.api.config.setting.ColorConfig;
 import net.shoreline.client.api.config.setting.NumberConfig;
 import net.shoreline.client.api.event.listener.EventListener;
 import net.shoreline.client.api.module.ModuleCategory;
@@ -25,6 +26,7 @@ import net.shoreline.client.init.Modules;
 import net.shoreline.client.util.player.RotationUtil;
 import net.shoreline.client.util.world.EndCrystalUtil;
 
+import java.awt.*;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -46,6 +48,7 @@ public class AutoMineModule extends RotationModule {
     Config<Boolean> switchResetConfig = new BooleanConfig("SwitchReset", "Resets mining after switching items", false);
     Config<Boolean> grimConfig = new BooleanConfig("Grim", "Uses grim block breaking speeds", false);
     Config<Boolean> instantConfig = new BooleanConfig("Instant", "Instant remines mined blocks", true);
+    Config<Color> miningColorConfig = new ColorConfig("Color", "The color for mining outlines", new Color(200, 60, 60,100));
     //
     private MiningData miningData;
     private MiningData miningData2;
@@ -267,12 +270,14 @@ public class AutoMineModule extends RotationModule {
             double dy = (render1.maxY - render1.minY) / 2.0;
             double dz = (render1.maxZ - render1.minZ) / 2.0;
             final Box scaled = new Box(center, center).expand(dx * scale, dy * scale, dz * scale);
-            RenderManager.renderBox(matrixStack, scaled,
-                    data.getBlockDamage() > (0.95f * data.getSpeed()) ? 0x6000ff00 : 0x60ff0000);
-            RenderManager.renderBoundingBox(matrixStack, scaled,
-                    2.5f, data.getBlockDamage() > (0.95f * data.getSpeed()) ? 0x6000ff00 : 0x60ff0000);
+
+            // Use the mining color config for rendering
+            int color = miningColorConfig.getValue().getRGB();
+            RenderManager.renderBox(matrixStack, scaled, color);
+            RenderManager.renderBoundingBox(matrixStack, scaled, 2.5f, color);
         }
     }
+
 
     private TreeMap<Double, BlockPos> getAutoMinePosition(PlayerEntity entity) {
         List<BlockPos> entityIntersections = Modules.SURROUND.getSurroundEntities(entity);
