@@ -6,6 +6,7 @@ import net.minecraft.entity.decoration.EndCrystalEntity;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.*;
 import net.minecraft.screen.slot.SlotActionType;
+import net.minecraft.util.Hand;
 import net.shoreline.client.api.config.Config;
 import net.shoreline.client.api.config.setting.BooleanConfig;
 import net.shoreline.client.api.config.setting.EnumConfig;
@@ -21,15 +22,13 @@ import net.shoreline.client.util.world.EndCrystalUtil;
 import java.util.List;
 
 /**
- * @author xgraza
+ * @author OvaqReborn
  * @since 1.0
  */
-public final class OffHandModule extends ToggleModule
-{
-    // The player inventory sync ID
+public final class OffHandModule extends ToggleModule {
     private static final int INVENTORY_SYNC_ID = 0;
-    private static final List<Item> HOTBAR_ITEMS = List.of(Items.TOTEM_OF_UNDYING,
-            Items.GOLDEN_APPLE, Items.ENCHANTED_GOLDEN_APPLE);
+    private static final List<Item> HOTBAR_ITEMS = List.of(
+            Items.TOTEM_OF_UNDYING, Items.GOLDEN_APPLE, Items.ENCHANTED_GOLDEN_APPLE);
 
     EnumConfig<OffhandItem> itemConfig = new EnumConfig<>("Item", "The item to wield in your offhand", OffhandItem.CRYSTAL, OffhandItem.values());
     NumberConfig<Float> healthConfig = new NumberConfig<>("Health", "The health required to fall below before swapping to a totem", 0.0f, 14.0f, 20.0f);
@@ -39,9 +38,8 @@ public final class OffHandModule extends ToggleModule
     Config<Boolean> fastConfig = new BooleanConfig("FastSwap", "Allows you to swap using faster packets", false);
     private int lastSlot;
 
-    public OffHandModule()
-    {
-        super("Offhand", "Automatically replenishes the totem in your offhand(BUGGD)", ModuleCategory.COMBAT);
+    public OffHandModule() {
+        super("Offhand", "Automatically manages the offhand item in combat", ModuleCategory.COMBAT);
     }
 
     @Override
@@ -54,24 +52,22 @@ public final class OffHandModule extends ToggleModule
         }
     }
 
-
     @Override
-    public void onEnable()
-    {
+    public void onEnable() {
         lastSlot = -1;
     }
 
     @EventListener
-    public void onPlayerTick(final PlayerTickEvent event)
-    {
+    public void onPlayerTick(final PlayerTickEvent event) {
         if (mc.currentScreen != null) {
             return;
         }
 
         final Item itemToWield = getItemToWield();
-        if (PlayerUtil.isHolding(itemToWield)) {
+        if (PlayerUtil.isHolding(itemToWield, Hand.OFF_HAND)) {
             return;
         }
+
         final int itemSlot = getSlotFor(itemToWield);
         if (itemSlot != -1) {
             if (itemSlot < 9) {
@@ -92,96 +88,81 @@ public final class OffHandModule extends ToggleModule
         }
     }
 
-    private int getSlotFor(final Item item)
-    {
+    private int getSlotFor(final Item item) {
         if (lastSlot != -1 && item.equals(mc.player.getInventory().getStack(lastSlot).getItem())) {
             int slot = lastSlot;
             lastSlot = -1;
             return slot;
         }
-        // Only take totems from the hotbar
+
         final int startSlot = HOTBAR_ITEMS.contains(item) ? 0 : 9;
-        // Search through our inventory
-        for (int slot = 35; slot >= startSlot; slot--)
-        {
+
+        for (int slot = 35; slot >= startSlot; slot--) {
             final ItemStack itemStack = mc.player.getInventory().getStack(slot);
-            if (!itemStack.isEmpty() && itemStack.getItem().equals(item))
-            {
+            if (!itemStack.isEmpty() && itemStack.getItem().equals(item)) {
                 return slot;
             }
         }
         return -1;
     }
 
-    private Item getItemToWield()
-    {
-        // If the player's health (+absorption) falls below the "safe" amount, equip a totem
+    private Item getItemToWield() {
         final float health = PlayerUtil.getLocalPlayerHealth();
-        if (health <= healthConfig.getValue())
-        {
+        if (health <= healthConfig.getValue()) {
             return Items.TOTEM_OF_UNDYING;
         }
-        // Check fall damage
-        if (PlayerUtil.computeFallDamage(mc.player.fallDistance, 1.0f) + 1.0f > mc.player.getHealth())
-        {
+
+        if (PlayerUtil.computeFallDamage(mc.player.fallDistance, 1.0f) + 1.0f > mc.player.getHealth()) {
             return Items.TOTEM_OF_UNDYING;
         }
-        if (lethalConfig.getValue())
-        {
+
+        if (lethalConfig.getValue()) {
             final List<Entity> entities = Lists.newArrayList(mc.world.getEntities());
-            for (Entity e : entities)
-            {
-                if (e == null || !e.isAlive() || !(e instanceof EndCrystalEntity crystal))
-                {
+            for (Entity e : entities) {
+                if (e == null || !e.isAlive() || !(e instanceof EndCrystalEntity crystal)) {
                     continue;
                 }
-                if (mc.player.squaredDistanceTo(e) > 140.0)
-                {
+                if (mc.player.squaredDistanceTo(e) > 140.0) {
                     continue;
                 }
                 double potential = EndCrystalUtil.getDamageTo(mc.player, crystal.getPos());
-                if (health + 1.5 > potential)
-                {
+                if (health + 1.5 > potential) {
                     continue;
                 }
                 return Items.TOTEM_OF_UNDYING;
             }
         }
-        // If offhand gap is enabled & the use key is pressed down, equip a golden apple.
-        if (gappleConfig.getValue() && mc.options.useKey.isPressed() && (mc.player.getMainHandStack().getItem() instanceof SwordItem
-                || mc.player.getMainHandStack().getItem() instanceof TridentItem || mc.player.getMainHandStack().getItem() instanceof AxeItem))
-        {
+
+        if (gappleConfig.getValue() && mc.options.useKey.isPressed() &&
+                (mc.player.getMainHandStack().getItem() instanceof SwordItem
+                        || mc.player.getMainHandStack().getItem() instanceof TridentItem
+                        || mc.player.getMainHandStack().getItem() instanceof AxeItem)) {
             return getGoldenAppleType();
         }
+
         return itemConfig.getValue().getItem();
     }
 
-    private Item getGoldenAppleType()
-    {
-        if (crappleConfig.getValue()
-                && mc.player.hasStatusEffect(StatusEffects.ABSORPTION)
-                && InventoryUtil.hasItemInInventory(Items.GOLDEN_APPLE, true))
-        {
+    private Item getGoldenAppleType() {
+        if (crappleConfig.getValue() && mc.player.hasStatusEffect(StatusEffects.ABSORPTION)
+                && InventoryUtil.hasItemInInventory(Items.GOLDEN_APPLE, true)) {
             return Items.GOLDEN_APPLE;
         }
         return Items.ENCHANTED_GOLDEN_APPLE;
     }
 
-    private enum OffhandItem
-    {
+    private enum OffhandItem {
         TOTEM(Items.TOTEM_OF_UNDYING),
         GAPPLE(Items.ENCHANTED_GOLDEN_APPLE),
         CRYSTAL(Items.END_CRYSTAL);
 
         private final Item item;
 
-        OffhandItem(Item item)
-        {
+        OffhandItem(Item item) {
             this.item = item;
         }
 
-        public Item getItem()
-        {
+        public Item getItem() {
             return item;
         }
     }

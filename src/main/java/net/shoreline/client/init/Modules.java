@@ -42,11 +42,12 @@ public class Modules {
     public static AutoCrystalBaseModule AUTO_CRYSTAL_BASE;
     public static AutoCrystalModule AUTO_CRYSTAL;
    // public static AutoCrystalMinusModule AUTO_CRYSTAL_MINUS;
-    public static AutoAnvilModule AUTO_ANVIL;
-    public static AntiAnvilModule ANTI_ANVIL;
+   // public static AutoAnvilModule AUTO_ANVIL;
+   // public static AntiAnvilModule ANTI_ANVIL;
     public static BacktrackModule BACK_TRACK;
     // public static BedAuraModule BEDAURA;
     public static AutoLogModule AUTO_LOG;
+    //public static AutoTotemModule AUTO_TOTEM;
     public static OffHandModule OFFHAND;
     public static AutoTrapModule AUTO_TRAP;
     public static AutoXPModule AUTO_XP;
@@ -232,10 +233,11 @@ public class Modules {
             AUTO_CRYSTAL_BASE = (AutoCrystalBaseModule) getRegisteredModule("autocrystalbase-module");
             AUTO_CRYSTAL = (AutoCrystalModule) getRegisteredModule("autocrystal-module");
             //AUTO_CRYSTAL_MINUS = (AutoCrystalMinusModule) getRegisteredModule("autocrystalminus-module");
-            AUTO_ANVIL = (AutoAnvilModule) getRegisteredModule("autoanvil-module");
-            ANTI_ANVIL = (AntiAnvilModule) getRegisteredModule("antianvil-module");
+            //AUTO_ANVIL = (AutoAnvilModule) getRegisteredModule("autoanvil-module");
+           // ANTI_ANVIL = (AntiAnvilModule) getRegisteredModule("antianvil-module");
             //OLDAUTO_CRYSTAL =(OldAutoCrystalModule) getRegisteredModule("oldautocrystal-module");
             AUTO_LOG = (AutoLogModule) getRegisteredModule("autolog-module");
+            //AUTO_TOTEM = (AutoTotemModule) getRegisteredModule("autototem-module");
             OFFHAND = (OffHandModule) getRegisteredModule("offhand-module");
             AUTO_TRAP = (AutoTrapModule) getRegisteredModule("autotrap-module");
             AUTO_XP = (AutoXPModule) getRegisteredModule("autoxp-module");
