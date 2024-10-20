@@ -9,15 +9,12 @@ import java.util.Map;
 
 public class EventDispatcher {
 
-    // イベントクラスごとのリスナーを管理するマップ
     private static final Map<Class<?>, List<EventListener<?>>> listenersMap = new HashMap<>();
 
-    // イベントリスナーを登録するメソッド
     public static <T> void register(Class<T> eventClass, EventListener<T> listener) {
         listenersMap.computeIfAbsent(eventClass, k -> new ArrayList<>()).add(listener);
     }
 
-    // イベントを発火するメソッド
     @SuppressWarnings("unchecked")
     public static <T> void post(T event) {
         List<EventListener<?>> listeners = listenersMap.get(event.getClass());
@@ -28,8 +25,7 @@ public class EventDispatcher {
         }
     }
 
-    // EntityDeathEventを発火させるメソッド
     public static void dispatch(EntityDeathEvent deathEvent) {
-        post(deathEvent); // postメソッドを使ってリスナーに通知
+        post(deathEvent);
     }
 }

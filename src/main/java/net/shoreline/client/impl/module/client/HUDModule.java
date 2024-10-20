@@ -47,6 +47,7 @@ public class HUDModule extends ToggleModule {
 
     //
     // private static final HudScreen HUD_SCREEN = new HudScreen();
+
     //
     Config<Boolean> watermarkConfig = new BooleanConfig("Watermark", "Displays client name and version watermark", true);
     Config<Boolean> directionConfig = new BooleanConfig("Direction", "Displays facing direction", true);

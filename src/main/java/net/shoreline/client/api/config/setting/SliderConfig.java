@@ -3,12 +3,12 @@ package net.shoreline.client.api.config.setting;
 import net.shoreline.client.api.config.Config;
 
 public class SliderConfig<T extends Number> extends Config<T> {
-    private final T minValue;  // スライダーの最小値
-    private final T maxValue;  // スライダーの最大値
-    private final double step;  // スライダーのステップ
+    private final T minValue;
+    private final T maxValue;
+    private final double step;
 
     public SliderConfig(String name, T defaultValue, T minValue, T maxValue, double step) {
-        super(name, String.valueOf(defaultValue));  // スーパークラスのコンストラクタを呼び出し
+        super(name, String.valueOf(defaultValue));
         this.minValue = minValue;
         this.maxValue = maxValue;
         this.step = step;
@@ -35,8 +35,7 @@ public class SliderConfig<T extends Number> extends Config<T> {
         super.setValue(value);
     }
 
-    // スライダーの値を表示するためのメソッド
     public String getSuffix() {
-        return "Value: " + getValue();  // 値の表示形式をカスタマイズ
+        return "Value: " + getValue();
     }
 }
