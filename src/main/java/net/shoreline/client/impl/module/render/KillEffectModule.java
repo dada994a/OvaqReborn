@@ -1,49 +1,47 @@
 package net.shoreline.client.impl.module.render;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.world.ClientWorld;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.LightningEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.sound.SoundEvents;
-import net.shoreline.client.api.config.Config;
-import net.shoreline.client.api.config.setting.BooleanConfig;
-import net.shoreline.client.api.config.setting.EnumConfig;
-import net.shoreline.client.api.event.listener.EventListener;
+import net.minecraft.entity.EntityType;
+import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Vec3d;
+import net.shoreline.client.api.event.EventDispatcher;
 import net.shoreline.client.api.module.ModuleCategory;
 import net.shoreline.client.api.module.ToggleModule;
 import net.shoreline.client.impl.event.entity.EntityDeathEvent;
 
-/**
- * Credit https://github.com/moneymod/moneymod/blob/main/src/main/java/wtf/moneymod/client/impl/module/render/KillEffect.java
- *
- * @return
- */
 public class KillEffectModule extends ToggleModule {
 
-    Config<Effect> effectConfig = new EnumConfig<>("Effect", "The effect that is applied on kill", Effect.BOLT, KillEffectModule.Effect.values());
-    Config<Boolean> soundConfig = new BooleanConfig("Sound", "Play sound on kill", true);
+    private final MinecraftClient mc = MinecraftClient.getInstance();
 
     public KillEffectModule() {
-        super("KillEffect", "Spawns lightning and plays sound when you kill an enemy", ModuleCategory.RENDER);
+        super("KillEffect", "Spawns lightning when you kill an entity", ModuleCategory.RENDER);
+        EventDispatcher.register(EntityDeathEvent.class, this::onEntityDeath);
     }
-//エラーは出ないように調節したけど動かないかもね
-//NaaNaaあとよろしくね
-    @EventListener
-    public void onEntityDeath(EntityDeathEvent event) {
-        if (mc.player == null || event.getEntity() == null) return;
 
-        Entity entity = event.getEntity();
-        if (entity.isRemoved() || (entity instanceof PlayerEntity && ((PlayerEntity) entity).getHealth() <= 0)) {
-            if (effectConfig.getValue() == Effect.BOLT) {
-                mc.world.spawnEntity(new LightningEntity(EntityType.LIGHTNING_BOLT, mc.world));
-                if (soundConfig.getValue()) {
-                    mc.player.playSound(SoundEvents.ENTITY_LIGHTNING_BOLT_THUNDER, 0.5f, 1.0f);
-                }
-            }
+    private void onEntityDeath(EntityDeathEvent event) {
+        LivingEntity killedEntity = event.getEntity();
+        if (isPlayerKiller(killedEntity)) {
+            spawnLightningEffect(mc.world, killedEntity.getPos());
         }
     }
 
-    public enum Effect {
-        BOLT
+    private boolean isPlayerKiller(LivingEntity killedEntity) {
+        return mc.player != null && killedEntity.getRecentDamageSource() != null && killedEntity.getRecentDamageSource().getAttacker() == mc.player;
+    }
+
+    private void spawnLightningEffect(ClientWorld world, Vec3d pos) {
+        if (world != null) {
+            LightningEntity lightning = new LightningEntity(EntityType.LIGHTNING_BOLT, world);
+            lightning.setPos(pos.x, pos.y, pos.z);
+            lightning.setSilent(true);
+            world.spawnEntity(lightning);
+
+            EntitySpawnS2CPacket packet = new EntitySpawnS2CPacket(lightning);
+            mc.getNetworkHandler().sendPacket(packet);
+        }
     }
 }

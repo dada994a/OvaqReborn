@@ -270,8 +270,6 @@ public class AutoMineModule extends RotationModule {
             double dy = (render1.maxY - render1.minY) / 2.0;
             double dz = (render1.maxZ - render1.minZ) / 2.0;
             final Box scaled = new Box(center, center).expand(dx * scale, dy * scale, dz * scale);
-
-            // Use the mining color config for rendering
             int color = miningColorConfig.getValue().getRGB();
             RenderManager.renderBox(matrixStack, scaled, color);
             RenderManager.renderBoundingBox(matrixStack, scaled, 2.5f, color);
