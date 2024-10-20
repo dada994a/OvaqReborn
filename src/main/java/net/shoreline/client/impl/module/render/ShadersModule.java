@@ -1,50 +1,49 @@
-package net.shoreline.client.impl.module.render;
+package net.shoreline.client.impl.module.graphics;
 
 import net.shoreline.client.api.config.Config;
-import net.shoreline.client.api.config.setting.BooleanConfig;
+import net.shoreline.client.api.config.setting.EnumConfig;
+import net.shoreline.client.api.config.setting.NumberConfig;
+import net.shoreline.client.api.event.listener.EventListener;
 import net.shoreline.client.api.module.ModuleCategory;
 import net.shoreline.client.api.module.ToggleModule;
-import net.shoreline.client.impl.shaders.GradientProgram;
-import net.shoreline.client.impl.shaders.RoundedRectangleProgram;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.util.math.Vec2f;
-
-import java.awt.*;
+import org.jetbrains.annotations.Debug;
 
 public class ShadersModule extends ToggleModule {
+    public enum ShaderType {
+        SOLID, RAINBOW, GRADIENT
+    }
 
-    private GradientProgram gradientProgram;
-    private RoundedRectangleProgram roundedRectangleProgram;
-
-    Config<Boolean> useGradient = new BooleanConfig("Use Gradient", "Enable Gradient Shader", true);
-    Config<Boolean> useRoundedRectangle = new BooleanConfig("Use Rounded Rectangle", "Enable Rounded Rectangle Shader", false);
+    public Config<ShaderType> shaderTypeConfig = new EnumConfig<>("Shader", "Select shader type", ShaderType.SOLID, ShaderType.values());
+    public Config<Float> rangeConfig = new NumberConfig<>("Range", "Shader range", 10.0f, 1.0f, 64.0f);
+    public Config<Float> lineWidthConfig = new NumberConfig<>("LineWidth", "Width of the lines", 1.0f, 0.1f, 5.0f);
+    public Config<Float> glowConfig = new NumberConfig<>("Glow", "Glow intensity", 1.5f, 0.0f, 10.0f);
 
     public ShadersModule() {
-        super("Shaders", "Renders shaders in-game", ModuleCategory.RENDER);
+        super("Shaders", "Apply solid shader effects", ModuleCategory.RENDER);
     }
 
-    @Override
-    public void onEnable() {
-        super.onEnable();
-
-        gradientProgram = new GradientProgram();
-        roundedRectangleProgram = new RoundedRectangleProgram();
-
-        MinecraftClient mc = MinecraftClient.getInstance();
-        int windowWidth = mc.getWindow().getWidth();
-        int windowHeight = mc.getWindow().getHeight();
-
-        // ユニフォームの設定
-        if (useGradient.getValue()) {
-            gradientProgram.setUniforms(new Vec2f(windowWidth, windowHeight));
-            gradientProgram.use();
-        }
-        if (useRoundedRectangle.getValue()) {
-            roundedRectangleProgram.setDimensions(100, 50);
-            roundedRectangleProgram.setColor(Color.RED);
-            roundedRectangleProgram.setRadius(10);
-            roundedRectangleProgram.setSoftness(5);
-            roundedRectangleProgram.use();
-        }
+    @EventListener
+    public void onRender() {
+        switch (shaderTypeConfig.getValue()) {
+            case SOLID:
+                applySolidShader();
+                break;
+            case RAINBOW:
+                applyRainbowShader();
+                break;
+            case GRADIENT:
+                applyGradientShader();
+                break;
         }
     }
+
+    private void applySolidShader() {
+
+    }
+
+    private void applyRainbowShader() {
+    }
+
+    private void applyGradientShader() {
+    }
+}

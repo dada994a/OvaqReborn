@@ -89,6 +89,7 @@ public class ModuleManager {
                 //new TrapPhaseModule(),
                 new PortalGodModeModule(),
                 new ReachModule(),
+                new RegenModule(),
                 // Misc
                 //new AntiAFKModule(),
                 new AntiAimModule(),
@@ -96,7 +97,7 @@ public class ModuleManager {
                 // new AntiBookBanModule(),
                 new AntiSpamModule(),
                 new AutoAcceptModule(),
-                //new AutoEzModule(),
+                new AutoEzModule(),
                 new AutoFishModule(),
                 new AutoReconnectModule(),
                 new AutoRespawnModule(),

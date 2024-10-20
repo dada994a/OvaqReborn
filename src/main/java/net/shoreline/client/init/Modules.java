@@ -83,13 +83,14 @@ public class Modules {
     //public static TrapPhaseModule TRAPPHASE;
     public static PortalGodModeModule PORTAL_GOD_MODE;
     public static ReachModule REACH;
+    public static RegenModule REGEN;
     // Misc
     public static AntiAimModule ANTI_AIM;
     public static AntiSpamModule ANTI_SPAM;
     //public static AntiAFKModule ANTI_AFK;
     public static ChatSuffixModule CHATSUFFIX;
     public static AutoAcceptModule AUTO_ACCEPT;
-    //public static AutoEzModule AUTO_EZ;
+    public static AutoEzModule AUTO_EZ;
     public static AutoFishModule AUTO_FISH;
     public static AutoReconnectModule AUTO_RECONNECT;
     public static AutoRespawnModule AUTO_RESPAWN;
@@ -276,11 +277,12 @@ public class Modules {
             //TRAPPHASE = (TrapPhaseModule) getRegisteredModule("trapphase-module");
             PORTAL_GOD_MODE = (PortalGodModeModule) getRegisteredModule("portalgodmode-module");
             REACH = (ReachModule) getRegisteredModule("reach-module");
+            REGEN = (RegenModule) getRegisteredModule("regen-module");
             ANTI_AIM = (AntiAimModule) getRegisteredModule("antiaim-module");
             // ANTI_BOOK_BAN = (AntiBookBanModule) getRegisteredModule("antibookban-module");
             ANTI_SPAM = (AntiSpamModule) getRegisteredModule("antispam-module");
             AUTO_ACCEPT = (AutoAcceptModule) getRegisteredModule("autoaccept-module");
-            //AUTO_EZ = (AutoEzModule) getRegisteredModule("autoez-module");
+            AUTO_EZ = (AutoEzModule) getRegisteredModule("autoez-module");
             AUTO_FISH = (AutoFishModule) getRegisteredModule("autofish-module");
             AUTO_RECONNECT = (AutoReconnectModule) getRegisteredModule("autoreconnect-module");
             AUTO_RESPAWN = (AutoRespawnModule) getRegisteredModule("autorespawn-module");

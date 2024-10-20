@@ -43,11 +43,11 @@ public class DiscordManager {
     private static String getServerInfo() {
         MinecraftClient mc = MinecraftClient.getInstance();
         if (mc.getCurrentServerEntry() != null) {
-            return "Playing on " + mc.getCurrentServerEntry().address;
+            return "MultiPlayer" + "(" + mc.getCurrentServerEntry().address + ")";
         } else if (mc.isInSingleplayer()) {
-            return "Playing in Singleplayer";
+            return "Singleplayer";
         } else {
-            return "In Title Menu";
+            return "Main Menu";
         }
     }
 

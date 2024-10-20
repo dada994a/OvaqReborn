@@ -1,12 +1,10 @@
 package net.shoreline.client.impl.module.render;
 
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.shoreline.client.api.event.EventDispatcher;
 import net.shoreline.client.api.module.ModuleCategory;
@@ -14,8 +12,6 @@ import net.shoreline.client.api.module.ToggleModule;
 import net.shoreline.client.impl.event.entity.EntityDeathEvent;
 
 public class KillEffectModule extends ToggleModule {
-
-    private final MinecraftClient mc = MinecraftClient.getInstance();
 
     public KillEffectModule() {
         super("KillEffect", "Spawns lightning when you kill an entity", ModuleCategory.RENDER);

@@ -81,10 +81,8 @@ public class AutoMineModule extends RotationModule {
     }
 
     @EventListener
-    public void onPlayerTick(final PlayerTickEvent event)
-    {
-        if (autoConfig.getValue() && !manualOverride && (miningData == null || mc.world.isAir(miningData.getPos())))
-        {
+    public void onPlayerTick(final PlayerTickEvent event) {
+        if (autoConfig.getValue() && !manualOverride && (miningData == null || mc.world.isAir(miningData.getPos()))) {
             PlayerEntity playerTarget = null;
             double minDistance = Float.MAX_VALUE;
             for (PlayerEntity entity : mc.world.getPlayers()) {
@@ -106,17 +104,12 @@ public class AutoMineModule extends RotationModule {
                     return;
                 }
                 final BlockPos cityBlockPos = cityPositions.pollLastEntry().getValue();
-                if (cityBlockPos != null)
-                {
+                if (cityBlockPos != null) {
                     // If we are re-mining, bypass throttle check below
-                    if (miningData instanceof AutoMiningData && miningData.isInstantRemine() && !mc.world.isAir(miningData.getPos()) && autoRemineConfig.getValue())
-                    {
+                    if (miningData instanceof AutoMiningData && miningData.isInstantRemine() && !mc.world.isAir(miningData.getPos()) && autoRemineConfig.getValue()) {
                         stopMining(miningData);
-                    }
-                    else if (!mc.world.isAir(cityBlockPos) && !isBlockDelayGrim())
-                    {
-                        if (miningData != null && miningData.getBlockDamage() > 0.0f)
-                        {
+                    } else if (!mc.world.isAir(cityBlockPos) && !isBlockDelayGrim()) {
+                        if (miningData != null && miningData.getBlockDamage() > 0.0f) {
                             abortMining(miningData);
                         }
                         miningData = new AutoMiningData(cityBlockPos,
@@ -125,15 +118,14 @@ public class AutoMineModule extends RotationModule {
                         startMining(miningData);
                     }
                 }
+
                 if (doubleBreakConfig.getValue()) {
                     if (cityPositions.isEmpty()) {
                         return;
                     }
                     final BlockPos cityBlockPos2 = cityPositions.pollLastEntry().getValue();
-                    if (cityBlockPos2 != null && cityBlockPos2 != cityBlockPos)
-                    {
-                        if (!mc.world.isAir(cityBlockPos2) && !isBlockDelayGrim())
-                        {
+                    if (cityBlockPos2 != null && cityBlockPos2 != cityBlockPos) {
+                        if (!mc.world.isAir(cityBlockPos2) && !isBlockDelayGrim()) {
                             miningData2 = new AutoMiningData(cityBlockPos2,
                                     strictDirectionConfig.getValue() ? Managers.INTERACT.getPlaceDirectionGrim(cityBlockPos2) : Direction.UP, 0.8f);
                             startMining(miningData2);
@@ -142,60 +134,49 @@ public class AutoMineModule extends RotationModule {
                 }
             }
         }
-        if (miningData != null)
-        {
+
+        if (miningData != null) {
             final double distance = miningData.getPos().getSquaredDistance(
                     mc.player.getX(), mc.player.getY(), mc.player.getZ());
-            if (distance > ((NumberConfig<Float>) rangeConfig).getValueSq())
-            {
+            if (distance > ((NumberConfig<Float>) rangeConfig).getValueSq()) {
                 abortMining(miningData);
                 miningData = null;
                 return;
             }
-            if (miningData.getState().isAir())
-            {
-                // Once we broke the block that overrode that the auto city, we can allow the module
-                // to auto mine "city" blocks
-                if (manualOverride)
-                {
+            if (miningData.getState().isAir()) {
+                if (manualOverride) {
                     manualOverride = false;
                     miningData = null;
                     return;
                 }
-                if (instantConfig.getValue())
-                {
+                if (instantConfig.getValue()) {
                     if (miningData instanceof AutoMiningData && !autoRemineConfig.getValue()) {
                         miningData = null;
                         return;
                     }
                     miningData.setInstantRemine();
                     miningData.setDamage(1.5f);
-                }
-                else
-                {
+                } else {
                     miningData.resetDamage();
                 }
                 return;
             }
             final float damageDelta = Modules.SPEEDMINE.calcBlockBreakingDelta(
                     miningData.getState(), mc.world, miningData.getPos());
-            if (miningData.damage(damageDelta) >= miningData.getSpeed() || miningData.isInstantRemine())
-            {
-                if (mc.player.isUsingItem() && !multitaskConfig.getValue())
-                {
+            if (miningData.damage(damageDelta) >= miningData.getSpeed() || miningData.isInstantRemine()) {
+                if (mc.player.isUsingItem() && !multitaskConfig.getValue()) {
                     return;
                 }
                 stopMining(miningData);
             }
         }
+
         if (miningData2 != null) {
             final float damageDelta2 = Modules.SPEEDMINE.calcBlockBreakingDelta(
                     miningData2.getState(), mc.world, miningData2.getPos());
             float dmg = miningData2.damage(damageDelta2);
-            if (dmg >= miningData2.getSpeed())
-            {
-                if (mc.player.isUsingItem() && !multitaskConfig.getValue())
-                {
+            if (dmg >= miningData2.getSpeed()) {
+                if (mc.player.isUsingItem() && !multitaskConfig.getValue()) {
                     return;
                 }
                 Managers.INVENTORY.setSlot(miningData2.getSlot());
@@ -206,31 +187,23 @@ public class AutoMineModule extends RotationModule {
     }
 
     @EventListener
-    public void onAttackBlock(final AttackBlockEvent event)
-    {
-        // Do not try to break unbreakable blocks
-        if (event.getState().getBlock().getHardness() == -2.0f || event.getState().isAir() || mc.player.isCreative())
-        {
+    public void onAttackBlock(final AttackBlockEvent event) {
+        if (event.getState().getBlock().getHardness() == -2.0f || event.getState().isAir() || mc.player.isCreative()) {
             return;
         }
         event.cancel();
         mc.player.swingHand(Hand.MAIN_HAND);
-        if (miningData != null)
-        {
-            if (miningData.getPos().equals(event.getPos()))
-            {
+        if (miningData != null) {
+            if (miningData.getPos().equals(event.getPos())) {
                 return;
             }
             abortMining(miningData);
         }
-        else if (autoConfig.getValue())
-        {
-            // Only count as an override if AutoCity is doing something
-            if (miningData instanceof AutoMiningData)
-            {
-                abortMining(miningData);
-                manualOverride = true;
+        if (miningData2 != null) {
+            if (miningData2.getPos().equals(event.getPos())) {
+                return;
             }
+            abortMining(miningData2);
         }
         miningData = new MiningData(event.getPos(), event.getDirection(), speedConfig.getValue());
         startMining(miningData);
