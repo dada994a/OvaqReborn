@@ -66,7 +66,11 @@ public class PistonPushModule extends RotationModule {
                 ChatUtil.error("No targets.");
                 disable();
             } else {
-                if (hole(true, target)) {
+                if (!Managers.HOLE.checkHole(target.getBlockPos()).isStandard()
+                || !Managers.HOLE.checkHole(target.getBlockPos()).isDouble()
+                || !Managers.HOLE.checkHole(target.getBlockPos()).isQuad()
+                || !Managers.HOLE.checkHole(target.getBlockPos()).isDoubleX()
+                || !Managers.HOLE.checkHole(target.getBlockPos()).isDoubleZ()) {
                     disable();
                     return;
                 }
@@ -89,7 +93,7 @@ public class PistonPushModule extends RotationModule {
                 pushable.sort(Comparator.comparingDouble(this::sort));
                 Piston a = pushable.get(0);
                 pushable.clear();
-                placePiston(a);
+                placePiston(piston, a);
                 placeRedstone(a.activatorPos);
             }
         } catch (Exception e) {
@@ -100,7 +104,7 @@ public class PistonPushModule extends RotationModule {
         Place(activatorPos, Items.REDSTONE_BLOCK, 3);
     }
 
-    private boolean placePiston(Piston a) {
+    private boolean placePiston(int pistons, Piston a) {
         if (a.pistonEd) {
             return false;
         }
@@ -112,7 +116,7 @@ public class PistonPushModule extends RotationModule {
             return true;
         }
         this.timer = 0;
-        Place(a.piston, Items.PISTON, 2);
+        Place(a.piston, Item.byRawId(pistons), 2);
         return true;
     }
 
@@ -140,25 +144,6 @@ public class PistonPushModule extends RotationModule {
             return;
         }
         Managers.INTERACT.placeBlock(placepos, getItemHotbar(block), false, false, null);
-    }
-
-    private boolean hole(boolean doubles, Entity entity) {
-        BlockPos blockPos = entity.getBlockPos();
-        int air = 0;
-        for (Direction direction : Direction.values()) {
-            BlockState state;
-            if (direction == Direction.UP || (state = state(blockPos.offset(direction))).getBlock() == Blocks.BEDROCK || state.getBlock() == Blocks.OBSIDIAN || state.getBlock() == Blocks.CRYING_OBSIDIAN) continue;
-            if (!doubles || direction == Direction.DOWN) {
-                return true;
-            }
-            ++air;
-            for (Direction dir : Direction.values()) {
-                BlockState blockState1;
-                if (dir == direction.getOpposite() || dir == Direction.UP || (blockState1 = state(blockPos.offset(direction).offset(dir))).getBlock() == Blocks.BEDROCK || blockState1.getBlock() == Blocks.OBSIDIAN) continue;
-                return true;
-            }
-        }
-        return air >= 2;
     }
 
     private int getItemHotbar(Item item) {
