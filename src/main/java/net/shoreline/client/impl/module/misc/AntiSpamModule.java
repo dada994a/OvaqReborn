@@ -34,17 +34,18 @@ public class AntiSpamModule extends ToggleModule {
             return;
         }
 
+        String chatMessage = packet.body().content();
+
         if (unicodeConfig.getValue()) {
-            String msg = packet.body().content();
             Pattern pattern = Pattern.compile("[\\x00-\\x7F]", Pattern.CASE_INSENSITIVE);
-            Matcher matcher = pattern.matcher(msg);
+            Matcher matcher = pattern.matcher(chatMessage);
             if (!matcher.find()) {
                 event.cancel();
                 return;
             }
         }
+
         if (antiLagMsgConfig.getValue()) {
-            String chatMessage = packet.body().content();
             if (chatMessage.equals(LAG_MESSAGE)) {
                 event.cancel();
                 mc.player.sendMessage(Text.of("(lagmessage)"), false);
@@ -53,9 +54,7 @@ public class AntiSpamModule extends ToggleModule {
         }
 
         final UUID sender = packet.sender();
-        final String chatMessage = packet.body().content();
         String lastMessage = messages.get(sender);
-
         if (chatMessage.equalsIgnoreCase(lastMessage)) {
             event.cancel();
         } else {

@@ -138,6 +138,7 @@ public class Modules {
     public static VelocityModule VELOCITY;
     public static YawModule YAW;
     // Render
+    //public static AmbienceModule AMBIENCE;
     public static BlockHighlightModule BLOCK_HIGHLIGHT;
     public static BreakHighlightModule BREAK_HIGHLIGHT;
     public static ChamsModule CHAMS;
@@ -329,6 +330,7 @@ public class Modules {
             TICK_SHIFT = (TickShiftModule) getRegisteredModule("tickshift-module");
             VELOCITY = (VelocityModule) getRegisteredModule("velocity-module");
             YAW = (YawModule) getRegisteredModule("yaw-module");
+            //AMBIENCE = (AmbienceModule) getRegisteredModule("ambience-module");
             BLOCK_HIGHLIGHT = (BlockHighlightModule) getRegisteredModule("blockhighlight-module");
             BREAK_HIGHLIGHT = (BreakHighlightModule) getRegisteredModule("breakhighlight-module");
             CHAMS = (ChamsModule) getRegisteredModule("chams-module");

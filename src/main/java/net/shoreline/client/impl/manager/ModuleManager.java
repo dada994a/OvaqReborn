@@ -145,6 +145,7 @@ public class ModuleManager {
                 new VelocityModule(),
                 new YawModule(),
                 // Render
+                //new AmbienceModule(),
                 new BlockHighlightModule(),
                 new BreakHighlightModule(),
                 new ChamsModule(),

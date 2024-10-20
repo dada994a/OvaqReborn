@@ -1,5 +1,6 @@
 package net.shoreline.client.mixin.entity.player;
 
+import com.google.common.eventbus.EventBus;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MovementType;
@@ -7,6 +8,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.shoreline.client.OvaqReborn;
+import net.shoreline.client.api.event.DeathEvent;
+import net.shoreline.client.api.event.Event;
 import net.shoreline.client.api.event.EventStage;
 import net.shoreline.client.impl.event.entity.player.PlayerJumpEvent;
 import net.shoreline.client.impl.event.entity.player.PushFluidsEvent;
@@ -36,6 +39,15 @@ public abstract class MixinPlayerEntity extends LivingEntity implements Globals 
     @Shadow
     public abstract void travel(Vec3d movementInput);
 
+    @Inject(method = "onDeath", at = @At("HEAD"), cancellable = true)
+    private void onDeath(CallbackInfo info) {
+        PlayerEntity player = (PlayerEntity) (Object) this;
+        DeathEvent deathEvent = new DeathEvent(player);
+        OvaqReborn.EVENT_HANDLER.dispatch(deathEvent);
+        if (deathEvent.isCanceled()) {
+            info.cancel();
+        }
+    }
     /**
      * @param movementInput
      * @param ci
