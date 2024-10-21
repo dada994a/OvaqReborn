@@ -89,6 +89,7 @@ public class ModuleManager {
                 new PearlPhaseModule(),
                 //new TrapPhaseModule(),
                 new PortalGodModeModule(),
+                new RaytraceBypassModule(),
                 new ReachModule(),
                 new RegenModule(),
                 // Misc
@@ -122,7 +123,6 @@ public class ModuleManager {
                 new AntiLevitationModule(),
                 new AutoWalkModule(),
                 //new BlockHoleMoveModule(),
-                new BetaBlockMoveModule(),
                 new BlockMoveModule(),
                 new BoatFlyModule(),
                 new ElytraFlyModule(),
@@ -148,7 +148,7 @@ public class ModuleManager {
                 new YawModule(),
                 // Render
                 //new AmbienceModule(),
-                new AnimationsModule(),
+                //new AnimationsModule(),
                 new BlockHighlightModule(),
                 new BreakHighlightModule(),
                 new ChamsModule(),

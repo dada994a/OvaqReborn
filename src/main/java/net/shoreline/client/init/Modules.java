@@ -78,11 +78,13 @@ public class Modules {
     public static FastProjectileModule FAST_PROJECTILE;
     public static HitboxDesyncModule HITBOXDESYNC;
     public static PacketCancelerModule PACKET_CANCELER;
+    public static PacketControlModule PACKET_CONTROL;
     public static PacketFlyModule PACKET_FLY;
     public static PhaseModule PHASE;
     public static PearlPhaseModule PEARLPHASE;
     //public static TrapPhaseModule TRAPPHASE;
     public static PortalGodModeModule PORTAL_GOD_MODE;
+    public static RaytraceBypassModule RAYTRACE_BYPASS;
     public static ReachModule REACH;
     public static RegenModule REGEN;
     // Misc
@@ -114,7 +116,6 @@ public class Modules {
     // Movement
     public static AntiLevitationModule ANTI_LEVITATION;
     public static AutoWalkModule AUTO_WALK;
-    public static BetaBlockMoveModule BETA_BLOCKHOLEMOVE;
     // public static BlockHoleMoveModule BLOCKHOLEMOVE;
     public static BlockMoveModule BLOCKMOVE;
     public static BoatFlyModule BOATFLY;
@@ -141,7 +142,7 @@ public class Modules {
     public static YawModule YAW;
     // Render
     //public static AmbienceModule AMBIENCE;
-    public static AnimationsModule ANIMATIONS;
+    //public static AnimationsModule ANIMATIONS;
     public static BlockHighlightModule BLOCK_HIGHLIGHT;
     public static BreakHighlightModule BREAK_HIGHLIGHT;
     public static ChamsModule CHAMS;
@@ -278,11 +279,13 @@ public class Modules {
             HITBOXDESYNC = (HitboxDesyncModule) getRegisteredModule("hitboxdesync-module");
             //HEARTFULEXPLOIT = (HeartfulExploitModule) getRegisteredModule("heartfulexploit-module");
             PACKET_CANCELER = (PacketCancelerModule) getRegisteredModule("packetcanceler-module");
+            PACKET_CONTROL = (PacketControlModule) getRegisteredModule("packetcontrol-module");
             PACKET_FLY = (PacketFlyModule) getRegisteredModule("packetfly-module");
             PHASE = (PhaseModule) getRegisteredModule("phase-module");
             PEARLPHASE = (PearlPhaseModule)  getRegisteredModule("pearlphase-module");
             //TRAPPHASE = (TrapPhaseModule) getRegisteredModule("trapphase-module");
             PORTAL_GOD_MODE = (PortalGodModeModule) getRegisteredModule("portalgodmode-module");
+            RAYTRACE_BYPASS = (RaytraceBypassModule) getRegisteredModule("raytracebypass-module");
             REACH = (ReachModule) getRegisteredModule("reach-module");
             REGEN = (RegenModule) getRegisteredModule("regen-module");
             ANTI_AIM = (AntiAimModule) getRegisteredModule("antiaim-module");
@@ -310,7 +313,6 @@ public class Modules {
             XCARRY = (XCarryModule) getRegisteredModule("xcarry-module");
             ANTI_LEVITATION = (AntiLevitationModule) getRegisteredModule("antilevitation-module");
             AUTO_WALK = (AutoWalkModule) getRegisteredModule("autowalk-module");
-            BETA_BLOCKHOLEMOVE = (BetaBlockMoveModule) getRegisteredModule("betablockholemove-module");
             //BLOCKHOLEMOVE = (BlockHoleMoveModule) getRegisteredModule("blockholemove-module");
             BLOCKMOVE = (BlockMoveModule) getRegisteredModule("blockmove-module");
             BOATFLY = (BoatFlyModule) getRegisteredModule("boatfly-module");
@@ -336,7 +338,7 @@ public class Modules {
             VELOCITY = (VelocityModule) getRegisteredModule("velocity-module");
             YAW = (YawModule) getRegisteredModule("yaw-module");
             //AMBIENCE = (AmbienceModule) getRegisteredModule("ambience-module");
-            ANIMATIONS = (AnimationsModule) getRegisteredModule("animations-module");
+           // ANIMATIONS = (AnimationsModule) getRegisteredModule("animations-module");
             BLOCK_HIGHLIGHT = (BlockHighlightModule) getRegisteredModule("blockhighlight-module");
             BREAK_HIGHLIGHT = (BreakHighlightModule) getRegisteredModule("breakhighlight-module");
             CHAMS = (ChamsModule) getRegisteredModule("chams-module");
