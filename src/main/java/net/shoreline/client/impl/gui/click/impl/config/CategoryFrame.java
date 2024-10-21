@@ -113,9 +113,6 @@ public class CategoryFrame extends Frame {
             y = mc.getWindow().getHeight() - 10;
         }
 
-        int borderColor = 0xFF00FF00;
-        float borderThickness = 2.0f;
-        fill(context, x - borderThickness, y - borderThickness, width + borderThickness * 2, height + borderThickness * 2, borderColor);
 
         rect(context, Modules.CLICK_GUI.getColor(1.7f));
         RenderManager.renderText(context, name, x + 3.0f, y + 4.0f, -1);
