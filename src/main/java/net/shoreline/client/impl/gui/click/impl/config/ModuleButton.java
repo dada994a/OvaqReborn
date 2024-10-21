@@ -104,14 +104,14 @@ public class ModuleButton extends Button {
             if (fill) {
                 fill(context, ix, y + height, 1.0f, off - (y + height) + 1.0f, Modules.CLICK_GUI.getColor1(scaledTime));
                 fill(context, ix + width - 1.0f, y + height, 1.0f, off - (y + height) + 1.0f, Modules.CLICK_GUI.getColor(scaledTime));
-                fillGradient(context, ix, off + 1.0f, ix + width, off + 2.0f, Modules.CLICK_GUI.getColor(scaledTime), Modules.CLICK_GUI.getColor1(scaledTime));
+                fillGradient(context, ix, off + 1.0f, ix + width, off + 2.0f, Modules.CLICK_GUI.getColor(scaledTime),  Modules.CLICK_GUI.getColor1(scaledTime));
             }
             disableScissor();
             ((CategoryFrame) frame).offset((float) (3.0f * settingsAnimation.getFactor()));
         }
-
         String toggleSymbol = open ? "-" : "+";
         RenderManager.renderText(context, toggleSymbol, ix + width - 12, iy + 3.5f, -1);
+
 
     }
 

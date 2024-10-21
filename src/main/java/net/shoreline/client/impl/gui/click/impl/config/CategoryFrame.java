@@ -126,8 +126,6 @@ public class CategoryFrame extends Frame {
                 off += (float) ((moduleButton.getHeight() + 1.0f) * categoryAnimation.getFactor());
                 inner += moduleButton.getHeight() + 1.0f;
 
-                String toggleSymbol = moduleButton.isOpen() ? "-" : "+";
-                RenderManager.renderText(context, toggleSymbol, x + width - 15, inner + 1.0f, -1);
             }
             disableScissor();
         }
