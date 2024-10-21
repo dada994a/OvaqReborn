@@ -21,7 +21,8 @@ import java.awt.*;
 public class ParticlesModule extends ToggleModule {
 
     Config<TotemParticle> totemConfig = new EnumConfig<>("Totem", "Renders totem particles", TotemParticle.OFF, TotemParticle.values());
-    Config<Color> totemColorConfig = new ColorConfig("TotemColor", "Color of the totem particles", new Color(25, 120, 0), false, false, () -> totemConfig.getValue() == TotemParticle.COLOR);
+    Config<Color> totemColorConfig1 = new ColorConfig("TotemColor1", "First color of the totem particles", new Color(25, 120, 0), false, false, () -> totemConfig.getValue() == TotemParticle.COLOR);
+    Config<Color> totemColorConfig2 = new ColorConfig("TotemColor2", "Second color of the totem particles", new Color(255, 0, 0), false, false, () -> totemConfig.getValue() == TotemParticle.COLOR);
     Config<Boolean> fireworkConfig = new BooleanConfig("Firework", "Renders firework particles", false);
     Config<Boolean> potionConfig = new BooleanConfig("Effects", "Renders potion effect particles", true);
     Config<Boolean> bottleConfig = new BooleanConfig("BottleSplash", "Render bottle splash particles", true);
@@ -45,14 +46,21 @@ public class ParticlesModule extends ToggleModule {
     public void onTotemParticle(TotemParticleEvent event) {
         if (totemConfig.getValue() == TotemParticle.COLOR) {
             event.cancel();
-            Color color = totemColorConfig.getValue();
-            float r = color.getRed() / 255.0f;
-            float g = color.getGreen() / 255.0f;
-            float b = color.getBlue() / 255.0f;
-            event.setColor(new Color(MathHelper.clamp(r + RANDOM.nextFloat() * 0.1f, 0.0f, 1.0f),
-                    MathHelper.clamp(g + RANDOM.nextFloat() * 0.1f, 0.0f, 1.0f),
-                    MathHelper.clamp(b + RANDOM.nextFloat() * 0.1f, 0.0f, 1.0f)));
+            // Get the two colors for fading
+            Color color1 = totemColorConfig1.getValue();
+            Color color2 = totemColorConfig2.getValue();
+            // Generate a random color between the two colors
+            event.setColor(generateRandomColor(color1, color2));
         }
+    }
+
+    private Color generateRandomColor(Color color1, Color color2) {
+        // Generate a random ratio between 0 and 1
+        double ratio = Math.random(); // Using Math.random() for clarity
+        int r = (int) (color1.getRed() * (1 - ratio) + color2.getRed() * ratio);
+        int g = (int) (color1.getGreen() * (1 - ratio) + color2.getGreen() * ratio);
+        int b = (int) (color1.getBlue() * (1 - ratio) + color2.getBlue() * ratio);
+        return new Color(r, g, b);
     }
 
     @EventListener
