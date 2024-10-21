@@ -632,11 +632,13 @@ public class PistonAuraModule extends RotationModule {
     }
 
     private boolean isCrystalOnPos(BlockPos pos) {
-        for (Entity entity : mc.world.getEntities()) {
-            if (!(entity instanceof EndCrystalEntity) || !entity.getBlockPos().equals(pos)) continue;
-            return true;
-        }
-        return false;
+        //ここ下手に変えたら死ぬ
+        Box test = new Box(pos.getX() - 0.5, pos.getY() - 0.5, pos.getZ() - 0.5,
+                pos.getX() + 1.5, pos.getY() + 1.5, pos.getZ() + 1.5);
+
+        List<EndCrystalEntity> entities = mc.world.getEntitiesByClass(EndCrystalEntity.class, test, entity -> true);
+
+        return !entities.isEmpty();
     }
 
     private float getBlastResistance(BlockPos block) {
