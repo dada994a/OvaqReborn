@@ -6,9 +6,11 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.event.GameEvent;
@@ -36,12 +38,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(Entity.class)
 public abstract class MixinEntity implements Globals {
 
-    /**
-     * @param movementInput
-     * @param speed
-     * @param yaw
-     * @return
-     */
     @Shadow
     private static Vec3d movementInputToVelocity(Vec3d movementInput, float speed, float yaw) {
         return null;
@@ -74,12 +70,8 @@ public abstract class MixinEntity implements Globals {
     @Shadow
     protected static TrackedData<EntityPose> POSE;
 
-    /**
-     *
-     * @param tickDelta
-     * @param info
-     * @author xgraza
-     */
+    @Shadow @Final protected static TrackedData<Byte> FLAGS;
+
     @Inject(method = "getRotationVec", at = @At("RETURN"), cancellable = true)
     public void hookGetCameraPosVec(final float tickDelta, final CallbackInfoReturnable<Vec3d> info) {
         final EntityRotationVectorEvent event = new EntityRotationVectorEvent(
@@ -88,10 +80,6 @@ public abstract class MixinEntity implements Globals {
         info.setReturnValue(event.getPosition());
     }
 
-    /**
-     * @param movement
-     * @param cir
-     */
     @Inject(method = "adjustMovementForCollisions(Lnet/minecraft/util/math/Vec3d;)Lnet/minecraft/util/math/Vec3d;", at = @At(value = "HEAD"))
     public void hookMove(Vec3d movement, CallbackInfoReturnable<Vec3d> cir) {
         if ((Object) this != mc.player) {
@@ -101,11 +89,6 @@ public abstract class MixinEntity implements Globals {
         // OvaqReborn.EVENT_HANDLER.dispatch(stepEvent);
     }
 
-    /**
-     * @param state
-     * @param multiplier
-     * @param ci
-     */
     @Inject(method = "slowMovement", at = @At(value = "HEAD"), cancellable = true)
     private void hookSlowMovement(BlockState state, Vec3d multiplier, CallbackInfo ci) {
         if ((Object) this != mc.player) {
@@ -118,13 +101,9 @@ public abstract class MixinEntity implements Globals {
         }
     }
 
-    /**
-     * @param instance
-     * @return
-     */
     @Redirect(method = "getVelocityMultiplier", at = @At(value = "INVOKE",
             target = "Lnet/minecraft/block/BlockState;getBlock()" +
-                    "Lnet/minecraft/ block/Block;"))
+                    "Lnet/minecraft/block/Block;"))
     private Block hookGetVelocityMultiplier(BlockState instance) {
         if ((Object) this != mc.player) {
             return instance.getBlock();
@@ -138,11 +117,6 @@ public abstract class MixinEntity implements Globals {
         return instance.getBlock();
     }
 
-    /**
-     * @param speed
-     * @param movementInput
-     * @param ci
-     */
     @Inject(method = "updateVelocity", at = @At(value = "HEAD"), cancellable = true)
     private void hookUpdateVelocity(float speed, Vec3d movementInput, CallbackInfo ci) {
         if ((Object) this == mc.player) {
@@ -155,10 +129,6 @@ public abstract class MixinEntity implements Globals {
         }
     }
 
-    /**
-     * @param entity
-     * @param ci
-     */
     @Inject(method = "pushAwayFrom", at = @At(value = "HEAD"), cancellable = true)
     private void hookPushAwayFrom(Entity entity, CallbackInfo ci) {
         PushEntityEvent pushEntityEvent = new PushEntityEvent((Entity) (Object) this, entity);
@@ -168,9 +138,6 @@ public abstract class MixinEntity implements Globals {
         }
     }
 
-    /**
-     * @param cir
-     */
     @Inject(method = "getTeamColorValue", at = @At(value = "HEAD"),
             cancellable = true)
     private void hookGetTeamColorValue(CallbackInfoReturnable<Integer> cir) {
@@ -183,12 +150,6 @@ public abstract class MixinEntity implements Globals {
         }
     }
 
-    /**
-     *
-     * @param cursorDeltaX
-     * @param cursorDeltaY
-     * @param ci
-     */
     @Inject(method = "changeLookDirection", at = @At(value = "HEAD"), cancellable = true)
     private void hookChangeLookDirection(double cursorDeltaX, double cursorDeltaY, CallbackInfo ci) {
         if ((Object) this == mc.player) {
@@ -225,5 +186,13 @@ public abstract class MixinEntity implements Globals {
             info.setReturnValue(pose);
             info.cancel();
         }
+    }
+
+
+    @Inject( at = @At("HEAD"), method = "getFlag", cancellable = true)
+    public void getFlag(int flag, CallbackInfoReturnable<Boolean> cir) {
+        FlagGetEvent flagGetEvent = new FlagGetEvent((Entity) (Object) this, flag, ((Byte) this.dataTracker.get(FLAGS) & 1 << flag) != 0);
+        OvaqReborn.EVENT_HANDLER.dispatch(flagGetEvent);
+        cir.setReturnValue(flagGetEvent.getReturnValue());
     }
 }

@@ -131,6 +131,7 @@ public class ModuleManager {
                 new FakeLagModule(),
                 new FastFallModule(),
                 new FlightModule(),
+                new FollowModule(),
                 new IceSpeedModule(),
                 new JesusModule(),
                 new LongJumpModule(),
@@ -147,6 +148,7 @@ public class ModuleManager {
                 new YawModule(),
                 // Render
                 //new AmbienceModule(),
+                new AnimationsModule(),
                 new BlockHighlightModule(),
                 new BreakHighlightModule(),
                 new ChamsModule(),

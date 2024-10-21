@@ -124,6 +124,7 @@ public class Modules {
     public static FakeLagModule FAKE_LAG;
     public static FastFallModule FAST_FALL;
     public static FlightModule FLIGHT;
+    public static FollowModule FOLLOW;
     public static IceSpeedModule ICE_SPEED;
     public static JesusModule JESUS;
     public static LongJumpModule LONG_JUMP;
@@ -140,6 +141,7 @@ public class Modules {
     public static YawModule YAW;
     // Render
     //public static AmbienceModule AMBIENCE;
+    public static AnimationsModule ANIMATIONS;
     public static BlockHighlightModule BLOCK_HIGHLIGHT;
     public static BreakHighlightModule BREAK_HIGHLIGHT;
     public static ChamsModule CHAMS;
@@ -318,6 +320,7 @@ public class Modules {
             FAKE_LAG = (FakeLagModule) getRegisteredModule("fakelag-module");
             FAST_FALL = (FastFallModule) getRegisteredModule("fastfall-module");
             FLIGHT = (FlightModule) getRegisteredModule("flight-module");
+            FOLLOW = (FollowModule) getRegisteredModule("follow-module");
             ICE_SPEED = (IceSpeedModule) getRegisteredModule("icespeed-module");
             JESUS = (JesusModule) getRegisteredModule("jesus-module");
             LONG_JUMP = (LongJumpModule) getRegisteredModule("longjump-module");
@@ -333,6 +336,7 @@ public class Modules {
             VELOCITY = (VelocityModule) getRegisteredModule("velocity-module");
             YAW = (YawModule) getRegisteredModule("yaw-module");
             //AMBIENCE = (AmbienceModule) getRegisteredModule("ambience-module");
+            ANIMATIONS = (AnimationsModule) getRegisteredModule("animations-module");
             BLOCK_HIGHLIGHT = (BlockHighlightModule) getRegisteredModule("blockhighlight-module");
             BREAK_HIGHLIGHT = (BreakHighlightModule) getRegisteredModule("breakhighlight-module");
             CHAMS = (ChamsModule) getRegisteredModule("chams-module");
