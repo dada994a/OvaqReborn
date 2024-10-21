@@ -14,10 +14,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.network.packet.c2s.play.HandSwingC2SPacket;
-import net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket;
-import net.minecraft.network.packet.c2s.play.PlayerInteractBlockC2SPacket;
-import net.minecraft.network.packet.c2s.play.PlayerInteractEntityC2SPacket;
+import net.minecraft.network.packet.c2s.play.*;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -35,6 +32,7 @@ import net.shoreline.client.api.event.listener.EventListener;
 import net.shoreline.client.api.module.ModuleCategory;
 import net.shoreline.client.api.module.RotationModule;
 import net.shoreline.client.impl.event.network.PlayerTickEvent;
+import net.shoreline.client.impl.module.world.AutoMineModule;
 import net.shoreline.client.init.Managers;
 import net.shoreline.client.init.Modules;
 import net.shoreline.client.mixin.accessor.AccessorSectionedEntityCache;
@@ -98,7 +96,7 @@ public class PistonAuraModule extends RotationModule {
     static Action action = Action.None;
 
     static int timer = 0;
-    Runnable task; //todo: later
+    Runnable task; //誰かtask..
 
     public PistonAuraModule() {
         super("PistonAura", "beta", ModuleCategory.COMBAT);
@@ -114,7 +112,6 @@ public class PistonAuraModule extends RotationModule {
             if (target == null) {
                 ChatUtil.error("No Target");
                 disable();
-                return;
             } else {
                 int crystal = getItemHotbar(Items.END_CRYSTAL);
                 int piston = getItemHotbar(Items.PISTON);
@@ -181,7 +178,13 @@ public class PistonAuraModule extends RotationModule {
                 if (action != Action.PlaceRedstone) {
                     activePos = null;
                 } else {
-                    Managers.INTERACT.placeBlock(activePos, redstone, false, false, null);
+                    if (!SneakBlocks.isSneakBlock(state(activePos))) {
+                        Managers.INTERACT.placeBlock(activePos, redstone, false, false, null);
+                    } else {
+                        Managers.NETWORK.sendPacket(new ClientCommandC2SPacket(mc.player, ClientCommandC2SPacket.Mode.PRESS_SHIFT_KEY));
+                        Managers.NETWORK.sendPacket(new ClientCommandC2SPacket(mc.player, ClientCommandC2SPacket.Mode.RELEASE_SHIFT_KEY));
+                        Managers.INTERACT.placeBlock(activePos, redstone, false, false, null);
+                    }
                 }
                 if (action != Action.ToggleLever) {
                     leverPos = null;
@@ -201,17 +204,35 @@ public class PistonAuraModule extends RotationModule {
                 if (action != Action.Support) {
                     supportPos = null;
                 } else {
-                    Managers.INTERACT.placeBlock(supportPos, supportItem, false, false, null);
+                    if (!SneakBlocks.isSneakBlock(state(supportPos))) {
+                        Managers.INTERACT.placeBlock(supportPos, supportItem, false, false, null);
+                    } else {
+                        Managers.NETWORK.sendPacket(new ClientCommandC2SPacket(mc.player, ClientCommandC2SPacket.Mode.PRESS_SHIFT_KEY));
+                        Managers.NETWORK.sendPacket(new ClientCommandC2SPacket(mc.player, ClientCommandC2SPacket.Mode.RELEASE_SHIFT_KEY));
+                        Managers.INTERACT.placeBlock(supportPos, supportItem, false, false, null);
+                    }
                 }
                 if (action != Action.SupportCrystal) {
                     cSupportPos = null;
                 } else {
-                    Managers.INTERACT.placeBlock(cSupportPos, obsidian, false, false, null);
+                    if (!SneakBlocks.isSneakBlock(state(cSupportPos))) {
+                        Managers.INTERACT.placeBlock(cSupportPos, obsidian, false, false, null);
+                    } else {
+                        Managers.NETWORK.sendPacket(new ClientCommandC2SPacket(mc.player, ClientCommandC2SPacket.Mode.PRESS_SHIFT_KEY));
+                        Managers.NETWORK.sendPacket(new ClientCommandC2SPacket(mc.player, ClientCommandC2SPacket.Mode.RELEASE_SHIFT_KEY));
+                        Managers.INTERACT.placeBlock(cSupportPos, obsidian, false, false, null);
+                    }
                 }
                 if (action == Action.Rotate) {
                     test();
                 } else if (action == Action.PlacePiston) {
-                    Managers.INTERACT.placeBlock(pistonPos.getPos(), piston, false, false, null);
+                    if (!SneakBlocks.isSneakBlock(state(pistonPos.getPos()))) {
+                        Managers.INTERACT.placeBlock(pistonPos.getPos(), piston, false, false, null);
+                    } else {
+                        Managers.NETWORK.sendPacket(new ClientCommandC2SPacket(mc.player, ClientCommandC2SPacket.Mode.PRESS_SHIFT_KEY));
+                        Managers.NETWORK.sendPacket(new ClientCommandC2SPacket(mc.player, ClientCommandC2SPacket.Mode.RELEASE_SHIFT_KEY));
+                        Managers.INTERACT.placeBlock(pistonPos.getPos(), piston, false, false, null);
+                    }
                 } else {
                     pistonPos = null;
                 }
@@ -221,21 +242,10 @@ public class PistonAuraModule extends RotationModule {
     }
 
     private void mine(BlockPos p) {
-        //todo make this work
         if (isAir(p)) {
             return;
         }
-        int pick = getItemHotbar(Items.DIAMOND_PICKAXE);
-        if (pick == -1) {
-            pick = getItemHotbar(Items.NETHERITE_PICKAXE);
-        }
-        if (pick == -1) {
-            return;
-        }
-        Managers.INVENTORY.setSlot(pick);
-        Managers.NETWORK.sendSequencedPacket(id -> new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.START_DESTROY_BLOCK, p, Direction.UP, id));
-        Managers.NETWORK.sendSequencedPacket(id -> new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.ABORT_DESTROY_BLOCK, p, Direction.UP, id));
-        Managers.INVENTORY.syncToClient();
+        Modules.AUTO_MINE.startMining(new AutoMineModule.MiningData(p, Direction.UP, 0.82f));
     }
 
     private void test() {
