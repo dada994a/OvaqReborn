@@ -106,11 +106,11 @@ public class AutoObsidianModule extends ObsidianPlacerModule {
     protected ArrayList<BlockPos> posArrayList(
             PlayerEntity target, int maxRange) {
         Vec3i[] offsets = {
-                new Vec3i(1, 0, 0), // east
-                new Vec3i(-1, 0, 0), // west
-                new Vec3i(0, 0, 1), // south
-                new Vec3i(0, 0, -1) // north
-        };
+            new Vec3i(1, 0, 0), // east
+            new Vec3i(-1, 0, 0), // west
+            new Vec3i(0, 0, 1), // south
+            new Vec3i(0, 0, -1) // north
+    };
         Vec3i[] offsetsdig = {
                 new Vec3i(1, 0, 1), // southeast
                 new Vec3i(-1, 0, -1), // northwest

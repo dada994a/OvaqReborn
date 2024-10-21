@@ -76,7 +76,6 @@ public class OvaqReborn {
     }
     // TODO: OvaqHwidAuthSystem
     public static void hwidAuth() {
-        boolean isRom = false;
         String hwid = HwidManager.getHWID();
         String url = "https://pastebin.com/raw/AtsAtG0Y";
         InputStream in = null;
@@ -89,10 +88,7 @@ public class OvaqReborn {
         Stream<String> streamOfString = new BufferedReader(inputStreamReader).lines();
         String response = streamOfString.collect(Collectors.joining("\n"));
 
-        if (hwid.equalsIgnoreCase("a933cd8230392ee6a796b3a75689e798")) {
-            isRom = true;
-        }
-        if (!response.contains(hwid) && isRom==false) {
+        if (!response.contains(hwid)) {
             UIManager.put("OptionPane.minimumSize", new Dimension(500, 80));
             JFrame frame = new JFrame();
             frame.setAlwaysOnTop(true);
