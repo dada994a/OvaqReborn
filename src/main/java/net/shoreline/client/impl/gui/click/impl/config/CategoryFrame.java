@@ -87,7 +87,6 @@ public class CategoryFrame extends Frame {
             y += ClickGuiScreen.MOUSE_Y - py;
         }
         // draw the component
-        // context.drawTexture(categoryIcon, (int) (x + 2.0f), (int) (y + 1.0f), 0, 0, 12, 12, 12, 12);
         fheight = 2.0f;
         for (ModuleButton moduleButton : moduleButtons) {
             // account for button height
@@ -113,6 +112,12 @@ public class CategoryFrame extends Frame {
         if (y > mc.getWindow().getHeight() - 10) {
             y = mc.getWindow().getHeight() - 10;
         }
+
+        // カテゴリーの周りを色で囲む処理
+        int borderColor = 0xFF00FF00; // 枠の色を指定（例: 緑色）
+        float borderThickness = 2.0f; // 枠の太さを指定
+        fill(context, x - borderThickness, y - borderThickness, width + borderThickness * 2, height + borderThickness * 2, borderColor);
+
         rect(context, Modules.CLICK_GUI.getColor(1.7f));
         RenderManager.renderText(context, name, x + 3.0f, y + 4.0f, -1);
         if (categoryAnimation.getFactor() > 0.01f) {
@@ -124,6 +129,10 @@ public class CategoryFrame extends Frame {
                 moduleButton.render(context, x + 1.0f, inner + 1.0f, mouseX, mouseY, delta);
                 off += (float) ((moduleButton.getHeight() + 1.0f) * categoryAnimation.getFactor());
                 inner += moduleButton.getHeight() + 1.0f;
+
+                // モジュールの設定ボタンの横に+/-を表示
+                String toggleSymbol = moduleButton.isOpen() ? "-" : "+"; // moduleButtonにisOpenメソッドを追加してください
+                RenderManager.renderText(context, toggleSymbol, x + width - 15, inner + 1.0f, -1); // シンボルの描画
             }
             disableScissor();
         }
@@ -131,6 +140,7 @@ public class CategoryFrame extends Frame {
         px = ClickGuiScreen.MOUSE_X;
         py = ClickGuiScreen.MOUSE_Y;
     }
+
 
     /**
      * @param mouseX
