@@ -84,6 +84,7 @@ public class ModuleManager {
                 new HitboxDesyncModule(),
                 //new HeartfulExploitModule(),
                 new PacketCancelerModule(),
+                new PacketControlModule(),
                 new PacketFlyModule(),
                 new PhaseModule(),
                 new PearlPhaseModule(),
