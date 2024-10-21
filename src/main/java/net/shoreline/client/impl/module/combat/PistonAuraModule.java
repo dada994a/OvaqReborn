@@ -69,7 +69,7 @@ public class PistonAuraModule extends RotationModule {
     private static Piston pistonPos;
 
     Config<Float> rangeConfig = new NumberConfig<>("Range", "number", 1.0f, 5.0f, 7.0f);
-    Config<Float> radiusConfig = new NumberConfig<>("Radius", "", 4.4f, 0.0f, 6.0f);
+    Config<Double> radiusConfig = new NumberConfig<>("Radius", "", 4.4, 0.0, 6.0);
     Config<Boolean> rotateConfig = new BooleanConfig("Rotate", "", true);
     Config<Boolean> breakCrystalsConfig = new BooleanConfig("BreakCrystal", "", true);
     Config<Boolean> ignoreTerrainConfig = new BooleanConfig("IgnoreTerrain", "", true);
@@ -193,7 +193,9 @@ public class PistonAuraModule extends RotationModule {
                 } else {
                     float pitch = leverPPos.dir().equals(Direction.DOWN) ? 90.0f : 0.0f;
                     //float f = leverPPos.dir().equals(Direction.UP) ? -90.0f : pitch;
-                    setRotation(leverPPos.dir().asRotation(), pitch);
+                    if (rotateConfig.getValue()) {
+                        setRotation(leverPPos.dir().asRotation(), pitch);
+                    }
                     Managers.INTERACT.placeBlock(leverPPos.pos(), leverItem, false, false, null);
                 }
                 if (action != Action.Support) {
@@ -237,8 +239,10 @@ public class PistonAuraModule extends RotationModule {
     }
 
     private void test() {
-        OvaqReborn.LOGGER.info("Rotating to direction: {}", pistonPos.getRotateDir().toString(), new Object[0]);
-        setRotation(pistonPos.getRotateDir().asRotation(), 0.0f);
+        if (rotateConfig.getValue()) {
+            OvaqReborn.LOGGER.info("Rotating to direction: {}", pistonPos.getRotateDir().toString(), new Object[0]);
+            setRotation(pistonPos.getRotateDir().asRotation(), 0.0f);
+        }
     }
 
     private void placeCrystal(int item, BlockPos pos, boolean swing) {
@@ -293,7 +297,6 @@ public class PistonAuraModule extends RotationModule {
     private double getYaw(Entity entity) {
         return mc.player.getYaw() + MathHelper.wrapDegrees((float) Math.toDegrees(Math.atan2(entity.getZ() - mc.player.getZ(), entity.getX() - mc.player.getX())) - 90f - mc.player.getYaw());
     }
-
     private void calculateStage(int red, int sup, int obi) {
         BlockPos pPos;
         if (action == Action.Rotate && timer >= pistonDelayConfig.getValue()) {
@@ -306,18 +309,15 @@ public class PistonAuraModule extends RotationModule {
             PlayerEntity player = (PlayerEntity)entity;
             pPos = new BlockPos(player.getBlockX(), Math.round(player.getBlockY()), player.getBlockZ());
             for (Entity entity2 : mc.world.getEntities()) {
-                //if (!(entity2 instanceof EndCrystalEntity) || !(EndCrystalUtil.getDamageTo(player, entity2.getPos(), ignoreTerrainConfig.getValue()) >= minDamageConfig.getValue()) || wtf(entity2.getBlockPos(), target) && !(facePlaceConfig.getValue())) continue;
                 if (!(entity2 instanceof EndCrystalEntity) || !(EndCrystalUtil.getDamageTo(player, entity2.getPos(), ignoreTerrainConfig.getValue()) >= minDamageConfig.getValue()) || wtf(entity2.getBlockPos(), target) && !(facePlaceConfig.getValue())) continue;
                 action = Action.BreakingCrystal;
                 cEntity = entity2;
                 return;
             }
-            //faceplace test calc
             if (facePlaceConfig.getValue()) {
                 for (int i = 0; i <= 4; ++i) {
                     for (int j = 0; j < 4; ++j) {
                         BlockPos test = pPos.add(Direction.fromHorizontal(j).getVector()).up(i);
-                        //if (!canPlace(test, radiusConfig.getValue(), true)) continue;
                         if (!(EndCrystalUtil.getDamageTo(player, Vec3d.ofBottomCenter(test), ignoreTerrainConfig.getValue()) >= minDamageConfig.getValue()) || !canPlace(test, radiusConfig.getValue(), true)) continue;
                         action = Action.PlaceCrystal;
                         cPos = test;
@@ -332,11 +332,11 @@ public class PistonAuraModule extends RotationModule {
             if (isBlastResist(pPos.up(i - 1))) {
                 return;
             }
-            List<Piston> pistons = getPresumablePistons(pPos.up(i), false, false, false, true, false);
+            List<Piston> pistons = getPresumablePistons(pPos.up(i), true, true, true, true, true);
             for (Piston piston : pistons) {
                 Entity e;
                 BlockPos lever = piston.getLeverPos();
-                if (dnpConfig.getValue()) {//テスト
+                if (dnpConfig.getValue()) {
                     BlockPos act;
                     if (isPiston(piston.getPos()) && (act = piston.getRedstoneBlock()) != null) {
                         action = Action.BreakActivator;
@@ -418,10 +418,10 @@ public class PistonAuraModule extends RotationModule {
                 cEntity = e;
             }
             OvaqReborn.LOGGER.warn("Couldn't find a piston pos on level {}", i, new Object[0]);
-            if (i != 3) continue;//5
+            if (i != 3) continue;
             if (mineConfig.getValue()) {
-                for (int j = 1; j <= 3; ++j) {//up offset
-                    BlockPos interfere = getPresumablePistons(pPos.up(j), false, false, false, true, false).get(0).getInterferingBlock(radiusConfig.getValue());
+                for (int j = 1; j <= 3; ++j) {
+                    BlockPos interfere = getPresumablePistons(pPos.up(j), true, true, true, true, true).get(0).getInterferingBlock(radiusConfig.getValue());
                     if (interfere == null) continue;
                     if (interferePos == null || state(interferePos).isReplaceable()) {
                         interferePos = interfere;
@@ -581,7 +581,6 @@ public class PistonAuraModule extends RotationModule {
     }
 
     private List<Piston> getPresumablePistons(BlockPos checkPos, boolean farawayPos, boolean sidePos, boolean upperPos, boolean straight, boolean upPos) {
-        //後々.
         ArrayList<Piston> a = new ArrayList<>();
         for (int i = 0; i < 4; ++i) {
             Direction dire = Direction.fromHorizontal(i);
