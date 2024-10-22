@@ -16,12 +16,12 @@ import org.lwjgl.opengl.GL11;
 import static net.shoreline.client.api.render.RenderBuffers.*;
 
 /**
- * @author linus
+ * @author OvaqReborn
  * @since 1.0
  */
 public class RenderManager implements Globals {
     //
-    public static TTFFontRenderer tf = TTFFontRenderer.of("sushi", 8);
+    public static TTFFontRenderer tf = TTFFontRenderer.of("NotoSansJP-ExtraBold", 7);
     public static final Tessellator TESSELLATOR = RenderSystem.renderThreadTesselator();
     public static final BufferBuilder BUFFER = TESSELLATOR.getBuffer();
 
@@ -40,6 +40,15 @@ public class RenderManager implements Globals {
      */
     public static void renderBox(MatrixStack matrices, BlockPos p, int color) {
         renderBox(matrices, new Box(p), color);
+    }
+
+    /**
+     * Returns the TTFFontRenderer instance for rendering text.
+     *
+     * @return the TTFFontRenderer instance
+     */
+    public static TTFFontRenderer getFont() {
+        return tf;
     }
 
     /**
