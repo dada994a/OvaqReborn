@@ -182,8 +182,8 @@ public class PistonAuraModule extends RotationModule {
                         Managers.INTERACT.placeBlock(activePos, redstone, false, false, null);
                     } else {
                         Managers.NETWORK.sendPacket(new ClientCommandC2SPacket(mc.player, ClientCommandC2SPacket.Mode.PRESS_SHIFT_KEY));
-                        Managers.NETWORK.sendPacket(new ClientCommandC2SPacket(mc.player, ClientCommandC2SPacket.Mode.RELEASE_SHIFT_KEY));
                         Managers.INTERACT.placeBlock(activePos, redstone, false, false, null);
+                        Managers.NETWORK.sendPacket(new ClientCommandC2SPacket(mc.player, ClientCommandC2SPacket.Mode.RELEASE_SHIFT_KEY));
                     }
                 }
                 if (action != Action.ToggleLever) {
@@ -208,8 +208,8 @@ public class PistonAuraModule extends RotationModule {
                         Managers.INTERACT.placeBlock(supportPos, supportItem, false, false, null);
                     } else {
                         Managers.NETWORK.sendPacket(new ClientCommandC2SPacket(mc.player, ClientCommandC2SPacket.Mode.PRESS_SHIFT_KEY));
-                        Managers.NETWORK.sendPacket(new ClientCommandC2SPacket(mc.player, ClientCommandC2SPacket.Mode.RELEASE_SHIFT_KEY));
                         Managers.INTERACT.placeBlock(supportPos, supportItem, false, false, null);
+                        Managers.NETWORK.sendPacket(new ClientCommandC2SPacket(mc.player, ClientCommandC2SPacket.Mode.RELEASE_SHIFT_KEY));
                     }
                 }
                 if (action != Action.SupportCrystal) {
@@ -219,8 +219,8 @@ public class PistonAuraModule extends RotationModule {
                         Managers.INTERACT.placeBlock(cSupportPos, obsidian, false, false, null);
                     } else {
                         Managers.NETWORK.sendPacket(new ClientCommandC2SPacket(mc.player, ClientCommandC2SPacket.Mode.PRESS_SHIFT_KEY));
-                        Managers.NETWORK.sendPacket(new ClientCommandC2SPacket(mc.player, ClientCommandC2SPacket.Mode.RELEASE_SHIFT_KEY));
                         Managers.INTERACT.placeBlock(cSupportPos, obsidian, false, false, null);
+                        Managers.NETWORK.sendPacket(new ClientCommandC2SPacket(mc.player, ClientCommandC2SPacket.Mode.RELEASE_SHIFT_KEY));
                     }
                 }
                 if (action == Action.Rotate) {
@@ -230,8 +230,8 @@ public class PistonAuraModule extends RotationModule {
                         Managers.INTERACT.placeBlock(pistonPos.getPos(), piston, false, false, null);
                     } else {
                         Managers.NETWORK.sendPacket(new ClientCommandC2SPacket(mc.player, ClientCommandC2SPacket.Mode.PRESS_SHIFT_KEY));
-                        Managers.NETWORK.sendPacket(new ClientCommandC2SPacket(mc.player, ClientCommandC2SPacket.Mode.RELEASE_SHIFT_KEY));
                         Managers.INTERACT.placeBlock(pistonPos.getPos(), piston, false, false, null);
+                        Managers.NETWORK.sendPacket(new ClientCommandC2SPacket(mc.player, ClientCommandC2SPacket.Mode.RELEASE_SHIFT_KEY));
                     }
                 } else {
                     pistonPos = null;

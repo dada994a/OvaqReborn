@@ -70,6 +70,7 @@ public class PistonPushModule extends RotationModule {
             } else {
                 if (Managers.SOCIAL.isFriend(target.getName().getString())) {
                     target = null;
+                    disable();
                     return;
                 }
                 if (!Managers.HOLE.checkHole(target.getBlockPos()).isStandard()

@@ -11,8 +11,6 @@ import java.util.Random;
 /**
  * @author Rom
  */
-//まだDiscord Bot client未対応。Chatをリレーできるのはゲーム内にいるプレイヤーのみ。
-//(Webhookには送信だけ可能)
 public class SocketWebhookManager implements Globals {
     public static void send(String mcid, String chat) {
         try {

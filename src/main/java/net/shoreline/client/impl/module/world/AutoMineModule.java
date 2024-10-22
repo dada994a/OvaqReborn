@@ -277,7 +277,7 @@ public class AutoMineModule extends RotationModule {
         return miningPositions;
     }
 
-    private void startMining(MiningData data) {
+    public void startMining(MiningData data) {
         if (data.getState().isAir()) {
             return;
         }
