@@ -103,6 +103,7 @@ public class Modules {
     // public static BetterChatModule BETTER_CHAT;
     public static ChatNotifierModule CHAT_NOTIFIER;
     public static ChestSwapModule CHEST_SWAP;
+    public static DeathCoordModule DEATH_COORD;
     public static FakePlayerModule FAKE_PLAYER;
     public static InvCleanerModule INV_CLEANER;
     public static MiddleClickModule MIDDLE_CLICK;
@@ -301,6 +302,7 @@ public class Modules {
             BETTER_CHAT = (BetterChatModule) getRegisteredModule("betterchat-module");
             CHAT_NOTIFIER = (ChatNotifierModule) getRegisteredModule("chatnotifier-module");
             CHEST_SWAP = (ChestSwapModule) getRegisteredModule("chestswap-module");
+            DEATH_COORD = (DeathCoordModule) getRegisteredModule("deathcoord-module");
             FAKE_PLAYER = (FakePlayerModule) getRegisteredModule("fakeplayer-module");
             INV_CLEANER = (InvCleanerModule) getRegisteredModule("invcleaner-module");
             MIDDLE_CLICK = (MiddleClickModule) getRegisteredModule("middleclick-module");
