@@ -109,6 +109,7 @@ public class ModuleManager {
                 new BetterChatModule(),
                 new ChatNotifierModule(),
                 new ChestSwapModule(),
+                new DeathCoordModule(),
                 // new ChestStealerModule(),
                 new FakePlayerModule(),
                 new InvCleanerModule(),
