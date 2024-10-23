@@ -116,7 +116,8 @@ public class CategoryFrame extends Frame {
 
 
         rect(context, Modules.CLICK_GUI.getColor(1.7f));
-        RenderManager.renderText(context, name, x + 3.0f, y + 4.0f, -1);
+        renderCategoryIcon(context, x + 3, y + 4);
+        RenderManager.renderText(context, name, x + 18.0f, y + 4.0f, -1);
         if (categoryAnimation.getFactor() > 0.01f) {
             enableScissor((int) x, (int) (y + height), (int) (x + width), (int) (y + height + fheight * categoryAnimation.getFactor()));
             fill(context, x, y + height, width, fheight, 0x77000000);
@@ -142,8 +143,8 @@ public class CategoryFrame extends Frame {
      * @param y      The y position.
      */
     private void renderCategoryIcon(DrawContext context, float x, float y) {
-        int width = 12;
-        int height = 12;
+        int width = 10;
+        int height =10;
         context.drawTexture(categoryIcon, (int) x, (int) y, 0, 0, width, height, width, height);
     }
 
