@@ -13,7 +13,6 @@ import net.shoreline.client.util.render.animation.TimeAnimation;
 import java.util.HashMap;
 import java.util.Map;
 
-//TODO: add easing when linus fixes enumconfig...
 public class BetterChatModule extends ToggleModule
 {
     Config<Boolean> animation = new BooleanConfig("Animation", "Animates the chat", false);
@@ -36,12 +35,7 @@ public class BetterChatModule extends ToggleModule
         return time;
     }
 
-    /*
-    public Config<Easing> getEasingConfig()
-    {
-        return easing;
-    }
-    */
+
 
     public Easing getEasingConfig()
     {
