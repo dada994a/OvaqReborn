@@ -1,6 +1,7 @@
 package net.shoreline.client.impl.gui.click.impl.config;
 
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.util.Identifier;
 import net.shoreline.client.api.config.Config;
 import net.shoreline.client.api.module.Module;
 import net.shoreline.client.api.module.ModuleCategory;
@@ -33,7 +34,7 @@ public class CategoryFrame extends Frame {
     //
     private final String name;
     private final ModuleCategory category;
-    // private final Identifier categoryIcon;
+     private final Identifier categoryIcon;
     // module components
     private final List<ModuleButton> moduleButtons =
             new CopyOnWriteArrayList<>();
@@ -54,7 +55,7 @@ public class CategoryFrame extends Frame {
                          float width, float height) {
         super(x, y, width, height);
         this.category = category;
-         //this.categoryIcon = new Identifier("shoreline", "icon/" + category.name().toLowerCase() + ".png");
+         this.categoryIcon = new Identifier("ovaqreborn", "icon/" + category.name().toLowerCase() + ".png");
         this.name = EnumFormatter.formatEnum(category);
         for (Module module : Managers.MODULE.getModules()) {
             if (module.getCategory() == category) {
@@ -134,6 +135,17 @@ public class CategoryFrame extends Frame {
         py = ClickGuiScreen.MOUSE_Y;
     }
 
+
+    /**
+     * @param context The draw context.
+     * @param x      The x position.
+     * @param y      The y position.
+     */
+    private void renderCategoryIcon(DrawContext context, float x, float y) {
+        int width = 12;
+        int height = 12;
+        context.drawTexture(categoryIcon, (int) x, (int) y, 0, 0, width, height, width, height);
+    }
 
     /**
      * @param mouseX
