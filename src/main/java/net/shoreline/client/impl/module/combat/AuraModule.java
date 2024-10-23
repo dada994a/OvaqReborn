@@ -1,5 +1,7 @@
 package net.shoreline.client.impl.module.combat;
 
+import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.render.*;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
@@ -9,19 +11,17 @@ import net.minecraft.entity.decoration.EndCrystalEntity;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
-import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.entity.projectile.thrown.ExperienceBottleEntity;
 import net.minecraft.item.*;
 import net.minecraft.network.packet.c2s.play.*;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.*;
 import net.minecraft.world.RaycastContext;
 import net.shoreline.client.api.config.Config;
 import net.shoreline.client.api.config.NumberDisplay;
 import net.shoreline.client.api.config.setting.BooleanConfig;
+import net.shoreline.client.api.config.setting.ColorConfig;
 import net.shoreline.client.api.config.setting.EnumConfig;
 import net.shoreline.client.api.config.setting.NumberConfig;
 import net.shoreline.client.api.event.listener.EventListener;
@@ -43,7 +43,10 @@ import net.shoreline.client.util.player.PlayerUtil;
 import net.shoreline.client.util.player.RotationUtil;
 import net.shoreline.client.util.string.EnumFormatter;
 import net.shoreline.client.util.world.EntityUtil;
+import org.joml.Matrix4f;
+import org.joml.Vector3d;
 
+import java.awt.*;
 import java.util.Comparator;
 import java.util.stream.Stream;
 
@@ -89,6 +92,8 @@ public class AuraModule extends RotationModule {
     Config<Boolean> animalsConfig = new BooleanConfig("Animals", "Target animals", false);
     Config<Boolean> invisiblesConfig = new BooleanConfig("Invisibles", "Target invisible entities", true);
     Config<Boolean> renderConfig = new BooleanConfig("Render", "Renders an indicator over the target", true);
+    Config<TargetRender> renderModeConfig = new EnumConfig<>("RenderMode", "Render mode", TargetRender.Circle, TargetRender.values(), () -> renderConfig.getValue());
+    Config<Color> circleColorConfig = new ColorConfig("Circle Color", "a", new Color(200, 200, 200, 255), () -> renderModeConfig.getValue() == TargetRender.Circle);
     Config<Boolean> disableDeathConfig = new BooleanConfig("DisableOnDeath", "Disables during disconnect/death", false);
 
     private Entity entityTarget;
@@ -239,20 +244,73 @@ public class AuraModule extends RotationModule {
     @EventListener
     public void onRenderWorld(RenderWorldEvent event) {
         if (entityTarget != null && renderConfig.getValue() && isHoldingSword()) {
-            int attackDelay;
-            float delay = (attackSpeedConfig.getValue() * 50.0f) + randomDelay;
-            if (attackDelayConfig.getValue()) {
-                float animFactor = 1.0f - mc.player.getAttackCooldownProgress(0.0f);
-                attackDelay = (int) (100.0 * animFactor);
+            switch (renderModeConfig.getValue()) {
+                case FadeBox -> {
+                    int attackDelay;
+                    float delay = (attackSpeedConfig.getValue() * 50.0f) + randomDelay;
+                    if (attackDelayConfig.getValue()) {
+                        float animFactor = 1.0f - mc.player.getAttackCooldownProgress(0.0f);
+                        attackDelay = (int) (100.0 * animFactor);
+                    }
+                    else {
+                        float animFactor = 1.0f - MathHelper.clamp(attackTimer.getElapsedTime() / (1000f - delay), 0.0f, 1.0f);
+                        attackDelay = (int) (100.0 * animFactor);
+                    }
+                    RenderManager.renderBox(event.getMatrices(),
+                            Interpolation.getInterpolatedEntityBox(entityTarget), Modules.COLORS.getRGB(60 + attackDelay));
+                    RenderManager.renderBoundingBox(event.getMatrices(),
+                            Interpolation.getInterpolatedEntityBox(entityTarget), 1.5f, Modules.COLORS.getRGB(145));
+                }
+                case Circle -> {
+                    /**
+                     * @author OvaqReborn
+                     */
+                    double playX = entityTarget.lastRenderX + (entityTarget.getX() - entityTarget.lastRenderX) * event.getTickDelta();
+                    double playY = entityTarget.lastRenderY + (entityTarget.getY() - entityTarget.lastRenderY) * event.getTickDelta();
+                    double playZ = entityTarget.lastRenderZ + (entityTarget.getZ() - entityTarget.lastRenderZ) * event.getTickDelta();
+                    event.getMatrices().push();
+                    RenderSystem.enableBlend();
+                    RenderSystem.defaultBlendFunc();
+                    RenderSystem.disableCull();
+                    RenderSystem.setShaderColor(circleColorConfig.getValue().getRed() / 255f, circleColorConfig.getValue().getGreen() / 255f, circleColorConfig.getValue().getBlue() / 255f, circleColorConfig.getValue().getAlpha() / 255f);
+                    Matrix4f matrix = event.getMatrices().peek().getPositionMatrix();
+                    Tessellator tessellator = RenderSystem.renderThreadTesselator();
+                    BufferBuilder bufferBuilder = tessellator.getBuffer();
+                    RenderSystem.setShader(GameRenderer::getPositionColorProgram);
+                    bufferBuilder.begin(VertexFormat.DrawMode.DEBUG_LINE_STRIP, VertexFormats.POSITION_COLOR);
+                    int angles = 120;
+                    float sizeNumber = 0.5F;
+                    float location = (float) Math.sin(System.currentTimeMillis() * 0.004) * 0.6F * sizeNumber;
+                    event.getMatrices().translate(0, entityTarget.getHeight() * location, 0);
+                    double time = Math.sin(System.currentTimeMillis() * 0.004);
+                    float waveWidth = entityTarget.getWidth() * 0.5f;
+                    float waveHeight = sizeNumber * 0.5f;
+                    for (int i = 0; i <= angles; i++) {
+                        float angle = (i * 3.141592653589793f) / (angles / 2.0f);
+                        bufferBuilder.vertex(matrix, (float) (Math.cos(angle) * waveWidth), (float) (waveHeight * time), (float) (Math.sin(angle) * waveWidth)).color(circleColorConfig.getValue().getRGB()).next();
+                    }
+                    tessellator.draw();
+                    RenderSystem.setShader(GameRenderer::getPositionColorProgram);
+                    bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR);
+                    event.getMatrices().translate(playX, playY, playZ);
+                    event.getMatrices().scale(2, 1, 2);
+                    event.getMatrices().translate(0, entityTarget.getHeight() * location, 0);
+                    event.getMatrices().translate(0, sizeNumber * (time), 0);
+                    for (int i = 1; i <= angles; i++) {
+                        float angle1 = (i * 3.141592653589793f) / (angles / 2.0f);
+                        float angle2 = ((i + 1) * 3.141592653589793f) / (angles / 2.0f);
+                        bufferBuilder.vertex(matrix, (float) (Math.cos(angle1) * waveWidth), (float) (waveHeight * time), (float) (Math.sin(angle1) * waveWidth)).color(setAlpha(circleColorConfig.getValue(), 120).getRGB()).next();
+                        bufferBuilder.vertex(matrix, (float) (Math.cos(angle2) * waveWidth), (float) (waveHeight * time), (float) (Math.sin(angle2) * waveWidth)).color(setAlpha(circleColorConfig.getValue(), 120).getRGB()).next();
+                        bufferBuilder.vertex(matrix, (float) (Math.cos(angle2) * waveWidth), (float) (-waveHeight * time), (float) (Math.sin(angle2) * waveWidth)).color(setAlpha(circleColorConfig.getValue(), 0).getRGB()).next();
+                        bufferBuilder.vertex(matrix, (float) (Math.cos(angle1) * waveWidth), (float) (-waveHeight * time), (float) (Math.sin(angle1) * waveWidth)).color(setAlpha(circleColorConfig.getValue(), 0).getRGB()).next();
+                    }
+                    tessellator.draw();
+                    RenderSystem.enableCull();
+                    RenderSystem.disableBlend();
+                    event.getMatrices().pop();
+                    RenderSystem.setShaderColor(1,1,1,1);
+                }
             }
-            else {
-                float animFactor = 1.0f - MathHelper.clamp(attackTimer.getElapsedTime() / (1000f - delay), 0.0f, 1.0f);
-                attackDelay = (int) (100.0 * animFactor);
-            }
-            RenderManager.renderBox(event.getMatrices(),
-                    Interpolation.getInterpolatedEntityBox(entityTarget), Modules.COLORS.getRGB(60 + attackDelay));
-            RenderManager.renderBoundingBox(event.getMatrices(),
-                    Interpolation.getInterpolatedEntityBox(entityTarget), 1.5f, Modules.COLORS.getRGB(145));
         }
     }
 
@@ -465,7 +523,6 @@ public class AuraModule extends RotationModule {
     /**
      * @param dist
      * @param pos
-     * @param entity
      * @return
      */
     public boolean isInAttackRange(double dist, Vec3d pos, Vec3d entityPos) {
@@ -522,6 +579,10 @@ public class AuraModule extends RotationModule {
         };
     }
 
+    private Color setAlpha(Color color, int opacity) {
+        return new Color(color.getRed(), color.getGreen(), color.getBlue(), opacity);
+    }
+
     /**
      * Returns <tt>true</tt> if the {@link Entity} is a valid enemy to attack.
      *
@@ -539,6 +600,11 @@ public class AuraModule extends RotationModule {
 
     public Entity getEntityTarget() {
         return entityTarget;
+    }
+
+    public enum TargetRender {
+        FadeBox,
+        Circle
     }
 
     public enum TargetMode {
