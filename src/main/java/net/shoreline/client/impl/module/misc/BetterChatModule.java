@@ -46,12 +46,9 @@ public class BetterChatModule extends ToggleModule {
     @Override
     public void onEnable() {
         super.onEnable();
-        // チャット背景を透明に設定
         if (transparentBackground.getValue()) {
-            // 透明なメッセージを送信
             ChatHud chatHud = mc.inGameHud.getChatHud();
-            chatHud.addMessage(Text.of(Formatting.BLACK + "チャット背景を透明にしました"), null, null);
-            // ここで、必要に応じて透明のメッセージを追加できます
+            chatHud.addMessage(Text.of(Formatting.BLACK + "Chat background is now transparent"), null, null);
         }
     }
 
@@ -59,6 +56,6 @@ public class BetterChatModule extends ToggleModule {
     public void onDisable() {
         super.onDisable();
         ChatHud chatHud = mc.inGameHud.getChatHud();
-        chatHud.addMessage(Text.of("チャット背景を元に戻しました"), null, null);
+        chatHud.addMessage(Text.of("Chat background restored"), null, null);
     }
 }
