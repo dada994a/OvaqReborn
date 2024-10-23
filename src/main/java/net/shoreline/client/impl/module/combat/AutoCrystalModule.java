@@ -3,6 +3,8 @@ package net.shoreline.client.impl.module.combat;
 import com.google.common.collect.Lists;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.network.ClientPlayNetworkHandler;
+import net.minecraft.client.network.PlayerListEntry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ExperienceOrbEntity;
 import net.minecraft.entity.LivingEntity;
@@ -140,6 +142,7 @@ public class AutoCrystalModule extends RotationModule {
     Config<Integer> fadeTimeConfig = new NumberConfig<>("Fade-Time", "Timer for the fade", 0, 250, 1000, () -> false);
     Config<Boolean> damageNametagConfig = new BooleanConfig("Render-Damage", "Renders the current expected damage of a place/attack", false, () -> renderConfig.getValue());
     Config<Boolean> breakDebugConfig = new BooleanConfig("Break-Debug", "Debugs break ms in data", false, () -> renderConfig.getValue());
+    Config<Boolean> pingDebugConfig = new BooleanConfig("Ping-Debug", "Debugs break ms in data", false, () -> renderConfig.getValue());
     //
     Config<Boolean> disableDeathConfig = new BooleanConfig("DisableOnDeath", "Disables during disconnect/death", false);
     //
@@ -179,11 +182,45 @@ public class AutoCrystalModule extends RotationModule {
 
     @Override
     public String getModuleData() {
+        StringBuilder data = new StringBuilder();
+
         if (breakDebugConfig.getValue()) {
-            return String.format("%dms", getBreakMs());
+            data.append(String.format("Break: %dms", getBreakMs()));
         }
+
+        if (pingDebugConfig.getValue()) {
+            if (data.length() > 0) {
+                data.append(", ");
+            }
+
+            int ping = getPlayerPing();
+            if (ping >= 0) {
+                data.append(String.format("Ping: %dms", ping));
+            }
+        }
+
+        if (data.length() > 0) {
+            return data.toString();
+        }
+
         return super.getModuleData();
     }
+
+    private int getPlayerPing() {
+        ClientPlayNetworkHandler networkHandler = mc.getNetworkHandler();
+
+        if (networkHandler != null && mc.player != null) {
+            PlayerListEntry playerEntry = networkHandler.getPlayerListEntry(mc.player.getUuid());
+
+            if (playerEntry != null) {
+                return playerEntry.getLatency();
+            }
+        }
+
+        return 1;
+    }
+
+
 
     @Override
     public void onDisable() {

@@ -46,7 +46,7 @@ public class ModuleManager {
                 new AutoBowReleaseModule(),
                 new AutoObsidianModule(),
                 new AutoCrystalModule(),
-                //new AutoCrystalMinusModule(),
+               new OldAutoCrystalModule(),
                // new AutoAnvilModule(),
                 //new AntiAnvilModule(),
                 new AutoLogModule(),

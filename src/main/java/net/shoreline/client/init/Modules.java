@@ -41,7 +41,7 @@ public class Modules {
     public static AutoBowReleaseModule AUTO_BOW_RELEASE;
     public static AutoObsidianModule AUTOOBSIDIAN;
     public static AutoCrystalModule AUTO_CRYSTAL;
-   // public static AutoCrystalMinusModule AUTO_CRYSTAL_MINUS;
+    public static OldAutoCrystalModule OLD_AUTO_CRYSTAL;
    // public static AutoAnvilModule AUTO_ANVIL;
    // public static AntiAnvilModule ANTI_ANVIL;
     public static BacktrackModule BACK_TRACK;
@@ -242,7 +242,7 @@ public class Modules {
             AUTO_BOW_RELEASE = (AutoBowReleaseModule) getRegisteredModule("autobowrelease-module");
             AUTOOBSIDIAN = (AutoObsidianModule) getRegisteredModule("autoobsidian-module");
             AUTO_CRYSTAL = (AutoCrystalModule) getRegisteredModule("autocrystal-module");
-            //AUTO_CRYSTAL_MINUS = (AutoCrystalMinusModule) getRegisteredModule("autocrystalminus-module");
+            OLD_AUTO_CRYSTAL = (OldAutoCrystalModule) getRegisteredModule("oldautocrystal-module");
             //AUTO_ANVIL = (AutoAnvilModule) getRegisteredModule("autoanvil-module");
            // ANTI_ANVIL = (AntiAnvilModule) getRegisteredModule("antianvil-module");
             //OLDAUTO_CRYSTAL =(OldAutoCrystalModule) getRegisteredModule("oldautocrystal-module");

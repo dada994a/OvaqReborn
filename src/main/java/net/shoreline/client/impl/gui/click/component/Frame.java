@@ -31,7 +31,7 @@ public class Frame extends Component implements Interactable {
      */
     @Override
     public void render(DrawContext context, float mouseX, float mouseY, float delta) {
-        // fill(matrices, x, y, width, height, 0xe5000000);
+         //fill(matrices, x, y, width, height, 0xe5000000);
     }
 
     /**
