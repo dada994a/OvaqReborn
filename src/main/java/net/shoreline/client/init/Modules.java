@@ -82,7 +82,6 @@ public class Modules {
     public static PacketFlyModule PACKET_FLY;
     public static PhaseModule PHASE;
     public static PearlPhaseModule PEARLPHASE;
-    //public static TrapPhaseModule TRAPPHASE;
     public static PortalGodModeModule PORTAL_GOD_MODE;
     public static RaytraceBypassModule RAYTRACE_BYPASS;
     public static ReachModule REACH;
@@ -284,7 +283,6 @@ public class Modules {
             PACKET_FLY = (PacketFlyModule) getRegisteredModule("packetfly-module");
             PHASE = (PhaseModule) getRegisteredModule("phase-module");
             PEARLPHASE = (PearlPhaseModule)  getRegisteredModule("pearlphase-module");
-            //TRAPPHASE = (TrapPhaseModule) getRegisteredModule("trapphase-module");
             PORTAL_GOD_MODE = (PortalGodModeModule) getRegisteredModule("portalgodmode-module");
             RAYTRACE_BYPASS = (RaytraceBypassModule) getRegisteredModule("raytracebypass-module");
             REACH = (ReachModule) getRegisteredModule("reach-module");

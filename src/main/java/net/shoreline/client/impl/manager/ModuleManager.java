@@ -88,7 +88,6 @@ public class ModuleManager {
                 new PacketFlyModule(),
                 new PhaseModule(),
                 new PearlPhaseModule(),
-                //new TrapPhaseModule(),
                 new PortalGodModeModule(),
                 new RaytraceBypassModule(),
                 new ReachModule(),

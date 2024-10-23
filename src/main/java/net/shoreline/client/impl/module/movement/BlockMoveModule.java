@@ -1,44 +1,111 @@
 package net.shoreline.client.impl.module.movement;
 
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.shoreline.client.api.module.ToggleModule;
-import net.shoreline.client.api.module.ModuleCategory; // 追加
+import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Direction;
+import net.minecraft.client.input.Input;
+import net.shoreline.client.api.config.Config;
+import net.shoreline.client.api.config.setting.BooleanConfig;
+import net.shoreline.client.api.config.setting.NumberConfig;
 import net.shoreline.client.api.event.listener.EventListener;
-import net.shoreline.client.impl.event.RunTickEvent;
+import net.shoreline.client.api.module.ModuleCategory;
+import net.shoreline.client.api.module.ToggleModule;
+import net.shoreline.client.impl.event.TickEvent;
 
+/**
+ * @author OvaqReborn
+ * Rom あとでおねがい
+ * @since 1.0
+ */
 public class BlockMoveModule extends ToggleModule {
+
+    Config<Boolean> middleConfig = new BooleanConfig("Middle", "Snap to middle of blocks", true);
+    Config<Integer> delayConfig = new NumberConfig<>("Delay", "Movement delay in milliseconds", 250, 0, 2000);
+    Config<Boolean> onlyInBlockConfig = new BooleanConfig("Only In Block", "Move only when inside blocks", true);
+    Config<Boolean> avoidOutConfig = new BooleanConfig("Avoid Out", "Avoid moving out of blocks", true, () -> !onlyInBlockConfig.getValue());
+
+    private long lastMoveTime = 0;
+    private final Vec3d[] sides = {
+            new Vec3d(0.24D, 0.0D, 0.24D),
+            new Vec3d(-0.24D, 0.0D, 0.24D),
+            new Vec3d(0.24D, 0.0D, -0.24D),
+            new Vec3d(-0.24D, 0.0D, -0.24D)
+    };
 
     public BlockMoveModule() {
         super("BlockMove", "Allows movement through blocks while submerged", ModuleCategory.MOVEMENT);
     }
 
     @EventListener
-    public void onTick(RunTickEvent event) {
-        if (!isEnabled() || mc.player == null || mc.world == null) {
-            return;
-        }
+    public void onTick(TickEvent event) {
+        if (!mc.player.isSubmergedInWater()) return;
 
         Vec3d playerPos = mc.player.getPos();
-        double moveSpeed = 0.1;
+        boolean isInAir = isPlayerInAir(playerPos);
 
-        Vec3d forward = mc.player.getRotationVector();
+        if (!isInAir && shouldMove()) {
+            BlockPos targetPos = middleConfig.getValue() ? mc.player.getBlockPos() : new BlockPos((int) playerPos.getX(), (int) playerPos.getY(), (int) playerPos.getZ());
 
 
-        if (mc.options.forwardKey.isPressed()) {
-            mc.player.setPos(playerPos.x + forward.x * moveSpeed, playerPos.y, playerPos.z + forward.z * moveSpeed);
+            Direction playerFacing = mc.player.getHorizontalFacing();
+
+            Vec3d newPos = calculateNewPosition(targetPos, playerFacing, mc.player.input);
+            if (newPos != null) {
+                mc.player.updatePosition(newPos.x, newPos.y, newPos.z);
+                lastMoveTime = System.currentTimeMillis();
+            }
+
+            mc.player.input.movementForward = 0;
+            mc.player.input.movementSideways = 0;
         }
-        if (mc.options.backKey.isPressed()) {
-            mc.player.setPos(playerPos.x - forward.x * moveSpeed, playerPos.y, playerPos.z - forward.z * moveSpeed);
+    }
+
+    private boolean shouldMove() {
+        return System.currentTimeMillis() - lastMoveTime > delayConfig.getValue();
+    }
+
+    private boolean isPlayerInAir(Vec3d playerPos) {
+        for (Vec3d offset : sides) {
+            BlockPos blockPos = new BlockPos((int) (playerPos.getX() + offset.x), (int) (playerPos.getY() + offset.y), (int) (playerPos.getZ() + offset.z));
+            if (!mc.world.getBlockState(blockPos).isAir()) {
+                Box box = mc.world.getBlockState(blockPos).getCollisionShape(mc.world, blockPos).getBoundingBox();
+                if (box != null && mc.player.getBoundingBox().intersects(box)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private Vec3d calculateNewPosition(BlockPos currentPos, Direction facing, Input input) {
+        boolean isMovingX = Math.abs(facing.getOffsetX()) > 0;
+
+        Vec3d newPos = null;
+        if (input.pressingForward) {
+            newPos = adjustPosition(currentPos, isMovingX, isMovingX ? facing.getOffsetX() < 0 : facing.getOffsetZ() < 0);
+        } else if (input.pressingBack) {
+            newPos = adjustPosition(currentPos, isMovingX, isMovingX ? facing.getOffsetX() > 0 : facing.getOffsetZ() > 0);
+        } else if (input.pressingLeft) {
+            newPos = adjustPosition(currentPos, !isMovingX, isMovingX ? facing.getOffsetX() > 0 : facing.getOffsetZ() > 0);
+        } else if (input.pressingRight) {
+            newPos = adjustPosition(currentPos, !isMovingX, isMovingX ? facing.getOffsetX() < 0 : facing.getOffsetZ() < 0);
         }
 
-        Vec3d left = forward.crossProduct(new Vec3d(0, 1, 0)).normalize();
-        Vec3d right = left.multiply(-1);
+        return newPos;
+    }
 
-        if (mc.options.leftKey.isPressed()) {
-            mc.player.setPos(playerPos.x + right.x * moveSpeed, playerPos.y, playerPos.z + right.z * moveSpeed); // 右に移動
-        }
-        if (mc.options.rightKey.isPressed()) {
-            mc.player.setPos(playerPos.x - right.x * moveSpeed, playerPos.y, playerPos.z - right.z * moveSpeed); // 左に移動
-        }
+    private Vec3d adjustPosition(BlockPos pos, boolean isXDirection, boolean isNegative) {
+        BlockPos newPos = isNegative ? pos.offset(isXDirection ? Direction.WEST : Direction.NORTH)
+                : pos.offset(isXDirection ? Direction.EAST : Direction.SOUTH);
+        return getValidPosition(newPos);
+    }
+
+    private Vec3d getValidPosition(BlockPos pos) {
+        Vec3d newPos = middleConfig.getValue() ? new Vec3d(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5)
+                : new Vec3d(pos.getX(), pos.getY(), pos.getZ());
+        boolean isValid = mc.world.getBlockState(pos).isAir() || mc.world.getBlockState(pos.up()).isAir();
+
+        return (!onlyInBlockConfig.getValue() || isValid || !avoidOutConfig.getValue()) ? newPos : null;
     }
 }
