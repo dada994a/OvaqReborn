@@ -26,7 +26,7 @@ import java.awt.*;
 public class ESPModule extends ToggleModule {
     //
     Config<ESPMode> modeConfig = new EnumConfig<>("Mode", "ESP rendering mode", ESPMode.GLOW, ESPMode.values());
-    Config<Float> widthConfig = new NumberConfig<>("Linewidth", "ESP rendering line width", 0.1f, 1.25f, 5.0f);
+//    Config<Float> widthConfig = new NumberConfig<>("Linewidth", "ESP rendering line width", 0.1f, 1.25f, 5.0f);
     Config<Boolean> playersConfig = new BooleanConfig("Players", "Render players through walls", true);
     Config<Color> playersColorConfig = new ColorConfig("PlayersColor", "The render color for players", new Color(200, 60, 60), false, () -> playersConfig.getValue());
     Config<Boolean> monstersConfig = new BooleanConfig("Monsters", "Render monsters through walls", true);

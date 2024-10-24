@@ -13,7 +13,7 @@ import net.shoreline.client.impl.event.gui.hud.PlayerListNameEvent;
 import net.shoreline.client.init.Managers;
 
 /**
- * @author linus
+ * @author OvaqReborn
  * @since 1.0
  */
 public class ExtraTabModule extends ToggleModule {

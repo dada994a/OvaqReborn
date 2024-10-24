@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @author linus
+ * @author OvaqReborn:)
  * @since 1.0
  */
 public class BreadcrumbsModule extends ToggleModule {

@@ -1,6 +1,7 @@
 package net.shoreline.client.impl.module.world;
 
 import net.minecraft.block.Blocks;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShapes;
 import net.shoreline.client.api.config.Config;
@@ -35,8 +36,7 @@ public class AvoidModule extends ToggleModule {
         if (event.getStage() == EventStage.PRE && voidConfig.getValue()
                 && !mc.player.isSpectator()
                 && mc.player.getY() < mc.world.getBottomY()) {
-            // sendModuleMessage(Formatting.RED + "Prevented player from " +
-            //    "falling into void!");
+         //    sendModuleMessage(Formatting.RED + "Prevented player from " + "falling into void!");
             Managers.MOVEMENT.setMotionY(0.0);
         }
     }

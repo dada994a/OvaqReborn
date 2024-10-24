@@ -151,6 +151,7 @@ public class ModuleManager {
                 //new AmbienceModule(),
                 //new AnimationsModule(),
                 new BlockHighlightModule(),
+                //new BreadcrumbsModule(),
                 new BreakHighlightModule(),
                 new ChamsModule(),
                 //new CrystalAnimationModule(),

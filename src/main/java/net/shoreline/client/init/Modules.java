@@ -144,6 +144,7 @@ public class Modules {
     //public static AmbienceModule AMBIENCE;
     //public static AnimationsModule ANIMATIONS;
     public static BlockHighlightModule BLOCK_HIGHLIGHT;
+    //public static BreadcrumbsModule BREADCRUMBS;
     public static BreakHighlightModule BREAK_HIGHLIGHT;
     public static ChamsModule CHAMS;
     //public static CrystalAnimationModule CRYSTAL_ANIMATION;
@@ -244,7 +245,6 @@ public class Modules {
             OLD_AUTO_CRYSTAL = (OldAutoCrystalModule) getRegisteredModule("oldautocrystal-module");
             //AUTO_ANVIL = (AutoAnvilModule) getRegisteredModule("autoanvil-module");
            // ANTI_ANVIL = (AntiAnvilModule) getRegisteredModule("antianvil-module");
-            //OLDAUTO_CRYSTAL =(OldAutoCrystalModule) getRegisteredModule("oldautocrystal-module");
             AUTO_LOG = (AutoLogModule) getRegisteredModule("autolog-module");
             //AUTO_TOTEM = (AutoTotemModule) getRegisteredModule("autototem-module");
             OFFHAND = (OffHandModule) getRegisteredModule("offhand-module");
@@ -340,6 +340,7 @@ public class Modules {
             //AMBIENCE = (AmbienceModule) getRegisteredModule("ambience-module");
            // ANIMATIONS = (AnimationsModule) getRegisteredModule("animations-module");
             BLOCK_HIGHLIGHT = (BlockHighlightModule) getRegisteredModule("blockhighlight-module");
+           // BREADCRUMBS = (BreadcrumbsModule) getRegisteredModule("breadcrumbs-module");
             BREAK_HIGHLIGHT = (BreakHighlightModule) getRegisteredModule("breakhighlight-module");
             CHAMS = (ChamsModule) getRegisteredModule("chams-module");
             //CRYSTAL_ANIMATION = (CrystalAnimationModule) getRegisteredModule("crystalanimation-module");

@@ -2,7 +2,6 @@ package net.shoreline.client.impl.module.world;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.item.BlockItem;
-import net.minecraft.network.packet.c2s.play.HandSwingC2SPacket;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -14,7 +13,6 @@ import net.shoreline.client.api.config.setting.NumberConfig;
 import net.shoreline.client.api.event.listener.EventListener;
 import net.shoreline.client.api.module.ModuleCategory;
 import net.shoreline.client.api.module.ToggleModule;
-import net.shoreline.client.init.Managers;
 import net.shoreline.client.api.render.RenderManager;
 import net.shoreline.client.impl.event.render.RenderWorldEvent;
 
@@ -55,7 +53,7 @@ public class AirPlaceModule extends ToggleModule {
             if (swingConfig.getValue()) {
                 mc.player.swingHand(main ? Hand.MAIN_HAND : Hand.OFF_HAND);
             } else {
-                Managers.NETWORK.sendPacket(new HandSwingC2SPacket(main ? Hand.MAIN_HAND : Hand.OFF_HAND));
+            //    Managers.NETWORK.sendPacket(new HandSwingC2SPacket(main ? Hand.MAIN_HAND : Hand.OFF_HAND));
             }
         }
     }

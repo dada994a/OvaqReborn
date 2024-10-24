@@ -11,6 +11,7 @@ import net.shoreline.client.api.module.ModuleCategory;
 import net.shoreline.client.api.module.ToggleModule;
 import net.shoreline.client.impl.event.network.InteractBlockEvent;
 import net.shoreline.client.impl.event.network.PacketEvent;
+import net.shoreline.client.init.Managers;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,8 +34,7 @@ public class AntiInteractModule extends ToggleModule {
         BlockState state = mc.world.getBlockState(pos);
         if (blacklist.contains(state.getBlock())) {
             event.cancel();
-            // Managers.NETWORK.sendSequencedPacket(sequence -> new PlayerInteractBlockC2SPacket(
-            //        event.getHand(), event.getHitResult(), sequence));
+           //  Managers.NETWORK.sendSequencedPacket(sequence -> new PlayerInteractBlockC2SPacket(event.getHand(), event.getHitResult(), sequence));
         }
     }
 
