@@ -99,7 +99,7 @@ public class FakeLagModule extends ToggleModule {
 
     @EventListener
     public void onDisconnectEvent(DisconnectEvent event) {
-        // packets.clear();
+        packets.clear();
         disable();
     }
 

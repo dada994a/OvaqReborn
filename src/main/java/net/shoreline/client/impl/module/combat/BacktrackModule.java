@@ -7,6 +7,7 @@ import net.minecraft.network.packet.s2c.common.CommonPingS2CPacket;
 import net.minecraft.network.packet.s2c.common.KeepAliveS2CPacket;
 import net.minecraft.network.packet.s2c.play.*;
 import net.minecraft.util.math.Box;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.shoreline.client.api.config.Config;
 import net.shoreline.client.api.config.setting.NumberConfig;
@@ -164,9 +165,9 @@ public final class BacktrackModule extends ToggleModule
             return null;
         }
 
-//        final double intX = MathHelper.lerp(tickDelta, lastServerPos.x, serverPos.x);
-//        final double intY = MathHelper.lerp(tickDelta, lastServerPos.y, serverPos.y);
-//        final double intZ = MathHelper.lerp(tickDelta, lastServerPos.z, serverPos.z);
+       final double intX = MathHelper.lerp(tickDelta, lastServerPos.x, serverPos.x);
+       final double intY = MathHelper.lerp(tickDelta, lastServerPos.y, serverPos.y);
+       final double intZ = MathHelper.lerp(tickDelta, lastServerPos.z, serverPos.z);
 
         return attackingEntity.getDimensions(attackingEntity.getPose()).getBoxAt(serverPos.x, serverPos.y, serverPos.z);
     }

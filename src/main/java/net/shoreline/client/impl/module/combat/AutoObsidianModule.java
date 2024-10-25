@@ -34,8 +34,7 @@ public class AutoObsidianModule extends ObsidianPlacerModule {
     Timer timer = new CacheTimer();
 
     Config<Integer> rangeConfig = new NumberConfig<>("Range", "number", 1, 5, 7);
-    Config<Integer> minYConfig =
-            new NumberConfig<>("MinY", "minimum Y Offset", 1, 3, 5);
+    Config<Integer> minYConfig = new NumberConfig<>("MinY", "minimum Y Offset", 1, 3, 5);
     Config<Integer> delayConfig = new NumberConfig<>("Delay", "delay", 1, 1, 5);
     Config<Boolean> rotateConfig = new BooleanConfig("Rotate", "yaw", false);
 

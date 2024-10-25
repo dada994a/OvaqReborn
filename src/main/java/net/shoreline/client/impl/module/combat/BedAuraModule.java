@@ -12,25 +12,24 @@ import net.minecraft.util.math.Vec3d;
 import net.shoreline.client.api.module.ModuleCategory;
 import net.shoreline.client.api.module.ToggleModule;
 
-public class BedAuraModule extends ToggleModule { // Ensure this extends ToggleModule
+public class BedAuraModule extends ToggleModule {
 
     private final MinecraftClient client;
-    private final ClientPlayerEntity player; // Change to ClientPlayerEntity
+    private final ClientPlayerEntity player;
 
     public BedAuraModule() {
         super("BedAura", "Automatically Bedplace and explode", ModuleCategory.COMBAT);
         this.client = MinecraftClient.getInstance();
-        this.player = client.player; // This will now be of type ClientPlayerEntity
+        this.player = client.player;
     }
 
     public void onUpdate() {
         if (player == null || client.world == null) {
-            return; // Ensure player and world are valid
+            return;
         }
 
-        // Check if player is sleeping in a bed
         if (player.isSleeping()) {
-            return; // Don't activate if player is sleeping
+            return;
         }
 
         BlockPos bedPos = findNearbyBed();
@@ -49,12 +48,11 @@ public class BedAuraModule extends ToggleModule { // Ensure this extends ToggleM
                 }
             }
         }
-        return null; // No bed found
+        return null;
     }
 
     private void attackBed(BlockPos bedPos) {
         if (client.world.canSetBlock(bedPos)) {
-            // Create a BlockHitResult for interaction
             BlockHitResult hitResult = new BlockHitResult(
                     new Vec3d(bedPos.getX() + 0.5, bedPos.getY() + 0.5, bedPos.getZ() + 0.5),
                     Direction.UP,
@@ -62,9 +60,8 @@ public class BedAuraModule extends ToggleModule { // Ensure this extends ToggleM
                     false
             );
 
-            // Use the player's hand to interact with the bed
             player.swingHand(Hand.MAIN_HAND);
-            client.interactionManager.interactBlock(player, Hand.MAIN_HAND, hitResult); // Update here
+            client.interactionManager.interactBlock(player, Hand.MAIN_HAND, hitResult);
         }
     }
 }

@@ -28,7 +28,6 @@ public class BoatFlyModule extends ToggleModule {
 
     @EventListener
     public void onTick(TickEvent event) {
-        // Check if riding
         if (!mc.player.hasVehicle()) {
             return;
         }
@@ -36,29 +35,24 @@ public class BoatFlyModule extends ToggleModule {
         Entity vehicle = mc.player.getVehicle();
         Vec3d velocity = vehicle.getVelocity();
 
-        // Default motion
         double motionX = velocity.x;
         double motionY = 0;
         double motionZ = velocity.z;
 
-        // Up/down movement
         if (mc.options.jumpKey.isPressed()) {
             motionY = upwardSpeed.getValue();
         } else if (mc.options.sprintKey.isPressed()) {
-            motionY = velocity.y;  // Maintain current Y velocity
+            motionY = velocity.y;
         }
 
-        // Forward and backward movement
         if (changeForwardSpeed.getValue()) {
             double speed;
             if (mc.options.forwardKey.isPressed()) {
-                // Forward movement
                 speed = forwardSpeed.getValue();
             } else if (mc.options.backKey.isPressed()) {
-                // Backward movement
                 speed = -backwardSpeed.getValue();
             } else {
-                speed = 0; // No movement if neither forward nor backward key is pressed
+                speed = 0;
             }
 
             float yawRad = vehicle.getYaw() * MathHelper.RADIANS_PER_DEGREE;
@@ -66,7 +60,6 @@ public class BoatFlyModule extends ToggleModule {
             motionZ = MathHelper.cos(yawRad) * speed;
         }
 
-        // Apply motion
         vehicle.setVelocity(motionX, motionY, motionZ);
     }
 }

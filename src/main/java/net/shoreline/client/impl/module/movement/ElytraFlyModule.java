@@ -17,6 +17,7 @@ import net.shoreline.client.api.event.listener.EventListener;
 import net.shoreline.client.api.module.ModuleCategory;
 import net.shoreline.client.api.module.ToggleModule;
 import net.shoreline.client.impl.event.entity.player.TravelEvent;
+import net.shoreline.client.impl.event.entity.projectile.RemoveFireworkEvent;
 import net.shoreline.client.impl.event.network.PacketEvent;
 import net.shoreline.client.init.Managers;
 import net.shoreline.client.mixin.accessor.AccessorPlayerMoveC2SPacket;
@@ -31,7 +32,7 @@ public class ElytraFlyModule extends ToggleModule {
     Config<FlyMode> modeConfig = new EnumConfig<>("Mode", "The mode for elytra flight", FlyMode.CONTROL, FlyMode.values());
     Config<Float> speedConfig = new NumberConfig<>("Speed", "The horizontal flight speed", 0.1f, 2.5f, 10.0f);
     Config<Float> vspeedConfig = new NumberConfig<>("VerticalSpeed", "The vertical flight speed", 0.1f, 1.0f, 5.0f);
-    Config<Boolean> instantFlyConfig = new BooleanConfig("InstantFly", "Automatically activates elytra from the ground", false);
+   // Config<Boolean> instantFlyConfig = new BooleanConfig("InstantFly", "Automatically activates elytra from the ground", false);
     Config<Boolean> fireworkConfig = new BooleanConfig("Fireworks", "Uses fireworks when flying", false, () -> modeConfig.getValue() != FlyMode.PACKET);
 
     private float pitch;
@@ -95,20 +96,20 @@ public class ElytraFlyModule extends ToggleModule {
         }
     }
 
-//    @EventListener
-//    public void onRemoveFirework(RemoveFireworkEvent event)
-//    {
-//        if (mc.player == null)
-//        {
-//            return;
-//        }
-//        if (mc.player.isFallFlying() && event.getRocketEntity() != fireworkRocketEntity
-//                && fireworkConfig.getValue())
-//        {
-//            fireworkRocketEntity = event.getRocketEntity();
-//            boostFirework();
-//        }
-//    }
+    @EventListener
+    public void onRemoveFirework(RemoveFireworkEvent event)
+    {
+        if (mc.player == null)
+        {
+           return;
+        }
+        if (mc.player.isFallFlying() && event.getRocketEntity() != fireworkRocketEntity
+        && fireworkConfig.getValue())
+      {
+            fireworkRocketEntity = event.getRocketEntity();
+            boostFirework();
+        }
+    }
 
     @EventListener
     public void onPacketOutbound(PacketEvent.Outbound event) {
@@ -165,19 +166,19 @@ public class ElytraFlyModule extends ToggleModule {
         l = l * l * Math.min(1.0, k / 0.4);
         vec3d4 = mc.player.getVelocity().add(0.0, d * (-1.0 + l * 0.75), 0.0);
         double m;
-        // if (vec3d4.y < 0.0 && i > 0.0)
-        // {
-        //    m = vec3d4.y * -0.1 * l;
-        //    vec3d4 = vec3d4.add(vec3d5.x * m / i, m, vec3d5.z * m / i);
-        // }
+        if (vec3d4.y < 0.0 && i > 0.0)
+         {
+            m = vec3d4.y * -0.1 * l;
+            vec3d4 = vec3d4.add(vec3d5.x * m / i, m, vec3d5.z * m / i);
+         }
         if (f < 0.0f && i > 0.0) {
             m = j * (double) (-MathHelper.sin(f)) * 0.04;
             vec3d4 = vec3d4.add(-vec3d5.x * m / i, m * 3.2, -vec3d5.z * m / i);
         }
-        // if (i > 0.0)
-        // {
-        //     vec3d4 = vec3d4.add((vec3d5.x / i * j - vec3d4.x) * 0.1, 0.0, (vec3d5.z / i * j - vec3d4.z) * 0.1);
-        // }
+         if (i > 0.0)
+         {
+             vec3d4 = vec3d4.add((vec3d5.x / i * j - vec3d4.x) * 0.1, 0.0, (vec3d5.z / i * j - vec3d4.z) * 0.1);
+         }
         mc.player.setVelocity(vec3d4.multiply(0.9900000095367432, 0.9800000190734863, 0.9900000095367432));
     }
 

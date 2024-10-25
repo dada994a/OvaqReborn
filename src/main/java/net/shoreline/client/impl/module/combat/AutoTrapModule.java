@@ -110,7 +110,6 @@ public final class AutoTrapModule extends ObsidianPlacerModule
             return;
         }
 
-        // Do we need this check?? Surround is always highest prio
         blocksPlaced = 0;
         BlockPos pos = PlayerUtil.getRoundedBlockPos(target.getX(), target.getY(), target.getZ());
         if (shiftDelay < shiftDelayConfig.getValue())
@@ -136,8 +135,7 @@ public final class AutoTrapModule extends ObsidianPlacerModule
             BlockPos targetPos = placements.get(blocksPlaced);
             blocksPlaced++;
             shiftDelay = 0;
-            // All rotations for shift ticks must send extra packet
-            // This may not work on all servers
+
             attackPlace(targetPos);
         }
     }

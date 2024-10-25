@@ -5,8 +5,8 @@ import java.security.MessageDigest;
 public class HwidManager {
 
     /**
-     * Method to retrieve the hardware ID (HWID)
-     * @return HWID in MD5 format
+     * @author OvaqReborn
+     * @since 1.0
      */
     public static String getHWID() {
         try {

@@ -15,7 +15,6 @@ import net.shoreline.client.impl.event.TickEvent;
 
 /**
  * @author OvaqReborn
- * Rom あとでおねがい
  * @since 1.0
  */
 public class BlockMoveModule extends ToggleModule {

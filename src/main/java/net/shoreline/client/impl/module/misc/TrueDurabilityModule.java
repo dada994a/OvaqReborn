@@ -21,7 +21,6 @@ public class TrueDurabilityModule extends ToggleModule {
 
     @EventListener
     public void onDurability(DurabilityEvent event) {
-        // ??? Whats this
         int dura = event.getItemDamage();
         if (event.getDamage() < 0) {
             dura = event.getDamage();

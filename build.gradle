@@ -31,6 +31,7 @@ loom {
 configurations {
     libImpl
 }
+
 repositories {
     maven {
         name = "jitpack.io"
@@ -77,7 +78,6 @@ dependencies {
     include modImplementation("com.github.0x3C50:Renderer:e547988")
 }
 
-
 processResources {
     inputs.property "version", project.version
     filesMatching("fabric.mod.json") {
@@ -107,3 +107,10 @@ def execute(String cmd) {
         return null
     }
 }
+/*
+task copyDeps(type: Copy) {
+    from configurations.runtimeClasspath
+    into 'libs'
+    }
+tasks.build.dependsOn copyDeps
+ */
