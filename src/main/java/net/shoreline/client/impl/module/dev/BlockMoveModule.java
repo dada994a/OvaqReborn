@@ -1,4 +1,4 @@
-package net.shoreline.client.impl.module.movement;
+package net.shoreline.client.impl.module.dev;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -33,7 +33,7 @@ public class BlockMoveModule extends ToggleModule {
     };
 
     public BlockMoveModule() {
-        super("BlockMove", "Allows movement through blocks while submerged", ModuleCategory.MOVEMENT);
+        super("BlockMove", "Allows movement through blocks while submerged", ModuleCategory.DEV);
     }
 
     @EventListener

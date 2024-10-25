@@ -1,4 +1,4 @@
-package net.shoreline.client.impl.module.combat;
+package net.shoreline.client.impl.module.dev;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
@@ -13,7 +13,6 @@ import net.shoreline.client.api.event.listener.EventListener;
 import net.shoreline.client.api.module.ModuleCategory;
 import net.shoreline.client.api.module.ToggleModule;
 import net.shoreline.client.util.player.InventoryUtil;
-import net.shoreline.client.impl.event.TickEvent;
 
 import java.util.Comparator;
 
@@ -27,7 +26,7 @@ public class AutoAnvilModule extends ToggleModule {
     Config<Integer> heightConfig = new NumberConfig<>("Height", "blocks", 2, 5, 10);
 
     public AutoAnvilModule() {
-        super("AutoAnvil", "Automatically places anvils above players", ModuleCategory.COMBAT);
+        super("AutoAnvil", "Automatically places anvils above players", ModuleCategory.DEV);
     }
 
     public void onActivate() {

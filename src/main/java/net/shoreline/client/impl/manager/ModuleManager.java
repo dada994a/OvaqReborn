@@ -5,6 +5,7 @@ import net.shoreline.client.OvaqRebornMod;
 import net.shoreline.client.api.module.Module;
 import net.shoreline.client.impl.module.client.*;
 import net.shoreline.client.impl.module.combat.*;
+import net.shoreline.client.impl.module.dev.BlockMoveModule;
 import net.shoreline.client.impl.module.exploit.*;
 import net.shoreline.client.impl.module.misc.*;
 import net.shoreline.client.impl.module.movement.*;
