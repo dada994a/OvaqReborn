@@ -1,4 +1,4 @@
-package net.shoreline.client.impl.module.dev;
+package net.shoreline.client.impl.module.combat;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.decoration.EndCrystalEntity;
@@ -15,7 +15,7 @@ import net.shoreline.client.api.module.ToggleModule;
 public final class CevBreakerModule extends ToggleModule {
 
     public CevBreakerModule() {
-        super("CevBreaker", "Places obsidian, interacts with a crystal, and breaks the obsidian", ModuleCategory.DEV);
+        super("CevBreaker", "Places obsidian, interacts with a crystal, and breaks the obsidian", ModuleCategory.COMBAT);
         enable();
     }
 

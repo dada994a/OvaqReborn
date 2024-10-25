@@ -7,7 +7,6 @@ import net.shoreline.client.impl.manager.ModuleManager;
 import net.shoreline.client.api.module.Module;
 import net.shoreline.client.impl.module.client.*;
 import net.shoreline.client.impl.module.combat.*;
-import net.shoreline.client.impl.module.dev.*;
 import net.shoreline.client.impl.module.exploit.*;
 import net.shoreline.client.impl.module.misc.*;
 import net.shoreline.client.impl.module.movement.*;
@@ -43,7 +42,10 @@ public class Modules {
     public static AutoObsidianModule AUTOOBSIDIAN;
     public static AutoCrystalModule AUTO_CRYSTAL;
     public static OldAutoCrystalModule OLD_AUTO_CRYSTAL;
+   // public static AutoAnvilModule AUTO_ANVIL;
+   // public static AntiAnvilModule ANTI_ANVIL;
     public static BacktrackModule BACK_TRACK;
+    // public static BedAuraModule BEDAURA;
     public static AutoLogModule AUTO_LOG;
     //public static AutoTotemModule AUTO_TOTEM;
     public static OffHandModule OFFHAND;
@@ -51,6 +53,7 @@ public class Modules {
     public static AutoXPModule AUTO_XP;
     public static BlockLagModule BLOCK_LAG;
     public static BowAimModule BOW_AIM;
+    //public static CevBreakerModule CEVBREAKER;
     public static CriticalsModule CRITICALS;
     public static HoleFillModule HOLE_FILL;
     public static HoleSnapModule HOLESNAP;
@@ -62,12 +65,6 @@ public class Modules {
     public static SelfTrapModule SELF_TRAP;
     public static SurroundModule SURROUND;
     public static TriggerModule TRIGGER;
-    //Dev
-    public static CevBreakerModule CEVBREAKER;
-    public static AntiAnvilModule ANTI_ANVIL;
-    public static AutoAnvilModule AUTO_ANVIL;
-    public static BedAuraModule BEDAURA;
-    public static BlockMoveModule BLOCKMOVE;
     // Exploit
     public static AntiHungerModule ANTI_HUNGER;
     public static AntiResourcePackModule ANTI_RESOURCE_PACK;
@@ -119,6 +116,8 @@ public class Modules {
     // Movement
     public static AntiLevitationModule ANTI_LEVITATION;
     public static AutoWalkModule AUTO_WALK;
+    // public static BlockHoleMoveModule BLOCKHOLEMOVE;
+    public static BlockMoveModule BLOCKMOVE;
     public static BoatFlyModule BOATFLY;
     public static ElytraFlyModule ELYTRA_FLY;
     public static EntityControlModule ENTITY_CONTROL;
@@ -244,18 +243,18 @@ public class Modules {
             AUTOOBSIDIAN = (AutoObsidianModule) getRegisteredModule("autoobsidian-module");
             AUTO_CRYSTAL = (AutoCrystalModule) getRegisteredModule("autocrystal-module");
             OLD_AUTO_CRYSTAL = (OldAutoCrystalModule) getRegisteredModule("oldautocrystal-module");
-            AUTO_ANVIL = (AutoAnvilModule) getRegisteredModule("autoanvil-module");
-            ANTI_ANVIL = (AntiAnvilModule) getRegisteredModule("antianvil-module");
+            //AUTO_ANVIL = (AutoAnvilModule) getRegisteredModule("autoanvil-module");
+           // ANTI_ANVIL = (AntiAnvilModule) getRegisteredModule("antianvil-module");
             AUTO_LOG = (AutoLogModule) getRegisteredModule("autolog-module");
             //AUTO_TOTEM = (AutoTotemModule) getRegisteredModule("autototem-module");
             OFFHAND = (OffHandModule) getRegisteredModule("offhand-module");
             AUTO_TRAP = (AutoTrapModule) getRegisteredModule("autotrap-module");
             AUTO_XP = (AutoXPModule) getRegisteredModule("autoxp-module");
             BACK_TRACK = (BacktrackModule) getRegisteredModule("backtrack-module");
-            BEDAURA = (BedAuraModule) getRegisteredModule("bedaura-module");
+            //BEDAURA = (BedAuraModule) getRegisteredModule("bedaura-module");
             BLOCK_LAG = (BlockLagModule) getRegisteredModule("blocklag-module");
             BOW_AIM = (BowAimModule) getRegisteredModule("bowaim-module");
-            CEVBREAKER = (CevBreakerModule) getRegisteredModule("cevbreaker-module");
+//            CEVBREAKER = (CevBreakerModule) getRegisteredModule("cevbreaker-module");
             CRITICALS = (CriticalsModule) getRegisteredModule("criticals-module");
             HOLE_FILL = (HoleFillModule) getRegisteredModule("holefill-module");
             HOLESNAP = (HoleSnapModule) getRegisteredModule("holesnap-module");

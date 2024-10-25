@@ -42,10 +42,5 @@ public enum ModuleCategory {
     /**
      * Modules associated with client processes
      */
-    CLIENT,
-    /**
-*DevelopmentModules
-     */
-    DEV
-
+    CLIENT
 }

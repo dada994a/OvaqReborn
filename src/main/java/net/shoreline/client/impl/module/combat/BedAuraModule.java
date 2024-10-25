@@ -1,8 +1,9 @@
-package net.shoreline.client.impl.module.dev;
+package net.shoreline.client.impl.module.combat;
 
 import net.minecraft.block.BedBlock;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -17,7 +18,7 @@ public class BedAuraModule extends ToggleModule {
     private final ClientPlayerEntity player;
 
     public BedAuraModule() {
-        super("BedAura", "Automatically Bedplace and explode", ModuleCategory.DEV);
+        super("BedAura", "Automatically Bedplace and explode", ModuleCategory.COMBAT);
         this.client = MinecraftClient.getInstance();
         this.player = client.player;
     }

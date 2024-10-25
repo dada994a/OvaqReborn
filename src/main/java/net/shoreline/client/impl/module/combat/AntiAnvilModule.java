@@ -1,4 +1,4 @@
-package net.shoreline.client.impl.module.dev;
+package net.shoreline.client.impl.module.combat;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Items;
@@ -18,7 +18,7 @@ public class AntiAnvilModule extends ToggleModule {
     Config<Float> rangeConfig = new NumberConfig<>("Range", "number", 1.0f, 5.0f, 7.0f);
 //TODO:動かないかもね(ゴリ押し)
     public AntiAnvilModule() {
-        super("AntiAnvil", "Protect AutoAnvil", ModuleCategory.DEV);
+        super("AntiAnvil", "Protect AutoAnvil", ModuleCategory.COMBAT);
     }
 
     @EventListener
