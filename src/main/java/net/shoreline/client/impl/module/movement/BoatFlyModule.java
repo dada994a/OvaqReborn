@@ -19,7 +19,7 @@ public class BoatFlyModule extends ToggleModule {
 
     Config<Float> forwardSpeed = new NumberConfig<>("ForwardSpeed", "Speed while moving forward", 0.1f, 1.0f, 20.0f);
     Config<Float> backwardSpeed = new NumberConfig<>("BackwardSpeed", "Speed while moving backward", 0.1f, 1.0f, 20.0f);
-    Config<Float> upwardSpeed = new NumberConfig<>("UpwardSpeed", "Speed while moving upward", 0.1f, 1.0f, 20.0f);
+    Config<Float> upwardSpeed = new NumberConfig<>("UpwardSpeed", "Speed while moving upward", 0.1f, 1.0f, 10.0f);
     Config<Boolean> changeForwardSpeed = new BooleanConfig("ChangeForwardSpeed", "Enable changing forward/backward speed", true);
 
     public BoatFlyModule() {
