@@ -10,7 +10,7 @@ import net.shoreline.client.util.chat.ChatUtil;
 
 public class ChatSuffixModule extends ToggleModule {
     private static final String OVAQ_SUFFIX = " ｜ ᴏᴠᴀǫʀᴇʙᴏʀɴ ᴅᴇᴠ";
-    private static final String CATMI_SUFFIX = " ｜ ᴄᴀᴛᴍɪ";
+    private static final String CATMI_SUFFIX = " ᴄᴀᴛᴍɪ";
     private static final String TEAM_SUFFIX = " ｜ ᴛᴇᴀᴍ 2ᴘ2ꜰᴊᴘ";
     private static final String DOT_SUFFIX = " ᴅᴏᴛɢᴏᴅ";
     private static final String LEMON_SUFFIX =" \uD835\uDCC1ᴇᴍ\uD835\uDC5C\uD835\uDCC3";

