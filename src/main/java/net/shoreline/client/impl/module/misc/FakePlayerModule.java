@@ -7,8 +7,6 @@ import net.shoreline.client.impl.event.entity.player.PushEntityEvent;
 import net.shoreline.client.impl.event.network.DisconnectEvent;
 import net.shoreline.client.util.world.FakePlayerEntity;
 
-import java.util.UUID;
-
 /**
  * @author linus
  * @see FakePlayerEntity
