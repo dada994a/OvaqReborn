@@ -97,6 +97,7 @@ public class Modules {
     public static AutoGappleModule AUTO_GAPPLE;
     public static AutoReconnectModule AUTO_RECONNECT;
     public static AutoRespawnModule AUTO_RESPAWN;
+    public static AutoSignModule AUTO_SIGN;
     public static BeaconSelectorModule BEACON_SELECTOR;
     public static BetterChatModule BETTER_CHAT;
     // public static BetterChatModule BETTER_CHAT;
@@ -296,6 +297,7 @@ public class Modules {
             AUTO_GAPPLE = (AutoGappleModule) getRegisteredModule("autogapple-module");
             AUTO_RECONNECT = (AutoReconnectModule) getRegisteredModule("autoreconnect-module");
             AUTO_RESPAWN = (AutoRespawnModule) getRegisteredModule("autorespawn-module");
+            AUTO_SIGN = (AutoSignModule) getRegisteredModule("autosign-module");
             BEACON_SELECTOR = (BeaconSelectorModule) getRegisteredModule("beaconselector-module");
             BETTER_CHAT = (BetterChatModule) getRegisteredModule("betterchat-module");
             CHAT_NOTIFIER = (ChatNotifierModule) getRegisteredModule("chatnotifier-module");

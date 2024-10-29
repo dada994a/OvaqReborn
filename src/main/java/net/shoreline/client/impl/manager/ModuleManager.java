@@ -104,6 +104,7 @@ public class ModuleManager {
                 new AutoGappleModule(),
                 new AutoReconnectModule(),
                 new AutoRespawnModule(),
+                new AutoSignModule(),
                 new BeaconSelectorModule(),
                 new BetterChatModule(),
                 new ChatNotifierModule(),
