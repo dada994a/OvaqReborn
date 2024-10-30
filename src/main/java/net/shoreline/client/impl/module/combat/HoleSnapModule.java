@@ -13,7 +13,7 @@ import net.shoreline.client.init.Managers;
 
 public class HoleSnapModule extends ToggleModule {
     Config<Float> rangeConfig = new NumberConfig<>("Range", "The range to snap to nearby holes", 1.0f, 3.0f, 8.0f);
-    Config<Double> speedConfig = new NumberConfig<>("Speed", "The speed at which to snap to holes", 0.1, 1.0, 5.0);
+    Config<Double> speedConfig = new NumberConfig<>("Speed", "The speed at which to snap to holes", 0.1, 0.1, 5.0);
     private BlockPos holePos;
     private Vec3d targetPos;
     private int stuckTicks;

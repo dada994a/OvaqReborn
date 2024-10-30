@@ -13,12 +13,12 @@ public class ChatSuffixModule extends ToggleModule {
     private static final String CATMI_SUFFIX = " ᴄᴀᴛᴍɪ";
     private static final String TEAM_SUFFIX = " ｜ ᴛᴇᴀᴍ 2ᴘ2ꜰᴊᴘ";
     private static final String DOT_SUFFIX = " ᴅᴏᴛɢᴏᴅ";
-    private static final String LEMON_SUFFIX = " \uD835\uDCC1ᴇᴍ\uD835\uDC5C\uD835\uDCC3";
-    private static final String REBIRTH_SUFFIX = "✷ℜ\uD835\uDD22\uD835\uDD1F\uD835\uDD26\uD835\uDD2F\uD835\uDD31\uD835\uDD25";
-    private static final String MOONBLADE_SUFFIX = "☽\uD835\uDD10\uD835\uDD2C\uD835\uDD2C\uD835\uDD2B\uD835\uDD1F\uD835\uDD29\uD835\uDD1E\uD835\uDD21\uD835\uDD22";
-    private static final String MELON_SUFFIX = "\uD835\uDD10\uD835\uDD22\uD835\uDD29\uD835\uDD2C\uD835\uDD2B\uD835\uDD05\uD835\uDD22\uD835\uDD31\uD835\uDD1E";
-    private static final String MIO_SUFFIX = "\uD835\uDDE0\uD835\uDDF6\uD835\uDDFC";
-    private static final String ISOLATION_SUFFIX = "\u00a4\u0197\u0073\u00f8\u026d\u03b1\u0442\u0e40\u0e4f\u0e20C";
+    private static final String LEMON_SUFFIX = "  \uD835\uDCC1ᴇᴍ\uD835\uDC5C\uD835\uDCC3";
+    private static final String REBIRTH_SUFFIX = "  ✷ℜ\uD835\uDD22\uD835\uDD1F\uD835\uDD26\uD835\uDD2F\uD835\uDD31\uD835\uDD25";
+    private static final String MOONBLADE_SUFFIX = "  ☽\uD835\uDD10\uD835\uDD2C\uD835\uDD2C\uD835\uDD2B\uD835\uDD1F\uD835\uDD29\uD835\uDD1E\uD835\uDD21\uD835\uDD22";
+    private static final String MELON_SUFFIX = "  \uD835\uDD10\uD835\uDD22\uD835\uDD29\uD835\uDD2C\uD835\uDD2B\uD835\uDD05\uD835\uDD22\uD835\uDD31\uD835\uDD1E";
+    private static final String MIO_SUFFIX = "  \uD835\uDDE0\uD835\uDDF6\uD835\uDDFC";
+    private static final String ISOLATION_SUFFIX = " \u00a4\u0197\u0073\u00f8\u026d\u03b1\u0442\u0e40\u0e4f\u0e20C";
 
     private final Config<Mode> modeConfig = new EnumConfig<>("Mode", "The suffix mode to append to chat messages", Mode.OVAQ, Mode.values());
 

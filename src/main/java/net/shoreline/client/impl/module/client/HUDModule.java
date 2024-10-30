@@ -26,6 +26,7 @@ import net.shoreline.client.api.module.ToggleModule;
 import net.shoreline.client.api.render.RenderManager;
 import net.shoreline.client.impl.event.ScreenOpenEvent;
 import net.shoreline.client.impl.event.gui.hud.RenderOverlayEvent;
+import net.shoreline.client.impl.manager.client.UIDManager;
 import net.shoreline.client.init.Managers;
 import net.shoreline.client.init.Modules;
 import net.shoreline.client.util.StreamUtils;

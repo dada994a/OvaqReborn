@@ -25,7 +25,7 @@ public class AutoSignModule extends ToggleModule {
 
     @Override
     public void onEnable() {
-        ChatUtil.clientSendMessage(" §p[!] §fPlace down a sign to set text!");
+        ChatUtil.clientSendMessage(" §fPlace down a sign to set text!");
         this.text = null;
     }
 }
