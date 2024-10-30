@@ -22,7 +22,7 @@ import net.shoreline.client.util.world.EntityUtil;
 import java.awt.*;
 
 /**
- * @author linus
+ * @author OvaqReborn
  * @since 1.0
  */
 public class TracersModule extends ToggleModule {
@@ -65,8 +65,8 @@ public class TracersModule extends ToggleModule {
             }
             Color color = getTracerColor(entity);
             if (color != null) {
-                // Vec3d entityPos = Interpolation.getRenderPosition(entity, event.getTickDelta()).add(0.0, getTargetY(entity), 0.0);
-                // RenderManager.renderLine(event.getMatrices(), pos, entityPos, widthConfig.getValue(), color.getRGB());
+                 Vec3d entityPos = Interpolation.getRenderPosition(entity, event.getTickDelta()).add(0.0, getTargetY(entity), 0.0);
+                 RenderManager.renderLine(event.getMatrices(), pos, entityPos, widthConfig.getValue(), color.getRGB());
             }
         }
         mc.options.getBobView().setValue(prevBobView);
