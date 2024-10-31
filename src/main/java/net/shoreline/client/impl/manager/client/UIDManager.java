@@ -11,7 +11,7 @@ import java.net.URL;
  * @since 1.0
  */
 public class UIDManager {
-    public String getUID() {
+    public static String getUID() {
         String a = HwidManager.getHWID();
         if (a.equals("Error")) {
             return "-1";
@@ -31,6 +31,7 @@ public class UIDManager {
         } catch (Exception e) {
             OvaqReborn.LOGGER.error("error i: {}", e.getMessage());
         }
+
         return "-1";
     }
 }

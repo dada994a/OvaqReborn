@@ -3,6 +3,7 @@ package net.shoreline.client;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
+import net.shoreline.client.impl.manager.client.UIDManager;
 
 /**
  * Fabric {@link ModInitializer}.
@@ -13,6 +14,7 @@ import net.fabricmc.loader.api.FabricLoader;
 public class OvaqRebornMod implements ClientModInitializer {
     public static final String MOD_NAME = "OvaqReborn";
     public static final String MOD_BUILD_NUMBER = BuildConfig.BUILD_IDENTIFIER;
+    public static final String UID = UIDManager.getUID();
     public static final String MOD_VER = BuildConfig.VERSION;
 
     /**
