@@ -16,6 +16,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.InetAddress;
 import java.net.URL;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -69,8 +70,18 @@ public class OvaqReborn {
         CONFIG.loadClient();
 
         if (Modules.IRC.isEnabled() && !IRCModule.chat.isConnected()) {
-            info("Connecting to IRC Server (Init)");
-            IRCModule.chat.connect();
+            try {
+                InetAddress address = InetAddress.getByName("www.google.com");
+                boolean isReachable = address.isReachable(5000);
+                if (isReachable) {
+                    info("Connecting to IRC Server (Init)");
+                    IRCModule.chat.connect();
+                } else {
+                    info("Network Connection Error. (Maybe Bug");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             info("Made by hypinohaizin,rom(nelf),Naa_Naa");
             info("OvaqReborn Load is done.");
         }
