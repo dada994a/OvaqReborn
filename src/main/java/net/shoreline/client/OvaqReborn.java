@@ -71,6 +71,8 @@ public class OvaqReborn {
         if (Modules.IRC.isEnabled() && !IRCModule.chat.isConnected()) {
             info("Connecting to IRC Server (Init)");
             IRCModule.chat.connect();
+            info("Made by hypinohaizin,rom(nelf),Naa_Naa");
+            info("OvaqReborn Load is done.");
         }
 
     }
