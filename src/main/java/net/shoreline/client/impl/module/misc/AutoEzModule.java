@@ -22,7 +22,7 @@ public class AutoEzModule extends ToggleModule {
    // Config<Boolean> killConfig = new BooleanConfig("Kill Message", "Send a message when a player is killed", true);
    // Config<Boolean> popConfig = new BooleanConfig("Pop Message", "Send a message when a player pops a totem", true);
     Config<MessageMode> messageModeConfig = new EnumConfig<>("Mode", "The mode for the rotation yaw spin ", MessageMode.DEFAULT, MessageMode.values());
-    Config<String> customMessageConfig = new StringConfig("Custom Message", "Custom message format", "GG[[ %player%");
+    Config<String> customMessageConfig = new StringConfig("Custom Message", "Custom message format", "GG %player%");
     Config<Integer> rangeConfig = new NumberConfig<>("Range", "Range to detect players", 10, 10, 50);
 
     private final Random random = new Random();
