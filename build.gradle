@@ -30,6 +30,9 @@ loom {
 
 configurations {
     libImpl
+
+    modImplementation.extendsFrom(modInclude)
+    include.extendsFrom(modInclude)
 }
 
 repositories {
@@ -75,6 +78,7 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modImplementation "cabaletta:baritone-api:${baritone_api_version}"
 
+    modInclude "org.ladysnake:satin:1.16.0"
     include modImplementation("com.github.0x3C50:Renderer:e547988")
 }
 
