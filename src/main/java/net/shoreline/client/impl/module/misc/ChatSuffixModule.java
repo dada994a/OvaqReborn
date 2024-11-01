@@ -14,6 +14,7 @@ public class ChatSuffixModule extends ToggleModule {
     private static final String TEAM_SUFFIX = " ｜ ᴛᴇᴀᴍ 2ᴘ2ꜰᴊᴘ";
     private static final String DOT_SUFFIX = " ᴅᴏᴛɢᴏᴅ";
     private static final String LEMON_SUFFIX = "  \uD835\uDCC1ᴇᴍ\uD835\uDC5C\uD835\uDCC3";
+    private static final String DARE_SUFFIX = " ｜ お前誰やねん";
     private final Config<Mode> modeConfig = new EnumConfig<>("Mode", "The suffix mode to append to chat messages", Mode.OVAQ, Mode.values());
 
     public ChatSuffixModule() {
@@ -42,6 +43,9 @@ public class ChatSuffixModule extends ToggleModule {
             case LEMON:
                 suffix = LEMON_SUFFIX;
                 break;
+            case DARE:
+                suffix = DARE_SUFFIX;
+                break;
             case OVAQ:
             default:
                 suffix = OVAQ_SUFFIX;
@@ -54,6 +58,6 @@ public class ChatSuffixModule extends ToggleModule {
     }
 
     public enum Mode {
-        OVAQ, CATMI, TEAM, DOT, LEMON
+        OVAQ, CATMI, TEAM, DOT, LEMON, DARE
     }
 }
