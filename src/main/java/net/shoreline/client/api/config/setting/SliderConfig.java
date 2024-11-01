@@ -28,7 +28,6 @@ public class SliderConfig<T extends Number> extends Config<T> {
 
     @Override
     public void setValue(T value) {
-        // 値が範囲内に収まっているか確認
         if (value.doubleValue() < minValue.doubleValue() || value.doubleValue() > maxValue.doubleValue()) {
             throw new IllegalArgumentException("Value out of range");
         }
