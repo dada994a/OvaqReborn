@@ -1,5 +1,7 @@
 package net.shoreline.client.util.string;
 
+import java.util.List;
+
 /**
  * @author linus
  * @since 1.0
@@ -17,4 +19,21 @@ public class StringUtil {
         }
         return "";
     }
+
+    public static int indexOfStartingWith(List<String> list, String startingWith) {
+        for (var i = 0; i < list.size(); i++) {
+            var string = list.get(i);
+
+            if (startingWith.isEmpty()) {
+                if (string.isEmpty()) {
+                    return i;
+                }
+            } else if (string.startsWith(startingWith)) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
 }

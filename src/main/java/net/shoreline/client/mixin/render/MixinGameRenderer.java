@@ -13,7 +13,6 @@ import net.shoreline.client.OvaqReborn;
 import net.shoreline.client.impl.event.network.ReachEvent;
 import net.shoreline.client.impl.event.render.*;
 import net.shoreline.client.impl.event.world.UpdateCrosshairTargetEvent;
-import net.shoreline.client.init.Programs;
 import net.shoreline.client.util.Globals;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -177,16 +176,5 @@ public class MixinGameRenderer implements Globals {
             cir.cancel();
             cir.setReturnValue(fovEvent.getFov() * (double) MathHelper.lerp(tickDelta, lastFovMultiplier, fovMultiplier));
         }
-    }
-
-    /**
-     * @param factory
-     * @param ci
-     */
-    @Inject(method = "loadPrograms", at = @At(value = "INVOKE",
-            target = "Ljava/util/List;add(Ljava/lang/Object;)Z",
-            ordinal = 0), locals = LocalCapture.CAPTURE_FAILHARD)
-    private void initPrograms(ResourceFactory factory, CallbackInfo ci) {
-        Programs.initPrograms();
     }
 }

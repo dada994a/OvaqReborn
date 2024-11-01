@@ -50,6 +50,7 @@ public class Modules {
     //public static AutoTotemModule AUTO_TOTEM;
     public static OffHandModule OFFHAND;
     public static AutoTrapModule AUTO_TRAP;
+    public static AutoWebModule AUTO_WEB;
     public static AutoXPModule AUTO_XP;
     public static BlockLagModule BLOCK_LAG;
     public static BowAimModule BOW_AIM;
@@ -94,7 +95,7 @@ public class Modules {
     public static AutoAcceptModule AUTO_ACCEPT;
     public static AutoEzModule AUTO_EZ;
     public static AutoFishModule AUTO_FISH;
-    public static AutoGappleModule AUTO_GAPPLE;
+    public static AutoEatModule AUTO_GAPPLE;
     public static AutoReconnectModule AUTO_RECONNECT;
     public static AutoRespawnModule AUTO_RESPAWN;
     public static AutoSignModule AUTO_SIGN;
@@ -161,8 +162,10 @@ public class Modules {
     public static NoRotateModule NO_ROTATE;
     public static NoWeatherModule NO_WEATHER;
     public static ParticlesModule PARTICLES;
+    public static PhaseESPModule PHASE_ESP;
     public static SkeletonModule SKELETON;
     public static SkyboxModule SKYBOX;
+    public static SmartF3Module SMARTF3;
     //public static ShadersModule SHADERS;
     public static TooltipsModule TOOLTIPS;
     public static TracersModule TRACERS;
@@ -231,7 +234,6 @@ public class Modules {
             RPC = (RPCModule) getRegisteredModule("rpc-module");
             IRC = (IRCModule) getRegisteredModule("irc-module");
             PROTOCOL = (ProtocolModule) getRegisteredModule("protocol-module");
-            //FONT =(FontModule) getRegisteredModule("font-module");
             ROTATIONS = (RotationsModule) getRegisteredModule("rotations-module");
             SERVER = (ServerModule) getRegisteredModule("server-module");
             if (OvaqRebornMod.isBaritonePresent()) {
@@ -250,6 +252,7 @@ public class Modules {
             //AUTO_TOTEM = (AutoTotemModule) getRegisteredModule("autototem-module");
             OFFHAND = (OffHandModule) getRegisteredModule("offhand-module");
             AUTO_TRAP = (AutoTrapModule) getRegisteredModule("autotrap-module");
+            AUTO_WEB = (AutoWebModule)getRegisteredModule("autoweb-module");
             AUTO_XP = (AutoXPModule) getRegisteredModule("autoxp-module");
             BACK_TRACK = (BacktrackModule) getRegisteredModule("backtrack-module");
             //BEDAURA = (BedAuraModule) getRegisteredModule("bedaura-module");
@@ -294,7 +297,7 @@ public class Modules {
             AUTO_ACCEPT = (AutoAcceptModule) getRegisteredModule("autoaccept-module");
             AUTO_EZ = (AutoEzModule) getRegisteredModule("autoez-module");
             AUTO_FISH = (AutoFishModule) getRegisteredModule("autofish-module");
-            AUTO_GAPPLE = (AutoGappleModule) getRegisteredModule("autogapple-module");
+            AUTO_GAPPLE = (AutoEatModule) getRegisteredModule("autoeat-module");
             AUTO_RECONNECT = (AutoReconnectModule) getRegisteredModule("autoreconnect-module");
             AUTO_RESPAWN = (AutoRespawnModule) getRegisteredModule("autorespawn-module");
             AUTO_SIGN = (AutoSignModule) getRegisteredModule("autosign-module");
@@ -358,8 +361,10 @@ public class Modules {
             NO_ROTATE = (NoRotateModule) getRegisteredModule("norotate-module");
             NO_WEATHER = (NoWeatherModule) getRegisteredModule("noweather-module");
             PARTICLES = (ParticlesModule) getRegisteredModule("particles-module");
+            PHASE_ESP = (PhaseESPModule) getRegisteredModule("phaseesp-module");
             SKELETON = (SkeletonModule) getRegisteredModule("skeleton-module");
             SKYBOX = (SkyboxModule) getRegisteredModule("skybox-module");
+            SMARTF3 = (SmartF3Module) getRegisteredModule("smartf3-module");
             //SHADERS = (ShadersModule) getRegisteredModule("shaders-module");
             TOOLTIPS = (TooltipsModule) getRegisteredModule("tooltips-module");
             TRACERS = (TracersModule) getRegisteredModule("tracers-module");

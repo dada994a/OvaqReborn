@@ -82,10 +82,9 @@ public class OvaqReborn {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            info("Made by hypinohaizin,rom(nelf),Naa_Naa");
-            info("OvaqReborn Load is done.");
         }
-
+        info("Made by hypinohaizin,rom(nelf),Naa_Naa");
+        info("OvaqReborn Load is done.");
     }
     // TODO: OvaqHwidAuthSystem
     public static void hwidAuth() {

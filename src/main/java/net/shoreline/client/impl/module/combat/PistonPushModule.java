@@ -9,6 +9,7 @@ import net.minecraft.item.Items;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
+import net.shoreline.client.OvaqReborn;
 import net.shoreline.client.api.config.Config;
 import net.shoreline.client.api.config.setting.NumberConfig;
 import net.shoreline.client.api.event.listener.EventListener;
@@ -27,7 +28,7 @@ import java.util.List;
  * @author OvaqReborn
  */
 public class PistonPushModule extends RotationModule {
-    private List<Block> airBlocks = Arrays.asList(
+    private final List<Block> airBlocks = Arrays.asList(
             Blocks.AIR,
             Blocks.FIRE,
             Blocks.LAVA,
@@ -73,19 +74,11 @@ public class PistonPushModule extends RotationModule {
                     disable();
                     return;
                 }
-                if (!Managers.HOLE.checkHole(target.getBlockPos()).isStandard()
-                        && !Managers.HOLE.checkHole(target.getBlockPos()).isDouble()
-                        && !Managers.HOLE.checkHole(target.getBlockPos()).isQuad()
-                        && !Managers.HOLE.checkHole(target.getBlockPos()).isDoubleX()
-                        && !Managers.HOLE.checkHole(target.getBlockPos()).isDoubleZ()) {
+                if (hole(true, target)) {
                     disable();
                     return;
                 }
                 BlockPos pos = new BlockPos(target.getBlockX(), Math.round(target.getBlockY()), target.getBlockZ());
-                if (target.getEyeHeight(target.getPose()) < 1.4) {
-                    disable();
-                    return;
-                }
                 if (!state(pos.up(2)).isReplaceable()) {
                     disable();
                     return;
@@ -104,6 +97,7 @@ public class PistonPushModule extends RotationModule {
                 placeRedstone(a.activatorPos);
             }
         } catch (Exception e) {
+            OvaqReborn.LOGGER.error("PistonPushModule: {}", e.getMessage());
         }
     }
 
@@ -139,6 +133,25 @@ public class PistonPushModule extends RotationModule {
             silentPlace(pos, e);
             freqs2++;
         }
+    }
+
+    private boolean hole(boolean doubles, Entity entity) {
+        BlockPos blockPos = entity.getBlockPos();
+        int air = 0;
+        for (Direction direction : Direction.values()) {
+            BlockState state;
+            if (direction == Direction.UP || (state = state(blockPos.offset(direction))).getBlock() == Blocks.BEDROCK || state.getBlock() == Blocks.OBSIDIAN || state.getBlock() == Blocks.CRYING_OBSIDIAN) continue;
+            if (!doubles || direction == Direction.DOWN) {
+                return true;
+            }
+            ++air;
+            for (Direction dir : Direction.values()) {
+                BlockState blockState1;
+                if (dir == direction.getOpposite() || dir == Direction.UP || (blockState1 = state(blockPos.offset(direction).offset(dir))).getBlock() == Blocks.BEDROCK || blockState1.getBlock() == Blocks.OBSIDIAN) continue;
+                return true;
+            }
+        }
+        return air >= 2;
     }
 
     private double sort(Piston pres) {
