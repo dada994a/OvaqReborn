@@ -34,7 +34,7 @@ import net.shoreline.client.util.string.EnumFormatter;
 import java.text.DecimalFormat;
 
 /**
- * @author Gavin, linus
+ * @author OvaqReborn
  * @since 1.0
  */
 public class VelocityModule extends ToggleModule {
@@ -47,12 +47,9 @@ public class VelocityModule extends ToggleModule {
     Config<Boolean> pushBlocksConfig = new BooleanConfig("NoPush-Blocks", "Prevents being pushed out of blocks", true);
     Config<Boolean> pushLiquidsConfig = new BooleanConfig("NoPush-Liquids", "Prevents being pushed by flowing liquids", true);
     Config<Boolean> pushFishhookConfig = new BooleanConfig("NoPush-Fishhook", "Prevents being pulled by fishing rod hooks", true);
-    //
+
     private boolean cancelVelocity;
 
-    /**
-     *
-     */
     public VelocityModule() {
         super("Velocity", "Reduces the amount of player knockback velocity",
                 ModuleCategory.MOVEMENT);
@@ -121,6 +118,14 @@ public class VelocityModule extends ToggleModule {
                     }
                     event.cancel();
                     cancelVelocity = true;
+                    mc.executeSync(() -> {
+                        float yaw = Managers.ROTATION.getServerYaw();
+                        float pitch = Managers.ROTATION.getServerPitch();
+                        Managers.NETWORK.sendPacket(new PlayerMoveC2SPacket.Full(
+                                mc.player.getX(), mc.player.getY(), mc.player.getZ(), yaw, pitch, mc.player.isOnGround()));
+                        Managers.NETWORK.sendPacket(new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.STOP_DESTROY_BLOCK,
+                                mc.player.getBlockPos(), Direction.DOWN));
+                    });
                 }
             }
         } else if (event.getPacket() instanceof ExplosionS2CPacket packet && explosionConfig.getValue()) {
@@ -146,7 +151,6 @@ public class VelocityModule extends ToggleModule {
                 }
             }
             if (event.isCanceled()) {
-                // Dumb fix bc canceling explosion velocity removes explosion handling in 1.19
                 mc.executeSync(() -> ((AccessorClientWorld) mc.world).hookPlaySound(packet.getX(), packet.getY(), packet.getZ(),
                         SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS,
                         4.0f, (1.0f + (RANDOM.nextFloat() - RANDOM.nextFloat()) * 0.2f) * 0.7f, false, RANDOM.nextLong()));
@@ -196,7 +200,6 @@ public class VelocityModule extends ToggleModule {
             event.cancel();
         }
     }
-
     private enum VelocityMode {
         NORMAL,
         GRIM
