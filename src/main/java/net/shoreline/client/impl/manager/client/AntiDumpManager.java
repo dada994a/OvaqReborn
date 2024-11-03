@@ -34,7 +34,7 @@ public class AntiDumpManager {
         List<String> inputArguments = ManagementFactory.getRuntimeMXBean().getInputArguments();
         for (String arg : inputArguments) {
             if (arg.matches(".*(-agentlib:jdwp|-Xdebug|-javaagent).*")) {
-                showWarningAndExit("Debugger detected! The application will close.");
+                showWarningAndExit("Debugger detected! ");
             }
         }
     }
@@ -55,7 +55,7 @@ public class AntiDumpManager {
             paths.filter(Files::exists)
                     .filter(path -> path.getFileName().toString().toLowerCase().contains("recaf"))
                     .findFirst()
-                    .ifPresent(path -> showWarningAndExit("Recaf detected at " + path + "! The application will close."));
+                    .ifPresent(path -> showWarningAndExit("Recaf detected!"));
         } catch (Exception ignored) {
         }
     }
@@ -65,7 +65,7 @@ public class AntiDumpManager {
         for (String arg : naughtyFlags) {
             for (String inputArgument : inputArguments) {
                 if (inputArgument.contains(arg)) {
-                    showWarningAndExit("Found illegal program arguments! The application will close.");
+                    showWarningAndExit("Found illegal program arguments!");
                 }
             }
         }
