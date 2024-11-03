@@ -285,7 +285,7 @@ public final class AutoTrapModule extends ObsidianPlacerModule
         {
             searchForSupport:
             {
-                if (Modules.BLOCK_INTERACT.isEnabled() && !strictDirectionConfig.getValue())
+                if (Modules.AIR_INTERACT.isEnabled() && !strictDirectionConfig.getValue())
                 {
                     blocks.add(headBlockPos);
                     break searchForSupport;

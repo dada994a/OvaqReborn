@@ -1,9 +1,16 @@
 package net.shoreline.client.impl.module.render;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.model.ModelPart;
+import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.render.OverlayTexture;
+import net.minecraft.client.render.VertexFormat;
+import net.minecraft.client.render.VertexFormats;
+import net.minecraft.client.render.entity.EndCrystalEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.decoration.EndCrystalEntity;
+import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec3d;
 import net.shoreline.client.api.config.Config;
 import net.shoreline.client.api.config.setting.BooleanConfig;
@@ -11,11 +18,14 @@ import net.shoreline.client.api.config.setting.NumberConfig;
 import net.shoreline.client.api.event.listener.EventListener;
 import net.shoreline.client.api.module.ModuleCategory;
 import net.shoreline.client.api.module.ToggleModule;
+import net.minecraft.client.render.*;
+import org.joml.Quaternionf;
+
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
-
 /**
  * @author OvaqReborn
  * @since 1.0
@@ -107,7 +117,40 @@ public class CrystalModelModule extends ToggleModule {
         posFloatMap.put(crystal.getPos(), age);
         return age + floatOffset.getValue();
     }
+    @EventListener
+    public void RenderCrystal(EndCrystalEntity endCrystalEntity, float f, float g, MatrixStack matrixStack, int i, ModelPart core, ModelPart frame) {
+        RenderSystem.enableBlend();
+        RenderSystem.disableCull();
+        RenderSystem.disableDepthTest();
 
-    public void renderCrystal(EndCrystalEntity endCrystalEntity, float f, float g, MatrixStack matrixStack, int i, ModelPart core, ModelPart frame) {
+        Tessellator tessellator = Tessellator.getInstance();
+        BufferBuilder buffer = tessellator.getBuffer();
+
+        matrixStack.push();
+        float h =  EndCrystalEntityRenderer.getYOffset(endCrystalEntity, g);
+        float j = ((float) endCrystalEntity.endCrystalAge + g) * 3.0f;
+        matrixStack.push();
+        matrixStack.scale(2.0f, 2.0f, 2.0f);
+        matrixStack.translate(0.0f, -0.5f, 0.0f);
+        int k = OverlayTexture.DEFAULT_UV;
+        matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(j));
+        matrixStack.translate(0.0f, 1.5f + h / 2.0f, 0.0f);
+        matrixStack.multiply(new Quaternionf().setAngleAxis(1.0471976f, (float) Math.sin(0.7853981633974483), (float) Math.sin(0.7853981633974483), (float) Math.sin(0.7853981633974483)));
+        frame.render(matrixStack, buffer, i, k);
+        matrixStack.scale(0.875f, 0.875f, 0.875f);
+        matrixStack.multiply(new Quaternionf().setAngleAxis(1.0471976f, (float) Math.sin(0.7853981633974483), 0.0f, (float) Math.sin(0.7853981633974483)));
+        matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(j));
+        frame.render(matrixStack, buffer, i, k);
+        matrixStack.scale(0.875f, 0.875f, 0.875f);
+        matrixStack.multiply(new Quaternionf().setAngleAxis(1.0471976f, (float) Math.sin(0.7853981633974483), 0.0f, (float) Math.sin(0.7853981633974483)));
+        matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(j));
+        core.render(matrixStack, buffer, i, k);
+        matrixStack.pop();
+        matrixStack.pop();
+        tessellator.draw();
+        RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
+        RenderSystem.disableBlend();
+        RenderSystem.enableDepthTest();
+        RenderSystem.enableCull();
     }
 }

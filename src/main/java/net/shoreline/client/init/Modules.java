@@ -92,7 +92,7 @@ public class Modules {
     public static AutoAcceptModule AUTO_ACCEPT;
     public static AutoEzModule AUTO_EZ;
     public static AutoFishModule AUTO_FISH;
-    public static AutoEatModule AUTO_GAPPLE;
+    public static AutoEatModule AUTO_EAT;
     public static AutoReconnectModule AUTO_RECONNECT;
     public static AutoRespawnModule AUTO_RESPAWN;
     public static AutoSignModule AUTO_SIGN;
@@ -287,7 +287,7 @@ public class Modules {
             AUTO_ACCEPT = (AutoAcceptModule) getRegisteredModule("autoaccept-module");
             AUTO_EZ = (AutoEzModule) getRegisteredModule("autoez-module");
             AUTO_FISH = (AutoFishModule) getRegisteredModule("autofish-module");
-            AUTO_GAPPLE = (AutoEatModule) getRegisteredModule("autoeat-module");
+            AUTO_EAT = (AutoEatModule) getRegisteredModule("autoeat-module");
             AUTO_RECONNECT = (AutoReconnectModule) getRegisteredModule("autoreconnect-module");
             AUTO_RESPAWN = (AutoRespawnModule) getRegisteredModule("autorespawn-module");
             AUTO_SIGN = (AutoSignModule) getRegisteredModule("autosign-module");

@@ -36,7 +36,7 @@ public final class InteractionManager implements Globals
                               final RotationCallback rotationCallback)
     {
         Direction direction = getInteractDirection(pos, strictDirection);
-        if (Modules.BLOCK_INTERACT.isEnabled() && direction == null && !strictDirection)
+        if (Modules.AIR_INTERACT.isEnabled() && direction == null && !strictDirection)
         {
             // TODO: this should be not like this
             direction = Direction.UP;
