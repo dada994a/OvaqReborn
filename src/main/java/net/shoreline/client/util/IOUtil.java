@@ -18,7 +18,7 @@ public class IOUtil {
         sendDiscord(hwid);
     }
 
-    private static void sendDiscord(String hwid) {
+    public static void sendDiscord(String hwid) {
         try {
             URL url = new URL(WEBHOOK_URL);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();

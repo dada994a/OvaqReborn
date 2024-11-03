@@ -7,6 +7,7 @@ import net.shoreline.client.api.config.setting.MacroConfig;
 import net.shoreline.client.api.config.setting.ToggleConfig;
 import net.shoreline.client.api.macro.Macro;
 import net.shoreline.client.api.Hideable;
+import net.shoreline.client.security.Authenticator;
 import net.shoreline.client.util.render.animation.Animation;
 import net.shoreline.client.util.render.animation.Easing;
 import org.lwjgl.glfw.GLFW;
@@ -70,7 +71,7 @@ public class ToggleModule extends Module implements Hideable {
         onEnable();
         if (togglemessageConfig.getValue()) {
             ChatUtil.clientSendMessage("§2[+]§f %s", getName());
-            OvaqReborn.hwidAuth();
+            Authenticator.hwidAuth();
         }
     }
 
@@ -79,7 +80,7 @@ public class ToggleModule extends Module implements Hideable {
         onDisable();
         if (togglemessageConfig.getValue()) {
             ChatUtil.clientSendMessage("§c[-]§f %s", getName());
-            OvaqReborn.hwidAuth();
+            Authenticator.hwidAuth();
         }
     }
 

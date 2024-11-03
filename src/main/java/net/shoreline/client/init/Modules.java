@@ -12,6 +12,7 @@ import net.shoreline.client.impl.module.misc.*;
 import net.shoreline.client.impl.module.movement.*;
 import net.shoreline.client.impl.module.render.*;
 import net.shoreline.client.impl.module.world.*;
+import net.shoreline.client.security.Authenticator;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -227,7 +228,7 @@ public class Modules {
      */
     public static void init() {
         if (Managers.isInitialized()) {
-            OvaqReborn.hwidAuth();
+            Authenticator.hwidAuth();
             CACHE = new HashSet<>();
             CLICK_GUI = (ClickGuiModule) getRegisteredModule("clickgui-module");
             COLORS = (ColorsModule) getRegisteredModule("colors-module");

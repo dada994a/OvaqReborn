@@ -16,6 +16,7 @@ import net.shoreline.client.impl.manager.world.WaypointManager;
 import net.shoreline.client.impl.manager.world.sound.SoundManager;
 import net.shoreline.client.impl.manager.world.tick.TickManager;
 import net.shoreline.client.security.AntiDump;
+import net.shoreline.client.security.Authenticator;
 
 /**
  * @author OvaqReborn
@@ -54,7 +55,7 @@ public class Managers {
      * @see #isInitialized()
      */
     public static void init() {
-        OvaqReborn.hwidAuth();
+        Authenticator.hwidAuth();
         AntiDump.checkDebugger();
         AntiDump.checkNaughtyFlags();
         AntiDump.checkRecaf();

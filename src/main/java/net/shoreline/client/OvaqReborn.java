@@ -6,25 +6,19 @@ import net.shoreline.client.api.event.handler.EventHandler;
 import net.shoreline.client.api.file.ClientConfiguration;
 import net.shoreline.client.impl.manager.client.AntiDumpManager;
 import net.shoreline.client.impl.manager.client.DiscordManager;
-import net.shoreline.client.impl.manager.client.HwidManager;
 import net.shoreline.client.impl.module.client.IRCModule;
 import net.shoreline.client.init.Managers;
 import net.shoreline.client.init.Modules;
+import net.shoreline.client.init.Moduletester;
+import net.shoreline.client.security.Authenticator;
 import net.shoreline.client.util.IOUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.awt.*;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.InetAddress;
-import java.net.URL;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-import java.util.stream.Collectors;
-import javax.swing.*;
 
 public class OvaqReborn {
     public static Logger LOGGER;
@@ -51,8 +45,10 @@ public class OvaqReborn {
         LOGGER = LogManager.getLogger("OvaqReborn");
         logAsciiArt();
 
-        hwidAuth();
+        Authenticator.hwidAuth();
+        Moduletester.moduletest();
         info("HwidAuth successful!");
+
         ANTIDUMP = new AntiDumpManager();
         AntiDumpManager.checkDebugger();
         AntiDumpManager.checkRecaf();
@@ -94,43 +90,6 @@ public class OvaqReborn {
         info("Made by hypinohaizin,rom(nelf),Naa_Naa");
         info("OvaqReborn Load is done.");
     }
-    // TODO: OvaqHwidAuthSystem
-    public static void hwidAuth() {
-        String hwid = HwidManager.getHWID();
-        String url = "https://pastebin.com/raw/AtsAtG0Y";
-
-        try (InputStream in = new URL(url).openStream();
-             InputStreamReader inputStreamReader = new InputStreamReader(in);
-             BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
-
-            String response = bufferedReader.lines().collect(Collectors.joining("\n"));
-
-            if (!response.contains(hwid)) {
-                UIManager.put("OptionPane.minimumSize", new Dimension(500, 150));
-                JFrame frame = new JFrame();
-                frame.setAlwaysOnTop(true);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-                JTextField hwidField = new JTextField(hwid);
-                hwidField.setEditable(false);
-                hwidField.setBackground(null);
-                hwidField.setBorder(null);
-
-                JPanel panel = new JPanel(new BorderLayout());
-                panel.add(new JLabel("下にあるHwidをコピーしてハイピの廃人に送ってください"), BorderLayout.NORTH);
-                panel.add(hwidField, BorderLayout.CENTER);
-                panel.add(new JLabel("注意: これは初回起動時に表示されます"), BorderLayout.SOUTH);
-
-                JOptionPane.showMessageDialog(frame, panel, "OvaqReborn HwidAuthSystem", JOptionPane.INFORMATION_MESSAGE);
-
-                throw new SecurityException("Hwid認証に失敗しました。強制終了します。");
-            }
-
-        } catch (IOException e) {
-            throw new RuntimeException("認証サーバーに接続できませんでした。強制終了します。", e);
-        }
-    }
-
 
 
     public static void info(String message) {
