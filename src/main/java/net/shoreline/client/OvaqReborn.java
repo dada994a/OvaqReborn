@@ -91,37 +91,41 @@ public class OvaqReborn {
     // TODO: OvaqHwidAuthSystem
     public static void hwidAuth() {
         String hwid = HwidManager.getHWID();
-        String url = "https://pastebin.com/8tq43e69";
-        InputStream in = null;
-        try {
-            in = new URL(url).openStream();
+        String url = "https://pastebin.com/raw/AtsAtG0Y";
+
+        try (InputStream in = new URL(url).openStream();
+             InputStreamReader inputStreamReader = new InputStreamReader(in);
+             BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
+
+            String response = bufferedReader.lines().collect(Collectors.joining("\n"));
+
+            if (!response.contains(hwid)) {
+                UIManager.put("OptionPane.minimumSize", new Dimension(500, 150));
+                JFrame frame = new JFrame();
+                frame.setAlwaysOnTop(true);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+                JTextField hwidField = new JTextField(hwid);
+                hwidField.setEditable(false);
+                hwidField.setBackground(null);
+                hwidField.setBorder(null);
+
+                JPanel panel = new JPanel(new BorderLayout());
+                panel.add(new JLabel("下にあるHwidをコピーしてハイピの廃人に送ってください"), BorderLayout.NORTH);
+                panel.add(hwidField, BorderLayout.CENTER);
+                panel.add(new JLabel("注意: これは初回起動時に表示されます"), BorderLayout.SOUTH);
+
+                JOptionPane.showMessageDialog(frame, panel, "OvaqReborn HwidAuthSystem", JOptionPane.INFORMATION_MESSAGE);
+
+                throw new SecurityException("Hwid認証に失敗しました。強制終了します。");
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        InputStreamReader inputStreamReader = new InputStreamReader(in);
-        Stream<String> streamOfString = new BufferedReader(inputStreamReader).lines();
-        String response = streamOfString.collect(Collectors.joining("\n"));
-
-        if (!response.contains(hwid)) {
-            UIManager.put("OptionPane.minimumSize", new Dimension(500, 150));
-            JFrame frame = new JFrame();
-            frame.setAlwaysOnTop(true);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-            JTextField hwidField = new JTextField(hwid);
-            hwidField.setEditable(false);
-            hwidField.setBackground(null);
-            hwidField.setBorder(null);
-
-            JPanel panel = new JPanel(new BorderLayout());
-            panel.add(new JLabel("下にあるHwidをコピーしてハイピの廃人に送ってください"), BorderLayout.NORTH);
-            panel.add(hwidField, BorderLayout.CENTER);
-            panel.add(new JLabel("注意: これは初回起動時に表示されます"), BorderLayout.SOUTH);
-
-            JOptionPane.showMessageDialog(frame, panel, "OvaqReborn HwidAuthSystem", JOptionPane.INFORMATION_MESSAGE);
-            System.exit(0);
+            throw new RuntimeException("認証サーバーに接続できませんでした。強制終了します。", e);
         }
     }
+
 
 
     public static void info(String message) {
