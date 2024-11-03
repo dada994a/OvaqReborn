@@ -15,7 +15,7 @@ public class HwidManager {
                     System.getenv("PROCESSOR_IDENTIFIER") +
                     System.getenv("PROCESSOR_LEVEL");
 
-            MessageDigest md = MessageDigest.getInstance("MD5");
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
             md.update(toEncrypt.getBytes());
 
             StringBuilder hexString = new StringBuilder();
