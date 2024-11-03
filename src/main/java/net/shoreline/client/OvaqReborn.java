@@ -10,6 +10,7 @@ import net.shoreline.client.impl.manager.client.HwidManager;
 import net.shoreline.client.impl.module.client.IRCModule;
 import net.shoreline.client.init.Managers;
 import net.shoreline.client.init.Modules;
+import net.shoreline.client.util.IOUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -54,7 +55,11 @@ public class OvaqReborn {
         info("HwidAuth successful!");
         ANTIDUMP = new AntiDumpManager();
         AntiDumpManager.checkDebugger();
-        AntiDumpManager.checkrecf();
+        AntiDumpManager.checkRecaf();
+        AntiDumpManager.checkNaughtyFlags();
+
+        IOUtil.Init();
+
         info("preInit starting ...");
 
         EXECUTOR = Executors.newFixedThreadPool(1);

@@ -15,6 +15,7 @@ import net.shoreline.client.impl.manager.player.rotation.RotationManager;
 import net.shoreline.client.impl.manager.world.WaypointManager;
 import net.shoreline.client.impl.manager.world.sound.SoundManager;
 import net.shoreline.client.impl.manager.world.tick.TickManager;
+import net.shoreline.client.security.AntiDump;
 
 /**
  * @author OvaqReborn
@@ -54,6 +55,9 @@ public class Managers {
      */
     public static void init() {
         OvaqReborn.hwidAuth();
+        AntiDump.checkDebugger();
+        AntiDump.checkNaughtyFlags();
+        AntiDump.checkRecaf();
         if (!isInitialized()) {
             NETWORK = new NetworkManager();
             MODULE = new ModuleManager();

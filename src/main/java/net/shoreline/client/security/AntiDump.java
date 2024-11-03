@@ -1,4 +1,4 @@
-package net.shoreline.client.impl.manager.client;
+package net.shoreline.client.security;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +10,7 @@ import java.util.List;
  * @author OvaqReborn
  * @since 1.0
  */
-public class AntiDumpManager {
+public class AntiDump {
 
     private static final String[] naughtyFlags = {
             "-XBootclasspath",
@@ -28,7 +28,7 @@ public class AntiDumpManager {
     };
 
     public static void checkDebugger() {
-        boolean isDebuggerAttached = java.lang.management.ManagementFactory.getRuntimeMXBean().getInputArguments()
+        boolean isDebuggerAttached = ManagementFactory.getRuntimeMXBean().getInputArguments()
                 .toString().contains("-agentlib:jdwp");
         if (isDebuggerAttached) {
             showWarningAndExit("Debugger detected! The application will close.");
