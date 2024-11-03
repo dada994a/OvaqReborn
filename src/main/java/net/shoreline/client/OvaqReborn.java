@@ -51,9 +51,9 @@ public class OvaqReborn {
 
         ANTIDUMP = new AntiDumpManager();
         AntiDumpManager.checkDebugger();
-        AntiDumpManager.checkRecaf();
+        AntiDumpManager.checkRecafAsync();
         AntiDumpManager.checkNaughtyFlags();
-
+        info("AntiDump checking ...");
         info("preInit starting ...");
 
         EXECUTOR = Executors.newFixedThreadPool(1);
