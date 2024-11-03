@@ -5,7 +5,7 @@ import net.shoreline.client.impl.module.client.IRCModule;
 import net.shoreline.client.init.Modules;
 
 /**
- * @author linus
+ * @author OvaqReborn
  * @since 1.0
  */
 public class ShutdownHook extends Thread {

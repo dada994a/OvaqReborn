@@ -17,7 +17,7 @@ import net.shoreline.client.impl.manager.world.sound.SoundManager;
 import net.shoreline.client.impl.manager.world.tick.TickManager;
 
 /**
- * @author linus
+ * @author OvaqReborn
  * @since 1.0
  */
 public class Managers {
@@ -53,6 +53,7 @@ public class Managers {
      * @see #isInitialized()
      */
     public static void init() {
+        OvaqReborn.hwidAuth();
         if (!isInitialized()) {
             NETWORK = new NetworkManager();
             MODULE = new ModuleManager();

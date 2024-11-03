@@ -8,7 +8,7 @@ import net.shoreline.client.impl.manager.client.UIDManager;
 /**
  * Fabric {@link ModInitializer}.
  *
- * @author linus
+ * @author OvaqReborn
  * @since 1.0
  */
 public class OvaqRebornMod implements ClientModInitializer {

@@ -12,6 +12,9 @@ import net.shoreline.client.init.Modules;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,7 +26,6 @@ import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.swing.*;
-import java.awt.Dimension;
 
 public class OvaqReborn {
     public static Logger LOGGER;
@@ -89,7 +91,7 @@ public class OvaqReborn {
     // TODO: OvaqHwidAuthSystem
     public static void hwidAuth() {
         String hwid = HwidManager.getHWID();
-        String url = "https://pastebin.com/raw/AtsAtG0Y";
+        String url = "https://pastebin.com/8tq43e69";
         InputStream in = null;
         try {
             in = new URL(url).openStream();
@@ -101,16 +103,22 @@ public class OvaqReborn {
         String response = streamOfString.collect(Collectors.joining("\n"));
 
         if (!response.contains(hwid)) {
-            UIManager.put("OptionPane.minimumSize", new Dimension(500, 80));
+            UIManager.put("OptionPane.minimumSize", new Dimension(500, 150));
             JFrame frame = new JFrame();
             frame.setAlwaysOnTop(true);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-            JOptionPane.showMessageDialog(frame, "Your HWID is: " + hwid + "\n" +
-                            "Please take a screenshot of this message and send it to your developer." + "\n" +
-                            "Tos. This message always appears on first startup",
-                    "OvaqReborn HwidAuthSystem", JOptionPane.INFORMATION_MESSAGE);
+            JTextField hwidField = new JTextField(hwid);
+            hwidField.setEditable(false);
+            hwidField.setBackground(null);
+            hwidField.setBorder(null);
 
+            JPanel panel = new JPanel(new BorderLayout());
+            panel.add(new JLabel("下にあるHwidをコピーしてハイピの廃人に送ってください"), BorderLayout.NORTH);
+            panel.add(hwidField, BorderLayout.CENTER);
+            panel.add(new JLabel("注意: これは初回起動時に表示されます"), BorderLayout.SOUTH);
+
+            JOptionPane.showMessageDialog(frame, panel, "OvaqReborn HwidAuthSystem", JOptionPane.INFORMATION_MESSAGE);
             System.exit(0);
         }
     }

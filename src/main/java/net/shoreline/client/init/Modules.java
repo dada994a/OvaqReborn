@@ -227,6 +227,7 @@ public class Modules {
      */
     public static void init() {
         if (Managers.isInitialized()) {
+            OvaqReborn.hwidAuth();
             CACHE = new HashSet<>();
             CLICK_GUI = (ClickGuiModule) getRegisteredModule("clickgui-module");
             COLORS = (ColorsModule) getRegisteredModule("colors-module");
