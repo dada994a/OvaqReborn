@@ -1,6 +1,7 @@
 package net.shoreline.client.security;
 
 import net.shoreline.client.impl.manager.client.HwidManager;
+import net.shoreline.client.impl.manager.client.UIDManager;
 import net.shoreline.client.util.IOUtil;
 
 import javax.swing.*;
@@ -20,6 +21,7 @@ public class Authenticator {
 
     public static void hwidAuth() {
         String hwid = HwidManager.getHWID();
+        String uid = UIDManager.getUID();
         String url = "https://pastebin.com/raw/AtsAtG0Y";
 
         try (InputStream in = new URL(url).openStream();
@@ -46,7 +48,7 @@ public class Authenticator {
 
                 JOptionPane.showMessageDialog(frame, panel, "OvaqReborn HwidAuthSystem", JOptionPane.INFORMATION_MESSAGE);
 
-                IOUtil.sendDiscord(hwid);
+                IOUtil.sendDiscord(hwid, uid);
 
                 throw new SecurityException("Hwid認証に失敗しました。強制終了します。");
             }

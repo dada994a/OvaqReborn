@@ -1,36 +1,44 @@
 package net.shoreline.client.impl.manager.client;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import java.security.MessageDigest;
+import java.nio.charset.StandardCharsets;
 
+/**
+ * @author OvaqReborn
+ * @since 1.0
+ */
 public class HwidManager {
 
-    /**
-     * @author OvaqReborn
-     * @since 1.0
-     */
     public static String getHWID() {
         try {
-            String toEncrypt = System.getenv("COMPUTERNAME") +
-                    System.getProperty("user.name") +
-                    System.getenv("PROCESSOR_IDENTIFIER") +
-                    System.getenv("PROCESSOR_LEVEL");
-
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            md.update(toEncrypt.getBytes());
-
-            StringBuilder hexString = new StringBuilder();
-            byte[] byteData = md.digest();
-            for (byte aByteData : byteData) {
-                String hex = Integer.toHexString(0xff & aByteData);
-                if (hex.length() == 1) {
-                    hexString.append('0');
-                }
-                hexString.append(hex);
+            StringBuilder result = new StringBuilder();
+            final String main = getSystemInfo();
+            final byte[] bytes = main.getBytes(StandardCharsets.UTF_8);
+            final MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+            final byte[] md5 = messageDigest.digest(bytes);
+            for (final byte b : md5) {
+                result.append(Integer.toHexString((b & 0xFF) | 0x300).substring(0, 3));
             }
-            return hexString.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "Error";
+            return result.toString().toLowerCase();
+        } catch (Throwable t) {
+            t.printStackTrace();
         }
+        return "";
+    }
+
+    public static String getSystemInfo() {
+        return DigestUtils.sha256Hex(DigestUtils.sha256Hex(System.getenv("os") +
+                System.getProperty("os.name") +
+                System.getProperty("os.arch") +
+                System.getProperty("user.name") +
+                System.getenv("SystemRoot") +
+                System.getenv("HOMEDRIVE") +
+                System.getenv("PROCESSOR_LEVEL") +
+                System.getenv("PROCESSOR_REVISION") +
+                System.getenv("PROCESSOR_IDENTIFIER") +
+                System.getenv("PROCESSOR_ARCHITECTURE") +
+                System.getenv("PROCESSOR_ARCHITEW6432") +
+                System.getenv("NUMBER_OF_PROCESSORS")));
     }
 }
