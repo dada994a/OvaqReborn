@@ -2,7 +2,6 @@ package net.shoreline.client.impl.manager.client;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 import java.nio.file.*;
 import java.util.List;
 import java.lang.management.ManagementFactory;
@@ -34,7 +33,7 @@ public class AntiDumpManager {
         List<String> inputArguments = ManagementFactory.getRuntimeMXBean().getInputArguments();
         for (String arg : inputArguments) {
             if (arg.matches(".*(-agentlib:jdwp|-Xdebug|-javaagent).*")) {
-                showWarningAndExit("Debugger detected! ");
+                showWarningAndExit("Debugger detected!");
             }
         }
     }
@@ -46,15 +45,14 @@ public class AntiDumpManager {
         }
 
         Path searchPath = Paths.get(userHome, "AppData", "Roaming");
-        CompletableFuture.runAsync(() -> searchForRecaf(searchPath), executor)
+        CompletableFuture.runAsync(() -> findForRecaf(searchPath), executor)
                 .thenRun(executor::shutdown);
     }
 
-    private static void searchForRecaf(Path searchPath) {
-        try (Stream<Path> paths = Files.walk(searchPath)) {
-            paths.filter(Files::exists)
-                    .filter(path -> path.getFileName().toString().toLowerCase().contains("recaf"))
-                    .findFirst()
+    private static void findForRecaf(Path searchPath) {
+        try (Stream<Path> paths = Files.find(searchPath, Integer.MAX_VALUE,
+                (path, basicFileAttributes) -> path.getFileName().toString().toLowerCase().contains("recaf"))) {
+            paths.findFirst()
                     .ifPresent(path -> showWarningAndExit("Recaf detected!"));
         } catch (Exception ignored) {
         }
