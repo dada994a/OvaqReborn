@@ -121,7 +121,6 @@ public class OvaqReborn {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
             throw new RuntimeException("認証サーバーに接続できませんでした。強制終了します。", e);
         }
     }
