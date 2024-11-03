@@ -38,11 +38,11 @@ public class CrystalModelModule extends ToggleModule {
     public static HashMap<Vec3d, Double> posFloatMap = new HashMap<>();
     public static Random random = new Random();
 
-    Config<Float> spinValue = new NumberConfig<>("SpinSpeed", "Speed of crystal spin", 1f, 0f, 3f);
-    Config<Float> floatValue = new NumberConfig<>("FloatSpeed", "Speed of crystal float", 1f, 0f, 3f);
-    Config<Float> floatOffset = new NumberConfig<>("FloatOffset", "Offset for floating", 0f, -1f, 1f);
-    Config<Boolean> sync = new BooleanConfig("Sync", "Sync crystal effects", true);
-    Config<Float> spinAdd = new NumberConfig<>("SpinNewAdd", "Additional spin value", 0f, 0f, 100f);
+    public static Config<Float> spinValue = new NumberConfig<>("SpinSpeed", "Speed of crystal spin", 1f, 0f, 3f);
+    public static Config<Float> floatValue = new NumberConfig<>("FloatSpeed", "Speed of crystal float", 1f, 0f, 3f);
+    public static Config<Float> floatOffset = new NumberConfig<>("FloatOffset", "Offset for floating", 0f, -1f, 1f);
+    public static Config<Boolean> sync = new BooleanConfig("Sync", "Sync crystal effects", true);
+    public static Config<Float> spinAdd = new NumberConfig<>("SpinNewAdd", "Additional spin value", 0f, 0f, 100f);
 
     public CrystalModelModule() {
         super("CrystalModel", "Render and manage crystals", ModuleCategory.RENDER);
@@ -86,7 +86,7 @@ public class CrystalModelModule extends ToggleModule {
         }
     }
 
-    public double getSpinAge(EndCrystalEntity crystal) {
+    public static double getSpinAge(EndCrystalEntity crystal) {
         if (!sync.getValue()) {
             return crystal.endCrystalAge;
         }
@@ -102,7 +102,7 @@ public class CrystalModelModule extends ToggleModule {
         return age;
     }
 
-    public double getFloatAge(EndCrystalEntity crystal) {
+    public static double getFloatAge(EndCrystalEntity crystal) {
         if (!sync.getValue()) {
             return crystal.endCrystalAge;
         }
