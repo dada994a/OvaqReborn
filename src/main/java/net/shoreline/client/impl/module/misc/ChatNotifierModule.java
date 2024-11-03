@@ -16,12 +16,14 @@ import net.shoreline.client.impl.event.world.AddEntityEvent;
 import net.shoreline.client.impl.event.world.RemoveEntityEvent;
 import net.shoreline.client.init.Managers;
 import net.shoreline.client.util.chat.ChatUtil;
+import net.shoreline.client.impl.manager.anticheat.AntiCheatManager;
 
 public class ChatNotifierModule extends ToggleModule {
 
     Config<Boolean> totemPopConfig = new BooleanConfig("TotemPop", "Notifies in chat when a player pops a totem", true);
     Config<Boolean> visualRangeConfig = new BooleanConfig("VisualRange", "Notifies in chat when player enters visual range", false);
     Config<Boolean> friendsConfig = new BooleanConfig("Friends", "Notifies for friends", false);
+    //Config<Boolean> grimConfig = new BooleanConfig("GrimCheck", "Notifies for GrimAC", false);
 
     public ChatNotifierModule() {
         super("ChatNotifier", "Notifies in chat", ModuleCategory.MISC);
@@ -85,9 +87,11 @@ public class ChatNotifierModule extends ToggleModule {
             return;
         }
         ChatUtil.clientSendMessage((isFriend ? "§b" : "§s") + playerName + "§f died after popping §s" + totems + "§f totems");
-
-
+/*
+        if (grimConfig.getValue() && Managers.ANTICHEAT.isGrim()) {
+            ChatUtil.clientSendMessage("§cServer is running GrimAC.");
 
         }
+         */
     }
-
+}
