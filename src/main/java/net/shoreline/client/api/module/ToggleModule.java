@@ -71,7 +71,6 @@ public class ToggleModule extends Module implements Hideable {
         onEnable();
         if (togglemessageConfig.getValue()) {
             ChatUtil.clientSendMessage("§2[+]§f %s", getName());
-            Authenticator.hwidAuth();
         }
     }
 
@@ -80,7 +79,6 @@ public class ToggleModule extends Module implements Hideable {
         onDisable();
         if (togglemessageConfig.getValue()) {
             ChatUtil.clientSendMessage("§c[-]§f %s", getName());
-            Authenticator.hwidAuth();
         }
     }
 
