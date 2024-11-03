@@ -43,19 +43,15 @@ public class Modules {
     public static AutoObsidianModule AUTOOBSIDIAN;
     public static AutoCrystalModule AUTO_CRYSTAL;
     public static OldAutoCrystalModule OLD_AUTO_CRYSTAL;
-   // public static AutoAnvilModule AUTO_ANVIL;
-   // public static AntiAnvilModule ANTI_ANVIL;
+
     public static BacktrackModule BACK_TRACK;
-    // public static BedAuraModule BEDAURA;
     public static AutoLogModule AUTO_LOG;
-    //public static AutoTotemModule AUTO_TOTEM;
     public static OffHandModule OFFHAND;
     public static AutoTrapModule AUTO_TRAP;
     public static AutoWebModule AUTO_WEB;
     public static AutoXPModule AUTO_XP;
     public static BlockLagModule BLOCK_LAG;
     public static BowAimModule BOW_AIM;
-    //public static CevBreakerModule CEVBREAKER;
     public static CriticalsModule CRITICALS;
     public static HoleFillModule HOLE_FILL;
     public static HoleSnapModule HOLESNAP;
@@ -102,7 +98,6 @@ public class Modules {
     public static AutoSignModule AUTO_SIGN;
     public static BeaconSelectorModule BEACON_SELECTOR;
     public static BetterChatModule BETTER_CHAT;
-    // public static BetterChatModule BETTER_CHAT;
     public static ChatNotifierModule CHAT_NOTIFIER;
     public static ChestSwapModule CHEST_SWAP;
     public static DeathCoordModule DEATH_COORD;
@@ -119,7 +114,6 @@ public class Modules {
     // Movement
     public static AntiLevitationModule ANTI_LEVITATION;
     public static AutoWalkModule AUTO_WALK;
-    // public static BlockHoleMoveModule BLOCKHOLEMOVE;
     public static BlockMoveModule BLOCKMOVE;
     public static BoatFlyModule BOATFLY;
     public static ElytraFlyModule ELYTRA_FLY;
@@ -144,13 +138,11 @@ public class Modules {
     public static VelocityModule VELOCITY;
     public static YawModule YAW;
     // Render
-    //public static AmbienceModule AMBIENCE;
-    //public static AnimationsModule ANIMATIONS;
     public static BlockHighlightModule BLOCK_HIGHLIGHT;
     //public static BreadcrumbsModule BREADCRUMBS;
     public static BreakHighlightModule BREAK_HIGHLIGHT;
     public static ChamsModule CHAMS;
-    //public static CrystalAnimationModule CRYSTAL_ANIMATION;
+    public static CrystalModelModule CRYSTAL_MODEL;
     public static ESPModule ESP;
     public static ExtraTabModule EXTRA_TAB;
     public static FreecamModule FREECAM;
@@ -176,12 +168,11 @@ public class Modules {
     //public static WaypointsModule WAYPOINTS;
     public static WorldTimeModule WORLDTIME;
     // World
-    //public static AirPlaceModule AIR_PLACE;
+    public static AirInteractModule AIR_INTERACT;
     public static AntiInteractModule ANTI_INTERACT;
     public static AutoMineModule AUTO_MINE;
     public static AutoToolModule AUTO_TOOL;
     public static AvoidModule AVOID;
-    public static BlockInteractModule BLOCK_INTERACT;
     public static FastDropModule FAST_DROP;
     //public static FastEatModule FAST_EAT;
     public static FastPlaceModule FAST_PLACE;
@@ -230,6 +221,7 @@ public class Modules {
         if (Managers.isInitialized()) {
             Authenticator.hwidAuth();
             CACHE = new HashSet<>();
+            //Client
             CLICK_GUI = (ClickGuiModule) getRegisteredModule("clickgui-module");
             COLORS = (ColorsModule) getRegisteredModule("colors-module");
             HUD = (HUDModule) getRegisteredModule("hud-module");
@@ -242,25 +234,21 @@ public class Modules {
                 BARITONE = (BaritoneModule) getRegisteredModule("baritone-module");
             }
             CAPES = (CapesModule) getRegisteredModule("capes-module");
+            //COMBAT
             AURA = (AuraModule) getRegisteredModule("aura-module");
             AUTO_ARMOR = (AutoArmorModule) getRegisteredModule("autoarmor-module");
             AUTO_BOW_RELEASE = (AutoBowReleaseModule) getRegisteredModule("autobowrelease-module");
             AUTOOBSIDIAN = (AutoObsidianModule) getRegisteredModule("autoobsidian-module");
             AUTO_CRYSTAL = (AutoCrystalModule) getRegisteredModule("autocrystal-module");
             OLD_AUTO_CRYSTAL = (OldAutoCrystalModule) getRegisteredModule("oldautocrystal-module");
-            //AUTO_ANVIL = (AutoAnvilModule) getRegisteredModule("autoanvil-module");
-           // ANTI_ANVIL = (AntiAnvilModule) getRegisteredModule("antianvil-module");
             AUTO_LOG = (AutoLogModule) getRegisteredModule("autolog-module");
-            //AUTO_TOTEM = (AutoTotemModule) getRegisteredModule("autototem-module");
             OFFHAND = (OffHandModule) getRegisteredModule("offhand-module");
             AUTO_TRAP = (AutoTrapModule) getRegisteredModule("autotrap-module");
             AUTO_WEB = (AutoWebModule)getRegisteredModule("autoweb-module");
             AUTO_XP = (AutoXPModule) getRegisteredModule("autoxp-module");
             BACK_TRACK = (BacktrackModule) getRegisteredModule("backtrack-module");
-            //BEDAURA = (BedAuraModule) getRegisteredModule("bedaura-module");
             BLOCK_LAG = (BlockLagModule) getRegisteredModule("blocklag-module");
             BOW_AIM = (BowAimModule) getRegisteredModule("bowaim-module");
-//            CEVBREAKER = (CevBreakerModule) getRegisteredModule("cevbreaker-module");
             CRITICALS = (CriticalsModule) getRegisteredModule("criticals-module");
             HOLE_FILL = (HoleFillModule) getRegisteredModule("holefill-module");
             HOLESNAP = (HoleSnapModule) getRegisteredModule("holesnap-module");
@@ -272,12 +260,12 @@ public class Modules {
             SELF_TRAP = (SelfTrapModule) getRegisteredModule("selftrap-module");
             SURROUND = (SurroundModule) getRegisteredModule("surround-module");
             TRIGGER = (TriggerModule) getRegisteredModule("trigger-module");
+            //EXPLOIT
             ANTI_HUNGER = (AntiHungerModule) getRegisteredModule("antihunger-module");
             ANTI_RESOURCE_PACK = (AntiResourcePackModule) getRegisteredModule("antiresourcepack-module");
             CHORUS_CONTROL = (ChorusControlModule) getRegisteredModule("choruscontrol-module");
             CLIENT_SPOOFER = (ClientSpoofModule) getRegisteredModule("clientspoof-module");
             CRASHER = (CrasherModule) getRegisteredModule("crasher-module");
-            //DISABLER = (DisablerModule) getRegisteredModule("disabler-module");
             EXTENDED_FIREWORK = (ExtendedFireworkModule) getRegisteredModule("extendedfirework-module");
             FAKE_LATENCY = (FakeLatencyModule) getRegisteredModule("fakelatency-module");
             FAST_LATENCY = (FastLatencyModule) getRegisteredModule("fastlatency-module");
@@ -293,8 +281,8 @@ public class Modules {
             RAYTRACE_BYPASS = (RaytraceBypassModule) getRegisteredModule("raytracebypass-module");
             REACH = (ReachModule) getRegisteredModule("reach-module");
             REGEN = (RegenModule) getRegisteredModule("regen-module");
+            //MISC
             ANTI_AIM = (AntiAimModule) getRegisteredModule("antiaim-module");
-            // ANTI_BOOK_BAN = (AntiBookBanModule) getRegisteredModule("antibookban-module");
             ANTI_SPAM = (AntiSpamModule) getRegisteredModule("antispam-module");
             AUTO_ACCEPT = (AutoAcceptModule) getRegisteredModule("autoaccept-module");
             AUTO_EZ = (AutoEzModule) getRegisteredModule("autoez-module");
@@ -319,8 +307,8 @@ public class Modules {
             UNFOCUSED_FPS = (UnfocusedFPSModule) getRegisteredModule("unfocusedfps-module");
             XCARRY = (XCarryModule) getRegisteredModule("xcarry-module");
             ANTI_LEVITATION = (AntiLevitationModule) getRegisteredModule("antilevitation-module");
+            //MOVEMENT
             AUTO_WALK = (AutoWalkModule) getRegisteredModule("autowalk-module");
-            //BLOCKHOLEMOVE = (BlockHoleMoveModule) getRegisteredModule("blockholemove-module");
             BLOCKMOVE = (BlockMoveModule) getRegisteredModule("blockmove-module");
             BOATFLY = (BoatFlyModule) getRegisteredModule("boatfly-module");
             ELYTRA_FLY = (ElytraFlyModule) getRegisteredModule("elytrafly-module");
@@ -344,13 +332,11 @@ public class Modules {
             TICK_SHIFT = (TickShiftModule) getRegisteredModule("tickshift-module");
             VELOCITY = (VelocityModule) getRegisteredModule("velocity-module");
             YAW = (YawModule) getRegisteredModule("yaw-module");
-            //AMBIENCE = (AmbienceModule) getRegisteredModule("ambience-module");
-           // ANIMATIONS = (AnimationsModule) getRegisteredModule("animations-module");
+            //RENDER
             BLOCK_HIGHLIGHT = (BlockHighlightModule) getRegisteredModule("blockhighlight-module");
-           // BREADCRUMBS = (BreadcrumbsModule) getRegisteredModule("breadcrumbs-module");
             BREAK_HIGHLIGHT = (BreakHighlightModule) getRegisteredModule("breakhighlight-module");
             CHAMS = (ChamsModule) getRegisteredModule("chams-module");
-            //CRYSTAL_ANIMATION = (CrystalAnimationModule) getRegisteredModule("crystalanimation-module");
+            CRYSTAL_MODEL = (CrystalModelModule) getRegisteredModule("crystalmodel-module");
             ESP = (ESPModule) getRegisteredModule("esp-module");
             EXTRA_TAB = (ExtraTabModule) getRegisteredModule("extratab-module");
             FREECAM = (FreecamModule) getRegisteredModule("freecam-module");
@@ -375,16 +361,15 @@ public class Modules {
             VIEW_MODEL = (ViewModelModule) getRegisteredModule("viewmodel-module");
             //WAYPOINTS = (WaypointsModule) getRegisteredModule("waypoints-module");
             WORLDTIME = (WorldTimeModule) getRegisteredModule("worldtime-module");
-            //AIR_PLACE = (AirPlaceModule) getRegisteredModule("airplace-module");
+            //WORLD
+            AIR_INTERACT = (AirInteractModule) getRegisteredModule("airinteract-module");
             ANTI_INTERACT = (AntiInteractModule) getRegisteredModule("antiinteract-module");
             AUTO_MINE = (AutoMineModule) getRegisteredModule("automine-module");
             CHATSUFFIX = (ChatSuffixModule) getRegisteredModule("chatsuffix-module");
             //ANTI_AFK = (AntiAFKModule) getRegisteredModule("antiafk-module");
             AUTO_TOOL = (AutoToolModule) getRegisteredModule("autotool-module");
             AVOID = (AvoidModule) getRegisteredModule("avoid-module");
-            BLOCK_INTERACT = (BlockInteractModule) getRegisteredModule("blockinteract-module");
             FAST_DROP = (FastDropModule) getRegisteredModule("fastdrop-module");
-            //FAST_EAT = (FastEatModule) getRegisteredModule("fasteat-module");
             FAST_PLACE = (FastPlaceModule) getRegisteredModule("fastplace-module");
             MULTITASK = (MultitaskModule) getRegisteredModule("multitask-module");
             NO_GLITCH_BLOCKS = (NoGlitchBlocksModule) getRegisteredModule("noglitchblocks-module");
