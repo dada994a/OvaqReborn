@@ -54,8 +54,6 @@ public class OvaqReborn {
         AntiDumpManager.checkRecaf();
         AntiDumpManager.checkNaughtyFlags();
 
-        IOUtil.Init();
-
         info("preInit starting ...");
 
         EXECUTOR = Executors.newFixedThreadPool(1);
