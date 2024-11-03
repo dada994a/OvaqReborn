@@ -4,6 +4,7 @@ import net.shoreline.client.api.Identifiable;
 import net.shoreline.client.api.event.handler.EventBus;
 import net.shoreline.client.api.event.handler.EventHandler;
 import net.shoreline.client.api.file.ClientConfiguration;
+import net.shoreline.client.impl.manager.client.AntiDumpManager;
 import net.shoreline.client.impl.manager.client.DiscordManager;
 import net.shoreline.client.impl.manager.client.HwidManager;
 import net.shoreline.client.impl.module.client.IRCModule;
@@ -13,8 +14,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.awt.*;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,7 +23,6 @@ import java.net.URL;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import javax.swing.*;
 
 public class OvaqReborn {
@@ -33,6 +31,7 @@ public class OvaqReborn {
     public static ClientConfiguration CONFIG;
     public static DiscordManager RPC;
     public static ShutdownHook SHUTDOWN;
+    public static AntiDumpManager ANTIDUMP;
     public static Executor EXECUTOR;
 
     public static void logAsciiArt() {
@@ -53,7 +52,9 @@ public class OvaqReborn {
 
         hwidAuth();
         info("HwidAuth successful!");
-
+        ANTIDUMP = new AntiDumpManager();
+        AntiDumpManager.checkDebugger();
+        AntiDumpManager.checkrecf();
         info("preInit starting ...");
 
         EXECUTOR = Executors.newFixedThreadPool(1);
