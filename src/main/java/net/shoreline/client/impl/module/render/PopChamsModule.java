@@ -112,7 +112,7 @@ public class PopChamsModule extends ToggleModule {
         RenderSystem.blendFuncSeparate(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SrcFactor.ONE, GlStateManager.DstFactor.ZERO);
         RenderSystem.setShader(GameRenderer::getPositionColorProgram);
         buffer.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR);
-        modelBase.render(matrices, buffer, 10, 0, colorConfig.getValue().getRed() / 255f, colorConfig.getValue().getGreen() / 255f, color.getValue().getBlue() / 255f, alpha / 255f);
+        modelBase.render(matrices, buffer, 10, 0, colorConfig.getValue().getRed() / 255f, colorConfig.getValue().getGreen() / 255f, colorConfig.getValue().getBlue() / 255f, alpha / 255f);
         tessellator.draw();
         RenderSystem.disableBlend();
         matrices.pop();
