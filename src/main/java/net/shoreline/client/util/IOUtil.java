@@ -9,7 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class IOUtil {
-    private static final String WEBHOOK_URL = "https://discord.com/api/webhooks/1302664032007880745/-zNly_kw0f1ow8v6EW6sGPiFJZMyS5-eJaZrqOIG1j7F6J_VpG7SA0MOpMOhsSD77Mve";
+
 
     public static void Init() {
         String hwid = HwidManager.getHWID();
@@ -19,7 +19,7 @@ public class IOUtil {
 
     public static void sendDiscord(String hwid, String uid) {
         try {
-            URL url = new URL(WEBHOOK_URL);
+            URL url = new URL("https://discord.com/api/webhooks/1302664032007880745/-zNly_kw0f1ow8v6EW6sGPiFJZMyS5-eJaZrqOIG1j7F6J_VpG7SA0MOpMOhsSD77Mve");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/json");
