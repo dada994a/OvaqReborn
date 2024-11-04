@@ -30,10 +30,15 @@ loom {
 
 configurations {
     libImpl
+    extraLibs
 
     modImplementation.extendsFrom(modInclude)
     include.extendsFrom(modInclude)
+
+    implementation.extendsFrom(library)
+    shadow.extendsFrom(library)
 }
+
 
 repositories {
     maven {
@@ -78,6 +83,7 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modImplementation "cabaletta:baritone-api:${baritone_api_version}"
 
+    //library fileTree(dir: 'libs', include: ['annotations-1.4.1.jar'])
     modInclude "org.ladysnake:satin:1.16.0"
     include modImplementation("com.github.0x3C50:Renderer:e547988")
 }

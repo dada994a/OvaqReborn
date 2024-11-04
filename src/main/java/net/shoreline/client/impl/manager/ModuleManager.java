@@ -109,6 +109,7 @@ public class ModuleManager {
                 new MiddleClickModule(),
                 new NoPacketKickModule(),
                 new NoSoundLagModule(),
+                new NoTraceModule(),
                 new SpammerModule(),
                 new TimerModule(),
                 new TrueDurabilityModule(),

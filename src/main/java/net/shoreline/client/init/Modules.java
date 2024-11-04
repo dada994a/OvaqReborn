@@ -106,6 +106,7 @@ public class Modules {
     public static MiddleClickModule MIDDLE_CLICK;
     public static NoPacketKickModule NO_PACKET_KICK;
     public static NoSoundLagModule NO_SOUND_LAG;
+    public static NoTraceModule NO_TRACE;
     public static SpammerModule SPAMMER;
     public static TimerModule TIMER;
     public static TrueDurabilityModule TRUE_DURABILITY;
@@ -301,6 +302,7 @@ public class Modules {
             MIDDLE_CLICK = (MiddleClickModule) getRegisteredModule("middleclick-module");
             NO_PACKET_KICK = (NoPacketKickModule) getRegisteredModule("nopacketkick-module");
             NO_SOUND_LAG = (NoSoundLagModule) getRegisteredModule("nosoundlag-module");
+            NO_TRACE = (NoTraceModule) getRegisteredModule("notrace-module");
             SPAMMER = (SpammerModule) getRegisteredModule("spammer-module");
             TIMER = (TimerModule) getRegisteredModule("timer-module");
             TRUE_DURABILITY = (TrueDurabilityModule) getRegisteredModule("truedurability-module");
