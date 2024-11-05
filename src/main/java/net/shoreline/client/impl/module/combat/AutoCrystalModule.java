@@ -28,7 +28,6 @@ import net.shoreline.client.api.config.NumberDisplay;
 import net.shoreline.client.api.config.setting.BooleanConfig;
 import net.shoreline.client.api.config.setting.EnumConfig;
 import net.shoreline.client.api.config.setting.NumberConfig;
-import net.shoreline.client.api.event.handler.EventBus;
 import net.shoreline.client.api.event.listener.EventListener;
 import net.shoreline.client.api.module.ModuleCategory;
 import net.shoreline.client.api.module.RotationModule;
@@ -47,7 +46,6 @@ import net.shoreline.client.util.math.timer.Timer;
 import net.shoreline.client.util.player.PlayerUtil;
 import net.shoreline.client.util.player.RotationUtil;
 import net.shoreline.client.util.render.animation.Animation;
-import net.shoreline.client.util.render.animation.TimeAnimation;
 import net.shoreline.client.util.world.EndCrystalUtil;
 import net.shoreline.client.util.world.EntityUtil;
 

@@ -52,12 +52,18 @@ public abstract class MixinEndCrystalEntityRenderer {
     @Inject(method = "render(Lnet/minecraft/entity/decoration/EndCrystalEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
             at = @At("HEAD"), cancellable = true)
     public void hookRender(EndCrystalEntity endCrystalEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
-        RenderCrystalEvent renderCrystalEvent = new RenderCrystalEvent(endCrystalEntity, f, g, matrixStack, i, core, frame);
-        OvaqReborn.EVENT_HANDLER.dispatch(renderCrystalEvent);
 
-        if (renderCrystalEvent.isCanceled()) {
-            ci.cancel();
+        if (!CrystalModelModule.INSTANCE.isEnabled()) {
             return;
+        }
+
+        if (!CrystalModelModule.sync.getValue()) {
+            RenderCrystalEvent renderCrystalEvent = new RenderCrystalEvent(endCrystalEntity, f, g, matrixStack, i, core, frame);
+            OvaqReborn.EVENT_HANDLER.dispatch(renderCrystalEvent);
+            if (renderCrystalEvent.isCanceled()) {
+                ci.cancel();
+                return;
+            }
         }
         matrixStack.push();
         float h = yOffset(endCrystalEntity, g);

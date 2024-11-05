@@ -33,6 +33,7 @@ import java.util.Random;
 public class CrystalModelModule extends ToggleModule {
     public static HashMap<EndCrystalEntity, Double> spinMap = new HashMap<>();
     public static HashMap<Vec3d, Double> posSpinMap = new HashMap<>();
+    public static CrystalModelModule INSTANCE;
 
     public static HashMap<EndCrystalEntity, Double> floatMap = new HashMap<>();
     public static HashMap<Vec3d, Double> posFloatMap = new HashMap<>();
@@ -46,6 +47,7 @@ public class CrystalModelModule extends ToggleModule {
 
     public CrystalModelModule() {
         super("CrystalModel", "Render and manage crystals", ModuleCategory.RENDER);
+        INSTANCE = this;
     }
 
     @EventListener
