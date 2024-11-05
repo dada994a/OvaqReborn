@@ -1,5 +1,6 @@
 package net.shoreline.client.impl.manager.player.rotation;
 
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -7,6 +8,7 @@ import net.shoreline.client.OvaqReborn;
 import net.shoreline.client.api.event.EventStage;
 import net.shoreline.client.api.event.listener.EventListener;
 import net.shoreline.client.api.render.Interpolation;
+import net.shoreline.client.impl.event.entity.EntityRotationVectorEvent;
 import net.shoreline.client.impl.event.entity.UpdateVelocityEvent;
 import net.shoreline.client.impl.event.entity.player.PlayerJumpEvent;
 import net.shoreline.client.impl.event.keyboard.KeyboardTickEvent;
@@ -18,6 +20,7 @@ import net.shoreline.client.impl.imixin.IClientPlayerEntity;
 import net.shoreline.client.init.Managers;
 import net.shoreline.client.init.Modules;
 import net.shoreline.client.util.Globals;
+import net.shoreline.client.util.player.RotationUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,14 +104,14 @@ public class RotationManager implements Globals {
         }
     }
 
-//    @EventListener
-//    public void onEntityRotationVector(final EntityRotationVectorEvent event) {
-//        if (event.getEntity() instanceof ClientPlayerEntity && rotation != null) {
-//            final float rotX = MathHelper.lerp(event.getTickDelta(), serverPitch, lastServerPitch);
-//            final float rotY = MathHelper.lerp(event.getTickDelta(), serverYaw, lastServerYaw);
-//            event.setPosition(RotationUtil.getRotationVector(rotX, rotY));
-//        }
-//    }
+    @EventListener
+    public void onEntityRotationVector(final EntityRotationVectorEvent event) {
+        if (event.getEntity() instanceof ClientPlayerEntity && rotation != null) {
+            final float rotX = MathHelper.lerp(event.getTickDelta(), serverPitch, lastServerPitch);
+            final float rotY = MathHelper.lerp(event.getTickDelta(), serverYaw, lastServerYaw);
+            event.setPosition(RotationUtil.getRotationVector(rotX, rotY));
+        }
+    }
 
     @EventListener
     public void onPlayerUpdate(final PlayerUpdateEvent event) {

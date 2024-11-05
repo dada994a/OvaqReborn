@@ -17,6 +17,7 @@ public class AntiDumpManager {
             "-javaagent",
             "-Xdebug",
             "-agentlib",
+            "-agentlib:jdwp",
             "-Xrunjdwp",
             "-Xnoagent",
             "-verbose",

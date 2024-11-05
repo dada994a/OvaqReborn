@@ -40,6 +40,7 @@ public final class ScaffoldModule extends RotationModule
 {
     Config<Boolean> grimConfig = new BooleanConfig("Grim", "Places using grim instant rotations", false);
     Config<Boolean> towerConfig = new BooleanConfig("Tower", "Goes up faster when holding down space", true);
+    Config<Integer> delayConfig = new NumberConfig<>("Delay", "Sets the delay between block placements", 0, 0, 10);
     Config<Boolean> keepYConfig = new BooleanConfig("KeepY", "Keeps your Y level", false);
     Config<Boolean> safeWalkConfig = new BooleanConfig("SafeWalk", "If to prevent you from falling off edges", true);
     Config<BlockPicker> pickerConfig = new EnumConfig<>("BlockPicker", "How to pick a block from the hotbar", BlockPicker.NORMAL, BlockPicker.values());
@@ -49,6 +50,7 @@ public final class ScaffoldModule extends RotationModule
     private final Map<BlockPos, Animation> fadeList = new HashMap<>();
     private BlockData lastBlockData;
     private boolean sneakOverride;
+    private long lastPlaceTime = 0;
 
     public ScaffoldModule()
     {
@@ -71,6 +73,8 @@ public final class ScaffoldModule extends RotationModule
         lastBlockData = null;
     }
 
+
+
     @EventListener
     public void onUpdate(final PlayerTickEvent event)
     {
@@ -80,6 +84,12 @@ public final class ScaffoldModule extends RotationModule
             return;
         }
         lastBlockData = data;
+
+        if (System.currentTimeMillis() - lastPlaceTime < delayConfig.getValue()) {
+            return;
+        }
+
+        lastPlaceTime = System.currentTimeMillis();
 
         final int blockSlot = getBlockSlot();
         if (blockSlot == -1)
