@@ -1,7 +1,7 @@
-1.20.4 2b2tjp Client
+### 1.20.4 2b2tjp Client
 
 Thank you so much to all the collaborators  
-Skidding Clients  
+### Skidding Clients  
 - LiquidBounce Nextgen  
 - BleachHack  
 - NullPoint  
@@ -11,11 +11,11 @@ Skidding Clients
 - Lemon  
 - etc.  
 
-Designer  
+### Designer  
 - ダチョエナガ  
 - ちくわ(ゴミカス)  
 
-Dev  
+### Dev  
 - Rom(Nelf)  
 - ハイピの廃人  
 - NaaNaa  
