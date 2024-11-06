@@ -52,6 +52,7 @@ public class HUDModule extends ToggleModule {
 
     //
     Config<Boolean> watermarkConfig = new BooleanConfig("Watermark", "Displays client name and version watermark", true);
+    Config<Boolean> uidConfig = new BooleanConfig("Uid","Displays User Uids",true);
     Config<Boolean> directionConfig = new BooleanConfig("Direction", "Displays facing direction", true);
     Config<Boolean> armorConfig = new BooleanConfig("Armor", "Displays player equipped armor and durability", true);
     Config<VanillaHud> potionHudConfig = new EnumConfig<>("PotionHud", "Renders the Minecraft potion Hud", VanillaHud.HIDE, VanillaHud.values());
@@ -130,12 +131,13 @@ public class HUDModule extends ToggleModule {
                 topRight += 27.0f;
             }
             if (watermarkConfig.getValue()) {
-               // RenderManager.renderText(event.getContext(), String.format("%s §f%s (%s-%s)",
-                       // OvaqRebornMod.MOD_NAME,  OvaqRebornMod.MOD_VER,OvaqRebornMod.MOD_BUILD_NUMBER, !BuildConfig.HASH.equals("null") ? "-" + BuildConfig.HASH : ""), 2.0f, topLeft, getHudColor(rainbowOffset));
-                RenderManager.renderText(event.getContext(), String.format("%s §f%s UID %s ",
-                        OvaqRebornMod.MOD_NAME,  OvaqRebornMod.MOD_VER,OvaqRebornMod.UID), 2.0f, topLeft, getHudColor(rainbowOffset));
+                RenderManager.renderText(event.getContext(), String.format("%s §f%s (%s-%s)",
+                        OvaqRebornMod.MOD_NAME,  OvaqRebornMod.MOD_VER,OvaqRebornMod.MOD_BUILD_NUMBER, !BuildConfig.HASH.equals("null") ? "" + BuildConfig.HASH : ""), 2.0f, topLeft, getHudColor(rainbowOffset));
 
-                // topLeft += 9.0f;
+                topLeft += 10;
+            }
+            if (uidConfig.getValue()) {
+                RenderManager.renderText(event.getContext(), String.format("UID §f%s", OvaqRebornMod.UID), 2.0f, topLeft, getHudColor(rainbowOffset));
             }
             if (arraylistConfig.getValue()) {
                 List<Module> modules = Managers.MODULE.getModules();

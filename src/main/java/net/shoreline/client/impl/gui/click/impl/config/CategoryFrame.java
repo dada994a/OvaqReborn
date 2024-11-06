@@ -55,7 +55,7 @@ public class CategoryFrame extends Frame {
                          float width, float height) {
         super(x, y, width, height);
         this.category = category;
-         this.categoryIcon = new Identifier("ovaqreborn", "icon/" + category.name().toLowerCase() + ".png");
+        this.categoryIcon = new Identifier("ovaqreborn", "icon/" + category.name().toLowerCase() + ".png");
         this.name = EnumFormatter.formatEnum(category);
         for (Module module : Managers.MODULE.getModules()) {
             if (module.getCategory() == category) {
@@ -72,7 +72,7 @@ public class CategoryFrame extends Frame {
      * @param y
      */
     public CategoryFrame(ModuleCategory category, float x, float y) {
-        this(category, x, y, 105.0f, 15.0f);
+        this(category, x, y, 105.0f, 17.0f);
     }
 
     /**
@@ -143,8 +143,8 @@ public class CategoryFrame extends Frame {
      * @param y      The y position.
      */
     private void renderCategoryIcon(DrawContext context, float x, float y) {
-        int width = 10;
-        int height =10;
+        int width = 12;
+        int height =12;
         context.drawTexture(categoryIcon, (int) x, (int) y, 0, 0, width, height, width, height);
     }
 

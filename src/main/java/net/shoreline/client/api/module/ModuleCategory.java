@@ -43,4 +43,8 @@ public enum ModuleCategory {
      * Modules associated with client processes
      */
     CLIENT
+    /**
+     *  Configs list
+     */
+  //  CONFIGS
 }

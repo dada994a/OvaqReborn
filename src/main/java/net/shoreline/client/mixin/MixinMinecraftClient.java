@@ -98,8 +98,7 @@ public abstract class MixinMinecraftClient implements IMinecraftClient {
      */
     @Inject(method = "updateWindowTitle", at = @At("HEAD"), cancellable = true)
     private void hookUpdateWindowTitle(CallbackInfo ci) {
-        //String customTitle = "OvaqReborn " + BuildConfig.VERSION + "(" + BuildConfig.BUILD_IDENTIFIER + "-" +BuildConfig.HASH + ")";
-        String customTitle = "OvaqReborn " + BuildConfig.VERSION  + " UID " + OvaqRebornMod.UID;
+        String customTitle = "OvaqReborn " + BuildConfig.VERSION + "(" + BuildConfig.BUILD_IDENTIFIER + "-" +BuildConfig.HASH + ")";
         MinecraftClient.getInstance().getWindow().setTitle(customTitle);
         ci.cancel();
     }

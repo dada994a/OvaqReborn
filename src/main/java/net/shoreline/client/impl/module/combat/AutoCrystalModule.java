@@ -183,7 +183,7 @@ public class AutoCrystalModule extends RotationModule {
         StringBuilder data = new StringBuilder();
 
         if (breakDebugConfig.getValue()) {
-            data.append(String.format("Break: %dms", getBreakMs()));
+            data.append(String.format("%dms,", getBreakMs()));
         }
 
         if (pingDebugConfig.getValue()) {
@@ -193,7 +193,7 @@ public class AutoCrystalModule extends RotationModule {
 
             int ping = getPlayerPing();
             if (ping >= 0) {
-                data.append(String.format("Ping: %dms", ping));
+                data.append(String.format(" %dms", ping));
             }
         }
 
