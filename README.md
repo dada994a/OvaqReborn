@@ -6,7 +6,7 @@ Thank you so much to all the collaborators
 ### Skidding Clients  
 - [LiquidBounce Nextgen](https://github.com/CCBlueX/LiquidBounce)
 - [BleachHack](https://github.com/BleachDev/BleachHack)
-- [NullPoint](https://github.com/KgDW/NullPoint-Fabric]
+- [NullPoint](https://github.com/KgDW/NullPoint-Fabric)
 - [Meteor](https://github.com/MeteorDevelopment/meteor-client)
 - [ThunderHack Recode](https://github.com/Pan4ur/ThunderHack-Recode)
 - Rebirth Nextgen
