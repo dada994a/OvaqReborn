@@ -52,6 +52,13 @@ public class MixinDebugHud {
                     }
                 }
             }
+            if (Modules.SMARTF3.getModernFix()) {
+                var modernFixIndex = StringUtil.indexOfStartingWith(text, "ModernFix");
+
+                if (modernFixIndex != -1) {
+                    text.subList(modernFixIndex, Math.min(modernFixIndex + 2, text.size())).clear();
+                }
+            }
             while (!text.isEmpty() && text.get(0).isEmpty()) {
                 text.remove(0);
             }

@@ -14,6 +14,7 @@ public class SmartF3Module extends ToggleModule {
     private final Config<Boolean> shyFluidsConfig = new BooleanConfig("Hide ShyFluids", "minecraft", true);
     private final Config<Boolean> sodiumConfig = new BooleanConfig("Hide Sodium", "Hide Sodium Mod info", true);
     private final Config<Boolean> irisConfig = new BooleanConfig("Hide Iris", "Hide Iris Mod info", true);
+    private final Config<Boolean> modernFixConfig = new BooleanConfig("Hide ModernFic", "Hide ModernFix Mod info", true);
 
     public SmartF3Module() {
         super("SmartF3", "Clean debug screen", ModuleCategory.RENDER);
@@ -33,5 +34,9 @@ public class SmartF3Module extends ToggleModule {
 
     public boolean getIris() {
         return irisConfig.getValue();
+    }
+
+    public boolean getModernFix() {
+        return modernFixConfig.getValue();
     }
 }
