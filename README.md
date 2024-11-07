@@ -16,9 +16,9 @@ Thank you so much to all the collaborators
 
 ### Designer  
 - ダチョエナガ  
-- ちくわ(ゴミカス)  
+- ちくわ(Shit)  
 
 ### Dev  
 - Rom(Nelf)  
 - ハイピの廃人  
-- NaaNaa  
+- Naa_Naa  
