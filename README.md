@@ -1,3 +1,4 @@
+# OvaqReborn
 ### 1.20.4 2b2tjp Client
 
 Thank you so much to all the collaborators  
@@ -15,9 +16,9 @@ Thank you so much to all the collaborators
 
 ### Designer  
 - ダチョエナガ  
-- ちくわ(ゴミカス)  
+- ちくわ(Shit)  
 
 ### Dev  
 - Rom(Nelf)  
 - ハイピの廃人  
-- NaaNaa  
+- Naa_Naa  
