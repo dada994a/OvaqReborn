@@ -6,6 +6,7 @@ import net.shoreline.client.api.event.listener.EventListener;
 import net.shoreline.client.api.module.ModuleCategory;
 import net.shoreline.client.api.module.ToggleModule;
 import net.shoreline.client.impl.event.gui.chat.ChatMessageEvent;
+import net.shoreline.client.init.Managers;
 import net.shoreline.client.util.chat.ChatUtil;
 
 public class ChatSuffixModule extends ToggleModule {
@@ -13,7 +14,6 @@ public class ChatSuffixModule extends ToggleModule {
     private static final String CATMI_SUFFIX = " ᴄᴀᴛᴍɪ";
     private static final String TEAM_SUFFIX = " ｜ ᴛᴇᴀᴍ 2ᴘ2ꜰᴊᴘ";
     private static final String DOT_SUFFIX = " ᴅᴏᴛɢᴏᴅ";
-    private static final String LEMON_SUFFIX = "  \uD835\uDCC1ᴇᴍ\uD835\uDC5C\uD835\uDCC3";
     private static final String DARE_SUFFIX = " ｜ お前誰やねん";
     private final Config<Mode> modeConfig = new EnumConfig<>("Mode", "The suffix mode to append to chat messages", Mode.OVAQ, Mode.values());
 
@@ -24,8 +24,9 @@ public class ChatSuffixModule extends ToggleModule {
     @EventListener
     public void onChatMessage(ChatMessageEvent.Client event) {
         String originalMessage = event.getMessage();
+        String commandPrefix = Managers.COMMAND.getPrefix();
 
-        if (originalMessage.contains("/") || originalMessage.contains(".") || originalMessage.contains("#") || originalMessage.contains("@")) {
+        if (originalMessage.isEmpty() ||  (originalMessage.contains("/") || originalMessage.contains("#") || originalMessage.contains("@")|| originalMessage.startsWith(commandPrefix))) {
             return;
         }
 
@@ -39,9 +40,6 @@ public class ChatSuffixModule extends ToggleModule {
                 break;
             case DOT:
                 suffix = DOT_SUFFIX;
-                break;
-            case LEMON:
-                suffix = LEMON_SUFFIX;
                 break;
             case DARE:
                 suffix = DARE_SUFFIX;
@@ -58,6 +56,6 @@ public class ChatSuffixModule extends ToggleModule {
     }
 
     public enum Mode {
-        OVAQ, CATMI, TEAM, DOT, LEMON, DARE
+        OVAQ, CATMI, TEAM, DOT, DARE
     }
 }

@@ -113,9 +113,7 @@ public class VelocityModule extends ToggleModule {
                             * (horizontalConfig.getValue() / 100.0f)));
                 }
                 case GRIM -> {
-                    if (!Managers.ANTICHEAT.hasPassed(100)) {
-                        return;
-                    }
+                    if (!Managers.ANTICHEAT.hasPassed(100)) return;
                     event.cancel();
                     cancelVelocity = true;
                     mc.executeSync(() -> {
@@ -143,9 +141,7 @@ public class VelocityModule extends ToggleModule {
                     }
                 }
                 case GRIM -> {
-                    if (!Managers.ANTICHEAT.hasPassed(100)) {
-                        return;
-                    }
+                    if (!Managers.ANTICHEAT.hasPassed(100)) return;
                     event.cancel();
                     cancelVelocity = true;
                 }
@@ -158,9 +154,8 @@ public class VelocityModule extends ToggleModule {
         } else if (event.getPacket() instanceof EntityStatusS2CPacket packet
                 && packet.getStatus() == EntityStatuses.PULL_HOOKED_ENTITY && pushFishhookConfig.getValue()) {
             Entity entity = packet.getEntity(mc.world);
-            if (entity instanceof FishingBobberEntity hook && hook.getHookedEntity() == mc.player) {
+            if (entity instanceof FishingBobberEntity hook && hook.getHookedEntity() == mc.player)
                 event.cancel();
-            }
         }
     }
 
@@ -168,7 +163,6 @@ public class VelocityModule extends ToggleModule {
     public void onTick(TickEvent event) {
         if (event.getStage() == EventStage.PRE && cancelVelocity) {
             if (modeConfig.getValue() == VelocityMode.GRIM && Managers.ANTICHEAT.hasPassed(100)) {
-                // Fixes issue with rotations
                 float yaw = Managers.ROTATION.getServerYaw();
                 float pitch = Managers.ROTATION.getServerPitch();
                 Managers.NETWORK.sendPacket(new PlayerMoveC2SPacket.Full(mc.player.getX(),
@@ -182,23 +176,20 @@ public class VelocityModule extends ToggleModule {
 
     @EventListener
     public void onPushEntity(PushEntityEvent event) {
-        if (pushEntitiesConfig.getValue() && event.getPushed().equals(mc.player)) {
+        if (pushEntitiesConfig.getValue() && event.getPushed().equals(mc.player))
             event.cancel();
-        }
     }
 
     @EventListener
     public void onPushOutOfBlocks(PushOutOfBlocksEvent event) {
-        if (pushBlocksConfig.getValue()) {
+        if (pushBlocksConfig.getValue())
             event.cancel();
-        }
     }
 
     @EventListener
     public void onPushFluid(PushFluidsEvent event) {
-        if (pushLiquidsConfig.getValue()) {
+        if (pushLiquidsConfig.getValue())
             event.cancel();
-        }
     }
     private enum VelocityMode {
         NORMAL,

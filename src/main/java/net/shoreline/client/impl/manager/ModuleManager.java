@@ -165,6 +165,7 @@ public class ModuleManager {
                 new SmartF3Module(),
                 //new ShadersModule(),
                 new TooltipsModule(),
+                new TotemAnimationsModule(),
                 new TracersModule(),
                 new TrueSightModule(),
                 new ViewClipModule(),

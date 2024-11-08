@@ -11,6 +11,7 @@ import net.shoreline.client.init.Managers;
 import net.shoreline.client.init.Modules;
 import net.shoreline.client.init.Moduletester;
 import net.shoreline.client.security.Authenticator;
+import net.shoreline.client.security.TimeAuth;
 import net.shoreline.client.util.IOUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -49,10 +50,11 @@ public class OvaqReborn {
         Moduletester.moduletest();
         info("HwidAuth successful!");
 
+        TimeAuth TimeAuth = new TimeAuth();
+        info("TimeAuth starting ...");
+
         ANTIDUMP = new AntiDumpManager();
-        AntiDumpManager.checkDebugger();
-        AntiDumpManager.checkRecafAsync();
-        AntiDumpManager.checkNaughtyFlags();
+        AntiDumpManager.init();
         info("AntiDump checking ...");
         info("preInit starting ...");
 

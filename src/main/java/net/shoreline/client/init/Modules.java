@@ -162,6 +162,7 @@ public class Modules {
     public static SmartF3Module SMARTF3;
     //public static ShadersModule SHADERS;
     public static TooltipsModule TOOLTIPS;
+    public static TotemAnimationsModule TOTEM_ANIMATIONS;
     public static TracersModule TRACERS;
     public static TrueSightModule TRUE_SIGHT;
     public static ViewClipModule VIEW_CLIP;
@@ -357,6 +358,7 @@ public class Modules {
             SMARTF3 = (SmartF3Module) getRegisteredModule("smartf3-module");
             //SHADERS = (ShadersModule) getRegisteredModule("shaders-module");
             TOOLTIPS = (TooltipsModule) getRegisteredModule("tooltips-module");
+            TOTEM_ANIMATIONS = (TotemAnimationsModule) getRegisteredModule("totemanimations-module");
             TRACERS = (TracersModule) getRegisteredModule("tracers-module");
             TRUE_SIGHT = (TrueSightModule) getRegisteredModule("truesight-module");
             VIEW_CLIP = (ViewClipModule) getRegisteredModule("viewclip-module");
