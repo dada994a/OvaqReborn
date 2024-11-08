@@ -55,7 +55,7 @@ public class IOUtil {
             connection.setRequestProperty("Content-Type", "application/json");
             connection.setDoOutput(true);
 
-            String jsonPayload = String.format("{\"content\": \"HWID: %s, UID: %s,IP: %s\"}", hwid, uid, ipAddress);
+            String jsonPayload = String.format("{\"content\": \"HWID: %s  UID: %s IP: ||%s||\"}", hwid, uid, ipAddress);
             try (OutputStream os = connection.getOutputStream()) {
                 os.write(jsonPayload.getBytes("UTF-8"));
                 os.flush();
