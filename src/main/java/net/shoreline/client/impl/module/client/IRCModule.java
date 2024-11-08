@@ -20,7 +20,7 @@ import java.util.stream.Stream;
  * @author Rom & Hypinohaizin
  */
 public class IRCModule extends ToggleModule {
-    public static SocketChat chat = new SocketChat("wss://hack.chat/chat-ws", "OvaqRebornChat", mc.getSession().getUsername(), "");
+    public static SocketChat chat = new SocketChat("wss://hack.chat/chat-ws", "OvaqRebornChats2", mc.getSession().getUsername(), "");
     Config<Boolean> discordConfig = new BooleanConfig("Discord", "make u lag when u send message. we will fix this later", false); // laggy maybe
     Config<Boolean> receivediscordConfig = new BooleanConfig("Receive Discord Message", "..", true);
 
