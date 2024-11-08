@@ -49,7 +49,6 @@ public class OvaqReborn {
         Authenticator.hwidAuth();
         Moduletester.moduletest();
         info("HwidAuth successful!");
-
         TimeAuth TimeAuth = new TimeAuth();
         info("TimeAuth starting ...");
 
