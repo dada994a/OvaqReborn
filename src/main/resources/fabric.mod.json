@@ -3,7 +3,7 @@
   "id": "ovaqreborn",
   "version": "${version}",
   "name": "OvaqReborn",
-  "description": "Created BY TEAM 2P2FJP [Based by Shoreline]",
+  "description": "Created BY TEAM 2P2FJP [Based by Shoreline] OvaqReborn is UtilityMod",
 
   "authors": [
     "Devs",
@@ -12,8 +12,9 @@
     "NaaNaa",
     "Designers",
     "ダチョエナガ",
-    "ちくわ(ゴミカス）"
-
+    "ちくわ(ゴミカス）",
+    "法律関係",
+    "ダチョエナガ(Google内定)"
   ],
   "icon": "logo.png",
   "environment": "*",
