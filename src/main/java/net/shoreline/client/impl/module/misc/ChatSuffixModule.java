@@ -15,7 +15,7 @@ public class ChatSuffixModule extends ToggleModule {
     private static final String TEAM_SUFFIX = " ｜ ᴛᴇᴀᴍ 2ᴘ2ꜰᴊᴘ";
     private static final String DOT_SUFFIX = " ᴅᴏᴛɢᴏᴅ";
     private static final String DARE_SUFFIX = " ｜ お前誰やねん";
-    private static final String REVO_SUFFIX = "|レグルス連邦 Team Revolution(ChatGPTクラン";
+    private static final String REVO_SUFFIX = "|レグルス連邦 Team Revolution(ChatGPTクラン)";
     private final Config<Mode> modeConfig = new EnumConfig<>("Mode", "The suffix mode to append to chat messages", Mode.OVAQ, Mode.values());
 
     public ChatSuffixModule() {
