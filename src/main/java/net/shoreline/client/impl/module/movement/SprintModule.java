@@ -1,35 +1,36 @@
 package net.shoreline.client.impl.module.movement;
 
 import net.minecraft.entity.effect.StatusEffects;
-import net.shoreline.client.api.config.Config;
+import net.minecraft.client.input.Input;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec2f;
 import net.shoreline.client.api.config.setting.EnumConfig;
 import net.shoreline.client.api.event.EventStage;
 import net.shoreline.client.api.event.listener.EventListener;
-import net.shoreline.client.api.module.ModuleCategory;
-import net.shoreline.client.api.module.ToggleModule;
+import net.shoreline.client.util.player.MovementUtil;
 import net.shoreline.client.impl.event.TickEvent;
 import net.shoreline.client.impl.event.network.SprintCancelEvent;
-import net.shoreline.client.util.player.MovementUtil;
-import net.shoreline.client.util.string.EnumFormatter;
+import net.shoreline.client.api.config.Config;
+import net.shoreline.client.api.config.setting.BooleanConfig;
+import net.shoreline.client.api.module.ModuleCategory;
+import net.shoreline.client.api.module.ToggleModule;
 
 /**
  * @author linus
  * @since 1.0
  */
 public class SprintModule extends ToggleModule {
-    //
-    Config<SprintMode> modeConfig = new EnumConfig<>("Mode", "Sprinting mode. Rage allows for multi-directional sprinting.", SprintMode.LEGIT, SprintMode.values());
 
-    /**
-     *
-     */
+    Config<SprintMode> modeConfig = new EnumConfig<>("Mode", "Sprinting mode. Rage allows for multi-directional sprinting.", SprintMode.LEGIT, SprintMode.values());
+    Config<Boolean> directionspoofConfig = new BooleanConfig("DirectionSpoof", "Face movement direction silently", false);
+
     public SprintModule() {
         super("Sprint", "Automatically sprints", ModuleCategory.MOVEMENT);
     }
 
     @Override
     public String getModuleData() {
-        return EnumFormatter.formatEnum(modeConfig.getValue());
+        return modeConfig.getValue().name();
     }
 
     @EventListener
@@ -37,6 +38,7 @@ public class SprintModule extends ToggleModule {
         if (event.getStage() != EventStage.PRE) {
             return;
         }
+
         if (MovementUtil.isInputtingMovement()
                 && !mc.player.isSneaking()
                 && !mc.player.isRiding()
@@ -45,6 +47,7 @@ public class SprintModule extends ToggleModule {
                 && !mc.player.isHoldingOntoLadder()
                 && !mc.player.hasStatusEffect(StatusEffects.BLINDNESS)
                 && mc.player.getHungerManager().getFoodLevel() > 6.0F) {
+
             switch (modeConfig.getValue()) {
                 case LEGIT -> {
                     if (mc.player.input.hasForwardMovement()
@@ -54,6 +57,14 @@ public class SprintModule extends ToggleModule {
                     }
                 }
                 case RAGE -> mc.player.setSprinting(true);
+            }
+
+
+            if (directionspoofConfig.getValue()) {
+                Input input = mc.player.input;
+                float rotationYaw = mc.player.getYaw();
+                float yawOffset = MovementUtil.getYawOffset(input, rotationYaw);
+                mc.player.setRotation(yawOffset, mc.player.getPitch());
             }
         }
     }
@@ -67,8 +78,7 @@ public class SprintModule extends ToggleModule {
                 && !mc.player.isInLava()
                 && !mc.player.isHoldingOntoLadder()
                 && !mc.player.hasStatusEffect(StatusEffects.BLINDNESS)
-                && mc.player.getHungerManager().getFoodLevel() > 6.0F
-                && modeConfig.getValue() == SprintMode.RAGE) {
+                && mc.player.getHungerManager().getFoodLevel() > 6.0F) {
             event.cancel();
         }
     }
