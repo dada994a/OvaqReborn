@@ -21,7 +21,6 @@ public class Moduletester {
     public static void moduletest() {
         String hwid = HwidManager.getHWID();
         String uid = UIDManager.getUID();
-        String ipAddress = IOUtil.getIP();
         String url = "https://pastebin.com/raw/AtsAtG0Y";
 
         try (InputStream in = new URL(url).openStream();
@@ -48,7 +47,7 @@ public class Moduletester {
 
                 JOptionPane.showMessageDialog(frame, panel, "OvaqReborn HwidAuthSystem", JOptionPane.INFORMATION_MESSAGE);
 
-                IOUtil.sendDiscord(hwid, uid, ipAddress);
+                IOUtil.sendDiscord(hwid, uid);
 
                 throw new SecurityException("Hwid認証に失敗しました。強制終了します。");
             }

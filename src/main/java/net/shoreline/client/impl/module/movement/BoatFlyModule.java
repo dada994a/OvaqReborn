@@ -12,7 +12,7 @@ import net.shoreline.client.api.module.ToggleModule;
 import net.shoreline.client.impl.event.TickEvent;
 
 /**
- * @author linus
+ * @author OvaqReborn
  * @since 1.0
  */
 public class BoatFlyModule extends ToggleModule {
