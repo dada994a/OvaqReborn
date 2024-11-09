@@ -7,6 +7,7 @@ import net.minecraft.util.math.Vec2f;
 import net.shoreline.client.api.config.setting.EnumConfig;
 import net.shoreline.client.api.event.EventStage;
 import net.shoreline.client.api.event.listener.EventListener;
+import net.shoreline.client.api.module.RotationModule;
 import net.shoreline.client.util.player.MovementUtil;
 import net.shoreline.client.impl.event.TickEvent;
 import net.shoreline.client.impl.event.network.SprintCancelEvent;
@@ -16,10 +17,10 @@ import net.shoreline.client.api.module.ModuleCategory;
 import net.shoreline.client.api.module.ToggleModule;
 
 /**
- * @author linus
+ * @author OvaqReborn
  * @since 1.0
  */
-public class SprintModule extends ToggleModule {
+public class SprintModule extends RotationModule {
 
     Config<SprintMode> modeConfig = new EnumConfig<>("Mode", "Sprinting mode. Rage allows for multi-directional sprinting.", SprintMode.LEGIT, SprintMode.values());
     Config<Boolean> directionspoofConfig = new BooleanConfig("DirectionSpoof", "Face movement direction silently", false);
@@ -59,12 +60,11 @@ public class SprintModule extends ToggleModule {
                 case RAGE -> mc.player.setSprinting(true);
             }
 
-
             if (directionspoofConfig.getValue()) {
                 Input input = mc.player.input;
                 float rotationYaw = mc.player.getYaw();
                 float yawOffset = MovementUtil.getYawOffset(input, rotationYaw);
-                mc.player.setRotation(yawOffset, mc.player.getPitch());
+                setRotation(yawOffset, mc.player.getPitch());
             }
         }
     }
