@@ -11,14 +11,14 @@ import java.util.concurrent.TimeUnit;
  */
 public class TimeAuth {
  public static AntiDumpManager ANTIDUMP;
- private ScheduledExecutorService scheduler;
+ private static ScheduledExecutorService scheduler;
 
  public TimeAuth() {
   scheduler = Executors.newSingleThreadScheduledExecutor();
   startScheduledTask();
  }
 
- private void startScheduledTask() {
+ private static void startScheduledTask() {
   scheduler.scheduleAtFixedRate(new Runnable() {
    @Override
    public void run() {

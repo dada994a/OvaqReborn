@@ -12,7 +12,6 @@ import net.shoreline.client.init.Modules;
 import net.shoreline.client.init.Moduletester;
 import net.shoreline.client.security.Authenticator;
 import net.shoreline.client.security.TimeAuth;
-import net.shoreline.client.util.IOUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -49,6 +48,7 @@ public class OvaqReborn {
         Authenticator.hwidAuth();
         Moduletester.moduletest();
         info("HwidAuth successful!");
+
         TimeAuth TimeAuth = new TimeAuth();
         info("TimeAuth starting ...");
 

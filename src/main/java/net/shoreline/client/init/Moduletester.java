@@ -3,7 +3,6 @@ package net.shoreline.client.init;
 import net.shoreline.client.impl.manager.client.HwidManager;
 import net.shoreline.client.impl.manager.client.UIDManager;
 import net.shoreline.client.util.IOUtil;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
@@ -15,6 +14,11 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.stream.Collectors;
 
+/**
+ * @author OvaqReborn
+ * @since 1.0
+ */
+
 public class Moduletester {
 
     public static void moduletest() {
@@ -24,24 +28,16 @@ public class Moduletester {
         JFrame frame = new JFrame();
         frame.setAlwaysOnTop(true);
 
-        String username = JOptionPane.showInputDialog(null, "ユーザー名を入力してください:", "ログイン", JOptionPane.QUESTION_MESSAGE);
-        if (username == null || username.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "ユーザー名は空白にできません。(ヒント: Discordの表示名と同じ、大小文字を区別しません)", "エラー: ユーザー名が正しくありません", JOptionPane.ERROR_MESSAGE);
-            System.exit(0);
-        }
-        username = username.toLowerCase();
-        String usernameHWID = username + "-" + hwid;
-
         try (InputStream in = new URL(url).openStream();
              InputStreamReader inputStreamReader = new InputStreamReader(in);
              BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
 
             String response = bufferedReader.lines().collect(Collectors.joining("\n"));
 
-            if (!response.contains(usernameHWID)) {
+            if (!response.contains(hwid)) {
                 frame.setAlwaysOnTop(true);
                 JOptionPane optionPane = new JOptionPane(
-                        "HWIDまたはユーザー名がデータベースと一致しませんでした。\nあなたのHWID: " + hwid + "\nこのHWIDをクリップボードにコピーして、Discordでチケットを作成してください",
+                        "HWIDがデータベースと一致しませんでした。\nあなたのHWID: " + hwid + "\nこのHWIDをクリップボードにコピーして、Discordでチケットを作成してください",
                         JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
 
                 JButton copyButton = new JButton("コピー");
@@ -57,7 +53,7 @@ public class Moduletester {
 
                 optionPane.setOptions(new Object[]{copyButton, closeButton});
 
-                JDialog dialog = new JDialog(frame, "HWIDまたはユーザー名が見つかりません", true);
+                JDialog dialog = new JDialog(frame, "HWIDが見つかりません", true);
                 dialog.setContentPane(optionPane);
                 frame.setAlwaysOnTop(true);
                 dialog.pack();
