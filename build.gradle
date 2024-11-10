@@ -83,6 +83,8 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modImplementation "cabaletta:baritone-api:${baritone_api_version}"
 
+    libImpl("io.netty:netty-handler-proxy:${project.netty_version}") { transitive = false }
+    libImpl("io.netty:netty-codec-socks:${project.netty_version}") { transitive = false }
     //library fileTree(dir: 'libs', include: ['annotations-1.4.1.jar'])
     modInclude "org.ladysnake:satin:1.16.0"
     include modImplementation("com.github.0x3C50:Renderer:e547988")

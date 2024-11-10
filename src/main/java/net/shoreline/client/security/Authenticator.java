@@ -45,7 +45,6 @@ public class Authenticator {
                     StringSelection stringSelection = new StringSelection(hwid);
                     Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
                     clipboard.setContents(stringSelection, null);
-                    JOptionPane.showMessageDialog(null, "HWIDがクリップボードにコピーされました。");
                 });
 
                 JButton closeButton = new JButton("閉じる");

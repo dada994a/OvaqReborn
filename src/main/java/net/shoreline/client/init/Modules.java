@@ -160,7 +160,7 @@ public class Modules {
     public static SkeletonModule SKELETON;
     public static SkyboxModule SKYBOX;
     public static SmartF3Module SMARTF3;
-    //public static ShadersModule SHADERS;
+    public static ShadersModule SHADERS;
     public static TooltipsModule TOOLTIPS;
     public static TotemAnimationsModule TOTEM_ANIMATIONS;
     public static TracersModule TRACERS;
@@ -356,7 +356,7 @@ public class Modules {
             SKELETON = (SkeletonModule) getRegisteredModule("skeleton-module");
             SKYBOX = (SkyboxModule) getRegisteredModule("skybox-module");
             SMARTF3 = (SmartF3Module) getRegisteredModule("smartf3-module");
-            //SHADERS = (ShadersModule) getRegisteredModule("shaders-module");
+            SHADERS = (ShadersModule) getRegisteredModule("shaders-module");
             TOOLTIPS = (TooltipsModule) getRegisteredModule("tooltips-module");
             TOTEM_ANIMATIONS = (TotemAnimationsModule) getRegisteredModule("totemanimations-module");
             TRACERS = (TracersModule) getRegisteredModule("tracers-module");

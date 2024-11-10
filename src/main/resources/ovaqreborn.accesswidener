@@ -55,3 +55,4 @@ accessible class net/minecraft/client/gui/hud/InGameHud$HeartType
 accessible method net/minecraft/network/packet/c2s/play/PlayerInteractEntityC2SPacket write (Lnet/minecraft/network/PacketByteBuf;)V
 accessible method net/minecraft/client/world/ClientWorld getPendingUpdateManager ()Lnet/minecraft/client/network/PendingUpdateManager;
 accessible method net/minecraft/entity/Entity setRotation (FF)V
+accessible method net/minecraft/client/render/GameRenderer renderHand (Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/Camera;F)V

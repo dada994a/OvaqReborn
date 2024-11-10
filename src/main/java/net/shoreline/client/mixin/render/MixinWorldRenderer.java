@@ -1,8 +1,10 @@
 package net.shoreline.client.mixin.render;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.gl.PostEffectProcessor;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.shoreline.client.OvaqReborn;
@@ -11,9 +13,14 @@ import net.shoreline.client.api.render.RenderBuffers;
 import net.shoreline.client.impl.event.PerspectiveEvent;
 import net.shoreline.client.impl.event.render.RenderWorldBorderEvent;
 import net.shoreline.client.impl.event.render.RenderWorldEvent;
+import net.shoreline.client.impl.manager.render.ShaderManager;
+import net.shoreline.client.init.Managers;
+import net.shoreline.client.init.Modules;
 import net.shoreline.client.util.Globals;
 import org.joml.Matrix4f;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -26,6 +33,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  */
 @Mixin(WorldRenderer.class)
 public class MixinWorldRenderer implements Globals {
+
+    @Shadow @Final private static Identifier MOON_PHASES;
 
     /**
      * @param matrices
@@ -69,6 +78,17 @@ public class MixinWorldRenderer implements Globals {
         OvaqReborn.EVENT_HANDLER.dispatch(renderWorldBorderEvent);
         if (renderWorldBorderEvent.isCanceled()) {
             ci.cancel();
+        }
+    }
+
+    @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gl/PostEffectProcessor;render(F)V", ordinal = 0))
+    private void replaceShaderHook(PostEffectProcessor instance, float tickDelta) {
+        ShaderManager.Shader shaders = Modules.SHADERS.mode.getValue();
+        if (Modules.SHADERS.isEnabled() && mc.world != null) {
+            if (Managers.SHADER.fullNullCheck()) return;
+            Managers.SHADER.setupShader(shaders, Managers.SHADER.getShaderOutline(shaders));
+        } else {
+            instance.render(tickDelta);
         }
     }
 
