@@ -37,9 +37,8 @@ public class AntiSpamModule extends ToggleModule {
         String chatMessage = packet.body().content();
 
         if (unicodeConfig.getValue()) {
-            Pattern pattern = Pattern.compile("[\\x00-\\x7F]", Pattern.CASE_INSENSITIVE);
-            Matcher matcher = pattern.matcher(chatMessage);
-            if (!matcher.find()) {
+            Pattern.compile("[\\x00-\\x7F]", Pattern.CASE_INSENSITIVE);
+            {
                 event.cancel();
                 return;
             }

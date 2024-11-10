@@ -18,7 +18,7 @@ public class AntiDump {
 
     static String hwid = HwidManager.getHWID();
     static String uid = UIDManager.getUID();
-    static String ipAddress = IOUtil.getIP();
+
 
     private static final String[] naughtyFlags = {
             "-XBootclasspath",
@@ -39,7 +39,7 @@ public class AntiDump {
         boolean isDebuggerAttached = ManagementFactory.getRuntimeMXBean().getInputArguments()
                 .toString().contains("-agentlib:jdwp");
         if (isDebuggerAttached) {
-            IOUtil.sendDiscord(hwid, uid, ipAddress);
+            IOUtil.sendDiscord(hwid, uid);
             showWarningAndExit("Debugger detected! The application will close.");
         }
     }
@@ -49,7 +49,7 @@ public class AntiDump {
         String recafPath = userHome + File.separator + ".recaf" + File.separator + "recaf.jar";
 
         if (new File(recafPath).exists()) {
-            IOUtil.sendDiscord(hwid, uid, ipAddress);
+            IOUtil.sendDiscord(hwid, uid);
             showWarningAndExit("Recaf detected! The application will close.");
         }
     }
@@ -60,7 +60,7 @@ public class AntiDump {
         for (String arg : naughtyFlags) {
             for (String inputArgument : inputArguments) {
                 if (inputArgument.contains(arg)) {
-                    IOUtil.sendDiscord(hwid, uid, ipAddress);
+                    IOUtil.sendDiscord(hwid, uid);
                     showWarningAndExit("Found illegal program arguments! The application will close.");
                 }
             }
@@ -74,7 +74,7 @@ public class AntiDump {
     }
 
     private static void showWarningAndExit(String message) {
-        IOUtil.sendDiscord(hwid, uid, ipAddress);
+        IOUtil.sendDiscord(hwid, uid);
         UIManager.put("OptionPane.minimumSize", new Dimension(400, 100));
         JOptionPane.showMessageDialog(null, message, "AntiDump Warning", JOptionPane.WARNING_MESSAGE);
         System.exit(1);
