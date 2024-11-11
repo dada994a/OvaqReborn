@@ -1,26 +1,30 @@
-# OvaqReborn UtilityMod
+## OvaqReborn
+### Minecraft Utility Mod
 
-### 1.20.4 2b2tjp Client
+##
+- Minecraft version **```Fabric 1.20.4```**
+- Default ClickGui KeyBind **```RShift```**
+- Default Prefix **```.```**
 
-Thank you so much to all the collaborators  
-### Base Client
+### Designer
+- ダチョエナガ
+- ちくわ(Shit)
+
+### Dev
+- Rom(Nelf)
+- ハイピの廃人
+- Naa_Naa
+
+## License
+Copyright © 2P2FJP Development Team 2024
+## Credits
+- [Alien](https://github.com/iM4dCat/Alien)
 - [Shoreline](https://github.com/HelianthusMC/Shoreline-Client)
-- 
-### Skidding Clients  
 - [LiquidBounce Nextgen](https://github.com/CCBlueX/LiquidBounce)
 - [BleachHack](https://github.com/BleachDev/BleachHack)
 - [NullPoint](https://github.com/KgDW/NullPoint-Fabric)
 - [Meteor](https://github.com/MeteorDevelopment/meteor-client)
 - [ThunderHack Recode](https://github.com/Pan4ur/ThunderHack-Recode)
 - Rebirth Nextgen
-- Lemon  
+- Lemon
 - etc.  
-
-### Designer  
-- ダチョエナガ  
-- ちくわ(Shit)  
-
-### Dev  
-- Rom(Nelf)  
-- ハイピの廃人  
-- Naa_Naa  
