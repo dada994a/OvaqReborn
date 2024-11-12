@@ -46,7 +46,7 @@ public class PopChamsModule extends ToggleModule {
     }
 
     @EventListener
-    public void onRender3D(MatrixStack matrixStack, float partialTicks) {
+    public void onRenderWorld(MatrixStack matrixStack, float partialTicks) {
         RenderSystem.depthMask(false);
         RenderSystem.disableDepthTest();
         RenderSystem.enableBlend();

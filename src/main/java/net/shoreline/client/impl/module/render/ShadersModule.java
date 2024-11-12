@@ -10,8 +10,10 @@ import net.shoreline.client.api.config.setting.BooleanConfig;
 import net.shoreline.client.api.config.setting.ColorConfig;
 import net.shoreline.client.api.config.setting.EnumConfig;
 import net.shoreline.client.api.config.setting.NumberConfig;
+import net.shoreline.client.api.event.listener.EventListener;
 import net.shoreline.client.api.module.ModuleCategory;
 import net.shoreline.client.api.module.ToggleModule;
+import net.shoreline.client.impl.event.render.RenderWorldEvent;
 import net.shoreline.client.impl.manager.render.ShaderManager;
 import net.shoreline.client.init.Managers;
 
@@ -85,9 +87,10 @@ public class ShadersModule extends ToggleModule {
         };
     }
 
-    public void onRender3D(MatrixStack matrices) {
+    @EventListener
+    public void onRenderWorld(RenderWorldEvent event) {
         if (hands.getValue())
-            Managers.SHADER.renderShader(()-> mc.gameRenderer.renderHand(matrices, mc.gameRenderer.getCamera(), mc.getTickDelta()), handsMode.getValue());
+            Managers.SHADER.renderShader(()-> mc.gameRenderer.renderHand(event.getMatrices(), mc.gameRenderer.getCamera(), mc.getTickDelta()), handsMode.getValue());
     }
 
     @Override

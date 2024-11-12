@@ -70,6 +70,7 @@ public class OvaqReborn {
         Managers.postInit();
         SHUTDOWN = new ShutdownHook();
         Runtime.getRuntime().addShutdownHook(SHUTDOWN);
+        info("Config loading ...");
         CONFIG.loadClient();
 
         if (Modules.IRC.isEnabled() && !IRCModule.chat.isConnected()) {

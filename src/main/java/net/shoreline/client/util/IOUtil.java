@@ -3,8 +3,6 @@ package net.shoreline.client.util;
 import net.shoreline.client.impl.manager.client.HwidManager;
 import net.shoreline.client.impl.manager.client.UIDManager;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
