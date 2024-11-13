@@ -32,27 +32,17 @@ import net.shoreline.client.util.world.EntityUtil;
  */
 public class CriticalsModule extends ToggleModule {
 
-    //
+    // Critical Attack Mode Configuration
     Config<CritMode> modeConfig = new EnumConfig<>("Mode", "Mode for critical attack modifier", CritMode.PACKET, CritMode.values());
     Config<Boolean> packetSyncConfig = new BooleanConfig("Tick-Sync", "Syncs the cached packet interaction to the next tick", false);
-    // The cached attack packets that will be resent after manipulating
-    // player position packets
     private PlayerInteractEntityC2SPacket attackPacket;
     private HandSwingC2SPacket swingPacket;
-    //
     private final Timer attackTimer = new CacheTimer();
 
-    /**
-     *
-     */
     public CriticalsModule() {
-        super("Criticals", "Modifies attacks to always land critical hits",
-                ModuleCategory.COMBAT);
+        super("Criticals", "Modifies attacks to always land critical hits", ModuleCategory.COMBAT);
     }
 
-    /**
-     * @return
-     */
     @Override
     public String getModuleData() {
         return EnumFormatter.formatEnum(modeConfig.getValue());
@@ -71,12 +61,8 @@ public class CriticalsModule extends ToggleModule {
         }
     }
 
-    /**
-     * @param event
-     */
     @EventListener
     public void onPacketOutbound(PacketEvent.Outbound event) {
-        // Custom aura crit handling
         if (Modules.AURA.isEnabled()) {
             return;
         }
@@ -136,12 +122,6 @@ public class CriticalsModule extends ToggleModule {
         }
     }
 
-    /**
-     * Callback method for pre attack stage, must be called before the attack
-     * packet or else the movements will not be registered
-     *
-     * @see AuraModule#postAttackTarget(Entity)
-     */
     public void preAttackPacket() {
         double x = Managers.POSITION.getX();
         double y = Managers.POSITION.getY();
@@ -175,7 +155,6 @@ public class CriticalsModule extends ToggleModule {
                         x, y + 0.0000013579f, z, false));
             }
             case LOW_HOP -> {
-                // mc.player.jump();
                 Managers.MOVEMENT.setMotionY(0.3425);
             }
         }
