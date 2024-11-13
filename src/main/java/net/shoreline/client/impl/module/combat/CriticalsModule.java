@@ -32,17 +32,27 @@ import net.shoreline.client.util.world.EntityUtil;
  */
 public class CriticalsModule extends ToggleModule {
 
-    // Critical Attack Mode Configuration
+    //
     Config<CritMode> modeConfig = new EnumConfig<>("Mode", "Mode for critical attack modifier", CritMode.PACKET, CritMode.values());
     Config<Boolean> packetSyncConfig = new BooleanConfig("Tick-Sync", "Syncs the cached packet interaction to the next tick", false);
+    // The cached attack packets that will be resent after manipulating
+    // player position packets
     private PlayerInteractEntityC2SPacket attackPacket;
     private HandSwingC2SPacket swingPacket;
+    //
     private final Timer attackTimer = new CacheTimer();
 
+    /**
+     *
+     */
     public CriticalsModule() {
-        super("Criticals", "Modifies attacks to always land critical hits", ModuleCategory.COMBAT);
+        super("Criticals", "Modifies attacks to always land critical hits",
+                ModuleCategory.COMBAT);
     }
 
+    /**
+     * @return
+     */
     @Override
     public String getModuleData() {
         return EnumFormatter.formatEnum(modeConfig.getValue());
@@ -61,8 +71,12 @@ public class CriticalsModule extends ToggleModule {
         }
     }
 
+    /**
+     * @param event
+     */
     @EventListener
     public void onPacketOutbound(PacketEvent.Outbound event) {
+        // Custom aura crit handling
         if (Modules.AURA.isEnabled()) {
             return;
         }
@@ -122,6 +136,12 @@ public class CriticalsModule extends ToggleModule {
         }
     }
 
+    /**
+     * Callback method for pre attack stage, must be called before the attack
+     * packet or else the movements will not be registered
+     *
+     * @see AuraModule#postAttackTarget(Entity)
+     */
     public void preAttackPacket() {
         double x = Managers.POSITION.getX();
         double y = Managers.POSITION.getY();
@@ -129,33 +149,35 @@ public class CriticalsModule extends ToggleModule {
         switch (modeConfig.getValue()) {
             case VANILLA -> {
                 double d = 1.0e-7 + 1.0e-7 * (1.0 + RANDOM.nextInt(RANDOM.nextBoolean() ? 34 : 43));
-                Managers.NETWORK.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(
-                        x, y + 0.1016f + d * 3.0f, z, false));
-                Managers.NETWORK.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(
-                        x, y + 0.0202f + d * 2.0f, z, false));
-                Managers.NETWORK.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(
-                        x, y + 3.239e-4 + d, z, false));
+                Managers.NETWORK.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(x, y + 0.1016f + d * 3.0f, z, false));
+                Managers.NETWORK.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(x, y + 0.0202f + d * 2.0f, z, false));
+                Managers.NETWORK.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(x, y + 3.239e-4 + d, z, false));
             }
             case PACKET -> {
-                Managers.NETWORK.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(
-                        x, y + 0.05f, z, false));
-                Managers.NETWORK.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(
-                        x, y, z, false));
-                Managers.NETWORK.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(
-                        x, y + 0.03f, z, false));
-                Managers.NETWORK.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(
-                        x, y, z, false));
+                mc.getNetworkHandler().sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(mc.player.getX(), mc.player.getY() + 0.0005, mc.player.getZ(), false));
+                mc.getNetworkHandler().sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(mc.player.getX(), mc.player.getY() + 0.0001, mc.player.getZ(), false));
             }
             case PACKET_STRICT -> {
-                Managers.NETWORK.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(
-                        x, y + 0.11f, z, false));
-                Managers.NETWORK.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(
-                        x, y + 0.1100013579f, z, false));
-                Managers.NETWORK.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(
-                        x, y + 0.0000013579f, z, false));
+                Managers.NETWORK.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(x, y + 0.11f, z, false));
+                Managers.NETWORK.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(x, y + 0.1100013579f, z, false));
+                Managers.NETWORK.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(x, y + 0.0000013579f, z, false));
             }
             case LOW_HOP -> {
+                // mc.player.jump();
                 Managers.MOVEMENT.setMotionY(0.3425);
+            }
+            case NCP -> {
+                mc.getNetworkHandler().sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(mc.player.getX(), mc.player.getY() + 0.0625D, mc.player.getZ(), false));
+                mc.getNetworkHandler().sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(mc.player.getX(), mc.player.getY(), mc.player.getZ(), false));
+            }
+            case OLD_NCP -> {
+                mc.getNetworkHandler().sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(mc.player.getX(), mc.player.getY() + 0.00001058293536, mc.player.getZ(), false));
+                mc.getNetworkHandler().sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(mc.player.getX(), mc.player.getY() + 0.00000916580235, mc.player.getZ(), false));
+                mc.getNetworkHandler().sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(mc.player.getX(), mc.player.getY() + 0.00000010371854, mc.player.getZ(), false));
+            }
+            case NEW_NCP -> {
+                mc.getNetworkHandler().sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(mc.player.getX(), mc.player.getY() + 0.000000271875, mc.player.getZ(), false));
+                mc.getNetworkHandler().sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(mc.player.getX(), mc.player.getY(), mc.player.getZ(), false));
             }
         }
     }
@@ -169,6 +191,9 @@ public class CriticalsModule extends ToggleModule {
         PACKET_STRICT,
         VANILLA,
         GRIM,
+        NCP,
+        OLD_NCP,
+        NEW_NCP,
         LOW_HOP
     }
 }
