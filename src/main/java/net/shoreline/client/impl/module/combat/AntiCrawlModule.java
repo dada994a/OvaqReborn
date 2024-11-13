@@ -6,10 +6,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
 import net.shoreline.client.api.config.Config;
 import net.shoreline.client.api.config.setting.BooleanConfig;
 import net.shoreline.client.api.config.setting.ColorConfig;
@@ -17,11 +14,10 @@ import net.shoreline.client.api.config.setting.NumberConfig;
 import net.shoreline.client.api.event.listener.EventListener;
 import net.shoreline.client.api.module.ModuleCategory;
 import net.shoreline.client.api.module.RotationModule;
-import net.shoreline.client.api.render.RenderManager;
-import net.shoreline.client.impl.event.network.PlayerTickEvent;
-import net.shoreline.client.impl.event.render.RenderWorldEvent;
 import net.shoreline.client.init.Managers;
 import net.shoreline.client.init.Modules;
+import net.shoreline.client.impl.event.network.PlayerTickEvent;
+import net.shoreline.client.impl.event.render.RenderWorldEvent;
 
 import java.awt.*;
 
@@ -34,8 +30,7 @@ public class AntiCrawlModule extends RotationModule {
 
  Config<Float> rangeConfig = new NumberConfig<>("Range", "Block clearance range", 1.0f, 3.0f, 5.0f);
  Config<Float> speedConfig = new NumberConfig<>("Speed", "Block breaking speed", 0.1f, 1.0f, 1.0f);
- //Config<Boolean> rotateConfig = new BooleanConfig("Rotate", "Rotate when clearing blocks", true);
- Config<Color> clearanceColorConfig = new ColorConfig("ClearanceColor", "Outline color for blocks to clear", new Color(150, 150, 255, 100));
+ //Config<Color> ColorConfig = new ColorConfig("Color", "Outline color for blocks to clear", new Color(150, 150, 255, 100));
 
  private ClearanceData clearanceData;
 
@@ -77,23 +72,6 @@ public class AntiCrawlModule extends RotationModule {
     clearanceData = new ClearanceData(headBlock, speedConfig.getValue());
     startClearing(clearanceData);
    }
-  }
- }
-
- @EventListener
- public void onRenderWorld(final RenderWorldEvent event) {
-  renderClearanceData(event.getMatrices(), clearanceData);
- }
-
- private void renderClearanceData(MatrixStack matrixStack, ClearanceData data) {
-  if (data != null) {
-   BlockPos pos = data.getPos();
-   VoxelShape shape = VoxelShapes.fullCube();
-   Box renderBox = shape.getBoundingBox();
-   Box expandedBox = new Box(pos.getX() + renderBox.minX, pos.getY() + renderBox.minY, pos.getZ() + renderBox.minZ, pos.getX() + renderBox.maxX, pos.getY() + renderBox.maxY, pos.getZ() + renderBox.maxZ);
-   int color = clearanceColorConfig.getValue().getRGB();
-   RenderManager.renderBox(matrixStack, expandedBox, color);
-   RenderManager.renderBoundingBox(matrixStack, expandedBox, 2.5f, color);
   }
  }
 

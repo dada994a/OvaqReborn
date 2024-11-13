@@ -207,8 +207,8 @@ public class SpeedmineModule extends RotationModule {
         }
     }
 
-    float calcBlockBreakingDelta(BlockState state, BlockView world,
-                                         BlockPos pos) {
+    public float calcBlockBreakingDelta(BlockState state, BlockView world,
+                                        BlockPos pos) {
         if (swapConfig.getValue() == Swap.OFF) {
             return state.calcBlockBreakingDelta(mc.player, mc.world, pos);
         }
