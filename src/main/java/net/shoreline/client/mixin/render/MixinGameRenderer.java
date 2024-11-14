@@ -137,7 +137,7 @@ public class MixinGameRenderer implements Globals {
      * @param d
      * @return
      */
-    @ModifyConstant(method = "updateTargetedEntity", constant = @Constant(doubleValue = 9))
+    @ModifyConstant(require = 0, method = "updateTargetedEntity", constant = @Constant(doubleValue = 9))
     private double updateTargetedEntityModifySquaredMaxReach(double d) {
         ReachEvent reachEvent = new ReachEvent();
         OvaqReborn.EVENT_HANDLER.dispatch(reachEvent);

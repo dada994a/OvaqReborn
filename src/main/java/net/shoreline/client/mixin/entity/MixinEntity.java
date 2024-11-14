@@ -101,7 +101,7 @@ public abstract class MixinEntity implements Globals {
         }
     }
 
-    @Redirect(method = "getVelocityMultiplier", at = @At(value = "INVOKE",
+    @Redirect(require = 0, method = "getVelocityMultiplier", at = @At(value = "INVOKE",
             target = "Lnet/minecraft/block/BlockState;getBlock()" +
                     "Lnet/minecraft/block/Block;"))
     private Block hookGetVelocityMultiplier(BlockState instance) {
