@@ -272,7 +272,11 @@ public class AuraModule extends RotationModule {
                     RenderSystem.enableBlend();
                     RenderSystem.defaultBlendFunc();
                     RenderSystem.disableCull();
-                    RenderSystem.setShaderColor(circleColorConfig.getValue().getRed() / 255f, circleColorConfig.getValue().getGreen() / 255f, circleColorConfig.getValue().getBlue() / 255f, circleColorConfig.getValue().getAlpha() / 255f);
+                    RenderSystem.setShaderColor(
+                            circleColorConfig.getValue().getRed() / 255f,
+                            circleColorConfig.getValue().getGreen() / 255f,
+                            circleColorConfig.getValue().getBlue() / 255f,
+                            circleColorConfig.getValue().getAlpha() / 255f);
                     Matrix4f matrix = event.getMatrices().peek().getPositionMatrix();
                     Tessellator tessellator = RenderSystem.renderThreadTesselator();
                     BufferBuilder bufferBuilder = tessellator.getBuffer();

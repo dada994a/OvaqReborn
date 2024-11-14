@@ -122,14 +122,6 @@ public class NetworkManager implements Globals {
         return false;
     }
 
-    public boolean isGrimCC() {
-        return info != null && info.address.equalsIgnoreCase("grim.crystalpvp.cc");
-    }
-
-    /**
-     * @param p
-     * @return
-     */
     public boolean isCached(Packet<?> p) {
         return PACKET_CACHE.contains(p);
     }
