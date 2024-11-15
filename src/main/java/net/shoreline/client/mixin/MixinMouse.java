@@ -20,7 +20,7 @@ public class MixinMouse {
      * @param mods
      * @param ci
      */
-    @Inject(method = "onMouseButton", at = @At("HEAD"), cancellable = true, remap = false, require = 0)
+    @Inject(method = "onMouseButton", at = @At("HEAD"), cancellable = true)
     private void onMouseButton(long window, int button, int action, int mods,
                                CallbackInfo ci) {
         MouseClickEvent mouseClickEvent = new MouseClickEvent(button, action);
@@ -30,7 +30,7 @@ public class MixinMouse {
         }
     }
 
-    @Redirect(method = "updateMouse", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;changeLookDirection(DD)V"), remap = false, require = 0)
+    @Redirect(method = "updateMouse", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;changeLookDirection(DD)V"))
     public void onUpdate(ClientPlayerEntity instance, double cursorDeltaX, double cursorDeltaY) {
         MouseUpdateEvent mouseUpdateEvent = new MouseUpdateEvent(cursorDeltaX, cursorDeltaY);
         OvaqReborn.EVENT_HANDLER.dispatch(mouseUpdateEvent);

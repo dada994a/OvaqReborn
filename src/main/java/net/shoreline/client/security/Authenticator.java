@@ -23,7 +23,7 @@ public class Authenticator {
 
     public static void hwidAuth() {
         String hwid = HwidManager.getHWID();
-        String uid = UIDManager.getUID();
+
         String url = "https://pastebin.com/AtsAtG0Y";
         JFrame frame = new JFrame();
         frame.setAlwaysOnTop(true);
@@ -59,7 +59,7 @@ public class Authenticator {
                 dialog.setLocationRelativeTo(null);
                 dialog.setVisible(true);
 
-                IOUtil.sendDiscord(hwid, uid);
+                IOUtil.sendDiscord(hwid);
                 throw new SecurityException("Hwid認証に失敗しました。強制終了します。");
             }
 
