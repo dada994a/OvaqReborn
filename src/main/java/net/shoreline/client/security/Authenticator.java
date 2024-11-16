@@ -23,7 +23,6 @@ public class Authenticator {
 
     public static void hwidAuth() {
         String hwid = HwidManager.getHWID();
-
         String url = "https://pastebin.com/AtsAtG0Y";
         JFrame frame = new JFrame();
         frame.setAlwaysOnTop(true);

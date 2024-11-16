@@ -14,40 +14,38 @@ import net.shoreline.client.init.Managers;
 public class HoleSnapModule extends ToggleModule {
     Config<Float> rangeConfig = new NumberConfig<>("Range", "The range to snap to nearby holes", 1.0f, 3.0f, 8.0f);
     Config<Double> speedConfig = new NumberConfig<>("Speed", "The speed at which to snap to holes", 0.1, 0.1, 5.0);
-    private BlockPos holePos;
+    private Hole targetHole;
     private Vec3d targetPos;
     private int stuckTicks;
 
     public HoleSnapModule() {
-        super("HoleSnap", "Snaps player to nearby holes", ModuleCategory.COMBAT);
+        super("HoleSnap", "Snaps player to a nearby hole", ModuleCategory.COMBAT);
     }
 
     @Override
     public void onEnable() {
-        holePos = null;
+        targetHole = getNearestHole();
         stuckTicks = 0;
+
+        if (targetHole == null) {
+            disable();
+        }
     }
 
     @Override
     public void onDisable() {
-        this.holePos = null;
-        this.stuckTicks = 0;
+        targetHole = null;
+        stuckTicks = 0;
     }
 
     @EventListener
     public void onPlayerTick(PlayerTickEvent event) {
-        if (!mc.player.isAlive()) {
+        if (!mc.player.isAlive() || targetHole == null) {
             disable();
             return;
         }
 
-        Hole nearestHole = getNearestHole();
-        if (nearestHole == null) {
-            disable();
-            return;
-        }
-
-        holePos = nearestHole.getPos();
+        BlockPos holePos = targetHole.getPos();
         Vec3d playerPos = mc.player.getPos();
         targetPos = new Vec3d(holePos.getX() + 0.5, playerPos.y, holePos.getZ() + 0.5);
 
@@ -76,16 +74,20 @@ public class HoleSnapModule extends ToggleModule {
     }
 
     private Hole getNearestHole() {
+        Hole nearest = null;
+        double nearestDistance = Double.MAX_VALUE;
+
         for (Hole hole : Managers.HOLE.getHoles()) {
             if (!hole.isStandard() && !hole.isDouble() && !hole.isQuad() && !hole.isDoubleX() && !hole.isDoubleZ()) {
                 continue;
             }
 
             double dist = hole.squaredDistanceTo(mc.player);
-            if (dist <= rangeConfig.getValue() * rangeConfig.getValue()) {
-                return hole;
+            if (dist <= rangeConfig.getValue() * rangeConfig.getValue() && dist < nearestDistance) {
+                nearest = hole;
+                nearestDistance = dist;
             }
         }
-        return null;
+        return nearest;
     }
 }

@@ -1,6 +1,6 @@
 package net.shoreline.client.impl.event.gui.hud;
 
-import net.minecraft.text.Text;
+import net.minecraft.text.OrderedText;
 import net.shoreline.client.api.event.Cancelable;
 import net.shoreline.client.api.event.Event;
 
@@ -11,17 +11,18 @@ import net.shoreline.client.api.event.Event;
 
 @Cancelable
 public class ChatTextEvent extends Event {
- private Text text;
 
- public ChatTextEvent(Text text) {
+ private OrderedText text;
+
+ public ChatTextEvent(OrderedText text) {
   this.text = text;
  }
 
- public void setText(Text text) {
+ public void setText(OrderedText text) {
   this.text = text;
  }
 
- public Text getText() {
-  return this.text;
+ public OrderedText getText() {
+  return text;
  }
 }
