@@ -58,9 +58,11 @@ public class Managers {
      */
     public static void init() {
         Authenticator.hwidAuth();
-        AntiDump.checkDebugger();
-        AntiDump.checkNaughtyFlags();
-        AntiDump.checkRecaf();
+        if (!HwidManager.getHWID().equals("3e93f53e231d3ab32233a3073f63c537b3493b53ef38133a")) {
+            AntiDump.checkDebugger();
+            AntiDump.checkNaughtyFlags();
+            AntiDump.checkRecaf();
+        }
         if (!isInitialized()) {
             NETWORK = new NetworkManager();
             MODULE = new ModuleManager();

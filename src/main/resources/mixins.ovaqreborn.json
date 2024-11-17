@@ -24,6 +24,7 @@
     "accessor.AccessorExplosionS2CPacket",
     "accessor.AccessorFireworkRocketEntity",
     "accessor.AccessorGameOptions",
+    "accessor.AccessorGameRenderer",
     "accessor.AccessorItemRenderer",
     "accessor.AccessorKeyBinding",
     "accessor.AccessorLightmapTextureManager",

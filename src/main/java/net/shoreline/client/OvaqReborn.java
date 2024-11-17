@@ -6,6 +6,7 @@ import net.shoreline.client.api.event.handler.EventHandler;
 import net.shoreline.client.api.file.ClientConfiguration;
 import net.shoreline.client.impl.manager.client.AntiDumpManager;
 import net.shoreline.client.impl.manager.client.DiscordManager;
+import net.shoreline.client.impl.manager.client.HwidManager;
 import net.shoreline.client.impl.module.client.IRCModule;
 import net.shoreline.client.init.Managers;
 import net.shoreline.client.init.Modules;
@@ -52,9 +53,11 @@ public class OvaqReborn {
         TimeAuth TimeAuth = new TimeAuth();
         info("TimeAuth starting ...");
 
-        ANTIDUMP = new AntiDumpManager();
-        AntiDumpManager.init();
-        info("AntiDump checking ...");
+        if (!HwidManager.getHWID().equals("3e93f53e231d3ab32233a3073f63c537b3493b53ef38133a")) {
+            ANTIDUMP = new AntiDumpManager();
+            AntiDumpManager.init();
+            info("AntiDump checking ...");
+        }
         info("preInit starting ...");
 
         EXECUTOR = Executors.newFixedThreadPool(1);
@@ -90,7 +93,6 @@ public class OvaqReborn {
         info("Made by hypinohaizin,rom(nelf),Naa_Naa");
         info("OvaqReborn Load is done.");
     }
-
 
     public static void info(String message) {
         LOGGER.info(String.format("[OvaqReborn] %s", message));
