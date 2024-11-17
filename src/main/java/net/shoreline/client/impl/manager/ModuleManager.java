@@ -165,7 +165,6 @@ public class ModuleManager {
                 new SkeletonModule(),
                 new SkyboxModule(),
                 new SmartF3Module(),
-                new ShadersModule(),
                 new TooltipsModule(),
                 new TotemAnimationsModule(),
                 new TracersModule(),

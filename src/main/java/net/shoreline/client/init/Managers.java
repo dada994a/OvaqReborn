@@ -12,7 +12,6 @@ import net.shoreline.client.impl.manager.player.MovementManager;
 import net.shoreline.client.impl.manager.player.PositionManager;
 import net.shoreline.client.impl.manager.player.interaction.InteractionManager;
 import net.shoreline.client.impl.manager.player.rotation.RotationManager;
-import net.shoreline.client.impl.manager.render.ShaderManager;
 import net.shoreline.client.impl.manager.world.WaypointManager;
 import net.shoreline.client.impl.manager.world.sound.SoundManager;
 import net.shoreline.client.impl.manager.world.tick.TickManager;
@@ -36,7 +35,6 @@ public class Managers {
     public static InventoryManager INVENTORY;
     public static PositionManager POSITION;
     public static RotationManager ROTATION;
-    public static ShaderManager SHADER;
     //public static NCPManager NCP;
     public static AntiCheatManager ANTICHEAT;
     public static MovementManager MOVEMENT;
@@ -73,7 +71,6 @@ public class Managers {
             INVENTORY = new InventoryManager();
             POSITION = new PositionManager();
             ROTATION = new RotationManager();
-            SHADER = new ShaderManager();
             ANTICHEAT = new AntiCheatManager();
             MOVEMENT = new MovementManager();
             HOLE = new HoleManager();

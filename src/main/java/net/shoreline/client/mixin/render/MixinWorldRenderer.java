@@ -13,9 +13,6 @@ import net.shoreline.client.api.render.RenderBuffers;
 import net.shoreline.client.impl.event.PerspectiveEvent;
 import net.shoreline.client.impl.event.render.RenderWorldBorderEvent;
 import net.shoreline.client.impl.event.render.RenderWorldEvent;
-import net.shoreline.client.impl.manager.render.ShaderManager;
-import net.shoreline.client.init.Managers;
-import net.shoreline.client.init.Modules;
 import net.shoreline.client.util.Globals;
 import org.joml.Matrix4f;
 import org.spongepowered.asm.mixin.Final;
@@ -78,17 +75,6 @@ public class MixinWorldRenderer implements Globals {
         OvaqReborn.EVENT_HANDLER.dispatch(renderWorldBorderEvent);
         if (renderWorldBorderEvent.isCanceled()) {
             ci.cancel();
-        }
-    }
-
-    @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gl/PostEffectProcessor;render(F)V", ordinal = 0))
-    private void replaceShaderHook(PostEffectProcessor instance, float tickDelta) {
-        ShaderManager.Shader shaders = Modules.SHADERS.mode.getValue();
-        if (Modules.SHADERS.isEnabled() && mc.world != null) {
-            if (Managers.SHADER.fullNullCheck()) return;
-            Managers.SHADER.setupShader(shaders, Managers.SHADER.getShaderOutline(shaders));
-        } else {
-            instance.render(tickDelta);
         }
     }
 
