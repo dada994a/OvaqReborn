@@ -1,9 +1,11 @@
 package net.shoreline.client.api.render;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import me.x150.renderer.render.Renderer2d;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.*;
 import net.shoreline.client.init.Fonts;
 import net.shoreline.client.init.Modules;
@@ -12,6 +14,8 @@ import net.shoreline.client.util.Globals;
 import net.shoreline.client.impl.font.TTFFontRenderer;
 import org.joml.Matrix4f;
 import org.lwjgl.opengl.GL11;
+
+import java.awt.*;
 
 import static net.shoreline.client.api.render.RenderBuffers.*;
 
@@ -331,6 +335,18 @@ public class RenderManager implements Globals {
                 .color(g, h, j, f).next();
         BufferRenderer.drawWithGlobalProgram(BUFFER.end());
         RenderSystem.disableBlend();
+    }
+
+    public static void simpleQuad(Matrix4f matrix4f, float x, float y, float width, float height, int color) {
+        RenderSystem.setShader(GameRenderer::getPositionTexColorProgram);
+        BUFFER.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR);
+        {
+            BUFFER.vertex(matrix4f, x, y + height, 0).texture(0, 0).color(color).next();
+            BUFFER.vertex(matrix4f, x + width, y + height, 0).texture(0, 1).color(color).next();
+            BUFFER.vertex(matrix4f, x + width, y, 0).texture(1, 1).color(color).next();
+            BUFFER.vertex(matrix4f, x, y, 0).texture(1, 0).color(color).next();
+        }
+        BufferRenderer.drawWithGlobalProgram(BUFFER.end());
     }
 
     /**

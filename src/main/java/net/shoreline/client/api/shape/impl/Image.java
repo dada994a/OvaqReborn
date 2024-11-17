@@ -22,7 +22,7 @@ public class Image implements Shape {
         RenderSystem.defaultBlendFunc();
         RenderSystem.setShaderColor(1, 1, 1, 1);
 
-        RenderSystem.setShaderTexture(0, new Identifier("expensive/" + texture));
+        RenderSystem.setShaderTexture(0, new Identifier("ovaqreborn/" + texture));
 
         float width = shapeProperties.getWidth();
         float x = shapeProperties.getX() + width;
