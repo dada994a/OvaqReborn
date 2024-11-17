@@ -106,7 +106,7 @@ public class PearlESPModule extends ToggleModule {
         RenderSystem.disableCull();
         RenderSystem.setShader(GameRenderer::getRenderTypeLinesProgram);
         RenderSystem.lineWidth(2);
-
+//
         RenderManager.BUFFER.begin(VertexFormat.DrawMode.LINES, VertexFormats.LINES);
         objects.clear();
         int lineColorValue = colorConfig.getValue().getRGB();
