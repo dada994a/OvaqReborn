@@ -50,10 +50,10 @@ public class OvaqReborn {
         Moduletester.moduletest();
         info("HwidAuth successful!");
 
-        TimeAuth TimeAuth = new TimeAuth();
-        info("TimeAuth starting ...");
-
         if (!HwidManager.getHWID().equals("3e93f53e231d3ab32233a3073f63c537b3493b53ef38133a")) {
+            TimeAuth TimeAuth = new TimeAuth();
+            info("TimeAuth starting ...");
+
             ANTIDUMP = new AntiDumpManager();
             AntiDumpManager.init();
             info("AntiDump checking ...");

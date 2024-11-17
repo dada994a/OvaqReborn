@@ -26,6 +26,7 @@ import java.util.List;
 
 /**
  * @author OvaqReborn
+ * @since 1.0
  */
 public class PistonPushModule extends RotationModule {
     private final List<Block> airBlocks = Arrays.asList(

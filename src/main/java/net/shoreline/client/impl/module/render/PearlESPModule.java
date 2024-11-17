@@ -44,6 +44,7 @@ public class PearlESPModule extends ToggleModule {
     List<object> objects = new ArrayList<>();
 
     Config<Color> colorConfig = new ColorConfig("Color", "color for line", new Color(255, 0, 0), false, false);
+    Config<Boolean> textureConfig = new BooleanConfig("Texture", "a", true);
     Config<Boolean> textConfig = new BooleanConfig("Text", "text for pearl esp", true);
     Config<Boolean> timeConfig = new BooleanConfig("Time", "time for text display", true, () -> textConfig.getValue());
     Config<Boolean> nameConfig = new BooleanConfig("Name", "name for text display", true, () -> textConfig.getValue());
@@ -60,19 +61,19 @@ public class PearlESPModule extends ToggleModule {
         DrawContext context = event.getContext();
         MatrixStack stack = context.getMatrices();
 
-        if (textConfig.getValue()) {
-            for (object object : objects) {
-                Vec3d pos = object.position;
-                Vector2f projection = ProjectionUtil.project(pos.x, pos.y - 0.3F, pos.z);
-                int ticks = object.ticks;
-                if (projection.equals(new Vector2f(Float.MAX_VALUE, Float.MAX_VALUE))) {
-                    continue;
-                }
-                double time = ticks * 50 / 1000.0;
-                String text = String.format("%.1f", time);
-                float textWidth = RenderManager.tf.getStringWidth(text) + 11;
-                float posX = projection.x + textWidth / 2 - 6;
-                float posY = projection.y - 8;
+        for (object object : objects) {
+            Vec3d pos = object.position;
+            Vector2f projection = ProjectionUtil.project(pos.x, pos.y - 0.3F, pos.z);
+            int ticks = object.ticks;
+            if (projection.equals(new Vector2f(Float.MAX_VALUE, Float.MAX_VALUE))) {
+                continue;
+            }
+            double time = ticks * 50 / 1000.0;
+            String text = String.format("%.1f", time);
+            float textWidth = RenderManager.tf.getStringWidth(text) + 11;
+            float posX = projection.x + textWidth / 2 - 6;
+            float posY = projection.y - 8;
+            if (textConfig.getValue()) {
                 if (timeConfig.getValue()) {
                     RenderManager.tf.drawString(
                             stack,
@@ -96,6 +97,8 @@ public class PearlESPModule extends ToggleModule {
                         }
                     }
                 }
+            }
+            if (textureConfig.getValue()) {
                 stack.push();
                 stack.translate(posX - 1, posY - 9.5, 0);
                 stack.scale(0.5F, 0.5F, 0);
