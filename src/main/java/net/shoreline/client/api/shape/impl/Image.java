@@ -10,6 +10,10 @@ import net.shoreline.client.api.render.RenderManager;
 import net.shoreline.client.api.shape.Shape;
 import net.shoreline.client.api.shape.ShapeProperties;
 
+/**
+ * @author OvaqReborn
+ * @since 1.0
+ */
 @Setter
 @Accessors(chain = true)
 public class Image implements Shape {

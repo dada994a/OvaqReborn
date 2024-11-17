@@ -6,6 +6,10 @@ import org.joml.Matrix4f;
 import org.joml.Vector4f;
 import org.joml.Vector4i;
 
+/**
+ * @author OvaqReborn
+ * @since 1.0
+ */
 @Builder
 @Getter
 public class ShapeProperties {
@@ -29,46 +33,80 @@ public class ShapeProperties {
         this.height = height;
         this.softness = softness;
         this.thickness = thickness;
-        this.round = round != null ? round : new Vector4f(0);
+        ShapeProperties.round = round != null ? round : new Vector4f(0);
         this.outlineColor = outlineColor;
-        this.color = color != null ? color : new Vector4i(-1);
+        ShapeProperties.color = color != null ? color : new Vector4i(-1);
     }
 
-    public static ShapeProperties.ShapePropertiesBuilder create(Matrix4f matrix4f, double x, double y, double width,
-                                                                double height) {
-        return ShapeProperties.create(matrix4f, x, y, width, height);
+    public static ShapePropertiesBuilder builder(Matrix4f matrix4f, double x, double y, double width, double height) {
+        return new ShapePropertiesBuilder()
+                .matrix4f(matrix4f)
+                .x((float) x)
+                .y((float) y)
+                .width((float) width)
+                .height((float) height);
     }
 
     public static class ShapePropertiesBuilder {
+        private Matrix4f matrix4f;
+        private float x, y, width, height;
+        private float softness, thickness;
+        private Vector4f round;
+        private int outlineColor = -1;
+        private Vector4i color;
 
-        public ShapePropertiesBuilder color(int color) {
-            setColor(new Vector4i(color));
+        public ShapePropertiesBuilder matrix4f(Matrix4f matrix4f) {
+            this.matrix4f = matrix4f;
             return this;
         }
 
-        public ShapePropertiesBuilder color(Vector4i color) {
-            setColor(color);
+        public ShapePropertiesBuilder x(float x) {
+            this.x = x;
             return this;
         }
 
-        public ShapePropertiesBuilder round(float round) {
-            setRound(new Vector4f(round));
+        public ShapePropertiesBuilder y(float y) {
+            this.y = y;
+            return this;
+        }
+
+        public ShapePropertiesBuilder width(float width) {
+            this.width = width;
+            return this;
+        }
+
+        public ShapePropertiesBuilder height(float height) {
+            this.height = height;
+            return this;
+        }
+
+        public ShapePropertiesBuilder softness(float softness) {
+            this.softness = softness;
+            return this;
+        }
+
+        public ShapePropertiesBuilder thickness(float thickness) {
+            this.thickness = thickness;
             return this;
         }
 
         public ShapePropertiesBuilder round(Vector4f round) {
-            setRound(new Vector4f(round));
+            this.round = round;
             return this;
         }
 
-        public ShapePropertiesBuilder color(int... color) {
-            setColor(new Vector4i(color));
+        public ShapePropertiesBuilder outlineColor(int outlineColor) {
+            this.outlineColor = outlineColor;
             return this;
         }
 
-        public ShapePropertiesBuilder round(float... round) {
-            setRound(new Vector4f(round));
+        public ShapePropertiesBuilder color(Vector4i color) {
+            this.color = color;
             return this;
+        }
+
+        public ShapeProperties build() {
+            return new ShapeProperties(matrix4f, x, y, width, height, softness, thickness, round, outlineColor, color);
         }
     }
 
