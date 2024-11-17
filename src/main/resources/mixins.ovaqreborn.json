@@ -90,7 +90,6 @@
     "render.MixinGameRenderer",
     "render.MixinLightmapTextureManager",
     "render.MixinRenderTickCounter",
-    "render.MixinShaderEffect",
     "render.MixinShaderProgram",
     "render.MixinWorldRenderer",
     "render.block.MixinEnchantingTableBlockEntityRenderer",
