@@ -160,6 +160,7 @@ public class ModuleManager {
                 new NoRotateModule(),
                 new NoWeatherModule(),
                 new ParticlesModule(),
+                new PearlESPModule(),
                 new PhaseESPModule(),
                 new SkeletonModule(),
                 new SkyboxModule(),
