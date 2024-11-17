@@ -4,6 +4,7 @@ import net.shoreline.client.api.Identifiable;
 import net.shoreline.client.api.event.handler.EventBus;
 import net.shoreline.client.api.event.handler.EventHandler;
 import net.shoreline.client.api.file.ClientConfiguration;
+import net.shoreline.client.api.render.shader.ShadersPool;
 import net.shoreline.client.impl.manager.client.AntiDumpManager;
 import net.shoreline.client.impl.manager.client.DiscordManager;
 import net.shoreline.client.impl.manager.client.HwidManager;
@@ -65,6 +66,7 @@ public class OvaqReborn {
         info("init starting ...");
         Managers.init();
         Modules.init();
+        ShadersPool.initShaders();
         RPC = new DiscordManager();
         DiscordManager.startRPC();
         info("discordrpc starting ...");

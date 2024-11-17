@@ -1,33 +1,34 @@
 package net.shoreline.client.api.render;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import me.x150.renderer.render.Renderer2d;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.*;
+import net.shoreline.client.impl.font.TTFFontRenderer;
 import net.shoreline.client.init.Fonts;
 import net.shoreline.client.init.Modules;
 import net.shoreline.client.mixin.accessor.AccessorWorldRenderer;
 import net.shoreline.client.util.Globals;
-import net.shoreline.client.impl.font.TTFFontRenderer;
+import net.shoreline.client.util.math.MathUtil;
 import org.joml.Matrix4f;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 
-import static net.shoreline.client.api.render.RenderBuffers.*;
+import static net.shoreline.client.api.render.RenderBuffers.LINES;
+import static net.shoreline.client.api.render.RenderBuffers.QUADS;
 
 /**
  * @author OvaqReborn
  * @since 1.0
  */
 public class RenderManager implements Globals {
-    //
-    public static TTFFontRenderer tf = TTFFontRenderer.of("NotoSansJP-ExtraBold", 7);
     public static final Tessellator TESSELLATOR = RenderSystem.renderThreadTesselator();
     public static final BufferBuilder BUFFER = TESSELLATOR.getBuffer();
+    //
+    public static TTFFontRenderer tf = TTFFontRenderer.of("NotoSansJP-ExtraBold", 7);
 
     /**
      * When rendering using vanilla methods, you should call this method in order to ensure the GL state does not get
@@ -337,16 +338,311 @@ public class RenderManager implements Globals {
         RenderSystem.disableBlend();
     }
 
-    public static void simpleQuad(Matrix4f matrix4f, float x, float y, float width, float height, int color) {
-        RenderSystem.setShader(GameRenderer::getPositionTexColorProgram);
-        BUFFER.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR);
-        {
-            BUFFER.vertex(matrix4f, x, y + height, 0).texture(0, 0).color(color).next();
-            BUFFER.vertex(matrix4f, x + width, y + height, 0).texture(0, 1).color(color).next();
-            BUFFER.vertex(matrix4f, x + width, y, 0).texture(1, 1).color(color).next();
-            BUFFER.vertex(matrix4f, x, y, 0).texture(1, 0).color(color).next();
+    public static void glowRoundRect(MatrixStack stack, float x1, float y1, float width1, float height1, float radius1, float glowWidth, Color color1, int opacity1, boolean left, boolean right, boolean bleft, boolean bright) {
+        if (stack == null) return;
+
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GL11.glDisable(GL11.GL_DEPTH_TEST);
+
+        stack.push();
+
+        Matrix4f matrix = stack.peek().getPositionMatrix();
+        Tessellator tessellator = RenderSystem.renderThreadTesselator();
+        BufferBuilder bufferBuilder = tessellator.getBuffer();
+
+        RenderSystem.setShader(GameRenderer::getPositionColorProgram);
+        bufferBuilder.begin(
+                VertexFormat.DrawMode.QUADS,
+                VertexFormats.POSITION_COLOR
+        );
+
+        float x2 = x1 + width1;
+        float y2 = y1 + height1;
+
+        float radius2 = radius1 + glowWidth;
+
+        float x1outer = x1 - glowWidth;
+        float y1outer = y1 - glowWidth;
+
+        float x2outer = x2 + glowWidth;
+        float y2outer = y2 + glowWidth;
+
+        float xStart1;
+        float yStart1;
+        float xEnd1 = 0;
+        float yEnd1 = 0;
+        float xStart21;
+        float yStart21;
+        float xEnd21 = 0;
+        float yEnd21 = 0;
+
+        float xStart2;
+        float yStart2;
+        float xEnd2 = 0;
+        float yEnd2 = 0;
+        float xStart22;
+        float yStart22;
+        float xEnd22 = 0;
+        float yEnd22 = 0;
+
+        float xStart3;
+        float yStart3;
+        float xEnd3 = 0;
+        float yEnd3 = 0;
+        float xStart23;
+        float yStart23;
+        float xEnd23 = 0;
+        float yEnd23 = 0;
+
+        float xStart4;
+        float yStart4;
+        float xEnd4 = 0;
+        float yEnd4 = 0;
+        float xStart24;
+        float yStart24;
+        float xEnd24 = 0;
+        float yEnd24 = 0;
+
+        color1 = new Color(
+                color1.getRed(),
+                color1.getGreen(),
+                color1.getBlue(),
+                opacity1
+        );
+        Color color2 = new Color(
+                color1.getRed(),
+                color1.getGreen(),
+                color1.getBlue(),
+                0
+        );
+
+        for (int i = 0; i < 90; i += 3) {
+            if (left) {
+                bufferBuilder.vertex(matrix, x1, y1, 0).next();
+                break;
+            }
+
+            xStart1 = MathUtil.getRoundedRectPoint(x1, radius1, i, 1);
+            yStart1 = MathUtil.getRoundedRectPoint(y1, radius1, i, 2);
+            xEnd1 = MathUtil.getRoundedRectPoint(x1, radius1, i + 3, 1);
+            yEnd1 = MathUtil.getRoundedRectPoint(y1, radius1, i + 3, 2);
+
+            xStart21 = MathUtil.getRoundedRectPoint(x1outer, radius2, i, 1);
+            yStart21 = MathUtil.getRoundedRectPoint(y1outer, radius2, i, 2);
+            xEnd21 = MathUtil.getRoundedRectPoint(x1outer, radius2, i + 3, 1);
+            yEnd21 = MathUtil.getRoundedRectPoint(y1outer, radius2, i + 3, 2);
+
+            bufferBuilder
+                    .vertex(matrix, xStart1, yStart1, 0)
+                    .color(color1.getRGB())
+                    .next();
+            bufferBuilder
+                    .vertex(matrix, xStart21, yStart21, 0)
+                    .color(color2.getRGB())
+                    .next();
+            bufferBuilder
+                    .vertex(matrix, xEnd21, yEnd21, 0)
+                    .color(color2.getRGB())
+                    .next();
+            bufferBuilder
+                    .vertex(matrix, xEnd1, yEnd1, 0)
+                    .color(color1.getRGB())
+                    .next();
         }
-        BufferRenderer.drawWithGlobalProgram(BUFFER.end());
+
+        for (int i = 90; i < 180; i += 3) {
+            xStart2 = MathUtil.getRoundedRectPoint(x1, radius1, i, 3);
+            yStart2 = MathUtil.getRoundedRectPoint(y2, radius1, i, 4);
+            xEnd2 = MathUtil.getRoundedRectPoint(x1, radius1, i + 3, 3);
+            yEnd2 = MathUtil.getRoundedRectPoint(y2, radius1, i + 3, 4);
+
+            xStart22 = MathUtil.getRoundedRectPoint(x1outer, radius2, i, 3);
+            yStart22 = MathUtil.getRoundedRectPoint(y2outer, radius2, i, 4);
+            xEnd22 = MathUtil.getRoundedRectPoint(x1outer, radius2, i + 3, 3);
+            yEnd22 = MathUtil.getRoundedRectPoint(y2outer, radius2, i + 3, 4);
+
+            if (i == 90) {
+                bufferBuilder
+                        .vertex(matrix, xEnd1, yEnd1, 0)
+                        .color(color1.getRGB())
+                        .next();
+                bufferBuilder
+                        .vertex(matrix, xEnd21, yEnd21, 0)
+                        .color(color2.getRGB())
+                        .next();
+                bufferBuilder
+                        .vertex(matrix, xStart22, yStart22, 0)
+                        .color(color2.getRGB())
+                        .next();
+                bufferBuilder
+                        .vertex(matrix, xStart2, yStart2, 0)
+                        .color(color1.getRGB())
+                        .next();
+            }
+
+            bufferBuilder
+                    .vertex(matrix, xStart2, yStart2, 0)
+                    .color(color1.getRGB())
+                    .next();
+            bufferBuilder
+                    .vertex(matrix, xStart22, yStart22, 0)
+                    .color(color2.getRGB())
+                    .next();
+            bufferBuilder
+                    .vertex(matrix, xEnd22, yEnd22, 0)
+                    .color(color2.getRGB())
+                    .next();
+            bufferBuilder
+                    .vertex(matrix, xEnd2, yEnd2, 0)
+                    .color(color1.getRGB())
+                    .next();
+        }
+
+        for (int i = 0; i < 90; i += 3) {
+            xStart3 = MathUtil.getRoundedRectPoint(x2, radius1, i, 5);
+            yStart3 = MathUtil.getRoundedRectPoint(y2, radius1, i, 6);
+            xEnd3 = MathUtil.getRoundedRectPoint(x2, radius1, i + 3, 5);
+            yEnd3 = MathUtil.getRoundedRectPoint(y2, radius1, i + 3, 6);
+
+            xStart23 = MathUtil.getRoundedRectPoint(x2outer, radius2, i, 5);
+            yStart23 = MathUtil.getRoundedRectPoint(y2outer, radius2, i, 6);
+            xEnd23 = MathUtil.getRoundedRectPoint(x2outer, radius2, i + 3, 5);
+            yEnd23 = MathUtil.getRoundedRectPoint(y2outer, radius2, i + 3, 6);
+
+            if (i == 0) {
+                bufferBuilder
+                        .vertex(matrix, xEnd2, yEnd2, 0)
+                        .color(color1.getRGB())
+                        .next();
+                bufferBuilder
+                        .vertex(matrix, xEnd22, yEnd22, 0)
+                        .color(color2.getRGB())
+                        .next();
+                bufferBuilder
+                        .vertex(matrix, xStart23, yStart23, 0)
+                        .color(color2.getRGB())
+                        .next();
+                bufferBuilder
+                        .vertex(matrix, xStart3, yStart3, 0)
+                        .color(color1.getRGB())
+                        .next();
+            }
+
+            bufferBuilder
+                    .vertex(matrix, xStart3, yStart3, 0)
+                    .color(color1.getRGB())
+                    .next();
+            bufferBuilder
+                    .vertex(matrix, xStart23, yStart23, 0)
+                    .color(color2.getRGB())
+                    .next();
+            bufferBuilder
+                    .vertex(matrix, xEnd23, yEnd23, 0)
+                    .color(color2.getRGB())
+                    .next();
+            bufferBuilder
+                    .vertex(matrix, xEnd3, yEnd3, 0)
+                    .color(color1.getRGB())
+                    .next();
+        }
+
+        for (int i = 90; i <= 177; i += 3) {
+            xStart4 = MathUtil.getRoundedRectPoint(x2, radius1, i, 7);
+            yStart4 = MathUtil.getRoundedRectPoint(y1, radius1, i, 8);
+            xEnd4 = MathUtil.getRoundedRectPoint(x2, radius1, i + 3, 7);
+            yEnd4 = MathUtil.getRoundedRectPoint(y1, radius1, i + 3, 8);
+
+            xStart24 = MathUtil.getRoundedRectPoint(x2outer, radius2, i, 7);
+            yStart24 = MathUtil.getRoundedRectPoint(y1outer, radius2, i, 8);
+            xEnd24 = MathUtil.getRoundedRectPoint(x2outer, radius2, i + 3, 7);
+            yEnd24 = MathUtil.getRoundedRectPoint(y1outer, radius2, i + 3, 8);
+
+            if (i == 90) {
+                bufferBuilder
+                        .vertex(matrix, xEnd3, yEnd3, 0)
+                        .color(color1.getRGB())
+                        .next();
+                bufferBuilder
+                        .vertex(matrix, xEnd23, yEnd23, 0)
+                        .color(color2.getRGB())
+                        .next();
+                bufferBuilder
+                        .vertex(matrix, xStart24, yStart24, 0)
+                        .color(color2.getRGB())
+                        .next();
+                bufferBuilder
+                        .vertex(matrix, xStart4, yStart4, 0)
+                        .color(color1.getRGB())
+                        .next();
+            }
+
+            bufferBuilder
+                    .vertex(matrix, xStart4, yStart4, 0)
+                    .color(color1.getRGB())
+                    .next();
+            bufferBuilder
+                    .vertex(matrix, xStart24, yStart24, 0)
+                    .color(color2.getRGB())
+                    .next();
+            bufferBuilder
+                    .vertex(matrix, xEnd24, yEnd24, 0)
+                    .color(color2.getRGB())
+                    .next();
+            bufferBuilder
+                    .vertex(matrix, xEnd4, yEnd4, 0)
+                    .color(color1.getRGB())
+                    .next();
+        }
+
+        xStart1 = MathUtil.getRoundedRectPoint(x1, radius1, 0, 1);
+        yStart1 = MathUtil.getRoundedRectPoint(y1, radius1, 0, 2);
+        xStart21 = MathUtil.getRoundedRectPoint(x1outer, radius2, 0, 1);
+        yStart21 = MathUtil.getRoundedRectPoint(y1outer, radius2, 0, 2);
+
+        bufferBuilder
+                .vertex(matrix, xEnd4, yEnd4, 0)
+                .color(color1.getRGB())
+                .next();
+        bufferBuilder
+                .vertex(matrix, xEnd24, yEnd24, 0)
+                .color(color2.getRGB())
+                .next();
+        bufferBuilder
+                .vertex(matrix, xStart21, yStart21, 0)
+                .color(color2.getRGB())
+                .next();
+        bufferBuilder
+                .vertex(matrix, xStart1, yStart1, 0)
+                .color(color1.getRGB())
+                .next();
+
+        tessellator.draw();
+
+        stack.pop();
+        RenderSystem.setShaderColor(1, 1, 1, 1);
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
+        GL11.glDisable(GL11.GL_BLEND);
+    }
+
+    public static void drawTexture(DrawContext context, String imageName, float x, float y, float width, float height) {
+        context.drawTexture(new Identifier("ovaqreborn", imageName), (int) x, (int) y, (int) width, (int) height, 0.0f, 0.0f, 16, 128, 16, 128);
+    }
+
+    public static void drawTexture(DrawContext context, Identifier image, int x, int y, int width, int height) {
+        context.drawTexture(image, x, y, width, height, 0.0f, 0.0f, 16, 128, 16, 128);
+    }
+
+    public static void drawTexture(DrawContext context, String imageName, int x, int y, int width, int height) {
+        context.drawTexture(new Identifier("ovaqreborn", imageName), x, y, width, height, 0.0f, 0.0f, 16, 128, 16, 128);
+    }
+
+    public static void drawTexture(DrawContext context, String imageName, int x, int y, int width, int height, int u, int v) {
+        context.drawTexture(new Identifier("ovaqreborn", imageName), x, y, u, v, width, height);
+    }
+
+    public static void drawTexture(DrawContext context, String imageName, int x, int y, int width, int height, int u, int v, int regionWidth, int regionHeight, int textureWidth, int textureHeight) {
+        context.drawTexture(new Identifier("ovaqreborn", imageName), x, y, width, height, u, v, regionWidth, regionHeight, textureWidth, textureHeight);
     }
 
     /**

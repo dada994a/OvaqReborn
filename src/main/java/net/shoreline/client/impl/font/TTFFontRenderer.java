@@ -10,6 +10,7 @@ import java.util.Objects;
 
 /**
  * @author OvaqReborn
+ * @since 1.0
  */
 public class TTFFontRenderer {
     public static TTFFontRenderer of(String asset, int size) {

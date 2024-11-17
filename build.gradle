@@ -82,15 +82,13 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modImplementation "cabaletta:baritone-api:${baritone_api_version}"
-
     libImpl("io.netty:netty-handler-proxy:${project.netty_version}") { transitive = false }
     libImpl("io.netty:netty-codec-socks:${project.netty_version}") { transitive = false }
     api("org.apiguardian:apiguardian-api:1.1.2")
     //library fileTree(dir: 'libs', include: ['annotations-1.4.1.jar'])
     modInclude "org.ladysnake:satin:1.16.0"
     include modImplementation("com.github.0x3C50:Renderer:e547988")
-    compileOnly 'org.projectlombok:lombok:1.18.30'
-    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+    modImplementation fileTree(dir: 'libs', include: ['ias.jar'])
 }
 
 processResources {
@@ -121,14 +119,6 @@ def execute(String cmd) {
     } catch (ignored) {
         return null
     }
-}
-
-dependencies {
-    compileOnly 'org.projectlombok:lombok:1.18.30'
-    annotationProcessor 'org.projectlombok:lombok:1.18.30'
-
-    testCompileOnly 'org.projectlombok:lombok:1.18.30'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
 }
 
 /*

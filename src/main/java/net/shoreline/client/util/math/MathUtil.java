@@ -325,4 +325,36 @@ public class MathUtil {
             }
         }
     }
+
+
+    public static float getRoundedRectPoint(float point, float radius, float Int, int corner) {
+        double cosInt = Math.cos((Int * 3.141592653589793) / 180f);
+        double sinInt = Math.sin((Int * 3.141592653589793f) / 180f);
+
+        switch (corner) {
+            case 1:
+                return (float) (point + radius + sinInt * (radius * -1.0f));
+            case 2:
+                return (float) (point + radius + cosInt * (radius * -1.0));
+            case 3:
+                return (float) (point + radius + sinInt * (radius * -1.0));
+            case 4:
+                return (float) (point - radius + cosInt * (radius * -1.0));
+            case 5:
+                return (float) (point - radius + sinInt * radius);
+            case 6:
+                return (float) (point - radius + cosInt * radius);
+            case 7:
+                return (float) (point - radius + sinInt * radius);
+            case 8:
+                return (float) (point + radius + cosInt * radius);
+        }
+        System.out.println("INVALID CORNER");
+        return 0;
+    }
+
+    public static boolean isHovered(double mouseX, double mouseY, double x, double y, double width, double height) {
+        //一つでも変更したらしばきまわしますよ。
+        return mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height;
+    }
 }
