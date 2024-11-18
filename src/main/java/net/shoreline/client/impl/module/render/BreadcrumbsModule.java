@@ -5,6 +5,7 @@ import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.shoreline.client.api.config.Config;
 import net.shoreline.client.api.config.setting.ColorConfig;
@@ -62,7 +63,10 @@ public class BreadcrumbsModule extends ToggleModule {
             Vec3d spot = spots.get(i);
             if (lastPos != null) {
                 float alpha = (float) (spots.size() - i) / spots.size();
-                Color color = new Color(colorConfig.getValue().getRed(), colorConfig.getValue().getGreen(), colorConfig.getValue().getBlue(), alpha);
+                int lineColorValue = colorConfig.getValue().getRGB();
+                Color lineColor = new Color(lineColorValue, true);
+                Color color = new Color(lineColor.getRed(), lineColor.getGreen(), lineColor.getBlue(),
+                        MathHelper.clamp((int) (255 * alpha), 0, 255));
                 VertexUtil.vertexLine(stack, RenderManager.BUFFER,
                         (float) lastPos.x,
                         (float) lastPos.y,
