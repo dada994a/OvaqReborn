@@ -141,7 +141,7 @@ public class Modules {
     public static YawModule YAW;
     // Render
     public static BlockHighlightModule BLOCK_HIGHLIGHT;
-    //public static BreadcrumbsModule BREADCRUMBS;
+    public static BreadcrumbsModule BREADCRUMBS;
     public static BreakHighlightModule BREAK_HIGHLIGHT;
     public static ChamsModule CHAMS;
     public static CrystalModelModule CRYSTAL_MODEL;
@@ -339,6 +339,7 @@ public class Modules {
             YAW = (YawModule) getRegisteredModule("yaw-module");
             //RENDER
             BLOCK_HIGHLIGHT = (BlockHighlightModule) getRegisteredModule("blockhighlight-module");
+            BREADCRUMBS = (BreadcrumbsModule) getRegisteredModule("breadcrumbs-module");
             BREAK_HIGHLIGHT = (BreakHighlightModule) getRegisteredModule("breakhighlight-module");
             CHAMS = (ChamsModule) getRegisteredModule("chams-module");
             CRYSTAL_MODEL = (CrystalModelModule) getRegisteredModule("crystalmodel-module");

@@ -1,28 +1,34 @@
 package net.shoreline.client.impl.module.render;
 
+import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.render.VertexFormat;
+import net.minecraft.client.render.VertexFormats;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.Vec3d;
 import net.shoreline.client.api.config.Config;
-import net.shoreline.client.api.config.setting.BooleanConfig;
-import net.shoreline.client.api.config.setting.NumberConfig;
-import net.shoreline.client.api.event.EventStage;
+import net.shoreline.client.api.config.setting.ColorConfig;
 import net.shoreline.client.api.event.listener.EventListener;
 import net.shoreline.client.api.module.ModuleCategory;
 import net.shoreline.client.api.module.ToggleModule;
+import net.shoreline.client.api.render.RenderManager;
 import net.shoreline.client.impl.event.network.PlayerUpdateEvent;
 import net.shoreline.client.impl.event.render.RenderWorldEvent;
+import net.shoreline.client.util.render.VertexUtil;
+import org.lwjgl.opengl.GL11;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.awt.*;
+import java.util.ArrayList;
 
 /**
- * @author OvaqReborn:)
+ * @author OvaqReborn
  * @since 1.0
  */
 public class BreadcrumbsModule extends ToggleModule {
+    ArrayList<Vec3d> spots = new ArrayList<>();
+    int ticks = 0;
 
-    private final Map<Vec3d, Long> positions = new ConcurrentHashMap<>();
-    Config<Boolean> infiniteConfig = new BooleanConfig("Infinite", "Renders breadcrumbs for all positions since toggle", true);
-    Config<Float> maxTimeConfig = new NumberConfig<>("MaxPosition", "The maximum time for a given position", 1.0f, 2.0f, 20.0f);
+    Config<Color> colorConfig = new ColorConfig("Color", "color for line", new Color(255, 0, 0), false, false);
 
     public BreadcrumbsModule() {
         super("Breadcrumbs", "Renders a line connecting all previous positions", ModuleCategory.RENDER);
@@ -30,27 +36,46 @@ public class BreadcrumbsModule extends ToggleModule {
 
     @Override
     public void onDisable() {
-        positions.clear();
+        spots.clear();
     }
 
     @EventListener
     public void onPlayerUpdate(PlayerUpdateEvent event) {
-        if (event.getStage() != EventStage.PRE) {
-            return;
-        }
-        positions.put(new Vec3d(mc.player.getX(), mc.player.getBoundingBox().minY, mc.player.getZ()), System.currentTimeMillis());
-        if (!infiniteConfig.getValue()) {
-            positions.forEach((p, t) ->
-            {
-                if (System.currentTimeMillis() - t >= maxTimeConfig.getValue() * 1000) {
-                    positions.remove(p);
-                }
-            });
-        }
+        if (mc.player != null) spots.add(mc.player.getPos());
     }
 
     @EventListener
     public void onRenderWorld(RenderWorldEvent event) {
+        ticks++;
+        while (spots.size() > 20) {
+            spots.remove(0);
+        }
+        MatrixStack stack = event.getMatrices();
+        GL11.glEnable(GL11.GL_LINE_SMOOTH);
+        RenderSystem.disableCull();
+        RenderSystem.setShader(GameRenderer::getRenderTypeLinesProgram);
+        RenderSystem.lineWidth(2);
+        RenderManager.BUFFER.begin(VertexFormat.DrawMode.LINES, VertexFormats.LINES);
 
+        Vec3d lastPos = null;
+        for (int i = 0; i < spots.size(); i++) {
+            Vec3d spot = spots.get(i);
+            if (lastPos != null) {
+                float alpha = (float) (spots.size() - i) / spots.size();
+                Color color = new Color(colorConfig.getValue().getRed(), colorConfig.getValue().getGreen(), colorConfig.getValue().getBlue(), alpha);
+                VertexUtil.vertexLine(stack, RenderManager.BUFFER,
+                        (float) lastPos.x,
+                        (float) lastPos.y,
+                        (float) lastPos.z,
+                        (float) spot.x,
+                        (float) spot.y,
+                        (float) spot.z,
+                        color);
+            }
+            lastPos = spot;
+        }
+        RenderManager.TESSELLATOR.draw();
+        RenderSystem.enableCull();
+        GL11.glDisable(GL11.GL_LINE_SMOOTH);
     }
 }

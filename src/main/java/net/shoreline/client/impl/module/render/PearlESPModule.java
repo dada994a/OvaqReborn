@@ -86,7 +86,7 @@ public class PearlESPModule extends ToggleModule {
                 if (nameConfig.getValue()) {
                     for (Entity entity : mc.world.getEntities()) {
                         if (entity instanceof EnderPearlEntity enderPearlEntity) {
-                            String name = enderPearlEntity.getOwner() != null ? enderPearlEntity.getOwner().getDisplayName().getString() : "Unknown";
+                            String name = enderPearlEntity.getOwner() != null ? enderPearlEntity.getOwner().getName().getString() : "Unknown";
                             RenderManager.tf.drawString(
                                     stack,
                                     name,
@@ -121,7 +121,6 @@ public class PearlESPModule extends ToggleModule {
         RenderSystem.disableCull();
         RenderSystem.setShader(GameRenderer::getRenderTypeLinesProgram);
         RenderSystem.lineWidth(2);
-//
         RenderManager.BUFFER.begin(VertexFormat.DrawMode.LINES, VertexFormats.LINES);
         objects.clear();
         int lineColorValue = colorConfig.getValue().getRGB();
