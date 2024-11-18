@@ -47,6 +47,7 @@ public class PearlESPModule extends ToggleModule {
     Config<Boolean> textureConfig = new BooleanConfig("Texture", "a", true);
     Config<Boolean> textConfig = new BooleanConfig("Text", "text for pearl esp", true);
     Config<Boolean> timeConfig = new BooleanConfig("Time", "time for text display", true, () -> textConfig.getValue());
+    Config<Boolean> nameConfig = new BooleanConfig("Name", "name for text display", true, () -> textConfig.getValue());
 
     public PearlESPModule() {
         super("PearlESP", "thrown entity", ModuleCategory.RENDER);
@@ -81,6 +82,20 @@ public class PearlESPModule extends ToggleModule {
                             posY + 1.4,
                             -1
                     );
+                }
+                if (nameConfig.getValue()) {
+                    for (Entity entity : mc.world.getEntities()) {
+                        if (entity instanceof EnderPearlEntity enderPearlEntity) {
+                            String name = enderPearlEntity.getOwner() != null ? enderPearlEntity.getOwner().getDisplayName().getString() : "Unknown";
+                            RenderManager.tf.drawString(
+                                    stack,
+                                    name,
+                                    posX + 1.2,
+                                    posY + 1.4 + (timeConfig.getValue() ? 10 : 0),
+                                    -1
+                            );
+                        }
+                    }
                 }
             }
             if (textureConfig.getValue()) {
