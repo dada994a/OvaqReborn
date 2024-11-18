@@ -12,6 +12,7 @@ import net.shoreline.client.impl.module.client.IRCModule;
 import net.shoreline.client.init.Managers;
 import net.shoreline.client.init.Modules;
 import net.shoreline.client.init.Moduletester;
+import net.shoreline.client.security.AntiDump;
 import net.shoreline.client.security.Authenticator;
 import net.shoreline.client.security.TimeAuth;
 import org.apache.logging.log4j.LogManager;
@@ -57,7 +58,9 @@ public class OvaqReborn {
 
             ANTIDUMP = new AntiDumpManager();
             AntiDumpManager.init();
-            info("AntiDump checking ...");
+            info("AntiDump Stage1 checking ...");
+            AntiDump.init();
+            info("AntiDump Stage2 checking ...");
         }
         info("preInit starting ...");
 
