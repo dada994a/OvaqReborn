@@ -62,7 +62,7 @@ public class BreadcrumbsModule extends ToggleModule {
         for (int i = 0; i < spots.size(); i++) {
             Vec3d spot = spots.get(i);
             if (lastPos != null) {
-                float alpha = (float) (spots.size() - i) / spots.size();
+                float alpha = (float) i / spots.size();
                 int lineColorValue = colorConfig.getValue().getRGB();
                 Color lineColor = new Color(lineColorValue, true);
                 Color color = new Color(lineColor.getRed(), lineColor.getGreen(), lineColor.getBlue(),
