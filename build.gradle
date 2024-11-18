@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.5-SNAPSHOT'
+    id 'fabric-loom' version '1.6-SNAPSHOT'
     id 'com.github.johnrengelman.shadow' version '8.1.1'
     id 'com.github.gmazzo.buildconfig' version '5.3.5'
 }
@@ -70,6 +70,13 @@ repositories {
             includeGroupByRegex 'dev\\.onyxstudios.*'
         }
     }
+    maven {
+        name = "modrinth"
+        url = "https://api.modrinth.com/maven"
+        content {
+            includeGroup "maven.modrinth"
+        }
+    }
     mavenCentral() {
         url "https://jitpack.io/"
         url "https://impactdevelopment.github.io/maven/"
@@ -88,7 +95,7 @@ dependencies {
     //library fileTree(dir: 'libs', include: ['annotations-1.4.1.jar'])
     modInclude "org.ladysnake:satin:1.16.0"
     include modImplementation("com.github.0x3C50:Renderer:e547988")
-    modImplementation fileTree(dir: 'libs', include: ['ias.jar'])
+    modImplementation("maven.modrinth:in-game-account-switcher:dHZaRsM5")
 }
 
 processResources {

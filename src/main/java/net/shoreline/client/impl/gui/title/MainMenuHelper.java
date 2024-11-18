@@ -14,7 +14,8 @@ import net.shoreline.client.util.button.components.CustomTitleButton;
 import net.shoreline.client.util.Globals;
 import net.shoreline.client.util.changelogs.ChangeLog;
 import net.shoreline.client.util.changelogs.ChangeLogEntry;
-import the_fireplace.ias.gui.AccountListScreen;
+import net.shoreline.client.util.math.MathUtil;
+import ru.vidtu.ias.screen.AccountScreen;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class MainMenuHelper extends Screen implements Globals {
     private final AbstractButton multiplayer = new CustomTitleButton("Multiplayer",
             () -> mc.setScreen(new MultiplayerScreen(this)));
     private final AbstractButton accounts = new CustomTitleButton("Accounts",
-            () -> mc.setScreen(new AccountListScreen(this)));
+            () -> mc.setScreen(new AccountScreen(this)));
     private final AbstractButton options = new CustomTitleButton("Options",
             () -> mc.setScreen(new OptionsScreen(this, mc.options)));
     private final AbstractButton exit = new CustomTitleButton("Exit",
@@ -132,7 +133,7 @@ public class MainMenuHelper extends Screen implements Globals {
         }
 
         // 文字
-        RenderManager.tf.drawStringShadow(context.getMatrices(), "Welcome " + Formatting.AQUA + mc.getSession().getUsername() + Formatting.RESET, 2F, (float) (7.5 + mc.textRenderer.fontHeight + 4), -1);
+        RenderManager.tf.drawStringShadow(context.getMatrices(), OvaqRebornMod.MOD_NAME + " " + OvaqRebornMod.MOD_VER + " Made by hypinohaizin, Rom, Naa_Naa", 2F, (float) (7.5 + mc.textRenderer.fontHeight + 4), -1);
 
         // components
         int wHeight = mc.getWindow().getHeight() / 4;
@@ -157,6 +158,31 @@ public class MainMenuHelper extends Screen implements Globals {
             y += offsetY;
         }
 
+        //Creditに行くようにする物
+        int screenWidth = context.getScaledWindowWidth();
+        int screenHeight = context.getScaledWindowHeight();
+        int logoWidth = 100;
+        int logoHeight = 100;
+        int logoX = (screenWidth - logoWidth) / 2;
+        int logoY = (screenHeight - logoHeight) / 4;
+        boolean isHovered = MathUtil.isHovered(mouseX, mouseY, logoX, logoY, logoWidth, logoHeight);
+        float targetScale = isHovered ? 1.2f : 1.0f;
+        float currentScale = 1.0f;
+        float maxScale = 1.2f;
+        float minScale = 1.0f;
+        float scaleSpeed = 8.0f;
+        currentScale += (targetScale - currentScale) * scaleSpeed * delta;
+        if (currentScale > maxScale) {
+            currentScale = maxScale;
+        } else if (currentScale < minScale) {
+            currentScale = minScale;
+        }
+        context.getMatrices().push();
+        context.getMatrices().translate(logoX + logoWidth / 2, logoY + logoHeight / 2, 0);
+        context.getMatrices().scale(currentScale, currentScale, 1);
+        context.getMatrices().translate(-logoWidth / 2, -logoHeight / 2, 0);
+        RenderManager.drawTexture(context, "icon/star.png", 0, 0, logoWidth, logoHeight);
+        context.getMatrices().pop();
 
         singleplayer.position(wWidth - 80, wHeight - 28)
                 .size(160, 27);
@@ -179,6 +205,9 @@ public class MainMenuHelper extends Screen implements Globals {
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         buttons.forEach(buttons -> buttons.mouseClicked(mouseX, mouseY, button));
+        if (MathUtil.isHovered(mouseX, mouseY, (mc.getWindow().getScaledWidth() - 100) / 2, (mc.getWindow().getScaledHeight() - 100) / 4, 100, 100)) {
+            mc.setScreen(new CreditMenuHelper());
+        }
         return super.mouseClicked(mouseX, mouseY, button);
     }
 

@@ -13,7 +13,7 @@ public class ChangeLog {
     static {
         changeLogs.add(new ChangeLogEntry(ChangeType.ADD, "Added Main Menu"));
         changeLogs.add(new ChangeLogEntry(ChangeType.ADD, "Added PearlESP"));
-        changeLogs.add(new ChangeLogEntry(ChangeType.REMOVE, "Aura Circle Render Mode"));
+        changeLogs.add(new ChangeLogEntry(ChangeType.REMOVE, "Removed Aura Circle Render Mode"));
     }
 
     public static List<ChangeLogEntry> getChangeLogs() {
