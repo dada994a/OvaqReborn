@@ -41,6 +41,9 @@ configurations {
 
 
 repositories {
+    flatDir {
+        dirs 'lib'
+    }
     maven {
         name = "jitpack.io"
         url = "https://jitpack.io"
@@ -56,10 +59,6 @@ repositories {
     maven {
         name = "meteor-maven-snapshots"
         url = "https://maven.meteordev.org/snapshots"
-    }
-    maven {
-        name = "ViaVersion"
-        url = "https://repo.viaversion.com"
     }
     maven {
         name = 'Ladysnake Mods'
@@ -92,7 +91,8 @@ dependencies {
     libImpl("io.netty:netty-handler-proxy:${project.netty_version}") { transitive = false }
     libImpl("io.netty:netty-codec-socks:${project.netty_version}") { transitive = false }
     api("org.apiguardian:apiguardian-api:1.1.2")
-    //library fileTree(dir: 'libs', include: ['annotations-1.4.1.jar'])
+    modImplementation name: 'IAS-Fabric-1.20.4-9.0.0'
+    include name: 'IAS-Fabric-1.20.4-9.0.0'
     modInclude "org.ladysnake:satin:1.16.0"
     include modImplementation("com.github.0x3C50:Renderer:e547988")
     modImplementation("maven.modrinth:in-game-account-switcher:dHZaRsM5")
