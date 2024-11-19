@@ -1,5 +1,7 @@
 package net.shoreline.client.util.math;
 
+import net.minecraft.util.math.Box;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -326,6 +328,13 @@ public class MathUtil {
         }
     }
 
+    public static Box getAxisBoxByVec(Box box, float alphaPC) {
+        float dePC = 1.0f - (1.0f - alphaPC) / 1.5f;
+        double diffX = box.maxX - box.minX;
+        double diffY = box.maxY - box.minY;
+        double diffZ = box.maxZ - box.minZ;
+        return new Box(box.getCenter().getX() - diffX * (double)dePC / 2.0, box.getCenter().getY(), box.getCenter().getZ() - diffZ * (double)dePC / 2.0, box.getCenter().getX() + diffX * (double)dePC / 2.0, box.getCenter().getY() + diffY, box.getCenter().getZ() + diffZ * (double)dePC / 2.0);
+    }
 
     public static float getRoundedRectPoint(float point, float radius, float Int, int corner) {
         double cosInt = Math.cos((Int * 3.141592653589793) / 180f);

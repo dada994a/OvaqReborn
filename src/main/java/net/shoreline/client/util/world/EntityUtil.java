@@ -11,9 +11,11 @@ import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.entity.vehicle.ChestMinecartEntity;
 import net.minecraft.entity.vehicle.FurnaceMinecartEntity;
 import net.minecraft.entity.vehicle.MinecartEntity;
+import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Vec3d;
 
 /**
- * @author linus
+ * @author OvaqReborn
  * @since 1.0
  */
 public class EntityUtil {
@@ -58,5 +60,23 @@ public class EntityUtil {
         return e instanceof BoatEntity || e instanceof MinecartEntity
                 || e instanceof FurnaceMinecartEntity
                 || e instanceof ChestMinecartEntity;
+    }
+
+    public static Vec3d getEntityVec3dPosition(Entity entityIn) {
+        return new Vec3d(entityIn.getX(), entityIn.getY(), entityIn.getZ());
+    }
+
+    public static Box getEntityBox(Entity entity) {
+        Vec3d pos = getEntityVec3dPosition(entity);
+        double width = entity.getWidth();
+        double height = entity.getHeight();
+        Box box = entity.getBoundingBox();
+        if (box != null) {
+            width = box.maxX - box.minX;
+            height = box.maxY - box.minY;
+        }
+        Vec3d first = new Vec3d(pos.getX() - width / 2.0, pos.getY(), pos.getZ() - width / 2.0);
+        Vec3d second = new Vec3d(pos.getX() + width / 2.0, pos.getY() + height, pos.getZ() + width / 2.0);
+        return new Box(first, second);
     }
 }
