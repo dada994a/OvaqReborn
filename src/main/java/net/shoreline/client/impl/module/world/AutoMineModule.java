@@ -44,6 +44,7 @@ public class AutoMineModule extends RotationModule {
     Config<Boolean> doubleBreakConfig = new BooleanConfig("DoubleBreak", "Allows you to mine two blocks at once", false);
     Config<Float> rangeConfig = new NumberConfig<>("Range", "The range to mine blocks", 0.1f, 4.0f, 7.0f);
     Config<Float> speedConfig = new NumberConfig<>("Speed", "The speed to mine blocks", 0.1f, 1.0f, 1.0f);
+    Config<Boolean> antiCrawlConfig = new BooleanConfig("AntiCrawl", "", true);
     Config<Boolean> rotateConfig = new BooleanConfig("Rotate", "Rotates when mining the block", true);
     Config<Boolean> switchResetConfig = new BooleanConfig("SwitchReset", "Resets mining after switching items", false);
     Config<Boolean> grimConfig = new BooleanConfig("Grim", "Uses grim block breaking speeds", false);
@@ -82,6 +83,13 @@ public class AutoMineModule extends RotationModule {
 
     @EventListener
     public void onPlayerTick(final PlayerTickEvent event) {
+        if (mc.player.isCrawling() && antiCrawlConfig.getValue()) {
+            BlockPos a = Managers.POSITION.getBlockPos().up(1);
+            if (mc.world.getBlockState(a).getHardness(mc.world, a) != -1.0F && !mc.world.getBlockState(a).isAir() && !mc.player.isCreative()) {
+                miningData = new AutoMiningData(a, strictDirectionConfig.getValue() ? Managers.INTERACT.getPlaceDirectionGrim(a) : Direction.UP, 0.8f);
+                startMining(miningData);
+            }
+        }
         if (autoConfig.getValue() && !manualOverride && (miningData == null || mc.world.isAir(miningData.getPos()))) {
             PlayerEntity playerTarget = null;
             double minDistance = Float.MAX_VALUE;

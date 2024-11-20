@@ -41,7 +41,7 @@ public class ModuleManager {
                 new RotationsModule(),
                 new ProtocolModule(),
                 // Combat
-                new AntiCrawlModule(),
+                //new AntiCrawlModule(),
                 new AuraModule(),
                 new AutoArmorModule(),
                 new AutoBowReleaseModule(),

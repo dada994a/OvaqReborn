@@ -37,8 +37,8 @@ public class Modules {
     public static ProtocolModule PROTOCOL;
     public static CapesModule CAPES;
     // Combat
-    public static AntiCrawlModule ANTI_CRAW;
-    public static AuraModule AURA;
+    //public static AntiCrawlModule ANTI_CRAW;
+     public static AuraModule AURA;
     public static AutoArmorModule AUTO_ARMOR;
     public static AutoBowReleaseModule AUTO_BOW_RELEASE;
     public static AutoObsidianModule AUTOOBSIDIAN;
@@ -238,7 +238,7 @@ public class Modules {
             }
             CAPES = (CapesModule) getRegisteredModule("capes-module");
             //COMBAT
-            ANTI_CRAW = (AntiCrawlModule) getRegisteredModule("anticrawl-module");
+            //ANTI_CRAW = (AntiCrawlModule) getRegisteredModule("anticrawl-module");
             AURA = (AuraModule) getRegisteredModule("aura-module");
             AUTO_ARMOR = (AutoArmorModule) getRegisteredModule("autoarmor-module");
             AUTO_BOW_RELEASE = (AutoBowReleaseModule) getRegisteredModule("autobowrelease-module");
