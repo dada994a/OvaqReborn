@@ -1,16 +1,26 @@
 package net.shoreline.client.impl.module.world;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.decoration.EndCrystalEntity;
 import net.minecraft.entity.effect.StatusEffectUtil;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.network.packet.c2s.play.HandSwingC2SPacket;
 import net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket;
+import net.minecraft.network.packet.c2s.play.PlayerInteractBlockC2SPacket;
 import net.minecraft.network.packet.c2s.play.UpdateSelectedSlotC2SPacket;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.screen.slot.SlotActionType;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.*;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
@@ -36,22 +46,24 @@ import net.shoreline.client.util.player.RotationUtil;
 import java.text.DecimalFormat;
 
 /**
- * @author linus
+ * @author OvaqReborn
  * @since 1.0
  */
 public class SpeedmineModule extends RotationModule {
-
     Config<SpeedmineMode> modeConfig = new EnumConfig<>("Mode", "The mining mode for speedmine", SpeedmineMode.PACKET, SpeedmineMode.values());
     Config<Float> mineSpeedConfig = new NumberConfig<>("Speed", "The speed to mine blocks", 0.0f, 0.7f, 0.9f, () -> modeConfig.getValue() == SpeedmineMode.DAMAGE);
     Config<Boolean> instantConfig = new BooleanConfig("Instant", "Instantly removes the mining block", false, () -> modeConfig.getValue() == SpeedmineMode.PACKET);
     Config<Float> rangeConfig = new NumberConfig<>("Range", "Range for mine", 1.0f, 4.5f, 7.0f, () -> modeConfig.getValue() == SpeedmineMode.PACKET);
     Config<Swap> swapConfig = new EnumConfig<>("AutoSwap", "Swaps to the best tool once the mining is complete", Swap.SILENT, Swap.values(), () -> modeConfig.getValue() == SpeedmineMode.PACKET);
+    Config<Boolean> autoCevConfig = new BooleanConfig("AutoCev", "cev", true);
+    Config<Boolean> oldCrystalConfig = new BooleanConfig("OldCrystal", "", false, () -> autoCevConfig.getValue());
     Config<Boolean> rotateConfig = new BooleanConfig("Rotate", "Rotates when mining the block", true, () -> modeConfig.getValue() == SpeedmineMode.PACKET);
     Config<Boolean> grimConfig = new BooleanConfig("Grim", "Uses grim block breaking speeds", false);
     Config<Boolean> strictConfig = new BooleanConfig("Strict", "Swaps to tool using alternative packets to bypass NCP silent swap", false, () -> swapConfig.getValue() != Swap.OFF && modeConfig.getValue() == SpeedmineMode.PACKET);
     private BlockPos mining;
     private BlockState state;
     private Direction direction;
+    private boolean crystalAttack;
     private float damage;
 
     public SpeedmineModule() {
@@ -69,6 +81,7 @@ public class SpeedmineModule extends RotationModule {
         mining = null;
         state = null;
         direction = null;
+        crystalAttack = false;
         damage = 0.0f;
     }
 
@@ -251,6 +264,70 @@ public class SpeedmineModule extends RotationModule {
             f /= 5.0f;
         }
         return f;
+    }
+
+    private int getItemHotbar(Item item) {
+        for (int i = 0; i < 9; ++i) {
+            Item item2 = mc.player.getInventory().getStack(i).getItem();
+            if (Item.getRawId(item2) != Item.getRawId(item)) {
+                continue;
+            }
+            return i;
+        }
+        return -1;
+    }
+
+    private boolean canPlaceCrystal(BlockPos pos, boolean oldVer) {
+        BlockPos boost = pos.add(0, 2, 0);
+        if (mc.world.getBlockState(pos).getBlock() != Blocks.BEDROCK && mc.world.getBlockState(pos).getBlock() != Blocks.OBSIDIAN) {
+            return false;
+        }
+        BlockPos boost2 = pos.add(0, 1, 0);
+        if((mc.world.getBlockState(boost).getBlock() != Blocks.AIR && mc.world.getBlockState(boost2).getBlock() != Blocks.AIR) && !oldVer) {
+            return false;
+        }
+        for (Entity entity : mc.world.getEntitiesByClass(PlayerEntity.class, new Box(boost), entity -> true)) {
+            if (entity.isAlive()) {
+                if (entity instanceof EndCrystalEntity) {
+                    continue;
+                }
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private PlayerEntity getPlacePlayer(BlockPos pos) {
+        for (PlayerEntity player : mc.world.getPlayers()) {
+            if (!Managers.SOCIAL.isFriend(player.getName().getString())) {
+                if (player.getHealth() + player.getAbsorptionAmount() >= 0.0f || !player.isDead()) {
+                    continue;
+                }
+                BlockPos playerPos = player.getBlockPos();
+                for (Direction direction1 : Direction.Type.HORIZONTAL) {
+                    if (playerPos.offset(direction1).equals(pos) || playerPos.up().offset(direction1).equals(pos)) {
+                        return player;
+                    }
+                }
+                if (playerPos.offset(Direction.UP).offset(Direction.UP).equals(pos)) {
+                    return player;
+                }
+            }
+        }
+        return null;
+    }
+
+    private boolean checkCrystalPos(BlockPos pos) {
+        boolean canPlace = true;
+        for (Entity entity : mc.world.getEntitiesByClass(Entity.class, new Box(pos.up()), entity -> true)) {
+            if (entity != null) {
+                if (!entity.isAlive()) {
+                    continue;
+                }
+                canPlace = false;
+            }
+        }
+        return canPlace;
     }
 
     private boolean canHarvest(BlockState state) {
