@@ -11,9 +11,7 @@ public class ChangeLog {
     private static final List<ChangeLogEntry> changeLogs = new ArrayList<>();
 
     static {
-        changeLogs.add(new ChangeLogEntry(ChangeType.ADD, "Added Main Menu"));
-        changeLogs.add(new ChangeLogEntry(ChangeType.ADD, "Added PearlESP"));
-        changeLogs.add(new ChangeLogEntry(ChangeType.REMOVE, "Removed Aura Circle Render Mode"));
+        changeLogs.add(new ChangeLogEntry(ChangeType.ADD, "Added ShotbowMode on Timer"));
     }
 
     public static List<ChangeLogEntry> getChangeLogs() {
