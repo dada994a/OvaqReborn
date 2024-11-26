@@ -18,6 +18,7 @@ public class AntiDumpManager {
             "-Xdebug",
             "-agentlib",
             "-agentlib:jdwp",
+            "-noverify",
             "-Xrunjdwp",
             "-Xnoagent",
             "-verbose",
@@ -39,22 +40,39 @@ public class AntiDumpManager {
         }
     }
 
-    public static void checkRecafAsync() {
+    public static void checkRecaf() {
         String userHome = System.getProperty("user.home");
         if (userHome == null || userHome.isEmpty()) {
             return;
         }
-
         Path searchPath = Paths.get(userHome, "AppData", "Roaming");
-        CompletableFuture.runAsync(() -> findForRecaf(searchPath), executor)
-                .thenRun(executor::shutdown);
+        CompletableFuture.runAsync(() -> {
+            findForRecaf(searchPath);
+            checkRecafTask();
+        }, executor).thenRun(executor::shutdown);
     }
 
     private static void findForRecaf(Path searchPath) {
         try (Stream<Path> paths = Files.find(searchPath, Integer.MAX_VALUE,
-                (path, basicFileAttributes) -> path.getFileName().toString().toLowerCase().contains("recaf"))) {
+                (path, basicFileAttributes) -> {
+                    String fileName = path.getFileName().toString().toLowerCase();
+                    return fileName.contains("recaf") || fileName.equals("rclog.txt");
+                })) {
             paths.findFirst()
-                    .ifPresent(path -> showWarningAndExit("Recaf detected!"));
+                    .ifPresent(path -> showWarningAndExit("Recaf detected"));
+        } catch (Exception ignored) {
+        }
+    }
+   //Beta(多分動かない）
+    private static void checkRecafTask() {
+        try {
+            ProcessHandle.allProcesses()
+                    .filter(process -> process.info().command().isPresent())
+                    .map(process -> process.info().command().get().toLowerCase())
+                    .filter(command -> command.contains("java") && command.contains("recaf"))
+                    .filter(command -> command.contains("javaw") && command.contains("recaf"))
+                    .findFirst()
+                    .ifPresent(command -> showWarningAndExit("Recaf detected"));
         } catch (Exception ignored) {
         }
     }
@@ -72,13 +90,14 @@ public class AntiDumpManager {
 
     public static void init() {
         checkDebugger();
-        checkRecafAsync();
+        checkRecaf();
+        checkRecafTask();
         checkNaughtyFlags();
     }
 
     private static void showWarningAndExit(String message) {
         UIManager.put("OptionPane.minimumSize", new Dimension(400, 100));
-        JOptionPane.showMessageDialog(null, message, "Security Warning", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(null, message, "AntiDump Warning", JOptionPane.WARNING_MESSAGE);
         System.exit(1);
     }
 }

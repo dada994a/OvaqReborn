@@ -15,7 +15,6 @@ import net.shoreline.client.impl.manager.player.rotation.RotationManager;
 import net.shoreline.client.impl.manager.world.WaypointManager;
 import net.shoreline.client.impl.manager.world.sound.SoundManager;
 import net.shoreline.client.impl.manager.world.tick.TickManager;
-import net.shoreline.client.security.AntiDump;
 import net.shoreline.client.security.Authenticator;
 
 /**
@@ -57,9 +56,7 @@ public class Managers {
     public static void init() {
         Authenticator.hwidAuth();
         if (!HwidManager.getHWID().equals("3e93f53e231d3ab32233a3073f63c537b3493b53ef38133a")) {
-            AntiDump.checkDebugger();
-            AntiDump.checkNaughtyFlags();
-            AntiDump.checkRecaf();
+            AntiDumpManager.init();
         }
         if (!isInitialized()) {
             NETWORK = new NetworkManager();
