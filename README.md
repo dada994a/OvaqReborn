@@ -8,7 +8,7 @@
 
 ### Designer
 - ダチョエナガ
-- ちくわ(Shit)
+- ちくわ(Gay Shit Boy)
 
 ### Dev
 - Rom(Nelf)
