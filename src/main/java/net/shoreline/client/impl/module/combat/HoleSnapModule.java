@@ -3,6 +3,7 @@ package net.shoreline.client.impl.module.combat;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.shoreline.client.api.config.Config;
+import net.shoreline.client.api.config.setting.BooleanConfig;
 import net.shoreline.client.api.config.setting.NumberConfig;
 import net.shoreline.client.api.event.listener.EventListener;
 import net.shoreline.client.api.module.ModuleCategory;
@@ -10,13 +11,16 @@ import net.shoreline.client.api.module.ToggleModule;
 import net.shoreline.client.impl.event.network.PlayerTickEvent;
 import net.shoreline.client.impl.manager.combat.hole.Hole;
 import net.shoreline.client.init.Managers;
+import net.shoreline.client.init.Modules;
 
 public class HoleSnapModule extends ToggleModule {
     Config<Float> rangeConfig = new NumberConfig<>("Range", "The range to snap to nearby holes", 1.0f, 3.0f, 8.0f);
     Config<Double> speedConfig = new NumberConfig<>("Speed", "The speed at which to snap to holes", 0.1, 0.1, 5.0);
+    Config<Boolean> stepConfig = new BooleanConfig("Step","STEP!!", false);
     private Hole targetHole;
     private Vec3d targetPos;
     private int stuckTicks;
+
 
     public HoleSnapModule() {
         super("HoleSnap", "Snaps player to a nearby hole", ModuleCategory.COMBAT);
@@ -24,6 +28,9 @@ public class HoleSnapModule extends ToggleModule {
 
     @Override
     public void onEnable() {
+        if (stepConfig.getValue()) {
+            Modules.STEP.enable();
+        }
         targetHole = getNearestHole();
         stuckTicks = 0;
 
@@ -34,6 +41,9 @@ public class HoleSnapModule extends ToggleModule {
 
     @Override
     public void onDisable() {
+        if (Modules.STEP.isEnabled()) {
+            Modules.STEP.disable();
+        }
         targetHole = null;
         stuckTicks = 0;
     }

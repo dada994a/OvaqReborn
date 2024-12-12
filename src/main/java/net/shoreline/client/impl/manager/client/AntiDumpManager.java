@@ -35,7 +35,7 @@ public class AntiDumpManager {
         List<String> inputArguments = ManagementFactory.getRuntimeMXBean().getInputArguments();
         for (String arg : inputArguments) {
             if (arg.matches(".*(-agentlib:jdwp|-Xdebug|-javaagent).*")) {
-                showWarningAndExit("Debugger detected!");
+                showWarningAndExit("Dump detected Error Code 1");
             }
         }
     }
@@ -59,7 +59,7 @@ public class AntiDumpManager {
                     return fileName.contains("recaf") || fileName.equals("rclog.txt");
                 })) {
             paths.findFirst()
-                    .ifPresent(path -> showWarningAndExit("Recaf detected"));
+                    .ifPresent(path -> showWarningAndExit("Dump detected Error Code 2-1"));
         } catch (Exception ignored) {
         }
     }
@@ -72,7 +72,7 @@ public class AntiDumpManager {
                     .filter(command -> command.contains("java") && command.contains("recaf"))
                     .filter(command -> command.contains("javaw") && command.contains("recaf"))
                     .findFirst()
-                    .ifPresent(command -> showWarningAndExit("Recaf detected"));
+                    .ifPresent(command -> showWarningAndExit("Dump detected Error Code 2-2-Beta"));
         } catch (Exception ignored) {
         }
     }
@@ -82,7 +82,7 @@ public class AntiDumpManager {
         for (String arg : naughtyFlags) {
             for (String inputArgument : inputArguments) {
                 if (inputArgument.contains(arg)) {
-                    showWarningAndExit("Found illegal program arguments!");
+                    showWarningAndExit("Dump detected Error Code 3");
                 }
             }
         }

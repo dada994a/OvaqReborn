@@ -12,6 +12,9 @@ public class ChangeLog {
 
     static {
         changeLogs.add(new ChangeLogEntry(ChangeType.ADD, "Added ShotbowMode on Timer"));
+        changeLogs.add(new ChangeLogEntry(ChangeType.ADD, "Added Step On HoleSnap(Beta)"));
+        changeLogs.add(new ChangeLogEntry(ChangeType.IMPROVE,"Improved Criticals(Beta)"));
+        changeLogs.add(new ChangeLogEntry(ChangeType.IMPROVE,"Improved AntiDump"));
     }
 
     public static List<ChangeLogEntry> getChangeLogs() {

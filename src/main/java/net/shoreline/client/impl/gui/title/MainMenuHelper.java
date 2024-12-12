@@ -134,7 +134,7 @@ public class MainMenuHelper extends Screen implements Globals {
 
         // 文字
         RenderManager.tf.drawStringShadow(context.getMatrices(), OvaqRebornMod.MOD_NAME + " " + OvaqRebornMod.MOD_VER + " Made by hypinohaizin, Rom, Naa_Naa", 2F, (float) (7.5 + mc.textRenderer.fontHeight + 4), -1);
-
+        RenderManager.tf.drawStringShadow(context.getMatrices(), "Copyright © 2P2FJP Development Team 2024 - 2025", 782F, (float) (7.5 + mc.textRenderer.fontHeight + 477), -1);
         // components
         int wHeight = mc.getWindow().getHeight() / 4;
         int wWidth = mc.getWindow().getScaledWidth() / 2;
