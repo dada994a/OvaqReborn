@@ -29,5 +29,5 @@ Copyright © 2P2FJP Development Team 2024
 - Lemon
 - etc.
  
-##License
+## License
 GNU General Public License version 3
