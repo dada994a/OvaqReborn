@@ -27,4 +27,7 @@ Copyright © 2P2FJP Development Team 2024
 - [ThunderHack Recode](https://github.com/Pan4ur/ThunderHack-Recode)
 - Rebirth Nextgen
 - Lemon
-- etc.  
+- etc.
+ 
+##License
+GNU General Public License version 3
