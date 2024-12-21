@@ -48,19 +48,18 @@ public class OvaqReborn {
         LOGGER = LogManager.getLogger("OvaqReborn");
         logAsciiArt();
 
-        Authenticator.hwidAuth();
-        Moduletester.moduletest();
-        info("HwidAuth successful!");
+//        Authenticator.hwidAuth();
+//        Moduletester.moduletest();
+//        info("HwidAuth successful!");
 
         //下のこれ動かなかったらごめん
-        if (!UIDManager.getUID().equals("2")) {
-            TimeAuth TimeAuth = new TimeAuth();
-            info("TimeAuth starting ...");
-
-            ANTIDUMP = new AntiDumpManager();
-            AntiDumpManager.init();
-            info("AntiDump checking ...");
-        }
+//        if (!UIDManager.getUID().equals("2")) {
+//            TimeAuth TimeAuth = new TimeAuth();
+//            info("TimeAuth starting ...");
+//            ANTIDUMP = new AntiDumpManager();
+//            AntiDumpManager.init();
+//            info("AntiDump checking ...");
+//       }
         info("preInit starting ...");
 
         EXECUTOR = Executors.newFixedThreadPool(1);

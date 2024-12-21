@@ -54,10 +54,10 @@ public class Managers {
      * @see #isInitialized()
      */
     public static void init() {
-        Authenticator.hwidAuth();
-        if (!HwidManager.getHWID().equals("3e93f53e231d3ab32233a3073f63c537b3493b53ef38133a")) {
-            AntiDumpManager.init();
-        }
+      //  Authenticator.hwidAuth();
+     //   if (!HwidManager.getHWID().equals("3e93f53e231d3ab32233a3073f63c537b3493b53ef38133a")) {
+      //      AntiDumpManager.init();
+      //  }
         if (!isInitialized()) {
             NETWORK = new NetworkManager();
             MODULE = new ModuleManager();

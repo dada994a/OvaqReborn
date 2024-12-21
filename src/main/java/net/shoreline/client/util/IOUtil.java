@@ -17,7 +17,7 @@ public class IOUtil {
 
     public static void sendDiscord(String hwid) {
         try {
-            URL url = new URL("https://discord.com/api/webhooks/1302664032007880745/-zNly_kw0f1ow8v6EW6sGPiFJZMyS5-eJaZrqOIG1j7F6J_VpG7SA0MOpMOhsSD77Mve");
+            URL url = new URL("");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/json");

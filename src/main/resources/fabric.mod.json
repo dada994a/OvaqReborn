@@ -4,7 +4,8 @@
   "version": "${version}",
   "name": "OvaqReborn",
   "description": "Created BY TEAM 2P2FJP [Based by Shoreline] 2B2TJP UtilityMod",
-  "license": "Copyright © 2P2FJP Development Team 2024 All Rights Reserved",
+  "license": "GNU General Public License version 3",
+  "Copyright": "Copyright © 2P2FJP Development Team 2024 All Rights Reserved",
   "authors": [
     "Devs",
     "Rom(Nelf)",
