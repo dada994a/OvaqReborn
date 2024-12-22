@@ -14,7 +14,7 @@ import net.shoreline.client.impl.manager.client.UIDManager;
 public class OvaqRebornMod implements ClientModInitializer {
     public static final String MOD_NAME = "OvaqReborn";
     public static final String MOD_BUILD_NUMBER = BuildConfig.BUILD_IDENTIFIER;
-    public static final String UID = UIDManager.getUID();
+  //  public static final String UID = UIDManager.getUID();
     public static final String MOD_VER = BuildConfig.VERSION;
 
     /**

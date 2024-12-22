@@ -136,9 +136,9 @@ public class HUDModule extends ToggleModule {
 
                 topLeft += 10;
             }
-            if (uidConfig.getValue()) {
-                RenderManager.renderText(event.getContext(), String.format("UID §f%s", OvaqRebornMod.UID), 2.0f, topLeft, getHudColor(rainbowOffset));
-            }
+         //   if (uidConfig.getValue()) {
+         //       RenderManager.renderText(event.getContext(), String.format("UID §f%s", OvaqRebornMod.UID), 2.0f, topLeft, getHudColor(rainbowOffset));
+         //   }
             if (arraylistConfig.getValue()) {
                 List<Module> modules = Managers.MODULE.getModules();
 

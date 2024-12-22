@@ -29,7 +29,7 @@ public class OvaqReborn {
     public static ClientConfiguration CONFIG;
     public static DiscordManager RPC;
     public static ShutdownHook SHUTDOWN;
-    public static AntiDumpManager ANTIDUMP;
+    //public static AntiDumpManager ANTIDUMP;
     public static Executor EXECUTOR;
 
     public static void logAsciiArt() {

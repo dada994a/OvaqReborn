@@ -222,7 +222,7 @@ public class Modules {
      */
     public static void init() {
         if (Managers.isInitialized()) {
-            Authenticator.hwidAuth();
+          //  Authenticator.hwidAuth();
             CACHE = new HashSet<>();
             //Client
             CLICK_GUI = (ClickGuiModule) getRegisteredModule("clickgui-module");
