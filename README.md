@@ -17,6 +17,7 @@
 
 ## License
 Copyright © 2P2FJP Development Team 2024
+GNU General Public License version 3
 ## Credits
 - [Alien](https://github.com/iM4dCat/Alien)
 - [Shoreline](https://github.com/HelianthusMC/Shoreline-Client)
@@ -29,5 +30,3 @@ Copyright © 2P2FJP Development Team 2024
 - Lemon
 - etc.
  
-## License
-GNU General Public License version 3
