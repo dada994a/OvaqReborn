@@ -1,4 +1,4 @@
-## OvaqReborn Development has been completed
+## OvaqReborn Development has been discontinued
 ### Minecraft Utility Mod
 
 ##
@@ -14,10 +14,25 @@
 - Rom(Nelf)
 - ハイピの廃人
 - Naa_Naa
+- Shlok2000(Best ChatGPT Code)
 
 ## License
-Copyright © 2P2FJP Development Team 2024
-GNU General Public License version 3
+Copyright (c) [2024-2025] [2P2FJP Development Group]
+
+Use of this software is subject to the following terms and conditions
+
+permitted items:
+
+Only personal use of this software is permitted.
+Commercial use, modification, or redistribution is prohibited. 2.
+prohibited items:
+
+Unauthorized copying, modification, or redistribution of this software is prohibited.
+disclaimer:
+
+This software is provided “as is” without warranty of any kind.
+The copyright holder assumes no responsibility for any damages resulting from its use.
+
 ## Credits
 - [Alien](https://github.com/iM4dCat/Alien)
 - [Shoreline](https://github.com/HelianthusMC/Shoreline-Client)
